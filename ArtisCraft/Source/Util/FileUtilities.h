@@ -1,5 +1,5 @@
 #include <string>
 
 namespace FileUtil {
-	std::string getContents(std::string filePath);
+	const std::string getContents(std::string filePath);
 }

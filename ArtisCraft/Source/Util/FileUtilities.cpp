@@ -5,10 +5,10 @@
 #include <sstream>
 #include <stdexcept>
 
-std::string FileUtil::getContents(std::string filePath) {
+const std::string FileUtil::getContents(std::string filePath) {
 	std::ifstream inFile(filePath);
 	if (!inFile.is_open()) {
-		printf("Unable to open file %s", filePath);
+		printf("Unable to open file: ");
 	}
 
 	std::stringstream string;

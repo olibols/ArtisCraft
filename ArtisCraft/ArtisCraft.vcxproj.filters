@@ -7,24 +7,71 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shaders\ShaderLoader.h" />
     <ClInclude Include="Source\Util\FileUtilities.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Shaders\BaseShader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Texture\BaseTexture.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shaders\BlockShader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Util\GLM.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shaders\LoadShader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\LoadShader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Model.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\QuadRenderer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Util\Matrix.h" />
+    <ClInclude Include="Source\GameStates\BaseStates.h" />
+    <ClInclude Include="Source\Renderer\MasterRenderer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Shaders\ShaderLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\BasicVertex.glsl" />
-    <None Include="Shaders\BasicFragment.glsl" />
+    <ClCompile Include="Source\Shaders\LoadShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Texture\BaseTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shaders\BaseShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shaders\BlockShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\QuadRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Util\Matrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\MasterRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
