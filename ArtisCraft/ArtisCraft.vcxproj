@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\GameStates\BaseStates.h" />
+    <ClInclude Include="Source\GameStates\BaseState.h" />
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\Renderer\MasterRenderer.h" />
     <ClInclude Include="Source\Renderer\QuadRenderer.h" />
@@ -42,7 +42,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{387A0F97-D87F-42C7-A200-2A2E44FC0716}</ProjectGuid>
     <RootNamespace>ArtisCraft</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -90,7 +90,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Dependencies\GLFW\lib-vc2019;$(SolutionDir)..\Dependencies\GLEW\lib\Release\x64;$(SolutionDir)..\Dependencies\SFML\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;shell32.lib;glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-graphics-s-d.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;shell32.lib;glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-graphics-s-d.lib;Advapi32.lib;Winmm.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

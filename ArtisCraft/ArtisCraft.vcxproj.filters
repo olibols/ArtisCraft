@@ -36,8 +36,8 @@
     </ClInclude>
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Util\Matrix.h" />
-    <ClInclude Include="Source\GameStates\BaseStates.h" />
     <ClInclude Include="Source\Renderer\MasterRenderer.h" />
+    <ClInclude Include="Source\GameStates\BaseState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">

@@ -5,5 +5,5 @@
 #include <GL/glew.h>
 
 int main() {
-		
+	Sleep(2000);
 }

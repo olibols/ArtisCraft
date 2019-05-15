@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <stdio.h>
 
 const std::string FileUtil::getContents(std::string filePath) {
 	std::ifstream inFile(filePath);

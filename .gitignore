@@ -4,3 +4,13 @@
 
 /ArtisCraft/.vs/ArtisCraft/v15
 /Bin/
+
+# Compiled source #
+###################
+*.com
+*.class
+*.exe
+*.o
+*.so
+/.vs
+/ArtisCraft/Source/GameStates/BaseState.h
