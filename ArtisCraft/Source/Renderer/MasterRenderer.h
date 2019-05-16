@@ -6,9 +6,9 @@ class Camera;
 
 class MasterRenderer {
 public:
-	void drawQuad(glm::vec3 position);
+	void drawQuad(const glm::vec3& position);
 
-	void finishRender(sf::RenderWindow window, Camera camera);
+	void finishRender(sf::RenderWindow& window, const Camera& camera);
 
 private:
 	QuadRenderer m_quadRenderer;

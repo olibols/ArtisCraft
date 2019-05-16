@@ -1,6 +1,8 @@
 #include "Model.h"
 
-Model::Model(std::vector<GLfloat> vertexPositions, std::vector<GLfloat> textureCoords, std::vector<GLuint> indices)
+Model::Model(const std::vector<GLfloat>& vertexPositions,
+	const std::vector<GLfloat>& textureCoords,
+	const std::vector<GLuint>&  indices)
 {
 	addData(vertexPositions, textureCoords, indices);
 }
@@ -10,10 +12,18 @@ Model::~Model()
 	deleteData();
 }
 
-void Model::addData(std::vector<GLfloat> vertexPositions, std::vector<GLfloat> textureCoords, std::vector<GLuint> indices)
+void Model::bindVAO() const
+{
+	glBindVertexArray(m_vao);
+}
+
+void Model::addData(const std::vector<GLfloat>& vertexPositions,
+	const std::vector<GLfloat>& textureCoords,
+	const std::vector<GLuint>&  indices)
 {
 	if (m_vao != 0)
 		deleteData();
+
 	m_indicesCount = indices.size();
 
 	glGenVertexArrays(1, &m_vao);
@@ -24,13 +34,13 @@ void Model::addData(std::vector<GLfloat> vertexPositions, std::vector<GLfloat> t
 	addEBO(indices);
 }
 
-void Model::addVBO(int dimensions, std::vector<GLfloat> data)
+void Model::addVBO(int dimensions, const std::vector<GLfloat>& data)
 {
 	GLuint vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER,
-		data.size(),
+		data.size() * sizeof(GLfloat),
 		data.data(),
 		GL_STATIC_DRAW);
 
@@ -46,7 +56,7 @@ void Model::addVBO(int dimensions, std::vector<GLfloat> data)
 	m_buffers.push_back(vbo);
 }
 
-void Model::addEBO(std::vector<GLuint> indices)
+void Model::addEBO(const std::vector<GLuint>& indices)
 {
 	GLuint ebo;
 	glGenBuffers(1, &ebo);
@@ -60,22 +70,17 @@ void Model::addEBO(std::vector<GLuint> indices)
 void Model::deleteData()
 {
 	glDeleteVertexArrays(1, &m_vao);
-	glDeleteBuffers(m_buffers.size(), m_buffers.data());
+	glDeleteBuffers(m_buffers.size(),
+		m_buffers.data());
 
 	m_buffers.clear();
 
 	m_vboCount = 0;
-	m_indicesCount = 0;
 	m_vao = 0;
+	m_indicesCount = 0;
 }
 
-
-void Model::bindVAO()
-{
-	glBindVertexArray(m_vao);
-}
-
-int Model::getIndicesCount()
+int Model::getIndicesCount() const
 {
 	return m_indicesCount;
 }

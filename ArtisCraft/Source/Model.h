@@ -1,27 +1,28 @@
 #include <GL/glew.h>
 #include <vector>
 
-class Model {
+class Model
+{
 public:
 	Model() = default;
-	Model(std::vector<GLfloat> vertexPositions,
-		std::vector<GLfloat> textureCoords,
-		std::vector<GLuint> indices);
+	Model(const std::vector<GLfloat>& vertexPositions,
+		const std::vector<GLfloat>& textureCoords,
+		const std::vector<GLuint>&  indices);
 	~Model();
 
-	void addData(std::vector<GLfloat> vertexPositions,
-		std::vector<GLfloat> textureCoords,
-		std::vector<GLuint> indices);
-	
+	void addData(const std::vector<GLfloat>& vertexPositions,
+		const std::vector<GLfloat>& textureCoords,
+		const std::vector<GLuint>&  indices);
+
 	void deleteData();
 
-	void addVBO(int dimensions, std::vector<GLfloat> data);
-	void bindVAO();
+	void addVBO(int dimensions, const std::vector<GLfloat>& data);
+	void bindVAO() const;
 
-	int getIndicesCount();
+	int getIndicesCount() const;
 
 private:
-	void addEBO(std::vector<GLuint> indices);
+	void addEBO(const std::vector<GLuint>& indices);
 
 	GLuint m_vao = 0;
 	int m_vboCount = 0;

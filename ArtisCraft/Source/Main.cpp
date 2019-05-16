@@ -1,9 +1,6 @@
-#include <iostream>
-#include "Renderer/QuadRenderer.h"
-#include <windows.h>
-#include <GLFW/glfw3.h>
-#include <GL/glew.h>
+#include "Application.h"
 
 int main() {
-	Sleep(2000);
+	Application app("minecraft");
+	app.runLoop();
 }

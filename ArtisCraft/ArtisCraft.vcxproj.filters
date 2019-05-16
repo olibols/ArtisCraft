@@ -34,10 +34,29 @@
     <ClInclude Include="Source\Renderer\QuadRenderer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\Util\Matrix.h" />
-    <ClInclude Include="Source\Renderer\MasterRenderer.h" />
-    <ClInclude Include="Source\GameStates\BaseState.h" />
+    <ClInclude Include="Source\Util\Matrix.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\MasterRenderer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Application.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameStates\BaseState.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameStates\PlayingState.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RenderContext.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h" />
+    <ClInclude Include="Source\Player\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -71,6 +90,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\MasterRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameStates\PlayingState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

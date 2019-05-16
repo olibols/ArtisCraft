@@ -1,8 +1,11 @@
 #include "Camera.h"
+#include "Util/Matrix.h"
 
 Camera::Camera()
 {
 	m_projectionMatrix = makeProjectionMatrix(90);
+
+	position = { 0, 0, -3.5 };
 }
 
 void Camera::update()
@@ -11,27 +14,22 @@ void Camera::update()
 	m_projViewMatrx = m_projectionMatrix * m_viewMatrix;
 }
 
-glm::mat4 Camera::getViewMatrix()
+void Camera::hookEntity(const Entity& entity)
+{
+	m_pEntity = &entity;
+}
+
+const glm::mat4& Camera::getViewMatrix() const noexcept
 {
 	return m_viewMatrix;
 }
 
-glm::mat4 Camera::getProjMatrix()
+const glm::mat4& Camera::getProjMatrix() const noexcept
 {
 	return m_projectionMatrix;
 }
 
-glm::mat4 Camera::getProjectionViewMatrix()
+const glm::mat4& Camera::getProjectionViewMatrix() const noexcept
 {
 	return m_projViewMatrx;
-}
-
-glm::vec3 Camera::getPosition()
-{
-	return m_worldPosition;
-}
-
-glm::vec3 Camera::getRotation()
-{
-	return m_rotation;
 }
