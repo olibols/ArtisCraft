@@ -4,7 +4,7 @@
 
 BaseShader::BaseShader(std::string& vertexFile, std::string& fragmentFile)
 {
-	m_id = loadShaders(vertexFile, fragmentFile);
+	m_id = loadShaders(vertexFile, fragmentFile); // Load the shaders
 	useProgram();
 }
 
@@ -46,5 +46,5 @@ BaseShader::~BaseShader()
 
 void BaseShader::useProgram()
 {
-	glUseProgram(m_id);
+	glUseProgram(m_id); // Sets this shader program as the active one
 }

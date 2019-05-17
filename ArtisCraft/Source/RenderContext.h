@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <GL\glew.h>
 
-struct RenderContext {
+struct RenderContext { // Creates the 
 	RenderContext() {
 		sf::ContextSettings settings;
 		settings.antialiasingLevel = 0;
