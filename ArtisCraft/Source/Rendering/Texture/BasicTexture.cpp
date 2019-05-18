@@ -1,23 +1,23 @@
-#include "BaseTexture.h"
+#include "BasicTexture.h"
 #include <SFML/Graphics.hpp>
 
 
-BaseTexture::BaseTexture(std::string filename){
+BasicTexture::BasicTexture(std::string filename){
 	loadFromFile(filename); // Just calles loadFromFile
 }
 
 
-BaseTexture::~BaseTexture()	{
-	glDeleteTextures(1, &m_id); // Deletes the texture from memory
+BasicTexture::~BasicTexture()	{
+	glDeleteTextures(1, &textureID); // Deletes the texture from memory
 }
 
-void BaseTexture::loadFromFile(std::string filename){
+void BasicTexture::loadFromFile(std::string filename){
 	
 	sf::Image i;
 	i.loadFromFile("Resources/Textures/Blocks/" + filename + ".png");
 
-	glGenTextures(1, &m_id); // Generate a texutre and put the ID into m_id
-	glBindTexture(GL_TEXTURE_2D, m_id); // Bind the texture to make it current
+	glGenTextures(1, &textureID); // Generate a texutre and put the ID into m_id
+	glBindTexture(GL_TEXTURE_2D, textureID); // Bind the texture to make it current
 	
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, i.getSize().x, i.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, i.getPixelsPtr()); // Give the texture object in openGL the actual texture
 
@@ -28,6 +28,6 @@ void BaseTexture::loadFromFile(std::string filename){
 
 }
 
-void BaseTexture::bindTexture(){
-	glBindTexture(GL_TEXTURE_2D, m_id); // Rebinds the texture for reuse after being unbound.
+void BasicTexture::bindTexture(){
+	glBindTexture(GL_TEXTURE_2D, textureID); // Rebinds the texture for reuse after being unbound.
 }

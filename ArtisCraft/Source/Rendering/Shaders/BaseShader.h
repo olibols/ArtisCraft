@@ -18,6 +18,6 @@ public:
 	void loadMatrix4(GLuint location, const glm::mat4 matrix);
 protected:
 	virtual void getUniforms() = 0;
-	GLuint m_id;
+	GLuint programID;
 
 };

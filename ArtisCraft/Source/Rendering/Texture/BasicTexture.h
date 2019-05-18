@@ -2,19 +2,19 @@
 #include <GL\glew.h>
 
 
-class BaseTexture
+class BasicTexture
 {
 public:
-	BaseTexture() = default;
-	BaseTexture(std::string filename);
+	BasicTexture() = default;
+	BasicTexture(std::string filename);
 
-	~BaseTexture();
+	~BasicTexture();
 
 	void loadFromFile(std::string filename);
 
 	void bindTexture();
 
 private:
-	GLuint m_id;
+	GLuint textureID;
 };
 

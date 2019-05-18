@@ -10,22 +10,27 @@
     <ClInclude Include="Source\Util\FileUtilities.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Shaders\BaseShader.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Texture\BaseTexture.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Util\GLM.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Shaders\LoadShader.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Shaders\LoadShader.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RenderContext.h">
+    <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\Rendering\Shaders\BaseShader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Rendering\Shaders\LoadShader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Rendering\Model\Model.h" />
+    <ClInclude Include="Source\Rendering\Model\GameObject.h" />
+    <ClInclude Include="Source\Rendering\Texture\BasicTexture.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Cube.h" />
+    <ClInclude Include="Source\Util\VertexFormat.h" />
+    <ClInclude Include="Source\Context.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -33,16 +38,25 @@
     <ClCompile Include="Source\Util\FileUtilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Shaders\LoadShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Texture\BaseTexture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Shaders\BaseShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Rendering\Shaders\BaseShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Rendering\Shaders\LoadShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Rendering\Model\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Rendering\Texture\BasicTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
