@@ -2,7 +2,7 @@
 #include <GL\glew.h>
 
 struct RenderContext { // Creates the window and rendering context
-	RenderContext(std::string windowName, int x, int y) {
+	RenderContext(std::string windowName, unsigned int x, unsigned int y) {
 		sf::ContextSettings settings;	
 		settings.antialiasingLevel = 0;
 		settings.minorVersion = 3;
