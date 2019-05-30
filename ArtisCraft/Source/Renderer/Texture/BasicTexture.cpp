@@ -14,7 +14,7 @@ BasicTexture::~BasicTexture()	{
 void BasicTexture::loadFromFile(std::string filename){
 	
 	sf::Image i;
-	i.loadFromFile("Resources/Textures/Blocks/" + filename + ".png");
+	i.loadFromFile("../Resources/Textures/Blocks/" + filename + ".png");
 
 	glGenTextures(1, &textureID); // Generate a texutre and put the ID into m_id
 	glBindTexture(GL_TEXTURE_2D, textureID); // Bind the texture to make it current

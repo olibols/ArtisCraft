@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	position = {0, 0, -10};
+	position = {0, 0, 5};
 }
 
 void Player::handleInput(sf::RenderWindow& window)
@@ -19,7 +19,7 @@ void Player::update(float delataTime)
 
 void Player::keyboardInput()
 {
-	glm::vec3 change;
+	glm::vec3 change = { 0, 0, 0 };
 	float speed = 0.5;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
@@ -38,8 +38,13 @@ void Player::keyboardInput()
 		change.x = -glm::cos(glm::radians(rotation.y)) * speed;
 		change.z = -glm::sin(glm::radians(rotation.y)) * speed;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		change.y = speed;
+	}
 
 	m_velocity += change;
+
+	printf("Position: %f, %f, %f \n", position.x, position.y, position.z);
 }
 
 void Player::mouseInput(sf::RenderWindow& window)

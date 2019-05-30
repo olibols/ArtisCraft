@@ -32,8 +32,8 @@ GLuint linkProgram(GLuint vertexShaderID, GLuint fragmentShaderID) { // Link the
 }
 
 GLuint loadShaders(std::string vertexShader, std::string fragmentShader) {
-	std::string vertexSource = FileUtil::getContents("Shaders/" + vertexShader + ".glsl");
-	std::string fragmentSource = FileUtil::getContents("Shaders/" + fragmentShader + ".glsl");
+	std::string vertexSource = FileUtil::getContents("../Shaders/" + vertexShader + ".glsl");
+	std::string fragmentSource = FileUtil::getContents("../Shaders/" + fragmentShader + ".glsl");
 
 	GLuint vertexShaderID = compileShader(vertexSource.c_str(), GL_VERTEX_SHADER);
 	GLuint fragmentShaderID = compileShader(fragmentSource.c_str(), GL_FRAGMENT_SHADER);
