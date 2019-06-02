@@ -1,6 +1,6 @@
+#pragma once
 #include <string>
 #include <GL\glew.h>
-
 
 class BasicTexture
 {
@@ -17,4 +17,3 @@ public:
 private:
 	GLuint textureID;
 };
-

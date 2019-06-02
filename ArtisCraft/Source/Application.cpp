@@ -1,36 +1,75 @@
 #include "Application.h"
+#include <GLM.h>
 
-Application::Application(std::string name) {
-	windowName = name;
-	m_camera.hookEntity(m_player);
+Application::Application(std::string windowName)
+{
+	_context = new RenderContext(windowName, 1280, 720);
+
+	_shader = new ShaderProgram("BasicVertex", "BasicFragment");
+
+	_quadModel = new Model();
+
+	Mesh test;
+	test.vertexPositions = {
+		-0.5,  0.5, 0,
+		 0.5,  0.5, 0,
+		 0.5, -0.5, 0,
+		-0.5, -0.5, 0,
+	};
+
+	test.vertexColors = {
+		1.0, 0.0, 0.0,
+		0.0, 1.0, 0.0,
+		1.0, 0.0, 1.0,
+		1.0, 0.0, 1.0
+	};
+
+	test.textureCoords = {
+		1.0, 1.0,
+		1.0, 0.0,
+		0.0, 0.0,
+		0.0, 1.0,
+	};
+
+	test.indices = {
+		0, 1, 2,
+		2, 3, 0
+	};
+
+	_quadModel->addData(test);
 }
 
 void Application::runLoop()
 {
-	sf::Clock deltaTimer;
-	
+	initialiseScene();
+
 	while (true) {
-		auto deltaTime = deltaTimer.restart();
+		renderScene();
 
-		m_player.handleInput(m_context->window);
-		m_player.update(deltaTime.asSeconds());
-
-		m_camera.update();
-
-		m_quadRenderer.add({ 0,0,0 });
-
-		glClearColor(0.1, 0.5, 1.0, 1.0);
-		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-		m_quadRenderer.renderQuads(m_camera);
-		m_context->window.display();
-
-		handleEvents();
-
+		_context->window.display();
+		handleInput();
 	}
-
 }
 
+void Application::initialiseScene()
+{
+	glClearColor(0, 0.5f, 1.0f, 1.0f);
+}
 
-void Application::handleEvents()
+void Application::renderScene()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	_shader->useProgram();
+	_quadModel->bindVAO();
+	_texture->bindTexture();
+	glDrawElements(GL_TRIANGLES, _quadModel->getIndicesCount(), GL_UNSIGNED_INT, 0);
+}
+
+void Application::releaseScene()
+{
+}
+
+void Application::handleInput()
 {
 }

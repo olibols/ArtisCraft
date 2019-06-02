@@ -1,26 +1,28 @@
 #include "Context.h"
-#include "Camera.h"
-#include "Renderer/QuadRenderer/QuadRenderer.h"
-#include "Player/Player.h"
+#include "Renderer/Shaders/ShaderProgram.h"
+#include "Model.h"
+#include "Renderer/Texture/BasicTexture.h"
 
 class Application {
 public:
-	Application(std::string name);
+	Application(std::string windowName);
+
+	sf::RenderWindow* getWindow();
 
 	void runLoop();
 
-	Camera getCamera() { return m_camera; }
+	void initialiseScene();
+	void renderScene();
+	void releaseScene();
 
-	sf::RenderWindow getWindow();
+	void handleInput();
 
 private:
-	void handleEvents();
+	RenderContext* _context = nullptr;
 
-	RenderContext* m_context = new RenderContext(windowName, 1280, 720);
-	QuadRenderer m_quadRenderer;
-	Camera m_camera;
+	ShaderProgram* _shader = nullptr;
 
-	Player m_player;
+	Model* _quadModel = nullptr;
 
-	std::string windowName;
+	BasicTexture* _texture = new BasicTexture("dirt");
 };
