@@ -12,9 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Context.h" />
     <ClInclude Include="Shaders\LoadShader.h" />
     <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\Renderer\QuadRenderer.h" />
     <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Renderer\Texture\stb_image.h" />

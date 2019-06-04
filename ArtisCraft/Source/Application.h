@@ -24,5 +24,5 @@ private:
 
 	Model* _quadModel = nullptr;
 
-	BasicTexture* _texture = new BasicTexture("dirt");
+	BasicTexture* _texture = nullptr;
 };

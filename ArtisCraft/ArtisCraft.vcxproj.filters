@@ -27,6 +27,8 @@
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
     <ClInclude Include="Source\Renderer\Texture\stb_image.h" />
+    <ClInclude Include="Source\Renderer\QuadRenderer.h" />
+    <ClInclude Include="Source\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">

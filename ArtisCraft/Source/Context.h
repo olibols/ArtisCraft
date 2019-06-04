@@ -1,23 +1,26 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <GL\glew.h>
+#include <GLM.h>
+#include <iostream>
 
 struct RenderContext { // Creates the window and rendering context
 	RenderContext(std::string windowName, unsigned int x, unsigned int y) {
 		sf::ContextSettings settings;	
 		settings.antialiasingLevel = 0;
-		settings.minorVersion = 3;
-		settings.majorVersion = 3;
+		settings.minorVersion = 4.3;
+		settings.majorVersion = 4.3;
 		settings.depthBits = 24;
 		settings.stencilBits = 8;
 
 		window.create({ x, y }, windowName, sf::Style::Close, settings);
 
 		glewInit();
+		glGetError();
 		glewExperimental = GL_TRUE;
 		glViewport(0, 0, x, y);
 
 		glCullFace(GL_BACK);
-
 		window.setFramerateLimit(60);
 	};
 

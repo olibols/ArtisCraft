@@ -1,15 +1,14 @@
 #include "Application.h"
-#include <GLM.h>
+
 
 Application::Application(std::string windowName)
 {
-	glEnable(GL_TEXTURE_2D);
 
-	_context = new RenderContext(windowName, 800, 600);
-
+	_context = new RenderContext(windowName, 1280, 720);
 	_shader = new ShaderProgram("BasicVertex", "BasicFragment");
-
 	_quadModel = new Model();
+
+	_texture = new BasicTexture("dirt");
 
 	Mesh test;
 	test.vertexPositions = {
@@ -37,7 +36,6 @@ Application::Application(std::string windowName)
 void Application::runLoop()
 {
 	initialiseScene();
-
 	while (true) {
 		renderScene();
 
@@ -56,12 +54,9 @@ void Application::renderScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	
-
 	_shader->useProgram();
 	_quadModel->bindVAO();
 	_texture->bindTexture();
-	glUniform1i(glGetUniformLocation(_shader->getID(), "myTexture"), 0);	
 
 	glDrawElements(GL_TRIANGLES, _quadModel->getIndicesCount(), GL_UNSIGNED_INT, 0);
 }
