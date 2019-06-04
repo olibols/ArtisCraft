@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <GL\glew.h>
+#include <SFML/Graphics.hpp>
 
 class BasicTexture
 {
@@ -15,5 +16,5 @@ public:
 	void bindTexture();
 
 private:
-	GLuint textureID;
+	GLuint _ID;
 };

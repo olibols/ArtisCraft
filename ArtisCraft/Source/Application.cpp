@@ -3,7 +3,9 @@
 
 Application::Application(std::string windowName)
 {
-	_context = new RenderContext(windowName, 1280, 720);
+	glEnable(GL_TEXTURE_2D);
+
+	_context = new RenderContext(windowName, 800, 600);
 
 	_shader = new ShaderProgram("BasicVertex", "BasicFragment");
 
@@ -17,18 +19,11 @@ Application::Application(std::string windowName)
 		-0.5, -0.5, 0,
 	};
 
-	test.vertexColors = {
-		1.0, 0.0, 0.0,
-		0.0, 1.0, 0.0,
-		1.0, 0.0, 1.0,
-		1.0, 0.0, 1.0
-	};
-
 	test.textureCoords = {
-		1.0, 1.0,
-		1.0, 0.0,
-		0.0, 0.0,
-		0.0, 1.0,
+		0, 1,
+		1, 1,
+		1, 0,
+		0, 0
 	};
 
 	test.indices = {
@@ -54,15 +49,20 @@ void Application::runLoop()
 void Application::initialiseScene()
 {
 	glClearColor(0, 0.5f, 1.0f, 1.0f);
+	glEnable(GL_TEXTURE_2D);
 }
 
 void Application::renderScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	
+
 	_shader->useProgram();
 	_quadModel->bindVAO();
 	_texture->bindTexture();
+	glUniform1i(glGetUniformLocation(_shader->getID(), "myTexture"), 0);	
+
 	glDrawElements(GL_TRIANGLES, _quadModel->getIndicesCount(), GL_UNSIGNED_INT, 0);
 }
 

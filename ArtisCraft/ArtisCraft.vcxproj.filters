@@ -26,6 +26,7 @@
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
+    <ClInclude Include="Source\Renderer\Texture\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">

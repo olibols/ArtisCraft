@@ -12,7 +12,6 @@ void Model::addData(Mesh& mesh)
 	_indicesCount = mesh.indices.size();
 
 	addVBO(3, mesh.vertexPositions);
-	addVBO(3, mesh.vertexColors);
 	addVBO(2, mesh.textureCoords);
 	addEBO(mesh.indices);
 }
@@ -33,11 +32,12 @@ void Model::addVBO(int dimensions, std::vector<GLfloat> data)
 	GLuint vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(GLfloat), data.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, data.	size() * sizeof(GLfloat), data.data(), GL_STATIC_DRAW);
 
 	glVertexAttribPointer(_vboCount, dimensions, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
 
-	glEnableVertexAttribArray(_vboCount++);
+	glEnableVertexAttribArray(_vboCount);
+	_vboCount++;
 
 	_buffers.push_back(vbo);
 }

@@ -4,6 +4,8 @@
 ShaderProgram::ShaderProgram(std::string vertex, std::string fragment)
 {
 	_ID = loadShaders(vertex, fragment);
+
+	glUniform1i(glGetUniformLocation(_ID, "myTexture"), 0);
 }
 
 ShaderProgram::~ShaderProgram() {

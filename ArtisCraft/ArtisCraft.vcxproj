@@ -17,6 +17,7 @@
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
+    <ClInclude Include="Source\Renderer\Texture\stb_image.h" />
     <ClInclude Include="Source\Util\FileUtilities.h" />
     <ClInclude Include="Source\Util\GLM.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />

@@ -3,6 +3,7 @@
 
 
 int main() {
+
 	Application app("ArtisCraft");
 
 	app.runLoop();
