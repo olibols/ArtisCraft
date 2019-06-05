@@ -33,5 +33,5 @@ const glm::mat4 Camera::getProjMatrix()
 
 const glm::mat4 Camera::getProjViewMatrix()
 {
-	return glm::mat4();
+	return _projViewMatrx;
 }

@@ -21,6 +21,7 @@ struct RenderContext { // Creates the window and rendering context
 		glViewport(0, 0, x, y);
 
 		glCullFace(GL_BACK);
+		glEnable(GL_TEXTURE_2D);
 		window.setFramerateLimit(60);
 	};
 
