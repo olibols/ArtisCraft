@@ -12,9 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Context.h" />
     <ClInclude Include="Shaders\LoadShader.h" />
     <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\Renderer\QuadRenderer.h" />
     <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
@@ -25,8 +27,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Model.cpp" />
+    <ClCompile Include="Source\Renderer\QuadRenderer.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\BlockShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\LoadShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\ShaderProgram.cpp" />

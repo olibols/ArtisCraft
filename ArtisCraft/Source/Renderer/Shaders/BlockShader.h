@@ -3,7 +3,7 @@
 
 class BlockShader : public ShaderProgram {
 public:
-	BlockShader(std::string = "BasicVertex", std::string = "BasicFragment");
+	BlockShader(std::string vertexFile = "BasicVertex", std::string fragmentFile = "BasicFragment");
 
 	void loadProjViewMatrix(glm::mat4 projViewMatrix);
 
@@ -11,7 +11,6 @@ public:
 private:
 	void getUniforms();
 
-	GLuint _locationProjViewMatrix;
-	GLuint _locationModelMatrix;
-
+	GLuint _locProjViewMat;
+	GLuint _locModelMat;
 };

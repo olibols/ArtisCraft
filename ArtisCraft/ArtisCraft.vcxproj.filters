@@ -27,7 +27,9 @@
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
     <ClInclude Include="Source\Renderer\Texture\stb_image.h" />
+    <ClInclude Include="Source\Renderer\QuadRenderer.h" />
     <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
+    <ClInclude Include="Source\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -51,7 +53,13 @@
     <ClCompile Include="Source\Renderer\Texture\BasicTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer\QuadRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Renderer\Shaders\BlockShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -7,17 +7,17 @@ BlockShader::BlockShader(std::string vertexFile, std::string fragmentFile) : Sha
 
 void BlockShader::loadProjViewMatrix(glm::mat4 projViewMatrix)
 {
-	loadMatrix4(_locationProjViewMatrix, projViewMatrix);
+	loadMatrix4(_locProjViewMat, projViewMatrix);
 }
 
 void BlockShader::loadModelMatrix(glm::mat4 modelMatrix)
 {
-	loadMatrix4(_locationModelMatrix, modelMatrix);
+	loadMatrix4(_locModelMat, modelMatrix);
 }
 
 void BlockShader::getUniforms()
 {
 	useProgram();
-	_locationProjViewMatrix = glGetUniformLocation(_ID, "projViewMatrix");
-	_locationModelMatrix = glGetUniformLocation(_ID, "modelMatrix");
+	_locProjViewMat = glGetUniformLocation(_ID, "projViewMatrix");
+	_locModelMat = glGetUniformLocation(_ID, "modelMatrix");
 }

@@ -1,7 +1,7 @@
 #include "Context.h"
-#include "Renderer/Shaders/ShaderProgram.h"
-#include "Model.h"
-#include "Renderer/Texture/BasicTexture.h"
+#include "Camera.h"
+#include "Renderer/QuadRenderer.h"
+
 
 class Application {
 public:
@@ -11,18 +11,12 @@ public:
 
 	void runLoop();
 
-	void initialiseScene();
-	void renderScene();
-	void releaseScene();
-
 	void handleInput();
 
 private:
 	RenderContext* _context = nullptr;
 
-	ShaderProgram* _shader = nullptr;
+	QuadRenderer* _quadRenderer = nullptr;
 
-	Model* _quadModel = nullptr;
-
-	BasicTexture* _texture = nullptr;
+	Camera* _camera = nullptr;
 };
