@@ -27,11 +27,13 @@
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
     <ClInclude Include="Source\Renderer\Texture\stb_image.h" />
-    <ClInclude Include="Source\Renderer\QuadRenderer.h" />
     <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Entity\Entity.h" />
     <ClInclude Include="Source\Entity\Player.h" />
+    <ClInclude Include="Source\World\Constants.h" />
+    <ClInclude Include="Source\Renderer\CubeRenderer.h" />
+    <ClInclude Include="Source\Renderer\RenderMaster.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -55,9 +57,6 @@
     <ClCompile Include="Source\Renderer\Texture\BasicTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Renderer\QuadRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Renderer\Shaders\BlockShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -65,6 +64,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Entity\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\CubeRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\RenderMaster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

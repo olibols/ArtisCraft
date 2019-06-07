@@ -6,10 +6,10 @@ Player::Player()
 	position = { 0, 3, 3 };
 }
 
-void Player::handleInput()
+void Player::handleInput(sf::RenderWindow& window)
 {
 	keyboardInput();
-	//mouseInput();
+	mouseInput(window);
 }
 
 void Player::update(float deltaTime)
@@ -18,6 +18,29 @@ void Player::update(float deltaTime)
 	_velocity *= 0.95;
 }
 
+
+void Player::mouseInput(sf::RenderWindow& window)
+{
+	static auto const BOUND = 80;
+	static auto lastMousePosition = sf::Mouse::getPosition(window);
+	auto change = sf::Mouse::getPosition() - lastMousePosition;
+
+	rotation.y += change.x * 0.05;
+	rotation.x += change.y * 0.05;
+
+	if (rotation.x > BOUND) rotation.x = BOUND;
+	else if (rotation.x < -BOUND) rotation.x = -BOUND;
+
+	if (rotation.y > 360) rotation.y = 0;
+	else if (rotation.y < 0)    rotation.y = 360;
+
+	auto cx = static_cast<int>(window.getSize().x / 2);
+	auto cy = static_cast<int>(window.getSize().y / 2);
+
+	sf::Mouse::setPosition({ cx, cy }, window);
+
+	lastMousePosition = sf::Mouse::getPosition();
+}
 
 void Player::keyboardInput()
 {

@@ -1,16 +1,17 @@
 #pragma once
 #include "Entity.h"
+#include <SFML/Graphics.hpp>
 
 class Player : public Entity {
 public:
 	Player();
 
-	void handleInput();
+	void handleInput(sf::RenderWindow& window);
 	
 	void update(float deltaTime);
 
 private:
-	void mouseInput();
+	void mouseInput(sf::RenderWindow& window);
 	void keyboardInput();
 
 	glm::vec3 _velocity = {0, 0, 0};

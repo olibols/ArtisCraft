@@ -1,7 +1,7 @@
 #include "Context.h"
 #include "Camera.h"
 #include "Entity/Player.h"
-#include "Renderer/QuadRenderer.h"
+#include "Renderer/RenderMaster.h"
 
 
 class Application {
@@ -17,7 +17,9 @@ public:
 private:
 	RenderContext* _context = nullptr;
 
-	QuadRenderer* _quadRenderer = nullptr;
+	RenderMaster* _renderMaster = nullptr;
+
+	
 
 	Camera* _camera = nullptr;
 

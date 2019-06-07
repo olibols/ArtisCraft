@@ -38,11 +38,7 @@ void Camera::update()
 	position = _entity->position;
 	rotation = _entity->rotation;
 
-		_viewMatrix = glm::lookAt(
-		position,
-		glm::vec3(5, 1, 5),
-		glm::vec3(0, 1, 0)
-	);
+	_viewMatrix = makeViewMatrix(*this);
 	
 	_projViewMatrix = _projMatrix * _viewMatrix;
 }
