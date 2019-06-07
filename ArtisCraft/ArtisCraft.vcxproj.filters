@@ -31,6 +31,7 @@
     <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Entity\Entity.h" />
+    <ClInclude Include="Source\Entity\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -61,6 +62,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

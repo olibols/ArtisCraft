@@ -1,5 +1,6 @@
 #include "Context.h"
 #include "Camera.h"
+#include "Entity/Player.h"
 #include "Renderer/QuadRenderer.h"
 
 
@@ -19,4 +20,6 @@ private:
 	QuadRenderer* _quadRenderer = nullptr;
 
 	Camera* _camera = nullptr;
+
+	Player* _player = nullptr;
 };
