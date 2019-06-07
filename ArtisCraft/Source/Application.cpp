@@ -15,8 +15,14 @@ void Application::runLoop()
 
 	while (true) {
 		glClear(GL_COLOR_BUFFER_BIT);
-		_quadRenderer->addQuad({ 0, 0, 0 });
+		for (int x = 0; x < 10; x++) {
+			for (int y = 0; y < 10; y++) {
+				_quadRenderer->addQuad({ y, x, 0 });
+			}
+		}
+	
 		_quadRenderer->renderQuads(*_camera);
+		_camera->update();
 
 		_context->window.display();		
 	}

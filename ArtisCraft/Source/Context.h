@@ -8,8 +8,8 @@ struct RenderContext { // Creates the window and rendering context
 	RenderContext(std::string windowName, unsigned int x, unsigned int y) {
 		sf::ContextSettings settings;	
 		settings.antialiasingLevel = 0;
-		settings.minorVersion = 4.3;
-		settings.majorVersion = 4.3;
+		settings.minorVersion = 4;
+		settings.majorVersion = 4;
 		settings.depthBits = 24;
 		settings.stencilBits = 8;
 

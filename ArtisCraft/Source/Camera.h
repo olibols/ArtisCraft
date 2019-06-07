@@ -20,7 +20,7 @@ public:
 	glm::vec3 getRotation();
 
 private:
-	glm::vec3 _worldPosition = {0, 0, -5};
+	glm::vec3 _worldPosition = { 0,3,3 };
 	glm::vec3 _rotation = { 0, 0, 0 };
 
 	glm::mat4 _projMatrix;

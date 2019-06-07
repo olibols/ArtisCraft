@@ -30,6 +30,7 @@
     <ClInclude Include="Source\Renderer\QuadRenderer.h" />
     <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
     <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Entity\Entity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">

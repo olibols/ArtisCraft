@@ -1,8 +1,9 @@
 #include "Camera.h"
+#include <SFML/Graphics.hpp>
 
 glm::mat4 makeViewMatrix(glm::vec3 rot, glm::vec3 pos)
 {
-	glm::mat4 matrix;
+	glm::mat4 matrix = glm::mat4(1.0f);
 
 	matrix = glm::rotate(matrix, glm::radians(rot.x), { 1, 0, 0 });
 	matrix = glm::rotate(matrix, glm::radians(rot.y), { 0, 1, 0 });
@@ -15,7 +16,7 @@ glm::mat4 makeViewMatrix(glm::vec3 rot, glm::vec3 pos)
 
 glm::mat4 makeModelMatrix(glm::vec3 position, glm::vec3 rotation)
 {
-	glm::mat4 matrix;
+	glm::mat4 matrix = glm::mat4(1.0f);
 
 	matrix = glm::rotate(matrix, glm::radians(rotation.x), { 1, 0, 0 });
 	matrix = glm::rotate(matrix, glm::radians(rotation.y), { 0, 1, 0 });
@@ -28,12 +29,29 @@ glm::mat4 makeModelMatrix(glm::vec3 position, glm::vec3 rotation)
 
 Camera::Camera()
 {
-	_projMatrix = glm::perspective(90.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
+	_projMatrix = glm::perspective(glm::radians(90.0f), 1280.0f / 720.0f, 0.1f, 1000.0f);
 }
 
 void Camera::update()
 {
-	_viewMatrix = makeViewMatrix(_rotation, _worldPosition);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		_worldPosition.x += 0.1;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		_worldPosition.x -= 0.1;
+	}if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		_worldPosition.z += 0.1;
+	}if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		_worldPosition.z -= 0.1;
+	}
+
+
+	_viewMatrix = glm::lookAt(
+		_worldPosition,
+		glm::vec3(0, 0, 0), 
+		glm::vec3(0, 1, 0)  
+	);
 	_projViewMatrix = _projMatrix * _viewMatrix;
 }
 
