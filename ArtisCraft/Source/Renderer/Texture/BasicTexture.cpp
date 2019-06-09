@@ -1,6 +1,4 @@
 #include "BasicTexture.h"
-#include "stb_image.h"
-#define STB_IMAGE_IMPLEMENTATION
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
@@ -15,21 +13,29 @@ BasicTexture::~BasicTexture() {
 	glDeleteTextures(1, &_ID); // Deletes the texture from memory
 }
 
-void BasicTexture::loadFromFile(std::string filename) {
-
-	sf::Image i;
-	i.loadFromFile(std::string("../Resources/Textures/Blocks/" + filename + ".png"));
+void BasicTexture::loadFromImage(sf::Image image){
 	glGenTextures(1, &_ID);
 	glBindTexture(GL_TEXTURE_2D, _ID);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, i.getSize().x, i.getSize().y,
-		0, GL_RGBA, GL_UNSIGNED_BYTE, i.getPixelsPtr());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getSize().x, image.getSize().y,
+		0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);	
+}
+
+void BasicTexture::loadFromFile(std::string file)
+{
+	sf::Image i;
+	if (!i.loadFromFile("../Resources/Textures/Blocks/" + file + ".png"))
+	{
+		
+	}
+
+	loadFromImage(i);
 }
 
 void BasicTexture::bindTexture() {

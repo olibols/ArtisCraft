@@ -26,7 +26,6 @@
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
-    <ClInclude Include="Source\Renderer\Texture\stb_image.h" />
     <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Entity\Entity.h" />
@@ -34,6 +33,14 @@
     <ClInclude Include="Source\World\Constants.h" />
     <ClInclude Include="Source\Renderer\CubeRenderer.h" />
     <ClInclude Include="Source\Renderer\RenderMaster.h" />
+    <ClInclude Include="Source\Renderer\Texture\TextureAtlas.h" />
+    <ClInclude Include="Source\World\Block\BlockData.h" />
+    <ClInclude Include="Source\World\Block\BlockID.h" />
+    <ClInclude Include="Source\World\Block\Types\BlockType.h" />
+    <ClInclude Include="Source\World\Block\Chunk\Database.h" />
+    <ClInclude Include="Source\World\Block\Chunk\Block.h" />
+    <ClInclude Include="Source\World\Block\Chunk\Mesh.h" />
+    <ClInclude Include="Source\World\Block\Chunk\Section.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -70,6 +77,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\RenderMaster.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Block\BlockData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Texture\TextureAtlas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Block\Types\BlockType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Block\Chunk\Database.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Block\Chunk\Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Block\Chunk\Section.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

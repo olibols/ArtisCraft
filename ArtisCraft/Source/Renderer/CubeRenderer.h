@@ -3,6 +3,7 @@
 #include "../Model.h"
 #include "../Camera.h"
 #include "Texture/BasicTexture.h"
+#include "Texture/TextureAtlas.h"
 
 class CubeRenderer {
 public:
@@ -22,4 +23,6 @@ private:
 	Model* _quadModel = nullptr;
 
 	BasicTexture* _texture = nullptr;
+
+	TextureAtlas _atlas;
 };

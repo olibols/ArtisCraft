@@ -11,6 +11,7 @@ public:
 
 	~BasicTexture();
 
+	void loadFromImage(sf::Image image);
 	void loadFromFile(std::string filename);
 
 	void bindTexture();

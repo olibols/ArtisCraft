@@ -1,13 +1,11 @@
 #include "CubeRenderer.h"
 #include "../Camera.h"
 
-CubeRenderer::CubeRenderer()
+CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
 {
 	_shader = new BlockShader();
 	_quadModel = new Model();
-
 	_texture = new BasicTexture("dirt");
-
 	
 	_quadMesh.vertexPositions = {
 		//Back
@@ -47,37 +45,22 @@ CubeRenderer::CubeRenderer()
 		0, 0, 1.
 	};
 
-	_quadMesh.textureCoords = {
-		0, 1,
-		1, 1,
-		1, 0,
-		0, 0,
+	auto top = _atlas.getTexture({ 0, 0 });
+	auto side = _atlas.getTexture({ 0, 0 });
+	auto bottom = _atlas.getTexture({ 0, 0 });
 
-		0, 1,
-		1, 1,
-		1, 0,
-		0, 0,
+	for (auto t : top)
+		std::cout << t << std::endl;
 
-		0, 1,
-		1, 1,
-		1, 0,
-		0, 0,
+	std::vector<GLfloat> texCoords;
+	texCoords.insert(texCoords.end(), side.begin(), side.end());
+	texCoords.insert(texCoords.end(), side.begin(), side.end());
+	texCoords.insert(texCoords.end(), side.begin(), side.end());
+	texCoords.insert(texCoords.end(), side.begin(), side.end());
+	texCoords.insert(texCoords.end(), top.begin(), top.end());
+	texCoords.insert(texCoords.end(), bottom.begin(), bottom.end());
 
-		0, 1,
-		1, 1,
-		1, 0,
-		0, 0,
-
-		0, 1,
-		1, 1,
-		1, 0,
-		0, 0,
-
-		0, 1,
-		1, 1,
-		1, 0,
-		0, 0,
-	};
+	_quadMesh.textureCoords = texCoords;
 
 	_quadMesh.indices = {
 		0, 1, 2,
@@ -110,7 +93,7 @@ void CubeRenderer::renderCubes(Camera& cam)
 {
 	_shader->useProgram();
 	_quadModel->bindVAO();
-	_texture->bindTexture();
+	_atlas.bindTexture();
 
 	_shader->loadProjViewMatrix(cam.getProjViewMatrix());
 

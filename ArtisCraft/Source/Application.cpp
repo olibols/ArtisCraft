@@ -19,11 +19,7 @@ void Application::runLoop()
 	while (true) {
 		auto deltaTime = dtTimer.restart();
 
-		for (int z = 0; z < 10; z++) {
-			for (int y = 0; y < 10; y++) {
-				_renderMaster->drawCube({ z, 0, y });
-			}
-		}	
+		_renderMaster->drawCube({ 0,0,0 });
 	
 		_player->handleInput(_context->window);
 		_player->update(deltaTime.asSeconds());

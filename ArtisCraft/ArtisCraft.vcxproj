@@ -23,10 +23,17 @@
     <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
-    <ClInclude Include="Source\Renderer\Texture\stb_image.h" />
+    <ClInclude Include="Source\Renderer\Texture\TextureAtlas.h" />
     <ClInclude Include="Source\Util\FileUtilities.h" />
     <ClInclude Include="Source\Util\GLM.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
+    <ClInclude Include="Source\World\Block\BlockData.h" />
+    <ClInclude Include="Source\World\Block\BlockID.h" />
+    <ClInclude Include="Source\World\Block\Chunk\Block.h" />
+    <ClInclude Include="Source\World\Block\Chunk\Database.h" />
+    <ClInclude Include="Source\World\Block\Chunk\Mesh.h" />
+    <ClInclude Include="Source\World\Block\Chunk\Section.h" />
+    <ClInclude Include="Source\World\Block\Types\BlockType.h" />
     <ClInclude Include="Source\World\Constants.h" />
   </ItemGroup>
   <ItemGroup>
@@ -40,8 +47,14 @@
     <ClCompile Include="Source\Renderer\Shaders\BlockShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\LoadShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\ShaderProgram.cpp" />
+    <ClCompile Include="Source\Renderer\Texture\TextureAtlas.cpp" />
     <ClCompile Include="Source\Util\FileUtilities.cpp" />
     <ClCompile Include="Source\Renderer\Texture\BasicTexture.cpp" />
+    <ClCompile Include="Source\World\Block\BlockData.cpp" />
+    <ClCompile Include="Source\World\Block\Chunk\Block.cpp" />
+    <ClCompile Include="Source\World\Block\Chunk\Database.cpp" />
+    <ClCompile Include="Source\World\Block\Chunk\Section.cpp" />
+    <ClCompile Include="Source\World\Block\Types\BlockType.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
