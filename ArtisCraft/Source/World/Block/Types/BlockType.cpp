@@ -4,7 +4,7 @@ BlockType::BlockType(std::string fileName) : _data(fileName)
 {
 }
 
-BlockData & BlockType::getData()
+const BlockData BlockType::getData()
 {
 	return _data;
 }

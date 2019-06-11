@@ -14,13 +14,13 @@ public:
 	void renderCubes(Camera& cam);
 private:
 
-	Mesh _quadMesh;
+	Mesh _cubeMesh;
 
 	std::vector<glm::vec3> _quads;
 
 	BlockShader* _shader = nullptr;
 
-	Model* _quadModel = nullptr;
+	Model* _cubeModel = nullptr;
 
 	BasicTexture* _texture = nullptr;
 

@@ -1,24 +1,22 @@
-#include "Database.h"
-
-#include "../Types/BlockType.h"
+#include "BlockTypeDatabase.h"
 
 BlockDatabase & BlockDatabase::get()
 {
-	static BlockDatabase database;
-	return database;
+	static BlockDatabase db;
+	return db;
 }
 
-BlockType & BlockDatabase::getBlock(BlockID id)
+BlockType BlockDatabase::getBlock(BlockID id)
 {
 	return *_blocks[(int)id];
 }
 
-BlockData & BlockDatabase::getData(BlockID id)
+BlockData BlockDatabase::getdata(BlockID id)
 {
 	return _blocks[(int)id]->getData();
 }
 
-BlockDatabase::BlockDatabase()
+BlockDatabase::BlockDatabase() : _atlas("ArtisPack")
 {
 	_blocks[(int)BlockID::Air] = std::make_unique<DefaultBlock>("Air");
 	_blocks[(int)BlockID::Dirt] = std::make_unique<DefaultBlock>("Dirt");

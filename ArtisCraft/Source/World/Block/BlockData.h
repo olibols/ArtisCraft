@@ -13,7 +13,7 @@ class BlockData {
 public:
 	BlockData(std::string fileName);
 
-	const TextureData& getTextureData() const;
+	TextureData& getTextureData();
 
 private:
 	TextureData _data;

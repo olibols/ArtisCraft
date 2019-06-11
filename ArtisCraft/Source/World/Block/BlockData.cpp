@@ -41,7 +41,7 @@ BlockData::BlockData(std::string fileName)
 	}
 }
 
-const TextureData & BlockData::getTextureData() const
+TextureData & BlockData::getTextureData() 
 {
 	return _data;
 }

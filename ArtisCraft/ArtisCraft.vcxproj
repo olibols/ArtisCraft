@@ -27,12 +27,14 @@
     <ClInclude Include="Source\Util\FileUtilities.h" />
     <ClInclude Include="Source\Util\GLM.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
+    <ClInclude Include="Source\Util\Utils.h" />
     <ClInclude Include="Source\World\Block\BlockData.h" />
     <ClInclude Include="Source\World\Block\BlockID.h" />
-    <ClInclude Include="Source\World\Block\Chunk\Block.h" />
-    <ClInclude Include="Source\World\Block\Chunk\Database.h" />
-    <ClInclude Include="Source\World\Block\Chunk\Mesh.h" />
-    <ClInclude Include="Source\World\Block\Chunk\Section.h" />
+    <ClInclude Include="Source\World\Block\BlockTypeDatabase.h" />
+    <ClInclude Include="Source\World\Block\Chunk\Chunk.h" />
+    <ClInclude Include="Source\World\Block\Chunk\ChunkBlock.h" />
+    <ClInclude Include="Source\World\Block\Chunk\ChunkBuildMesh.h" />
+    <ClInclude Include="Source\World\Block\Chunk\ChunkMesh.h" />
     <ClInclude Include="Source\World\Block\Types\BlockType.h" />
     <ClInclude Include="Source\World\Constants.h" />
   </ItemGroup>
@@ -51,9 +53,12 @@
     <ClCompile Include="Source\Util\FileUtilities.cpp" />
     <ClCompile Include="Source\Renderer\Texture\BasicTexture.cpp" />
     <ClCompile Include="Source\World\Block\BlockData.cpp" />
+    <ClCompile Include="Source\World\Block\BlockTypeDatabase.cpp" />
     <ClCompile Include="Source\World\Block\Chunk\Block.cpp" />
-    <ClCompile Include="Source\World\Block\Chunk\Database.cpp" />
-    <ClCompile Include="Source\World\Block\Chunk\Section.cpp" />
+    <ClCompile Include="Source\World\Block\Chunk\Chunk.cpp" />
+    <ClCompile Include="Source\World\Block\Chunk\ChunkBlock.cpp" />
+    <ClCompile Include="Source\World\Block\Chunk\ChunkBuildMesh.cpp" />
+    <ClCompile Include="Source\World\Block\Chunk\ChunkMesh.cpp" />
     <ClCompile Include="Source\World\Block\Types\BlockType.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -4,15 +4,14 @@
 class BlockType {
 public:
 	BlockType(std::string fileName);
-	~BlockType() = default;
 
-
-	BlockData& getData();
+	const BlockData getData();
 private:
+
 	BlockData _data;
 };
 
 class DefaultBlock : public BlockType {
 public:
-	DefaultBlock(std::string fileName) : BlockType(fileName) {};
+	DefaultBlock(std::string fileName) : BlockType(fileName) {}
 };

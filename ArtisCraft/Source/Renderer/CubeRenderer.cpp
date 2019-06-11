@@ -4,10 +4,10 @@
 CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
 {
 	_shader = new BlockShader();
-	_quadModel = new Model();
+	_cubeModel = new Model();
 	_texture = new BasicTexture("dirt");
 	
-	_quadMesh.vertexPositions = {
+	_cubeMesh.vertexPositions = {
 		//Back
 		1, 0, 0,
 		0, 0, 0,
@@ -49,9 +49,6 @@ CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
 	auto side = _atlas.getTexture({ 0, 0 });
 	auto bottom = _atlas.getTexture({ 0, 0 });
 
-	for (auto t : top)
-		std::cout << t << std::endl;
-
 	std::vector<GLfloat> texCoords;
 	texCoords.insert(texCoords.end(), side.begin(), side.end());
 	texCoords.insert(texCoords.end(), side.begin(), side.end());
@@ -60,9 +57,9 @@ CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
 	texCoords.insert(texCoords.end(), top.begin(), top.end());
 	texCoords.insert(texCoords.end(), bottom.begin(), bottom.end());
 
-	_quadMesh.textureCoords = texCoords;
+	_cubeMesh.textureCoords = texCoords;
 
-	_quadMesh.indices = {
+	_cubeMesh.indices = {
 		0, 1, 2,
 		2, 3, 0,
 
@@ -82,7 +79,7 @@ CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
 		22, 23, 20
 	};
 
-	_quadModel->addData(_quadMesh);
+	_cubeModel->addData(_cubeMesh);
 }
 
 void CubeRenderer::addCube(glm::vec3 pos) {
@@ -92,14 +89,14 @@ void CubeRenderer::addCube(glm::vec3 pos) {
 void CubeRenderer::renderCubes(Camera& cam)
 {
 	_shader->useProgram();
-	_quadModel->bindVAO();
+	_cubeModel->bindVAO();
 	_atlas.bindTexture();
 
 	_shader->loadProjViewMatrix(cam.getProjViewMatrix());
 
 	for (auto quad : _quads) {
 		_shader->loadModelMatrix(makeModelMatrix(quad, { 0, 0, 0 }));
-		glDrawElements(GL_TRIANGLES, _quadModel->getIndicesCount(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, _cubeModel->getIndicesCount(), GL_UNSIGNED_INT, 0);
 	}
 	_quads.clear();
 }

@@ -35,12 +35,14 @@
     <ClInclude Include="Source\Renderer\RenderMaster.h" />
     <ClInclude Include="Source\Renderer\Texture\TextureAtlas.h" />
     <ClInclude Include="Source\World\Block\BlockData.h" />
+    <ClInclude Include="Source\World\Block\Chunk\ChunkBlock.h" />
+    <ClInclude Include="Source\World\Block\Chunk\Chunk.h" />
+    <ClInclude Include="Source\World\Block\Chunk\ChunkMesh.h" />
+    <ClInclude Include="Source\World\Block\BlockTypeDatabase.h" />
     <ClInclude Include="Source\World\Block\BlockID.h" />
     <ClInclude Include="Source\World\Block\Types\BlockType.h" />
-    <ClInclude Include="Source\World\Block\Chunk\Database.h" />
-    <ClInclude Include="Source\World\Block\Chunk\Block.h" />
-    <ClInclude Include="Source\World\Block\Chunk\Mesh.h" />
-    <ClInclude Include="Source\World\Block\Chunk\Section.h" />
+    <ClInclude Include="Source\World\Block\Chunk\ChunkBuildMesh.h" />
+    <ClInclude Include="Source\Util\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -85,16 +87,25 @@
     <ClCompile Include="Source\Renderer\Texture\TextureAtlas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\World\Block\Types\BlockType.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Block\Chunk\Database.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\World\Block\Chunk\Block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\World\Block\Chunk\Section.cpp">
+    <ClCompile Include="Source\World\Block\Chunk\ChunkBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Block\Chunk\Chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Block\Chunk\ChunkMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Block\BlockTypeDatabase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Block\Types\BlockType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Block\Chunk\ChunkBuildMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
