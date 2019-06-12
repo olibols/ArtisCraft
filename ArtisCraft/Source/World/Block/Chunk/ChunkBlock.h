@@ -2,16 +2,22 @@
 #include <GLM.h>
 #include "../BlockID.h"
 
-class ChunkBlock {
+class BlockData;
+class BlockType;
+
+struct ChunkBlock {
 public:
 	ChunkBlock() = default;
-	ChunkBlock(BlockID block);
 
-	~ChunkBlock();
+	ChunkBlock(Block_t blockid);
+	ChunkBlock(BlockID blockid);
 
-	BlockID getBlock();
-	void setBlock(BlockID& block);
+	BlockData getData();
+	BlockType getType();
 
-private:
-	BlockID _block;
+	bool operator ==(ChunkBlock other) {
+		return id == other.id;
+	}
+
+	Block_t id = 1;
 };

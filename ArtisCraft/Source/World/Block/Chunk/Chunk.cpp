@@ -14,9 +14,14 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 
 ChunkBlock Chunk::getBlock(int x, int y, int z)
 {
-	if (outOfBounds(x, y, z)) return;
+	if (outOfBounds(x, y, z)) return BlockID::Air;
 
 	return _blocks[getIndex(x, y, z)];
+}
+
+sf::Vector3i Chunk::getLocation()
+{
+	return _location;
 }
 
 bool Chunk::outOfBounds(int x, int y, int z)

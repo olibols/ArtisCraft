@@ -13,11 +13,11 @@ public:
 	BlockType getBlock(BlockID id);
 	BlockData getdata(BlockID id);
 
+	TextureAtlas atlas;
+
 private:
 	BlockDatabase();
 
-	TextureAtlas _atlas;
-	
 	std::array<std::unique_ptr<BlockType>, (size_t)BlockID::NUM_TYPES> _blocks;
 
 };

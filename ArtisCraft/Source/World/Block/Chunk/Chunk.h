@@ -13,6 +13,8 @@ public:
 	void setBlock(int x, int y, int z, ChunkBlock block);
 	ChunkBlock getBlock(int x, int y, int z);
 
+	sf::Vector3i getLocation();
+
 	ChunkMesh _mesh;
 
 private:
@@ -23,5 +25,5 @@ private:
 
 	std::array<ChunkBlock, CHUNK_VOLUME> _blocks;
 
-	glm::vec3 _location;
+	sf::Vector3i _location;
 };

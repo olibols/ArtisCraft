@@ -1,21 +1,8 @@
 #include "ChunkBlock.h"
 
-ChunkBlock::ChunkBlock(BlockID block)
-{
-	_block = block;
-}
 
-ChunkBlock::~ChunkBlock()
-{
 
-}
-
-BlockID ChunkBlock::getBlock()
+bool ChunkBlock::operator==(ChunkBlock other)
 {
-	return _block;
-}
-
-void ChunkBlock::setBlock(BlockID& block)
-{
-	_block = block;
+	return id == other.id;
 }

@@ -16,7 +16,7 @@ BlockData BlockDatabase::getdata(BlockID id)
 	return _blocks[(int)id]->getData();
 }
 
-BlockDatabase::BlockDatabase() : _atlas("ArtisPack")
+BlockDatabase::BlockDatabase() : atlas("ArtisPack")
 {
 	_blocks[(int)BlockID::Air] = std::make_unique<DefaultBlock>("Air");
 	_blocks[(int)BlockID::Dirt] = std::make_unique<DefaultBlock>("Dirt");

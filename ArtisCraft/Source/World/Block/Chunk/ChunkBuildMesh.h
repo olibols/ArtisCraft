@@ -10,9 +10,9 @@ public:
 	void buildMesh(ChunkMesh chunkMesh);
 private:
 
-	void addMeshToFace(std::vector<GLfloat> face, sf::Vector2i textureCoords, sf::Vector2i blockPosition, sf::Vector2i blockFacint);
+	void addMeshToFace(std::vector<GLfloat> face, sf::Vector2i textureCoords, sf::Vector3i blockPosition, sf::Vector3i blockFacing);
 
-	void shouldMakeFace(sf::Vector3i adjBlock, TextureData texData);
+	bool shouldMakeFace(sf::Vector3i adjBlock, TextureData texData);
 
 	int faces = 0;
 
