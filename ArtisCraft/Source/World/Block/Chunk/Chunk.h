@@ -1,8 +1,8 @@
 #pragma once
 #include "ChunkBlock.h"
 #include "../../Constants.h"
+#include <SFML/Graphics.hpp>
 #include "ChunkMesh.h"
-
 #include <array>
 
 class Chunk {
@@ -15,7 +15,7 @@ public:
 
 	sf::Vector3i getLocation();
 
-	ChunkMesh _mesh;
+	ChunkMesh mesh;
 
 private:
 

@@ -11,7 +11,7 @@ BlockType BlockDatabase::getBlock(BlockID id)
 	return *_blocks[(int)id];
 }
 
-BlockData BlockDatabase::getdata(BlockID id)
+BlockData BlockDatabase::getData(BlockID id)
 {
 	return _blocks[(int)id]->getData();
 }

@@ -19,8 +19,6 @@ private:
 
 	RenderMaster* _renderMaster = nullptr;
 
-	
-
 	Camera* _camera = nullptr;
 
 	Player* _player = nullptr;

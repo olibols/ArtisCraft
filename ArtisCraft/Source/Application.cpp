@@ -1,5 +1,5 @@
 #include "Application.h"
-
+#include "World/Block/Chunk/ChunkMeshBuilder.h"
 
 Application::Application(std::string windowName)
 {
@@ -16,10 +16,18 @@ void Application::runLoop()
 
 	sf::Clock dtTimer;
 
+	Chunk chunk;
+
+	ChunkMeshBuilder builder(chunk);
+	builder.build(chunk.mesh);
+
+	chunk.mesh.updateMesh();
+
 	while (true) {
 		auto deltaTime = dtTimer.restart();
 
 		_renderMaster->drawCube({ 0,0,0 });
+		_renderMaster->drawChunk(chunk.mesh);
 	
 		_player->handleInput(_context->window);
 		_player->update(deltaTime.asSeconds());

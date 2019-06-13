@@ -5,6 +5,11 @@ void RenderMaster::drawCube(glm::vec3 position)
 	_cubeRenderer.addCube(position);
 }
 
+void RenderMaster::drawChunk(ChunkMesh & mesh)
+{
+	_chunkRenderer.add(mesh);
+}
+
 void RenderMaster::finishRender(sf::RenderWindow & window, Camera & camera)
 {
 	glClearColor(0.1, 0.5, 1.0, 1.0);
@@ -12,6 +17,7 @@ void RenderMaster::finishRender(sf::RenderWindow & window, Camera & camera)
 	glEnable(GL_DEPTH_TEST);
 
 	_cubeRenderer.renderCubes(camera);
+	_chunkRenderer.render(camera);
 
 	window.display();
 }

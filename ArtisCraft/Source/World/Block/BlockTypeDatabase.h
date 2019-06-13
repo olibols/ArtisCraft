@@ -11,7 +11,7 @@ public:
 	static BlockDatabase& get();
 
 	BlockType getBlock(BlockID id);
-	BlockData getdata(BlockID id);
+	BlockData getData(BlockID id);
 
 	TextureAtlas atlas;
 
