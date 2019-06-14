@@ -18,6 +18,8 @@ void Application::runLoop()
 
 	Chunk chunk;
 
+	//chunk.setBlock(5, 5, 5, ChunkBlock(BlockID::Dirt));
+
 	ChunkMeshBuilder builder(chunk);
 	builder.build(chunk.mesh);
 
@@ -26,9 +28,10 @@ void Application::runLoop()
 	while (true) {
 		auto deltaTime = dtTimer.restart();
 
-		_renderMaster->drawCube({ 0,0,0 });
+		//_renderMaster->drawCube({ 0,0,0 });
 		_renderMaster->drawChunk(chunk.mesh);
-	
+		
+
 		_player->handleInput(_context->window);
 		_player->update(deltaTime.asSeconds());
 		_camera->update();

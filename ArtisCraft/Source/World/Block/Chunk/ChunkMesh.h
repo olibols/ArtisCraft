@@ -6,7 +6,8 @@ class ChunkMesh {
 public:
 	ChunkMesh();
 
-	void addBlock(std::vector<GLfloat> textureCoords,
+	void addFace(std::vector<GLfloat> blockFace,
+		std::vector<GLfloat> textureCoords,
 		sf::Vector3i chunkPosition,
 		sf::Vector3i blockPosition);
 

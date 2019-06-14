@@ -8,7 +8,7 @@ public:
 	void loadProjViewMatrix(glm::mat4 projViewMatrix);
 
 	void loadModelMatrix(glm::mat4 modelMatrix);
-private:
+protected:
 	void getUniforms();
 
 	GLuint _locProjViewMat;

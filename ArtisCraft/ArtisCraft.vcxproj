@@ -22,6 +22,7 @@
     <ClInclude Include="Source\Renderer\CubeRenderer.h" />
     <ClInclude Include="Source\Renderer\RenderMaster.h" />
     <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
+    <ClInclude Include="Source\Renderer\Shaders\ChunkShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Renderer\Texture\TextureAtlas.h" />
@@ -49,6 +50,7 @@
     <ClCompile Include="Source\Renderer\CubeRenderer.cpp" />
     <ClCompile Include="Source\Renderer\RenderMaster.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\BlockShader.cpp" />
+    <ClCompile Include="Source\Renderer\Shaders\ChunkShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\LoadShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Renderer\Texture\TextureAtlas.cpp" />

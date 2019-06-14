@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Shaders/BlockShader.h"
+#include "Shaders/ChunkShader.h"
 
 class ChunkMesh;
 class Camera;
@@ -13,5 +13,5 @@ public:
 private:
 	std::vector<ChunkMesh> _chunks;
 
-	BlockShader _shader;
+	ChunkShader _shader;
 };

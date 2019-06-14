@@ -83,5 +83,5 @@ void Player::keyboardInput()
 
 	_velocity += change;
 
-	printf("Position: %f, %f, %f \n", position.x, position.y, position.z);
+	//printf("Position: %f, %f, %f \n", position.x, position.y, position.z);
 }
