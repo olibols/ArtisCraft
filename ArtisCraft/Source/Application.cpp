@@ -7,37 +7,25 @@ Application::Application(std::string windowName)
 	_camera = new Camera();
 	_renderMaster = new RenderMaster;
 
-	_player = new Player();
+	_states.push_back(std::make_unique<PlayingState>(*this));
 }
 
 void Application::runLoop()
 {
-	_camera->hookEntity(*_player);
-
 	sf::Clock dtTimer;
 
-	Chunk chunk;
-
-	//chunk.setBlock(5, 5, 5, ChunkBlock(BlockID::Dirt));
-
-	ChunkMeshBuilder builder(chunk);
-	builder.build(chunk.mesh);
-
-	chunk.mesh.updateMesh();
 
 	while (true) {
 		auto deltaTime = dtTimer.restart();
+		BaseState& state = *_states.back();
 
-		//_renderMaster->drawCube({ 0,0,0 });
-		_renderMaster->drawChunk(chunk.mesh);
-		
-
-		_player->handleInput(_context->window);
-		_player->update(deltaTime.asSeconds());
+		state.handleInput();
+		state.update(deltaTime.asSeconds());
 		_camera->update();
-		_renderMaster->finishRender(_context->window, *_camera);
 
-		handleInput();
+		state.render(*_renderMaster);
+		_renderMaster->finishRender(getWindow(), *_camera);
+
 	}
 }
 

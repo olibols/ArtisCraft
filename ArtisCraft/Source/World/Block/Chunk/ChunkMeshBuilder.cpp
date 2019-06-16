@@ -72,7 +72,7 @@ void ChunkMeshBuilder::build(ChunkMesh & mesh)
 				ChunkBlock block = _chunk->getBlock(x, y, z);
 				
 				if (block == BlockID::Air) {
-					break;
+					continue;
 				}
 
 				_texData = &BlockDatabase::get().getData((BlockID)block.id).getTextureData();

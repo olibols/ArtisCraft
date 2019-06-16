@@ -45,6 +45,8 @@
     <ClInclude Include="Source\World\Block\Chunk\ChunkMeshBuilder.h" />
     <ClInclude Include="Source\World\Block\Chunk\ChunkMesh.h" />
     <ClInclude Include="Source\Renderer\Shaders\ChunkShader.h" />
+    <ClInclude Include="Source\States\BaseState.h" />
+    <ClInclude Include="Source\States\PlayingState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -111,6 +113,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\Shaders\ChunkShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\States\PlayingState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

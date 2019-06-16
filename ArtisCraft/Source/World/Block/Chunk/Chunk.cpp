@@ -3,11 +3,6 @@
 Chunk::Chunk()
 {
 	_location = { 0, 0, 0 };
-
-	for (int i = 0; i < CHUNK_VOLUME; i++) {
-		_blocks[i] = ChunkBlock(BlockID::Dirt);
-	}
-
 }
 
 void Chunk::setBlock(int x, int y, int z, ChunkBlock block)

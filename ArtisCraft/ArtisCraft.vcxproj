@@ -26,6 +26,8 @@
     <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Renderer\Texture\TextureAtlas.h" />
+    <ClInclude Include="Source\States\BaseState.h" />
+    <ClInclude Include="Source\States\PlayingState.h" />
     <ClInclude Include="Source\Util\FileUtilities.h" />
     <ClInclude Include="Source\Util\GLM.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
@@ -54,6 +56,7 @@
     <ClCompile Include="Source\Renderer\Shaders\LoadShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Renderer\Texture\TextureAtlas.cpp" />
+    <ClCompile Include="Source\States\PlayingState.cpp" />
     <ClCompile Include="Source\Util\FileUtilities.cpp" />
     <ClCompile Include="Source\Renderer\Texture\BasicTexture.cpp" />
     <ClCompile Include="Source\World\Block\BlockData.cpp" />
