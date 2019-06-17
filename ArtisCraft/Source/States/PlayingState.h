@@ -2,7 +2,7 @@
 #include "BaseState.h"
 
 #include "../Entity/Player.h"
-#include "../World/Block/Chunk/Chunk.h"
+#include "../World/World.h"
 
 class PlayingState : public BaseState {
 public:
@@ -18,5 +18,5 @@ public:
 private:
 	Player _player;
 	
-	Chunk _chunk;
+	World _world;
 };

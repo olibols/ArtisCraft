@@ -35,18 +35,20 @@
     <ClInclude Include="Source\Renderer\RenderMaster.h" />
     <ClInclude Include="Source\Renderer\Texture\TextureAtlas.h" />
     <ClInclude Include="Source\World\Block\BlockData.h" />
-    <ClInclude Include="Source\World\Block\Chunk\ChunkBlock.h" />
-    <ClInclude Include="Source\World\Block\Chunk\Chunk.h" />
     <ClInclude Include="Source\World\Block\BlockTypeDatabase.h" />
     <ClInclude Include="Source\World\Block\BlockID.h" />
     <ClInclude Include="Source\World\Block\Types\BlockType.h" />
     <ClInclude Include="Source\Util\Utils.h" />
     <ClInclude Include="Source\Renderer\ChunkRenderer.h" />
-    <ClInclude Include="Source\World\Block\Chunk\ChunkMeshBuilder.h" />
-    <ClInclude Include="Source\World\Block\Chunk\ChunkMesh.h" />
     <ClInclude Include="Source\Renderer\Shaders\ChunkShader.h" />
     <ClInclude Include="Source\States\BaseState.h" />
     <ClInclude Include="Source\States\PlayingState.h" />
+    <ClInclude Include="Source\World\Chunk\Chunk.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkBlock.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkMesh.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkMeshBuilder.h" />
+    <ClInclude Include="Source\World\Chunk\Region.h" />
+    <ClInclude Include="Source\World\World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -91,31 +93,37 @@
     <ClCompile Include="Source\Renderer\Texture\TextureAtlas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\World\Block\Chunk\Chunk.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\World\Block\BlockTypeDatabase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\Block\Types\BlockType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\World\Block\Chunk\ChunkBlock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Renderer\ChunkRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Block\Chunk\ChunkMesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Block\Chunk\ChunkMeshBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\Shaders\ChunkShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\States\PlayingState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Chunk\Chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Chunk\ChunkBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Chunk\ChunkMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Chunk\ChunkMeshBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Chunk\Region.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

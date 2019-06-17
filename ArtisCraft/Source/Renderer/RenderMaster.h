@@ -4,7 +4,7 @@
 #include "../Camera.h"
 #include "ChunkRenderer.h"
 #include "CubeRenderer.h"
-#include "../World/Block/Chunk/Chunk.h"
+#include "../World/Chunk/Chunk.h"
 
 class RenderMaster {
 public:

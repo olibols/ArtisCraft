@@ -1,5 +1,5 @@
 #include "ChunkRenderer.h"
-#include "../World/Block/Chunk/ChunkMesh.h"
+#include "../World/Chunk/ChunkMesh.h"
 #include "../World/Block/BlockTypeDatabase.h"
 #include "../Camera.h"
 

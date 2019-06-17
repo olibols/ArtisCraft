@@ -14,9 +14,11 @@ public:
 
 	void runLoop();
 
-	void handleInput();
+	void handleEvents();
 
 private:
+
+	bool shouldUpdate = true;
 
 	std::vector<std::unique_ptr<BaseState>> _states;
 

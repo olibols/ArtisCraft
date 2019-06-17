@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "World/Block/Chunk/ChunkMeshBuilder.h"
+#include "World/Chunk/ChunkMeshBuilder.h"
 
 Application::Application(std::string windowName)
 {
@@ -19,18 +19,25 @@ void Application::runLoop()
 		auto deltaTime = dtTimer.restart();
 		BaseState& state = *_states.back();
 
-		state.handleInput();
-		state.update(deltaTime.asSeconds());
+		if (shouldUpdate) {
+			state.handleInput();
+			state.update(deltaTime.asSeconds());
+		}
+
 		_camera->update();
 
 		state.render(*_renderMaster);
 		_renderMaster->finishRender(getWindow(), *_camera);
 
+		handleEvents();
 	}
 }
 
 
-void Application::handleInput()
+void Application::handleEvents()
 {
-	//if ();
-}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+		shouldUpdate = !shouldUpdate;
+		sf::sleep(sf::Time(sf::seconds(0.2)));
+	}
+}	
