@@ -1,8 +1,7 @@
 #include "Chunk.h"
 
-Chunk::Chunk()
+Chunk::Chunk(sf::Vector3i position, World& world) : _location(position), _world(&world)
 {
-	
 }
 
 void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
@@ -22,6 +21,16 @@ ChunkBlock Chunk::getBlock(int x, int y, int z)
 sf::Vector3i Chunk::getLocation()
 {
 	return _location;
+}
+
+sf::Vector3i Chunk::toWorldPos(int x, int y, int z)
+{
+	sf::Vector3i pos = { _location.x * CHUNK_SIZE + x,
+		_location.y * CHUNK_SIZE + y,
+		_location.z * CHUNK_SIZE + z,
+	};
+
+	return pos;
 }
 
 bool Chunk::outOfBounds(int x, int y, int z)

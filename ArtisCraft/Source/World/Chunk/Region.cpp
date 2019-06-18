@@ -2,16 +2,26 @@
 #include "ChunkMeshBuilder.h"
 #include "../World.h"
 #include "../../Renderer/RenderMaster.h"
+#include <time.h>
 
 Region::Region(World & world) : _world(&world)
 {
 	for (int y = 0; y < 5; y++) {
 		_chunks.emplace_back(sf::Vector3i(0, y, 0), world);
-		Chunk& chunk = _chunks.back();
+	}
+	for (auto& chunk : _chunks) {
 
-		ChunkMeshBuilder meshBuild(chunk);
-		meshBuild.build(chunk.mesh);
-		chunk.mesh.updateMesh();
+		srand(time(NULL));
+
+		for (int x = 0; x < CHUNK_SIZE; x++)
+		for (int z = 0; z < CHUNK_SIZE; z++)
+		for (int y = 0, srand(time(NULL)); y < rand() % CHUNK_SIZE - 5; y++)
+		chunk.setBlock(x, y, z, ChunkBlock(BlockID::Stone));
+
+			ChunkMeshBuilder meshBuild(chunk);
+			meshBuild.build(chunk.mesh);
+			chunk.mesh.updateMesh();
+		
 	}
 }
 

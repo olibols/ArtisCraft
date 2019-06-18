@@ -5,9 +5,11 @@
 #include "ChunkMesh.h"
 #include <array>
 
+class World;
+
 class Chunk {
 public:
-	Chunk();
+	Chunk(sf::Vector3i position, World& world);
 	
 	void setBlock(int x, int y, int z, ChunkBlock block);
 	ChunkBlock getBlock(int x, int y, int z);
@@ -18,6 +20,8 @@ public:
 
 private:
 
+	sf::Vector3i toWorldPos(int x, int y, int z);
+
 	bool outOfBounds(int x, int y, int z);
 
 	int getIndex(int x, int y, int z);
@@ -25,4 +29,6 @@ private:
 	std::array<ChunkBlock, CHUNK_VOLUME> _blocks;
 
 	sf::Vector3i _location;
+
+	World* _world;
 };
