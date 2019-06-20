@@ -22,7 +22,7 @@ private:
 
 	sf::Vector3i toWorldPos(int x, int y, int z);
 
-	bool outOfBounds(int x, int y, int z);
+	bool outOfBounds(int value);
 
 	int getIndex(int x, int y, int z);
 

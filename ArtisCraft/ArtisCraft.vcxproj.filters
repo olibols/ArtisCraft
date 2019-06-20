@@ -49,6 +49,7 @@
     <ClInclude Include="Source\World\Chunk\ChunkMeshBuilder.h" />
     <ClInclude Include="Source\World\Chunk\Region.h" />
     <ClInclude Include="Source\World\World.h" />
+    <ClInclude Include="Source\Util\Ray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -124,6 +125,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\Chunk\Region.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Util\Ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

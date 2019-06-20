@@ -3,7 +3,7 @@
 
 Application::Application(std::string windowName)
 {
-	_context = new RenderContext("ArtisCraft", 1280, 720);
+	_context = new RenderContext("ArtisCraft", 1920, 1080);
 	_camera = new Camera();
 	_renderMaster = new RenderMaster;
 
@@ -36,8 +36,26 @@ void Application::runLoop()
 
 void Application::handleEvents()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-		shouldUpdate = !shouldUpdate;
-		sf::sleep(sf::Time(sf::seconds(0.2)));
+	sf::Event e;
+	while (_context->window.pollEvent(e)) {
+		switch (e.type) {
+
+		case sf::Event::Closed:
+			_context->window.close();
+
+		case sf::Event::KeyPressed:
+			switch (e.key.code) {
+			case sf::Keyboard::Escape:
+				shouldUpdate = !shouldUpdate;
+				_context->window.setMouseCursorVisible(!shouldUpdate);
+				sf::sleep(sf::Time(sf::seconds(0.2)));
+
+			default:
+				break;
+			}				   
+
+		default:
+			break;
+		}		
 	}
 }	

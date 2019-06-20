@@ -1,4 +1,5 @@
 #include "Chunk.h"
+#include "../World.h"
 
 Chunk::Chunk(sf::Vector3i position, World& world) : _location(position), _world(&world)
 {
@@ -6,15 +7,21 @@ Chunk::Chunk(sf::Vector3i position, World& world) : _location(position), _world(
 
 void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 {
-	if (outOfBounds(x, y, z)) return;
+	if (outOfBounds(x) ||
+		outOfBounds(y) ||
+		outOfBounds(z)) return;
 
 	_blocks[getIndex(x, y ,z)] = block;
 }
 
 ChunkBlock Chunk::getBlock(int x, int y, int z)
 {
-	if (outOfBounds(x, y, z)) return BlockID::Air;
-
+	if (outOfBounds(x) ||
+		outOfBounds(y) ||
+		outOfBounds(z)) {
+	sf::Vector3i location = toWorldPos(x, y, z);
+	return _world->getBlock(location.x, location.y, location.z);
+	}
 	return _blocks[getIndex(x, y, z)];
 }
 
@@ -25,7 +32,8 @@ sf::Vector3i Chunk::getLocation()
 
 sf::Vector3i Chunk::toWorldPos(int x, int y, int z)
 {
-	sf::Vector3i pos = { _location.x * CHUNK_SIZE + x,
+	sf::Vector3i pos = { 
+		_location.x * CHUNK_SIZE + x,
 		_location.y * CHUNK_SIZE + y,
 		_location.z * CHUNK_SIZE + z,
 	};
@@ -33,12 +41,10 @@ sf::Vector3i Chunk::toWorldPos(int x, int y, int z)
 	return pos;
 }
 
-bool Chunk::outOfBounds(int x, int y, int z)
+bool Chunk::outOfBounds(int value)
 {
-	if (x >= CHUNK_SIZE || y >= CHUNK_SIZE || z >= CHUNK_SIZE) return true;
-	if (x < 0 || y < 0 || z < 0) return true;
-	
-	return false;
+	return  value >= CHUNK_SIZE ||
+		value < 0;
 }
 
 int Chunk::getIndex(int x, int y, int z) // The blocks are stored in a 1D array for speed etc, this func finds the block from 3d coords.

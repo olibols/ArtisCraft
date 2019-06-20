@@ -91,7 +91,7 @@ void ChunkMeshBuilder::build(ChunkMesh & mesh)
 		}
 	}
 
-	printf("Built chunk mesh, face count: %i \n", faceCount);
+	printf("\n Built chunk mesh, face count: %i \n", faceCount);
 
 }
 

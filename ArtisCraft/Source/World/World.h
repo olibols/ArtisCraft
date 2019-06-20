@@ -9,10 +9,12 @@ public:
 
 	ChunkBlock getBlock(int x, int y, int z);
 	void setBlock(int x, int y, int z, ChunkBlock block);
+	void editBlock(int x, int y, int z, ChunkBlock block);
+
 
 	void render(RenderMaster& renderer);
 
 private:
-	
-	Region _region;
+
+	std::vector<Region> _regions;
 };

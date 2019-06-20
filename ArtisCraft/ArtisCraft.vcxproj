@@ -31,6 +31,7 @@
     <ClInclude Include="Source\Util\FileUtilities.h" />
     <ClInclude Include="Source\Util\GLM.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
+    <ClInclude Include="Source\Util\Ray.h" />
     <ClInclude Include="Source\Util\Utils.h" />
     <ClInclude Include="Source\World\Block\BlockData.h" />
     <ClInclude Include="Source\World\Block\BlockID.h" />
@@ -61,6 +62,7 @@
     <ClCompile Include="Source\States\PlayingState.cpp" />
     <ClCompile Include="Source\Util\FileUtilities.cpp" />
     <ClCompile Include="Source\Renderer\Texture\BasicTexture.cpp" />
+    <ClCompile Include="Source\Util\Ray.cpp" />
     <ClCompile Include="Source\World\Block\BlockData.cpp" />
     <ClCompile Include="Source\World\Block\BlockTypeDatabase.cpp" />
     <ClCompile Include="Source\World\Chunk\Chunk.cpp" />
@@ -75,7 +77,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{387A0F97-D87F-42C7-A200-2A2E44FC0716}</ProjectGuid>
     <RootNamespace>ArtisCraft</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

@@ -4,25 +4,23 @@
 #include "../../Renderer/RenderMaster.h"
 #include <time.h>
 
-Region::Region(World & world) : _world(&world)
+Region::Region(World & world, sf::Vector2i location) : _world(&world), _location(location)
 {
-	for (int y = 0; y < 5; y++) {
-		_chunks.emplace_back(sf::Vector3i(0, y, 0), world);
+	for (int y = 0; y < 2; y++) {
+		_chunks.emplace_back(sf::Vector3i(location.x, y, location.y), world);
 	}
-	for (auto& chunk : _chunks) {
 
-		srand(time(NULL));
+	int height = _chunks.size() * CHUNK_SIZE - 1;
 
-		for (int x = 0; x < CHUNK_SIZE; x++)
-		for (int z = 0; z < CHUNK_SIZE; z++)
-		for (int y = 0, srand(time(NULL)); y < rand() % CHUNK_SIZE - 5; y++)
-		chunk.setBlock(x, y, z, ChunkBlock(BlockID::Stone));
+	for (int y = 0; y < _chunks.size() * CHUNK_SIZE; y++)
+		for (int x = 0; x < 16; x++)
+			for (int z = 0; z < 16; z++)
+			{
+				if (y == height) { setBlock(x, y, z, BlockID::Grass); }
+				else if (y > height - 3) { setBlock(x, y, z, BlockID::Dirt); }
+				else { setBlock(x, y, z, BlockID::Stone); }
+			}
 
-			ChunkMeshBuilder meshBuild(chunk);
-			meshBuild.build(chunk.mesh);
-			chunk.mesh.updateMesh();
-		
-	}
 }
 
 void Region::setBlock(int x, int y, int z, ChunkBlock block)
@@ -51,6 +49,15 @@ void Region::draw(RenderMaster & renderer)
 	}
 }
 
+void Region::buildMesh()
+{
+	for (auto& chunk : _chunks) {
+		ChunkMeshBuilder meshBuild(chunk);
+		meshBuild.build(chunk.mesh);
+		chunk.mesh.updateMesh();
+	}
+}
+
 bool Region::outOfBounds(int x, int y, int z)
 {
 	if (x >= CHUNK_SIZE) return true;
@@ -58,7 +65,7 @@ bool Region::outOfBounds(int x, int y, int z)
 
 	if (x < 0 || y < 0 || z < 0) return true;
 
-	if (y >= _chunks.size() * CHUNK_SIZE) return true;
+	if (y >= (int)_chunks.size() * CHUNK_SIZE) return true;
 
 	return false;
 
