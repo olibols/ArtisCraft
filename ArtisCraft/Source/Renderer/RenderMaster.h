@@ -10,11 +10,11 @@ class RenderMaster {
 public:
 	void drawCube(glm::vec3 position);
 	void drawChunk(ChunkMesh& mesh);
+	void drawCrosshair();
 
 	void finishRender(sf::RenderWindow& window, Camera& camera);
 
 private:
 	CubeRenderer _cubeRenderer;
-
 	ChunkRenderer _chunkRenderer;
 };

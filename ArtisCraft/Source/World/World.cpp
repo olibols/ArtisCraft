@@ -57,6 +57,7 @@ void World::editBlock(int x, int y, int z, ChunkBlock block)
 	if (cZ >= wsize) return;
 
 	setBlock(x, y, z, block);
+
 	_regions.at(cX * wsize + cZ).buildMesh();
 }
 

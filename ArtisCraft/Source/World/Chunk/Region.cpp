@@ -53,7 +53,7 @@ void Region::buildMesh()
 {
 	for (auto& chunk : _chunks) {
 		ChunkMeshBuilder meshBuild(chunk);
-		meshBuild.build(chunk.mesh);
+		meshBuild.build();
 		chunk.mesh.updateMesh();
 	}
 }

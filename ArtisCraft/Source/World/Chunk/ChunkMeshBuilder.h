@@ -8,7 +8,7 @@ public:
 
 	ChunkMeshBuilder(Chunk& chunk);
 
-	void build(ChunkMesh& mesh);
+	void build();
 
 private:
 

@@ -8,7 +8,6 @@ CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
 	_texture = new BasicTexture("dirt");
 	
 	_cubeMesh.vertexPositions = {
-		//Back
 		1, 0, 0,
 		0, 0, 0,
 		0, 1, 0,
@@ -95,7 +94,7 @@ void CubeRenderer::renderCubes(Camera& cam)
 	_shader->loadProjViewMatrix(cam.getProjViewMatrix());
 
 	for (auto quad : _quads) {
-		_shader->loadModelMatrix(makeModelMatrix(quad, { 0, 0, 0 }));
+		_shader->loadModelMatrix(makeModelMatrix({ (int)quad.x, (int)quad.y, (int)quad.z }, { 0, 0, 0 }));
 		glDrawElements(GL_TRIANGLES, _cubeModel->getIndicesCount(), GL_UNSIGNED_INT, 0);
 	}
 	_quads.clear();

@@ -19,8 +19,6 @@ void PlayingState::handleInput()
 {
 	_player.handleInput(_application->getWindow());
 
-	sf::Clock time;
-
 	for (Ray ray(_player.position, _player.rotation); ray.getLength() < 6; ray.step(0.1)) {
 
 		auto x = ray.getEnd().x;
@@ -30,13 +28,17 @@ void PlayingState::handleInput()
 		auto block = _world.getBlock(x, y, z);
 
 		if (block != ChunkBlock(BlockID::Air) ){
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-				//if (time.getElapsedTime().asMilliseconds() > 200) {
+			if (time.getElapsedTime().asSeconds() > 0.2) {
+
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 					time.restart();
 					_world.editBlock(x, y, z, 0);
-					//sf::sleep(sf::Time(sf::seconds(0.2)));
 					break;
-				//}
+				}
+				else if ((sf::Mouse::isButtonPressed(sf::Mouse::Right))) {
+					time.restart();
+					_world.editBlock(lastPos.x,	lastPos.y, lastPos.z, BlockID::Stone);
+				}
 			}
 		}
 		lastPos = ray.getEnd();
@@ -47,8 +49,6 @@ void PlayingState::handleInput()
 
 		sf::sleep(sf::Time(sf::seconds(0.2)));
 	}
-
-
 }
 
 void PlayingState::update(float deltaTime)
@@ -58,9 +58,6 @@ void PlayingState::update(float deltaTime)
 
 void PlayingState::render(RenderMaster & renderer)
 {
-	_cuberenderer.addCube(lastPos);
-
-	_cuberenderer.renderCubes();
-
+	renderer.drawCube(lastPos);
 	_world.render(renderer);
 }

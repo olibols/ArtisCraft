@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "../Camera.h"
 
 class RenderMaster;
 class Application;

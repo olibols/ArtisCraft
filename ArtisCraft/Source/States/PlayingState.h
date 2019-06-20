@@ -19,10 +19,10 @@ public:
 private:
 
 	glm::vec3 lastPos;
+	sf::Clock time;
 
-	CubeRenderer _cuberenderer;
+	CubeRenderer _cubeboi;
 
 	Player _player;
-	
 	World _world;
 };
