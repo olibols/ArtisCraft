@@ -93,6 +93,8 @@ void ChunkMeshBuilder::build(ChunkMesh & mesh)
 
 	printf("\n Built chunk mesh, face count: %i \n", faceCount);
 
+	faceCount = 0;
+
 }
 
 bool ChunkMeshBuilder::shouldMakeFace(sf::Vector3i blockPosition, TextureData texData)

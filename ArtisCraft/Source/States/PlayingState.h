@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseState.h"
+#include "../Renderer/CubeRenderer.h"
 
 #include "../Entity/Player.h"
 #include "../World/World.h"
@@ -16,6 +17,11 @@ public:
 	void render(RenderMaster& renderer) override;
 
 private:
+
+	glm::vec3 lastPos;
+
+	CubeRenderer _cuberenderer;
+
 	Player _player;
 	
 	World _world;

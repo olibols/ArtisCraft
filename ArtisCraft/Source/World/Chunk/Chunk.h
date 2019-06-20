@@ -16,6 +16,8 @@ public:
 
 	sf::Vector3i getLocation();
 
+
+	void deleteMesh();
 	ChunkMesh mesh;
 
 private:

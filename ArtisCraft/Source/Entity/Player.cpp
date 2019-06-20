@@ -3,7 +3,7 @@
 
 Player::Player()
 {
-	position = { 0, 3, 3 };
+	position = { 0, 36, 0 };
 }
 
 void Player::handleInput(sf::RenderWindow& window)

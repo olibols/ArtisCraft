@@ -14,6 +14,7 @@ public:
 	void updateMesh();
 
 	Model getModel();
+	void deleteModel();
 
 private:
 

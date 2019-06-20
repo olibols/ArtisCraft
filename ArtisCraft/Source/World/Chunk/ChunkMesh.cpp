@@ -45,10 +45,21 @@ void ChunkMesh::updateMesh()
 	_mesh->textureCoords.clear();
 	_mesh->vertexPositions.clear();
 
+	_mesh->indices.shrink_to_fit();
+	_mesh->textureCoords.shrink_to_fit();
+	_mesh->vertexPositions.shrink_to_fit();
+
 	_indiceCount = 0;
 }
+
+
 
 Model ChunkMesh::getModel()
 {
 	return *_model;
+}
+
+void ChunkMesh::deleteModel()
+{
+	_model->deleteData();
 }

@@ -7,6 +7,8 @@
 PlayingState::PlayingState(Application & app) : BaseState (app)
 {
 	app.getCamera().hookEntity(_player);
+
+	//_world.editBlock(10, 10, 10, BlockID::Air);
 }
 
 void PlayingState::handleEvent(sf::Event event)
@@ -18,25 +20,34 @@ void PlayingState::handleInput()
 	_player.handleInput(_application->getWindow());
 
 	sf::Clock time;
-	glm::vec3 lastPos;
 
-	for (Ray ray(_player.position, _player.rotation);
-		ray.getLength() < 6; ray.step(0.1)) {
+	for (Ray ray(_player.position, _player.rotation); ray.getLength() < 6; ray.step(0.1)) {
 
-		auto block = _world.getBlock(ray.getEnd().x, ray.getEnd().y, ray.getEnd().z);
+		auto x = ray.getEnd().x;
+		auto y = ray.getEnd().y;
+		auto z = ray.getEnd().z;
 
-		if (block.id != (Block_t)BlockID::Air) {
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-				if (time.getElapsedTime().asSeconds() > 0.2) {
-				{
+		auto block = _world.getBlock(x, y, z);
+
+		if (block != ChunkBlock(BlockID::Air) ){
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+				//if (time.getElapsedTime().asMilliseconds() > 200) {
 					time.restart();
-					_world.editBlock(ray.getEnd().x, ray.getEnd().y, ray.getEnd().z, 0);
+					_world.editBlock(x, y, z, 0);
+					//sf::sleep(sf::Time(sf::seconds(0.2)));
 					break;
-				}
+				//}
 			}
 		}
 		lastPos = ray.getEnd();
 	}	
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5)) {
+		_world.rebuildAll();
+
+		sf::sleep(sf::Time(sf::seconds(0.2)));
+	}
+
 
 }
 
@@ -47,5 +58,9 @@ void PlayingState::update(float deltaTime)
 
 void PlayingState::render(RenderMaster & renderer)
 {
+	_cuberenderer.addCube(lastPos);
+
+	_cuberenderer.renderCubes();
+
 	_world.render(renderer);
 }

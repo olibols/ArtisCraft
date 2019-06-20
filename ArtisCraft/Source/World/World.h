@@ -11,6 +11,7 @@ public:
 	void setBlock(int x, int y, int z, ChunkBlock block);
 	void editBlock(int x, int y, int z, ChunkBlock block);
 
+	void rebuildAll();
 
 	void render(RenderMaster& renderer);
 
