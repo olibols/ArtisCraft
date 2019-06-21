@@ -10,9 +10,9 @@ public:
 	
 	void update(float deltaTime);
 
+	glm::vec3 _velocity = { 0, 0, 0 };
+
 private:
 	void mouseInput(sf::RenderWindow& window);
 	void keyboardInput();
-
-	glm::vec3 _velocity = {0, 0, 0};
 };

@@ -18,6 +18,8 @@ public:
 
 private:
 
+	Application * _app = nullptr;
+
 	glm::vec3 lastPos;
 	sf::Clock time;
 

@@ -15,13 +15,13 @@ void Player::handleInput(sf::RenderWindow& window)
 void Player::update(float deltaTime)
 {
 	position += _velocity * deltaTime;
-	_velocity *= 0.95;
+	_velocity *= 0.95 ;
 }
 
 
 void Player::mouseInput(sf::RenderWindow& window)
 {
-	static auto const BOUND = 80;
+	static auto const BOUND = 90;
 	static auto lastMousePosition = sf::Mouse::getPosition(window);
 	auto change = sf::Mouse::getPosition() - lastMousePosition;
 

@@ -16,6 +16,8 @@ public:
 
 	void hookEntity(const Entity& entity);
 
+	void newFov(float value);
+
 	glm::mat4 getViewMatrix();
 	glm::mat4 getProjMatrix();
 	glm::mat4 getProjViewMatrix();

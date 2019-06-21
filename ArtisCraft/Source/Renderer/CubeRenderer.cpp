@@ -8,45 +8,45 @@ CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
 	_texture = new BasicTexture("dirt");
 	
 	_cubeMesh.vertexPositions = {
-		1, 0, 0,
+		500, 0, 0,
 		0, 0, 0,
-		0, 1, 0,
-		1, 1, 0,
+		0, 500, 0,
+		500, 500, 0,
 
 		//Front
-		0, 0, 1,
-		1, 0, 1,
-		1, 1, 1,
-		0, 1, 1,
+		0, 0, 500,
+		500, 0, 500,
+		500, 500, 500,
+		0, 500, 500,
 
 		//Right
-		1, 0, 1,
-		1, 0, 0,
-		1, 1, 0,
-		1, 1, 1,
+		500, 0, 500,
+		500, 0, 0,
+		500, 500, 0,
+		500, 500, 500,
 
 		//Left
 		0, 0, 0,
-		0, 0, 1,
-		0, 1, 1,
-		0, 1, 0,
+		0, 0, 500,
+		0, 500, 500,
+		0, 500, 0,
 
 		//Top
-		0, 1, 1,
-		1, 1, 1,
-		1, 1, 0,
-		0, 1, 0,
+		0, 500, 500,
+		500, 500, 500,
+		500, 500, 0,
+		0, 500, 0,
 
 		//Bottom
 		0, 0, 0,
-		1, 0, 0,
-		1, 0, 1,
-		0, 0, 1.
+		500, 0, 0,
+		500, 0, 500,
+		0, 0, 500
 	};
 
-	auto top = _atlas.getTexture({ 0, 0 });
-	auto side = _atlas.getTexture({ 0, 0 });
-	auto bottom = _atlas.getTexture({ 0, 0 });
+	auto top = _atlas.getTexture({ 0, 1 });
+	auto side = _atlas.getTexture({ 1, 1 });
+	auto bottom = _atlas.getTexture({ 0, 1 });
 
 	std::vector<GLfloat> texCoords;
 	texCoords.insert(texCoords.end(), side.begin(), side.end());
@@ -94,7 +94,7 @@ void CubeRenderer::renderCubes(Camera& cam)
 	_shader->loadProjViewMatrix(cam.getProjViewMatrix());
 
 	for (auto quad : _quads) {
-		_shader->loadModelMatrix(makeModelMatrix({ (int)quad.x, (int)quad.y, (int)quad.z }, { 0, 0, 0 }));
+		_shader->loadModelMatrix(makeModelMatrix({ quad.x, quad.y, quad.z }, { 0, 0, 0 }));
 		glDrawElements(GL_TRIANGLES, _cubeModel->getIndicesCount(), GL_UNSIGNED_INT, 0);
 	}
 	_quads.clear();

@@ -27,7 +27,6 @@ void Application::runLoop()
 		_camera->update();
 
 		state.render(*_renderMaster);
-		_renderMaster->finishRender(getWindow(), *_camera);
 
 		handleEvents();
 	}
@@ -49,6 +48,10 @@ void Application::handleEvents()
 				shouldUpdate = !shouldUpdate;
 				_context->window.setMouseCursorVisible(!shouldUpdate);
 				sf::sleep(sf::Time(sf::seconds(0.2)));
+
+			case sf::Keyboard::Up:
+				fov++;
+				_camera->newFov(fov);
 
 			default:
 				break;

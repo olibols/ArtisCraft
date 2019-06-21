@@ -23,7 +23,7 @@ struct RenderContext { // Creates the window and rendering context
 		glCullFace(GL_BACK);
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_DEPTH_TEST);
-		window.setFramerateLimit(60);
+		//window.setFramerateLimit(60);
 	};
 
 	sf::RenderWindow window;

@@ -1,11 +1,14 @@
 #include "PlayingState.h"
 #include "../World/Chunk/ChunkMeshBuilder.h"
+#include <thread>
 #include "../Application.h"
 #include "../Util/Ray.h"
 
 
 PlayingState::PlayingState(Application & app) : BaseState (app)
 {
+	_app = &app;
+
 	app.getCamera().hookEntity(_player);
 
 	//_world.editBlock(10, 10, 10, BlockID::Air);
@@ -32,12 +35,15 @@ void PlayingState::handleInput()
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 					time.restart();
+					sf::Clock clok;
 					_world.editBlock(x, y, z, 0);
+					printf("Took %f seconds to edit the block", clok.getElapsedTime().asSeconds());
 					break;
 				}
 				else if ((sf::Mouse::isButtonPressed(sf::Mouse::Right))) {
 					time.restart();
 					_world.editBlock(lastPos.x,	lastPos.y, lastPos.z, BlockID::Stone);
+					break;
 				}
 			}
 		}
@@ -58,6 +64,8 @@ void PlayingState::update(float deltaTime)
 
 void PlayingState::render(RenderMaster & renderer)
 {
-	renderer.drawCube(lastPos);
+	renderer.drawCube({ _player.position.x - 250 ,_player.position.y - 250, _player.position.z -250});
 	_world.render(renderer);
+
+	renderer.finishRender(_app->getWindow(), _app->getCamera());
 }

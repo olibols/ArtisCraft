@@ -15,18 +15,13 @@ World::World()
 
 ChunkBlock World::getBlock(int x, int y, int z)
 {
-	int bX = x % CHUNK_SIZE;
-	int bZ = z % CHUNK_SIZE;
 
-	int cX = x / CHUNK_SIZE;
-	int cZ = z / CHUNK_SIZE;
+	VectorXZ blockPos = getBlockXZ(x, z);
+	VectorXZ chunkPos = getChunkXZ(x, z);
 
-	if (cX < 0) return ChunkBlock(BlockID::Air);
-	if (cZ < 0) return ChunkBlock(BlockID::Air);
-	if (cX >= wsize) return ChunkBlock(BlockID::Air);
-	if (cZ >= wsize) return ChunkBlock(BlockID::Air);
+	if (isOutOfBounds(chunkPos)) return BlockID::Air;
 
-	return _regions.at(cX * wsize + cZ).getBlock(bX, y, bZ);
+	return _regions.at(chunkPos.x * wsize + chunkPos.z).getBlock(blockPos.x, y, blockPos.z);
 }
 
 void World::setBlock(int x, int y, int z, ChunkBlock block)
@@ -58,7 +53,7 @@ void World::editBlock(int x, int y, int z, ChunkBlock block)
 
 	setBlock(x, y, z, block);
 
-	_regions.at(cX * wsize + cZ).buildMesh();
+	_regions.at(cX * wsize + cZ).buildMesh(y);
 }
 
 void World::rebuildAll()

@@ -18,6 +18,8 @@ public:
 
 private:
 
+	float fov = 90;
+
 	bool shouldUpdate = true;
 
 	std::vector<std::unique_ptr<BaseState>> _states;

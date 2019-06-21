@@ -3,6 +3,7 @@
 #include "../World.h"
 #include "../../Renderer/RenderMaster.h"
 #include <time.h>
+#include <random>
 
 Region::Region(World & world, sf::Vector2i location) : _world(&world), _location(location)
 {
@@ -10,16 +11,17 @@ Region::Region(World & world, sf::Vector2i location) : _world(&world), _location
 		_chunks.emplace_back(sf::Vector3i(location.x, y, location.y), world);
 	}
 
-	int height = _chunks.size() * CHUNK_SIZE - 1;
+	int height = _chunks.size() * CHUNK_SIZE - 20;
 
-	for (int y = 0; y < _chunks.size() * CHUNK_SIZE; y++)
-		for (int x = 0; x < 16; x++)
-			for (int z = 0; z < 16; z++)
-			{
-				if (y == height) { setBlock(x, y, z, BlockID::Grass); }
-				else if (y > height - 3) { setBlock(x, y, z, BlockID::Dirt); }
-				else { setBlock(x, y, z, BlockID::Stone); }
-			}
+
+	for (int x = 0; x < 16; x++)
+	for (int z = 0; z < 16; z++)
+	for (int y = 0, srand(sf::Clock()), newh = 10 + rand() % 15; y <= newh; y++)
+		{
+			if (y == newh) { setBlock(x, y, z, BlockID::Grass); }
+			else if (y > newh) { setBlock(x, y, z, BlockID::Dirt); }
+			else { setBlock(x, y, z, BlockID::Stone); }
+		}
 
 }
 
@@ -56,6 +58,17 @@ void Region::buildMesh()
 		meshBuild.build();
 		chunk.mesh.updateMesh();
 	}
+}
+
+void Region::buildMesh(int y)
+{
+	sf::Clock clok;
+	Chunk& chunk = _chunks.at(y / CHUNK_SIZE);
+	ChunkMeshBuilder meshBuild(chunk);
+	meshBuild.build();
+	chunk.mesh.updateMesh();
+
+	printf("Rebuild whole mesh etc in %f seconds \n", clok.getElapsedTime().asSeconds());
 }
 
 bool Region::outOfBounds(int x, int y, int z)

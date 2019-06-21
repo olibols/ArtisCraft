@@ -14,6 +14,7 @@ public:
 
 	void draw(RenderMaster& renderer);
 
+	void buildMesh(int y);
 	void buildMesh();
 
 private:

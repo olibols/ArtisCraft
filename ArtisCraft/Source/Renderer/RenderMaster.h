@@ -15,6 +15,7 @@ public:
 	void finishRender(sf::RenderWindow& window, Camera& camera);
 
 private:
+	sf::Clock clok;
 	CubeRenderer _cubeRenderer;
 	ChunkRenderer _chunkRenderer;
 };

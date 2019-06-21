@@ -16,6 +16,8 @@ void RenderMaster::finishRender(sf::RenderWindow & window, Camera & camera)
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 
+	srand(clok.getElapsedTime().asSeconds());
+
 	_cubeRenderer.renderCubes(camera);
 	_chunkRenderer.render(camera);
 

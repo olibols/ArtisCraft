@@ -65,6 +65,8 @@ void ChunkMeshBuilder::build()
 
 	AdjacentPositions directions;
 
+	sf::Clock timer;
+
 	for (int x = 0; x < CHUNK_SIZE; ++x) {
 		for (int y = 0; y < CHUNK_SIZE; ++y) {
 			for (int z = 0; z < CHUNK_SIZE; ++z) {
@@ -92,7 +94,7 @@ void ChunkMeshBuilder::build()
 		}
 	}
 
-	printf("\n Built chunk mesh, face count: %i \n", faceCount);
+	printf("Built chunk mesh in: %f ms \n", timer.getElapsedTime().asSeconds());
 
 	faceCount = 0;
 }

@@ -37,8 +37,6 @@ void ChunkMesh::addFace(std::vector<GLfloat> blockFace,
 
 void ChunkMesh::updateMesh()
 {
-	printf("Mesh info: Vertices: %i		Textures: %i	Indices: %i", _mesh->vertexPositions.size() / 3, _mesh->textureCoords.size() / 2, _mesh->indices.size() / 1.5);
-
 	_model->deleteData();
 
 	_model->addData(*_mesh);

@@ -1,4 +1,5 @@
 #include "Model.h"
+#include <SFML/Graphics.hpp>
 
 Model::Model(Mesh& mesh) {
 	addData(mesh);
