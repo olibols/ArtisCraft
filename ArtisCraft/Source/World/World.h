@@ -18,4 +18,5 @@ public:
 private:
 
 	std::vector<Region> _regions;
+	std::vector<Region*> _changedRegions;
 };

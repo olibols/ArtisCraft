@@ -7,7 +7,7 @@
 
 Region::Region(World & world, sf::Vector2i location) : _world(&world), _location(location)
 {
-	for (int y = 0; y < 2; y++) {
+	for (int y = 0; y < 5; y++) {
 		_chunks.emplace_back(sf::Vector3i(location.x, y, location.y), world);
 	}
 
@@ -32,7 +32,7 @@ void Region::setBlock(int x, int y, int z, ChunkBlock block)
 	int blockY = y % CHUNK_SIZE;
 
 	_chunks.at(y / CHUNK_SIZE).setBlock(x, blockY, z, block);
-
+	_chunks.at(y / CHUNK_SIZE).hasMesh = false;
 }
 
 ChunkBlock Region::getBlock(int x, int y, int z)
@@ -47,28 +47,17 @@ ChunkBlock Region::getBlock(int x, int y, int z)
 void Region::draw(RenderMaster & renderer)
 {
 	for (auto& chunk : _chunks) {
-		renderer.drawChunk(chunk.mesh);
+		if (chunk.hasMesh) {
+			renderer.drawChunk(chunk.mesh);
+		}
 	}
 }
 
 void Region::buildMesh()
 {
 	for (auto& chunk : _chunks) {
-		ChunkMeshBuilder meshBuild(chunk);
-		meshBuild.build();
-		chunk.mesh.updateMesh();
+		chunk.buildMesh();
 	}
-}
-
-void Region::buildMesh(int y)
-{
-	sf::Clock clok;
-	Chunk& chunk = _chunks.at(y / CHUNK_SIZE);
-	ChunkMeshBuilder meshBuild(chunk);
-	meshBuild.build();
-	chunk.mesh.updateMesh();
-
-	printf("Rebuild whole mesh etc in %f seconds \n", clok.getElapsedTime().asSeconds());
 }
 
 bool Region::outOfBounds(int x, int y, int z)

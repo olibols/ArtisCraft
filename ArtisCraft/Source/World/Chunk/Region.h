@@ -13,8 +13,6 @@ public:
 	ChunkBlock getBlock(int x, int y, int z);
 
 	void draw(RenderMaster& renderer);
-
-	void buildMesh(int y);
 	void buildMesh();
 
 private:

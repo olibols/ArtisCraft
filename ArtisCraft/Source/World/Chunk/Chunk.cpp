@@ -1,4 +1,5 @@
 #include "Chunk.h"
+#include "ChunkMeshBuilder.h"
 #include "../World.h"
 
 Chunk::Chunk(sf::Vector3i position, World& world) : _location(position), _world(&world)
@@ -28,6 +29,16 @@ ChunkBlock Chunk::getBlock(int x, int y, int z)
 sf::Vector3i Chunk::getLocation()
 {
 	return _location;
+}
+
+void Chunk::buildMesh()
+{
+	if (!hasMesh) {
+		ChunkMeshBuilder(*this).build();
+		mesh.updateMesh();
+		hasMesh = true;
+	}
+
 }
 
 sf::Vector3i Chunk::toWorldPos(int x, int y, int z)

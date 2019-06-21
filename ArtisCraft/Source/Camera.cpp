@@ -29,7 +29,7 @@ glm::mat4 makeModelMatrix(glm::vec3 position, glm::vec3 rotation)
 
 Camera::Camera()
 {
-	_projMatrix = glm::perspective(glm::radians(120.0f), 1920.0f / 1080.0f, 0.1f, 1000.0f);
+	_projMatrix = glm::perspective(glm::radians(90.0f), 1920.0f / 1080.0f, 0.1f, 1000.0f);
 }
 
 void Camera::update()

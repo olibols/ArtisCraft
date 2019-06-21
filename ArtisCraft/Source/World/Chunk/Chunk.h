@@ -16,6 +16,9 @@ public:
 
 	sf::Vector3i getLocation();
 
+	bool hasMesh = false;
+	void buildMesh();
+
 	ChunkMesh mesh;
 
 private:

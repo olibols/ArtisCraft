@@ -27,33 +27,24 @@ ChunkBlock World::getBlock(int x, int y, int z)
 void World::setBlock(int x, int y, int z, ChunkBlock block)
 {
 
-	int bX = x % CHUNK_SIZE;
-	int bZ = z % CHUNK_SIZE;
+	VectorXZ blockPos = getBlockXZ(x, z);
+	VectorXZ chunkPos = getChunkXZ(x, z);
 
-	int cX = x / CHUNK_SIZE;
-	int cZ = z / CHUNK_SIZE;
+	if (isOutOfBounds(chunkPos)) return;
 
-	if (cX < 0) return;
-	if (cZ < 0) return;
-	if (cX >= wsize) return;
-	if (cZ >= wsize) return;
-
-	_regions.at(cX * wsize + cZ).setBlock(bX, y, bZ, block);
+	_regions.at(chunkPos.x * wsize + chunkPos.z).setBlock(blockPos.x, y, blockPos.z, block);
 }
 
 void World::editBlock(int x, int y, int z, ChunkBlock block)
 {
-	int cX = x / CHUNK_SIZE;
-	int cZ = z / CHUNK_SIZE;
+	VectorXZ blockPos = getBlockXZ(x, z);
+	VectorXZ chunkPos = getChunkXZ(x, z);
 
-	if (cX < 0) return;
-	if (cZ < 0) return;
-	if (cX >= wsize) return;
-	if (cZ >= wsize) return;
+	if (isOutOfBounds(chunkPos)) return;
 
 	setBlock(x, y, z, block);
 
-	_regions.at(cX * wsize + cZ).buildMesh(y);
+	_changedRegions.push_back(&_regions.at(chunkPos.x * wsize + chunkPos.z));
 }
 
 void World::rebuildAll()
@@ -65,8 +56,12 @@ void World::rebuildAll()
 
 void World::render(RenderMaster & renderer)
 {
-	for (auto& region : _regions) {
+	for (auto& region : _changedRegions) {
+		region->buildMesh();
+	}
+	_changedRegions.clear();
+
+	for (auto& region : _regions){
 		region.draw(renderer);
-		//region.buildMesh();
 	}
 }
