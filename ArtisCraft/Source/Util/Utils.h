@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <functional>
+#include "VectorXZ.h"
 
 
 struct AdjacentPositions
@@ -22,10 +24,6 @@ struct AdjacentPositions
 	sf::Vector3i back;
 };
 
-struct VectorXZ {
-	int x, z;
-};
-
 inline VectorXZ getBlockXZ(int x, int z) {
 	return{
 		x % CHUNK_SIZE,
@@ -38,12 +36,4 @@ inline VectorXZ getChunkXZ(int x, int z) {
 		x / CHUNK_SIZE,
 		z / CHUNK_SIZE
 	};
-}
-
-inline bool isOutOfBounds(VectorXZ regionPosition) {
-	if (regionPosition.x < 0) return true;
-	if (regionPosition.z < 0) return true;
-	if (regionPosition.x >= 2) return true;
-	if (regionPosition.z >= 2) return true;
-	return false;
 }

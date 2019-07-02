@@ -10,6 +10,11 @@ void RenderMaster::drawChunk(ChunkMesh & mesh)
 	_chunkRenderer.add(mesh);
 }
 
+void RenderMaster::drawSFML(sf::Drawable & drawable)
+{
+	_SFMLRenderer.add(drawable);
+}
+
 void RenderMaster::finishRender(sf::RenderWindow & window, Camera & camera)
 {
 	glClearColor(0.1, 0.5, 1.0, 1.0);
@@ -20,6 +25,7 @@ void RenderMaster::finishRender(sf::RenderWindow & window, Camera & camera)
 
 	_cubeRenderer.renderCubes(camera);
 	_chunkRenderer.render(camera);
+	_SFMLRenderer.render(window);
 
 	window.display();
 }

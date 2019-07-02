@@ -1,6 +1,8 @@
 #pragma once
 #include "BaseState.h"
 #include "../Renderer/CubeRenderer.h"
+#include "../Renderer/HUD/FrameCounter.h"
+#include "../Renderer/HUD/Crosshair.h"
 
 #include "../Entity/Player.h"
 #include "../World/World.h"
@@ -24,6 +26,9 @@ private:
 	sf::Clock time;
 
 	CubeRenderer _cubeboi;
+
+	FrameCounter _frameCounter;
+	Crosshair _crosshair;
 
 	Player _player;
 	World _world;

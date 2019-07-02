@@ -1,4 +1,5 @@
 #include "Context.h"
+#include "Settings.h"
 #include "Camera.h"
 #include "Entity/Player.h"
 #include "Renderer/RenderMaster.h"
@@ -17,8 +18,6 @@ public:
 	void handleEvents();
 
 private:
-
-	float fov = 90;
 
 	bool shouldUpdate = true;
 

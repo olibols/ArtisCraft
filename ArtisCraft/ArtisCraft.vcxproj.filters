@@ -50,6 +50,10 @@
     <ClInclude Include="Source\World\Chunk\Region.h" />
     <ClInclude Include="Source\World\World.h" />
     <ClInclude Include="Source\Util\Ray.h" />
+    <ClInclude Include="Source\Renderer\SFMLRenderer.h" />
+    <ClInclude Include="Source\Renderer\HUD\FrameCounter.h" />
+    <ClInclude Include="Source\Renderer\HUD\Crosshair.h" />
+    <ClInclude Include="Source\Settings.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -128,6 +132,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Util\Ray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\ChunkManager.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\ChunkManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Util\VectorXZ.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Util\VectorXZ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\SFMLRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\HUD\FrameCounter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\HUD\Crosshair.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

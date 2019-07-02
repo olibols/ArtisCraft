@@ -3,11 +3,13 @@
 
 Application::Application(std::string windowName)
 {
-	_context = new RenderContext("ArtisCraft", 1920, 1080);
+	_context = new RenderContext("ArtisCraft", Settings::width, Settings::height);
 	_camera = new Camera();
 	_renderMaster = new RenderMaster;
 
 	_states.push_back(std::make_unique<PlayingState>(*this));
+
+	_context->window.setMouseCursorVisible(false);
 }
 
 void Application::runLoop()
@@ -48,10 +50,6 @@ void Application::handleEvents()
 				shouldUpdate = !shouldUpdate;
 				_context->window.setMouseCursorVisible(!shouldUpdate);
 				sf::sleep(sf::Time(sf::seconds(0.2)));
-
-			case sf::Keyboard::Up:
-				fov++;
-				_camera->newFov(fov);
 
 			default:
 				break;

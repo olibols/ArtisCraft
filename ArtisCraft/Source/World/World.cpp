@@ -1,16 +1,32 @@
 #include "World.h"
+#include "ChunkManager.h"
 #include <Utils.h>
 
-constexpr int wsize = 2;
+std::unordered_set<sf::Vector3i> World::_changedRegions;
 
-World::World()
+constexpr int wsize = 5;
+
+bool isOutOfBounds(VectorXZ regionPosition) {
+	if (regionPosition.x < 0) return true;
+	if (regionPosition.z < 0) return true;
+	if (regionPosition.x >= wsize) return true;
+	if (regionPosition.z >= wsize) return true;
+	return false;
+}
+
+World::World() : _chunkManager(*this)
 {
 	for (int x = 0; x < wsize; x++)
 		for (int z = 0; z < wsize; z++)
-			_regions.emplace_back(*this, sf::Vector2i(x, z));
+			_chunkManager.getRegion(x, z).load();
 
-	for (auto& region : _regions)
-		region.buildMesh();
+
+
+	for (int x = 0; x < wsize; x++) {
+		for (int z = 0; z < wsize; z++) {
+			_chunkManager.makeMesh(x, z);
+		}
+	}
 }
 
 ChunkBlock World::getBlock(int x, int y, int z)
@@ -21,47 +37,41 @@ ChunkBlock World::getBlock(int x, int y, int z)
 
 	if (isOutOfBounds(chunkPos)) return BlockID::Air;
 
-	return _regions.at(chunkPos.x * wsize + chunkPos.z).getBlock(blockPos.x, y, blockPos.z);
+	return _chunkManager.getRegion(chunkPos.x, chunkPos.z).getBlock(blockPos.x, y, blockPos.z);
 }
 
 void World::setBlock(int x, int y, int z, ChunkBlock block)
 {
+	if (y == 0) return;
 
 	VectorXZ blockPos = getBlockXZ(x, z);
 	VectorXZ chunkPos = getChunkXZ(x, z);
 
 	if (isOutOfBounds(chunkPos)) return;
-
-	_regions.at(chunkPos.x * wsize + chunkPos.z).setBlock(blockPos.x, y, blockPos.z, block);
-}
-
-void World::editBlock(int x, int y, int z, ChunkBlock block)
-{
-	VectorXZ blockPos = getBlockXZ(x, z);
-	VectorXZ chunkPos = getChunkXZ(x, z);
-
-	if (isOutOfBounds(chunkPos)) return;
-
-	setBlock(x, y, z, block);
-
-	_changedRegions.push_back(&_regions.at(chunkPos.x * wsize + chunkPos.z));
-}
-
-void World::rebuildAll()
-{
-	for (auto& region : _regions) {
-		region.buildMesh();
+	
+	auto& region = _chunkManager.getRegion(chunkPos.x, chunkPos.z);
+	region.setBlock(blockPos.x, y, blockPos.z, block);
+	if (region.hasLoaded())
+	{
+		_changedRegions.emplace(chunkPos.x, y / CHUNK_SIZE, chunkPos.z);
 	}
 }
 
 void World::render(RenderMaster & renderer)
 {
-	for (auto& region : _changedRegions) {
-		region->buildMesh();
+	for (auto& location : _changedRegions) {
+		try {
+			Chunk& chunk = _chunkManager.getRegion(location.x, location.z).getChunk(location.y);
+			chunk.buildMesh();
+		}
+		catch(std::exception e){}
 	}
+
 	_changedRegions.clear();
 
-	for (auto& region : _regions){
-		region.draw(renderer);
+	auto& regions = _chunkManager.getRegions();
+
+	for (auto& region : regions) {
+		region.second.draw(renderer);
 	}
 }

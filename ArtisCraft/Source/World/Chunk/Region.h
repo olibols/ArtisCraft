@@ -13,12 +13,19 @@ public:
 	ChunkBlock getBlock(int x, int y, int z);
 
 	void draw(RenderMaster& renderer);
+
+	inline bool hasLoaded() { return isLoaded; };
+	void load();
+
 	void buildMesh();
+
+	Chunk& getChunk(int chunkIndex);
 
 private:
 
 	bool outOfBounds(int x, int y, int z);
 	
+	bool isLoaded = false;
 
 	std::vector<Chunk> _chunks;
 	sf::Vector2i _location;

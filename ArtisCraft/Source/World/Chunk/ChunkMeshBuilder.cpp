@@ -82,7 +82,9 @@ void ChunkMeshBuilder::build()
 
 				directions.update(x, y, z);
 
-				addFace(bottomFace, _texData->texBottomCoord, position, directions.down);
+				if (y != 0) {
+					addFace(bottomFace, _texData->texBottomCoord, position, directions.down);
+				};
 				addFace(topFace, _texData->texTopCoord, position, directions.up);
 
 				addFace(leftFace, _texData->texSideCoord, position, directions.left);

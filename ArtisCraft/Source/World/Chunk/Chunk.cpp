@@ -12,6 +12,7 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 		outOfBounds(y) ||
 		outOfBounds(z)) return;
 
+	hasMesh = false;
 	_blocks[getIndex(x, y ,z)] = block;
 }
 
@@ -33,11 +34,11 @@ sf::Vector3i Chunk::getLocation()
 
 void Chunk::buildMesh()
 {
-	if (!hasMesh) {
+	//if (!hasMesh) {
 		ChunkMeshBuilder(*this).build();
 		mesh.updateMesh();
 		hasMesh = true;
-	}
+	//}
 
 }
 
