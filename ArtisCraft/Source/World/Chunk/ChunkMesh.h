@@ -13,12 +13,15 @@ public:
 
 	void updateMesh();
 
+	bool hasMesh();
+
 	Model getModel();
 	void deleteModel();
 
 private:
 
 	GLuint _indiceCount = 0;
+	int _faces = 0;
 
 	Mesh* _mesh = nullptr;
 	Model* _model = nullptr;

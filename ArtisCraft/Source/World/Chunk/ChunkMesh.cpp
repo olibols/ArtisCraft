@@ -33,6 +33,8 @@ void ChunkMesh::addFace(std::vector<GLfloat> blockFace,
 		_indiceCount
 		});
 	_indiceCount += 4;
+
+	_faces++;
 }
 
 void ChunkMesh::updateMesh()
@@ -50,6 +52,12 @@ void ChunkMesh::updateMesh()
 	_mesh->vertexPositions.shrink_to_fit();
 
 	_indiceCount = 0;
+}
+
+bool ChunkMesh::hasMesh()
+{
+	if (_faces > 0) return true;
+	else return false;
 }
 
 

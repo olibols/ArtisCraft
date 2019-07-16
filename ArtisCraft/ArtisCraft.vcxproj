@@ -35,6 +35,7 @@
     <ClInclude Include="Source\Util\FileUtilities.h" />
     <ClInclude Include="Source\Util\GLM.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
+    <ClInclude Include="Source\Util\PerlinNoise.h" />
     <ClInclude Include="Source\Util\Ray.h" />
     <ClInclude Include="Source\Util\Utils.h" />
     <ClInclude Include="Source\World\Block\BlockData.h" />
@@ -131,8 +132,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\Dependencies\GLFW\include\;$(SolutionDir)..\Dependencies\GLEW\include\;$(SolutionDir)..\Dependencies\GLM\;$(SolutionDir)..\Dependencies\SFML\include\;$(SolutionDir)Source\Rendering\;$(SolutionDir)Source\Util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Dependencies\GLFW\include\;$(SolutionDir)..\Dependencies\GLEW\include\;$(SolutionDir)..\Dependencies\GLM\;$(SolutionDir)..\Dependencies\SFML\include\;$(SolutionDir)Source\Rendering\;$(SolutionDir)Source\Util\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Dependencies\GLFW\lib-vc2019;$(SolutionDir)..\Dependencies\GLEW\lib\Release\x64;$(SolutionDir)..\Dependencies\SFML\lib</AdditionalLibraryDirectories>

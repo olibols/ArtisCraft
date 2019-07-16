@@ -15,12 +15,11 @@ Application::Application(std::string windowName)
 void Application::runLoop()
 {
 	sf::Clock dtTimer;
-
+	BaseState& state = *_states.back();
 
 	while (true) {
 		auto deltaTime = dtTimer.restart();
-		BaseState& state = *_states.back();
-
+		
 		if (shouldUpdate) {
 			state.handleInput();
 			state.update(deltaTime.asSeconds());

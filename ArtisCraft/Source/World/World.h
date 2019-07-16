@@ -16,6 +16,8 @@ public:
 	ChunkBlock getBlock(int x, int y, int z);
 	void setBlock(int x, int y, int z, ChunkBlock block);
 
+	void update(const Camera& camera);
+
 	void render(RenderMaster& renderer);
 
 private:

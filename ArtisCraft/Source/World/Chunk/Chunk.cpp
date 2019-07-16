@@ -10,9 +10,15 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 {
 	if (outOfBounds(x) ||
 		outOfBounds(y) ||
-		outOfBounds(z)) return;
+		outOfBounds(z)) 
+	{
+		auto location = toWorldPos(x, y, z);
+		_world->setBlock(location.x, location.y, location.z, block);
+		return;
+	};
 
 	hasMesh = false;
+	_hasBlocks = true;
 	_blocks[getIndex(x, y ,z)] = block;
 }
 
@@ -21,8 +27,10 @@ ChunkBlock Chunk::getBlock(int x, int y, int z)
 	if (outOfBounds(x) ||
 		outOfBounds(y) ||
 		outOfBounds(z)) {
+
 	sf::Vector3i location = toWorldPos(x, y, z);
 	return _world->getBlock(location.x, location.y, location.z);
+
 	}
 	return _blocks[getIndex(x, y, z)];
 }
@@ -32,14 +40,19 @@ sf::Vector3i Chunk::getLocation()
 	return _location;
 }
 
+bool Chunk::hasFaces()
+{
+	if (_mesh.hasMesh()) return true;
+	else return false;
+}
+
 void Chunk::buildMesh()
 {
-	//if (!hasMesh) {
+	if(_hasBlocks) {
 		ChunkMeshBuilder(*this).build();
-		mesh.updateMesh();
+		_mesh.updateMesh();
 		hasMesh = true;
-	//}
-
+	}
 }
 
 sf::Vector3i Chunk::toWorldPos(int x, int y, int z)

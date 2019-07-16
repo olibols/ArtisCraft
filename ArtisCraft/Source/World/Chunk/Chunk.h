@@ -17,15 +17,22 @@ public:
 	sf::Vector3i getLocation();
 
 	bool hasMesh = false;
+
+	bool hasFaces();
+
+	inline bool hasBlocks() { return _hasBlocks; };
+
 	void buildMesh();
 
-	ChunkMesh mesh;
-
+	ChunkMesh _mesh;
+	   
 private:
 
 	sf::Vector3i toWorldPos(int x, int y, int z);
 	bool outOfBounds(int value);
 	int getIndex(int x, int y, int z);
+
+	bool _hasBlocks = false;
 
 	std::array<ChunkBlock, CHUNK_VOLUME> _blocks;
 	sf::Vector3i _location;

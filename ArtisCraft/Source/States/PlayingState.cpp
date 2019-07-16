@@ -37,7 +37,7 @@ void PlayingState::handleInput()
 					time.restart();
 					sf::Clock clok;
 					_world.setBlock(x, y, z, 0);
-					printf("Took %f seconds to edit the block", clok.getElapsedTime().asSeconds());
+					//printf("Took %f seconds to edit the block", clok.getElapsedTime().asSeconds());
 					break;
 				}
 				else if ((sf::Mouse::isButtonPressed(sf::Mouse::Right))) {
@@ -54,6 +54,8 @@ void PlayingState::handleInput()
 void PlayingState::update(float deltaTime)
 {
 	_player.update(deltaTime);
+	_world.update(_app->getCamera());
+
 	_frameCounter.update();
 }
 

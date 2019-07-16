@@ -54,6 +54,7 @@
     <ClInclude Include="Source\Renderer\HUD\FrameCounter.h" />
     <ClInclude Include="Source\Renderer\HUD\Crosshair.h" />
     <ClInclude Include="Source\Settings.h" />
+    <ClInclude Include="Source\Util\PerlinNoise.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">

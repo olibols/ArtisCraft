@@ -4,7 +4,7 @@
 
 std::unordered_set<sf::Vector3i> World::_changedRegions;
 
-constexpr int wsize = 5;
+constexpr int wsize = 6;
 
 bool isOutOfBounds(VectorXZ regionPosition) {
 	if (regionPosition.x < 0) return true;
@@ -19,14 +19,6 @@ World::World() : _chunkManager(*this)
 	for (int x = 0; x < wsize; x++)
 		for (int z = 0; z < wsize; z++)
 			_chunkManager.getRegion(x, z).load();
-
-
-
-	for (int x = 0; x < wsize; x++) {
-		for (int z = 0; z < wsize; z++) {
-			_chunkManager.makeMesh(x, z);
-		}
-	}
 }
 
 ChunkBlock World::getBlock(int x, int y, int z)
@@ -57,14 +49,20 @@ void World::setBlock(int x, int y, int z, ChunkBlock block)
 	}
 }
 
+void World::update(const Camera & camera)
+{
+	for (int x = 0; x < wsize; x++) {
+		for (int z = 0; z < wsize; z++) {
+			_chunkManager.makeMesh(x, z);
+		}
+	}
+}
+
 void World::render(RenderMaster & renderer)
 {
 	for (auto& location : _changedRegions) {
-		try {
-			Chunk& chunk = _chunkManager.getRegion(location.x, location.z).getChunk(location.y);
-			chunk.buildMesh();
-		}
-		catch(std::exception e){}
+		Chunk& chunk = _chunkManager.getRegion(location.x, location.z).getChunk(location.y);
+		chunk.buildMesh();
 	}
 
 	_changedRegions.clear();
