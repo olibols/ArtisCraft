@@ -10,6 +10,9 @@ void ChunkRenderer::add(ChunkMesh mesh)
 
 void ChunkRenderer::render(Camera& camera)
 {
+
+	if (_chunks.empty()) return;
+
 	_shader.useProgram();
 	BlockDatabase::get().atlas.bindTexture();
 

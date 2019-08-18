@@ -2,17 +2,9 @@
 #include "ChunkManager.h"
 #include <Utils.h>
 
-std::unordered_set<sf::Vector3i> World::_changedRegions;
+constexpr int wsize = 4;
+constexpr int renderDistance = 4;
 
-constexpr int wsize = 6;
-
-bool isOutOfBounds(VectorXZ regionPosition) {
-	if (regionPosition.x < 0) return true;
-	if (regionPosition.z < 0) return true;
-	if (regionPosition.x >= wsize) return true;
-	if (regionPosition.z >= wsize) return true;
-	return false;
-}
 
 World::World() : _chunkManager(*this)
 {
@@ -27,49 +19,148 @@ ChunkBlock World::getBlock(int x, int y, int z)
 	VectorXZ blockPos = getBlockXZ(x, z);
 	VectorXZ chunkPos = getChunkXZ(x, z);
 
-	if (isOutOfBounds(chunkPos)) return BlockID::Air;
-
 	return _chunkManager.getRegion(chunkPos.x, chunkPos.z).getBlock(blockPos.x, y, blockPos.z);
 }
 
 void World::setBlock(int x, int y, int z, ChunkBlock block)
 {
-	if (y == 0) return;
+	if (y <= 0) return;
 
 	VectorXZ blockPos = getBlockXZ(x, z);
 	VectorXZ chunkPos = getChunkXZ(x, z);
-
-	if (isOutOfBounds(chunkPos)) return;
 	
-	auto& region = _chunkManager.getRegion(chunkPos.x, chunkPos.z);
-	region.setBlock(blockPos.x, y, blockPos.z, block);
-	if (region.hasLoaded())
-	{
-		_changedRegions.emplace(chunkPos.x, y / CHUNK_SIZE, chunkPos.z);
-	}
+	_chunkManager.getRegion(chunkPos.x, chunkPos.z).setBlock(blockPos.x, y, blockPos.z, block);
+
 }
 
 void World::update(const Camera & camera)
 {
+	for (auto& event : _events) {
+		event->handle(*this);
+	}
+	
+	updateRegions();
+
+	bool isMeshMade = false;
+	int cameraX = camera.position.x / CHUNK_SIZE;
+	int cameraZ = camera.position.z / CHUNK_SIZE;
+
+	for(int i = 0; i < _currentLoadDistance; i++){
+		int minX = std::max(cameraX - i, 0);
+		int minZ = std::max(cameraZ - i, 0);
+		int maxX = cameraX + i;
+		int maxZ = cameraZ + i;
+
+		for (int x = minX; x < maxX; ++x) {
+			for (int z = minZ; z < maxZ; ++z) {
+				if (_chunkManager.makeMesh(x, z)) {
+					isMeshMade = true;
+					break;
+				}
+			}
+			if (isMeshMade)
+				break;
+		}
+		if (isMeshMade)
+			break;
+	}
+
+	if (!isMeshMade) _currentLoadDistance++;
+	if (_currentLoadDistance >= renderDistance) _currentLoadDistance = 2;
+
+
 	for (int x = 0; x < wsize; x++) {
 		for (int z = 0; z < wsize; z++) {
+			if (!_chunkManager.regionExistsAt(x, z)) {
+				_chunkManager.loadRegion(x, z);
+			}
 			_chunkManager.makeMesh(x, z);
 		}
+	}
+	_events.clear();
+}
+
+void World::updateRegion(int blockX, int blockY, int blockZ)
+{
+	auto addChunkToUpdateBatch = [&](const sf::Vector3i& key, Chunk& chunk)
+	{
+		_regionUpdates.emplace(key, &chunk);
+	};
+
+	auto chunkPos = getChunkXZ(blockX, blockZ);
+	auto chunkY = blockY / CHUNK_SIZE;
+	
+	sf::Vector3i key(chunkPos.x, chunkY, chunkPos.z);
+	addChunkToUpdateBatch(key, _chunkManager.getRegion(chunkPos.x, chunkPos.z).getChunk(chunkY));
+
+	auto chunkBlockXZ = getBlockXZ(blockX, blockZ);
+	auto chunkBlockY = blockY % CHUNK_SIZE;
+
+	if (chunkBlockXZ.x == 0)
+	{
+		sf::Vector3i newKey(chunkPos.x - 1, chunkY, chunkPos.z);
+		addChunkToUpdateBatch(newKey, _chunkManager.getRegion(newKey.x, newKey.z).getChunk(newKey.y));
+	}
+	else if (chunkBlockXZ.x == CHUNK_SIZE - 1)
+	{
+		sf::Vector3i newKey(chunkPos.x + 1, chunkY, chunkPos.z);
+		addChunkToUpdateBatch(newKey, _chunkManager.getRegion(newKey.x, newKey.z).getChunk(newKey.y));
+	}
+
+	if (chunkBlockY == 0)
+	{
+		sf::Vector3i newKey(chunkPos.x, chunkY - 1, chunkPos.z);
+		addChunkToUpdateBatch(newKey, _chunkManager.getRegion(newKey.x, newKey.z).getChunk(newKey.y));
+	}
+	else if (chunkBlockY == CHUNK_SIZE - 1)
+	{
+		sf::Vector3i newKey(chunkPos.x, chunkY + 1, chunkPos.z);
+		addChunkToUpdateBatch(newKey, _chunkManager.getRegion(newKey.x, newKey.z).getChunk(newKey.y));
+	}
+
+	if (chunkBlockXZ.z == 0)
+	{
+		sf::Vector3i newKey(chunkPos.x, chunkY, chunkPos.z - 1);
+		addChunkToUpdateBatch(newKey, _chunkManager.getRegion(newKey.x, newKey.z).getChunk(newKey.y));
+	}
+	else if (chunkBlockXZ.z == CHUNK_SIZE - 1)
+	{
+		sf::Vector3i newKey(chunkPos.x, chunkY, chunkPos.z + 1);
+		addChunkToUpdateBatch(newKey, _chunkManager.getRegion(newKey.x, newKey.z).getChunk(newKey.y));
 	}
 }
 
 void World::render(RenderMaster & renderer)
 {
-	for (auto& location : _changedRegions) {
-		Chunk& chunk = _chunkManager.getRegion(location.x, location.z).getChunk(location.y);
-		chunk.buildMesh();
-	}
-
-	_changedRegions.clear();
-
-	auto& regions = _chunkManager.getRegions();
-
-	for (auto& region : regions) {
+	auto& regionMap = _chunkManager.getRegions();
+	for (auto& region : regionMap) {
 		region.second.draw(renderer);
 	}
+}
+
+VectorXZ World::getBlockXZ(int x, int z)
+{
+	return
+	{
+		x % CHUNK_SIZE,
+		z % CHUNK_SIZE
+	};
+}
+
+VectorXZ World::getChunkXZ(int x, int z)
+{
+	return
+	{
+		x / CHUNK_SIZE,
+		z / CHUNK_SIZE
+	};
+}
+
+void World::updateRegions()
+{
+	for (auto& region : _regionUpdates) {
+		Chunk& section = *region.second;
+		section.buildMesh();
+	}
+	_regionUpdates.clear();
 }

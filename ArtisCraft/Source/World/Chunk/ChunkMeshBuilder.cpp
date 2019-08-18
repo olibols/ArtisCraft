@@ -67,8 +67,9 @@ void ChunkMeshBuilder::build()
 
 	sf::Clock timer;
 
-	for (int x = 0; x < CHUNK_SIZE; ++x) {
-		for (int y = 0; y < CHUNK_SIZE; ++y) {
+	for (int y = 0; y < CHUNK_SIZE; ++y) {
+		if (!shouldMakeLayer(y)) continue;
+		for (int x = 0; x < CHUNK_SIZE; ++x) {
 			for (int z = 0; z < CHUNK_SIZE; ++z) {
 
 				sf::Vector3i position(x, y, z);
@@ -111,6 +112,24 @@ bool ChunkMeshBuilder::shouldMakeFace(sf::Vector3i blockPosition, TextureData te
 	else {
 		return false;
 	}
+}
+
+bool ChunkMeshBuilder::isAdjSolid(int x, int y, int z) {
+	Chunk& chunk = _chunk->getAdjacentChunk(x, z);
+	return chunk.getLayer(y).isAllSolid();
+}
+
+bool ChunkMeshBuilder::shouldMakeLayer(int y)
+{
+	return  (!_chunk->getLayer(y).isAllSolid()) ||
+		(!_chunk->getLayer(y + 1).isAllSolid()) ||
+		(!_chunk->getLayer(y - 1).isAllSolid()) ||
+
+		(!isAdjSolid(1, y, 0)) ||
+		(!isAdjSolid(0, y, 1)) ||
+		(!isAdjSolid(-1, y, 0)) ||
+		(!isAdjSolid(0, y, -1));
+
 }
 
 void ChunkMeshBuilder::addFace(std::vector<GLfloat> blockFace, sf::Vector2i texCoords, sf::Vector3i blockPosition, sf::Vector3i blockFacing)

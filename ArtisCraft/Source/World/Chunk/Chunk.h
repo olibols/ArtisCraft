@@ -7,6 +7,19 @@
 
 class World;
 
+class ChunkLayer {
+public:
+	inline void update(ChunkBlock block) {
+		if (block == BlockID::Air) _solidBlockCount--;
+		else _solidBlockCount++;
+	}
+
+	inline bool isAllSolid() { return _solidBlockCount == CHUNK_AREA; }
+
+private:
+	int _solidBlockCount = 0;
+};
+
 class Chunk {
 public:
 	Chunk(sf::Vector3i position, World& world);
@@ -24,6 +37,9 @@ public:
 
 	void buildMesh();
 
+	ChunkLayer& getLayer(int y);
+	Chunk& getAdjacentChunk(int x, int z);
+
 	ChunkMesh _mesh;
 	   
 private:
@@ -34,6 +50,7 @@ private:
 
 	bool _hasBlocks = false;
 
+	std::array<ChunkLayer, CHUNK_SIZE> _layers;
 	std::array<ChunkBlock, CHUNK_VOLUME> _blocks;
 	sf::Vector3i _location;
 	World* _world;

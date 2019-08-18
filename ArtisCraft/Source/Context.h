@@ -13,7 +13,7 @@ struct RenderContext { // Creates the window and rendering context
 		settings.depthBits = 24;
 		settings.stencilBits = 8;
 
-		window.create(sf::VideoMode(1920, 1080), windowName, sf::Style::None, settings);
+		window.create(sf::VideoMode(1920, 1080), windowName, sf::Style::Close, settings);
 
 		glewInit();
 		glGetError();

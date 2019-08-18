@@ -3,7 +3,7 @@
 #include "../Renderer/CubeRenderer.h"
 #include "../Renderer/HUD/FrameCounter.h"
 #include "../Renderer/HUD/Crosshair.h"
-
+#include <memory>
 #include "../Entity/Player.h"
 #include "../World/World.h"
 

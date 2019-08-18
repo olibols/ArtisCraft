@@ -55,6 +55,9 @@
     <ClInclude Include="Source\Renderer\HUD\Crosshair.h" />
     <ClInclude Include="Source\Settings.h" />
     <ClInclude Include="Source\Util\PerlinNoise.h" />
+    <ClInclude Include="Source\World\Events\BaseWorldEvent.h" />
+    <ClInclude Include="Source\World\Events\PlayerDigEvent.h" />
+    <ClInclude Include="Source\AABB\AABB.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -154,6 +157,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\HUD\Crosshair.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Events\PlayerDigEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

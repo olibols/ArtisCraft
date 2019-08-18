@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\AABB\AABB.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Context.h" />
@@ -48,6 +49,8 @@
     <ClInclude Include="Source\World\Block\Types\BlockType.h" />
     <ClInclude Include="Source\World\Chunk\Region.h" />
     <ClInclude Include="Source\World\Constants.h" />
+    <ClInclude Include="Source\World\Events\BaseWorldEvent.h" />
+    <ClInclude Include="Source\World\Events\PlayerDigEvent.h" />
     <ClInclude Include="Source\World\World.h" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +86,7 @@
     <ClCompile Include="Source\World\Chunk\ChunkMeshBuilder.cpp" />
     <ClCompile Include="Source\World\Block\Types\BlockType.cpp" />
     <ClCompile Include="Source\World\Chunk\Region.cpp" />
+    <ClCompile Include="Source\World\Events\PlayerDigEvent.cpp" />
     <ClCompile Include="Source\World\World.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -135,6 +139,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)..\Dependencies\GLFW\include\;$(SolutionDir)..\Dependencies\GLEW\include\;$(SolutionDir)..\Dependencies\GLM\;$(SolutionDir)..\Dependencies\SFML\include\;$(SolutionDir)Source\Rendering\;$(SolutionDir)Source\Util\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Dependencies\GLFW\lib-vc2019;$(SolutionDir)..\Dependencies\GLEW\lib\Release\x64;$(SolutionDir)..\Dependencies\SFML\lib</AdditionalLibraryDirectories>

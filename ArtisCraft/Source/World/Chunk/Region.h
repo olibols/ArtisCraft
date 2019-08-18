@@ -17,11 +17,15 @@ public:
 	inline bool hasLoaded() { return isLoaded; };
 	void load();
 
-	void buildMesh();
+	bool buildMesh();
 
 	Chunk& getChunk(int chunkIndex);
 
 private:
+
+	void addChunk();
+	void addChunkBlockTarget(int blockY);
+	void addChunkIndexTarget(int index);
 
 	bool outOfBounds(int x, int y, int z);
 	

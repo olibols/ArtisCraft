@@ -3,6 +3,8 @@
 #include <thread>
 #include "../Application.h"
 #include "../Util/Ray.h"
+#include "../World/Events/PlayerDigEvent.h"
+#include <memory>
 
 
 PlayingState::PlayingState(Application & app) : BaseState (app)
@@ -36,13 +38,13 @@ void PlayingState::handleInput()
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 					time.restart();
 					sf::Clock clok;
-					_world.setBlock(x, y, z, 0);
+					_world.addEvent<PlayerDigEvent>(sf::Mouse::Button::Left, ray.getEnd(), _player);
 					//printf("Took %f seconds to edit the block", clok.getElapsedTime().asSeconds());
 					break;
 				}
 				else if ((sf::Mouse::isButtonPressed(sf::Mouse::Right))) {
 					time.restart();
-					_world.setBlock(lastPos.x,	lastPos.y, lastPos.z, BlockID::Stone);
+					_world.addEvent<PlayerDigEvent>(sf::Mouse::Button::Right, lastPos, _player);
 					break;
 				}
 			//}
@@ -53,7 +55,7 @@ void PlayingState::handleInput()
 
 void PlayingState::update(float deltaTime)
 {
-	_player.update(deltaTime);
+	_player.update(deltaTime, _world);
 	_world.update(_app->getCamera());
 
 	_frameCounter.update();

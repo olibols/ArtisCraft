@@ -19,6 +19,9 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 
 	hasMesh = false;
 	_hasBlocks = true;
+
+	_layers[y].update(block);
+
 	_blocks[getIndex(x, y ,z)] = block;
 }
 
@@ -53,6 +56,24 @@ void Chunk::buildMesh()
 		_mesh.updateMesh();
 		hasMesh = true;
 	}
+}
+
+ChunkLayer & Chunk::getLayer(int y)
+{
+	if (y == -1) {
+		return _world->getChunkManager().getRegion(_location.x, _location.z).getChunk(_location.y - 1).getLayer(CHUNK_SIZE - 1);
+	}
+	else if(y == CHUNK_SIZE){
+		return _world->getChunkManager().getRegion(_location.x, _location.z).getChunk(_location.y + 1).getLayer(0);
+	}
+	else {
+		return _layers[y];
+	}
+}
+
+Chunk & Chunk::getAdjacentChunk(int x, int z)
+{
+	return _world->getChunkManager().getRegion(_location.x + x, _location.z + z).getChunk(_location.y);
 }
 
 sf::Vector3i Chunk::toWorldPos(int x, int y, int z)
