@@ -63,8 +63,8 @@ void PlayingState::update(float deltaTime)
 
 void PlayingState::render(RenderMaster & renderer)
 {
-	renderer.drawCube({ _player.position.x - 250 ,_player.position.y - 250, _player.position.z -250});
-	_world.render(renderer);
+	//renderer.drawCube({ _player.position.x - 250 ,_player.position.y - 250, _player.position.z -250});
+	_world.render(renderer, _application->getCamera());
 	_frameCounter.draw(renderer);
 	_crosshair.draw(renderer);
 	renderer.finishRender(_app->getWindow(), _app->getCamera());

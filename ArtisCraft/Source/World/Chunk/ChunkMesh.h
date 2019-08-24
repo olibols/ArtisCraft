@@ -9,7 +9,8 @@ public:
 	void addFace(std::vector<GLfloat> blockFace,
 		std::vector<GLfloat> textureCoords,
 		sf::Vector3i chunkPosition,
-		sf::Vector3i blockPosition);
+		sf::Vector3i blockPosition,
+		GLfloat cardinalLight);
 
 	void updateMesh();
 
@@ -22,6 +23,8 @@ private:
 
 	GLuint _indiceCount = 0;
 	int _faces = 0;
+
+	std::vector<GLfloat> _light;
 
 	Mesh* _mesh = nullptr;
 	Model* _model = nullptr;

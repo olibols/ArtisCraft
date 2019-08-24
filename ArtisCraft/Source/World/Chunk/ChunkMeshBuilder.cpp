@@ -2,6 +2,11 @@
 #include <Utils.h>
 #include "../Block/BlockTypeDatabase.h"
 
+constexpr GLfloat LIGHT_TOP = 1.0f;
+constexpr GLfloat LIGHT_X = 0.8f;
+constexpr GLfloat LIGHT_Z = 0.6f;
+constexpr GLfloat LIGHT_BOT = 0.4f;
+
 const std::vector<GLfloat> frontFace
 {
 	0, 0, 1,
@@ -84,20 +89,20 @@ void ChunkMeshBuilder::build()
 				directions.update(x, y, z);
 
 				if (y != 0) {
-					addFace(bottomFace, _texData->texBottomCoord, position, directions.down);
+					addFace(bottomFace, _texData->texBottomCoord, position, directions.down, LIGHT_BOT);
 				};
-				addFace(topFace, _texData->texTopCoord, position, directions.up);
+				addFace(topFace, _texData->texTopCoord, position, directions.up, LIGHT_TOP);
 
-				addFace(leftFace, _texData->texSideCoord, position, directions.left);
-				addFace(rightFace, _texData->texSideCoord, position, directions.right);
+				addFace(leftFace, _texData->texSideCoord, position, directions.left, LIGHT_X);
+				addFace(rightFace, _texData->texSideCoord, position, directions.right, LIGHT_X);
 
-				addFace(frontFace, _texData->texSideCoord, position, directions.front);
-				addFace(backFace, _texData->texSideCoord, position, directions.back);
+				addFace(frontFace, _texData->texSideCoord, position, directions.front, LIGHT_Z);
+				addFace(backFace, _texData->texSideCoord, position, directions.back, LIGHT_Z);
 			}
 		}
 	}
 
-	printf("Built chunk mesh in: %f ms \n", timer.getElapsedTime().asSeconds());
+	//printf("Built chunk mesh in: %f ms \n", timer.getElapsedTime().asSeconds());
 
 	faceCount = 0;
 }
@@ -132,12 +137,12 @@ bool ChunkMeshBuilder::shouldMakeLayer(int y)
 
 }
 
-void ChunkMeshBuilder::addFace(std::vector<GLfloat> blockFace, sf::Vector2i texCoords, sf::Vector3i blockPosition, sf::Vector3i blockFacing)
+void ChunkMeshBuilder::addFace(std::vector<GLfloat> blockFace, sf::Vector2i texCoords, sf::Vector3i blockPosition, sf::Vector3i blockFacing, GLfloat cardinalLight)
 {
 	if (shouldMakeFace(blockFacing, *_texData)) {
 		faceCount++;
 		auto textureCoords = BlockDatabase::get().atlas.getTexture(texCoords);
 
-		_mesh->addFace(blockFace, textureCoords, _chunk->getLocation(), blockPosition);
+		_mesh->addFace(blockFace, textureCoords, _chunk->getLocation(), blockPosition, cardinalLight);
 	}
 }

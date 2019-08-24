@@ -36,7 +36,7 @@
     <ClInclude Include="Source\Util\FileUtilities.h" />
     <ClInclude Include="Source\Util\GLM.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
-    <ClInclude Include="Source\Util\PerlinNoise.h" />
+    <ClInclude Include="Source\Util\SimplexNoise.h" />
     <ClInclude Include="Source\Util\Ray.h" />
     <ClInclude Include="Source\Util\Utils.h" />
     <ClInclude Include="Source\World\Block\BlockData.h" />
@@ -51,6 +51,7 @@
     <ClInclude Include="Source\World\Constants.h" />
     <ClInclude Include="Source\World\Events\BaseWorldEvent.h" />
     <ClInclude Include="Source\World\Events\PlayerDigEvent.h" />
+    <ClInclude Include="Source\World\Generators\NoiseGenerator.h" />
     <ClInclude Include="Source\World\World.h" />
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +75,7 @@
     <ClCompile Include="Source\Util\FileUtilities.cpp" />
     <ClCompile Include="Source\Renderer\Texture\BasicTexture.cpp" />
     <ClCompile Include="Source\Util\Ray.cpp" />
+    <ClCompile Include="Source\Util\SimplexNoise.cpp" />
     <ClCompile Include="Source\Util\VectorXZ.cpp" />
     <ClCompile Include="Source\Util\VectorXZ.h" />
     <ClCompile Include="Source\World\Block\BlockData.cpp" />
@@ -87,6 +89,7 @@
     <ClCompile Include="Source\World\Block\Types\BlockType.cpp" />
     <ClCompile Include="Source\World\Chunk\Region.cpp" />
     <ClCompile Include="Source\World\Events\PlayerDigEvent.cpp" />
+    <ClCompile Include="Source\World\Generators\NoiseGenerator.cpp" />
     <ClCompile Include="Source\World\World.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

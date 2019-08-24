@@ -54,10 +54,11 @@
     <ClInclude Include="Source\Renderer\HUD\FrameCounter.h" />
     <ClInclude Include="Source\Renderer\HUD\Crosshair.h" />
     <ClInclude Include="Source\Settings.h" />
-    <ClInclude Include="Source\Util\PerlinNoise.h" />
     <ClInclude Include="Source\World\Events\BaseWorldEvent.h" />
     <ClInclude Include="Source\World\Events\PlayerDigEvent.h" />
     <ClInclude Include="Source\AABB\AABB.h" />
+    <ClInclude Include="Source\Util\SimplexNoise.h" />
+    <ClInclude Include="Source\World\Generators\NoiseGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -160,6 +161,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\Events\PlayerDigEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Util\SimplexNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Generators\NoiseGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

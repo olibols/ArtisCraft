@@ -1,5 +1,6 @@
 #pragma once
 #include "Chunk.h"
+#include "../Generators/NoiseGenerator.h"
 
 
 class World;
@@ -17,11 +18,15 @@ public:
 	inline bool hasLoaded() { return isLoaded; };
 	void load();
 
+	inline sf::Vector2i getLocation() { return _location; };
+
 	bool buildMesh();
 
 	Chunk& getChunk(int chunkIndex);
 
 private:
+
+	NoiseGenerator* temp_noiseGen = new NoiseGenerator(420);
 
 	void addChunk();
 	void addChunkBlockTarget(int blockY);

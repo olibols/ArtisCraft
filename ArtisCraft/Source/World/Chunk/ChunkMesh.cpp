@@ -12,7 +12,8 @@ ChunkMesh::ChunkMesh()
 void ChunkMesh::addFace(std::vector<GLfloat> blockFace,
 		std::vector<GLfloat> textureCoords,
 		sf::Vector3i chunkPosition,
-		sf::Vector3i blockPosition)
+		sf::Vector3i blockPosition,
+		GLfloat cardinalLight)
 {
 	_mesh->textureCoords.insert(_mesh->textureCoords.end(), textureCoords.begin(), textureCoords.end());
 
@@ -20,6 +21,8 @@ void ChunkMesh::addFace(std::vector<GLfloat> blockFace,
 		_mesh->vertexPositions.push_back(blockFace[block++] + chunkPosition.x * CHUNK_SIZE + blockPosition.x);
 		_mesh->vertexPositions.push_back(blockFace[block++] + chunkPosition.y * CHUNK_SIZE + blockPosition.y);
 		_mesh->vertexPositions.push_back(blockFace[block++] + chunkPosition.z * CHUNK_SIZE + blockPosition.z);
+
+		_light.push_back(cardinalLight);
 	}
 
 	_mesh->indices.insert(_mesh->indices.end(),
@@ -42,14 +45,17 @@ void ChunkMesh::updateMesh()
 	_model->deleteData();
 
 	_model->addData(*_mesh);
+	_model->addVBO(1, _light);
 
 	_mesh->indices.clear();
 	_mesh->textureCoords.clear();
 	_mesh->vertexPositions.clear();
+	_light.clear();
 
 	_mesh->indices.shrink_to_fit();
 	_mesh->textureCoords.shrink_to_fit();
 	_mesh->vertexPositions.shrink_to_fit();
+	_light.shrink_to_fit();
 
 	_indiceCount = 0;
 }

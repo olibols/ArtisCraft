@@ -2,7 +2,7 @@
 #include "../World/World.h"
 #include <SFML/Graphics.hpp>
 
-Player::Player() : Entity({10, 100, 10}, {0, 0, 0}, {0.5, 1.75, 0.5})
+Player::Player() : Entity({10, 240, 10}, {0, 0, 0}, {0.5, 1.75, 0.5})
 {
 }
 
@@ -32,7 +32,7 @@ void Player::update(float deltaTime, World& world)
 	position.z += velocity.z * deltaTime;
 	collide(world, { 0, 0, velocity.z }, deltaTime);
 
-	printf("Coordinates: %f, %f, %f \n Onground: %b \n", position.x, position.y, position.z, _onGround);
+	//printf("Coordinates: %f, %f, %f \n Onground: %b \n", position.x, position.y, position.z, _onGround);
 }
 
 void Player::collide(World& world, glm::vec3 vel, float dt)
@@ -132,7 +132,7 @@ void Player::keyboardInput()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
-		position = { 10, 100, 10 };
+		position = { 10, 250, 10 };
 		velocity = { 0, 0, 0 };
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && _onGround)

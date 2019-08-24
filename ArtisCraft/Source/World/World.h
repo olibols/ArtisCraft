@@ -7,7 +7,11 @@
 #include "Events/BaseWorldEvent.h"
 #include <unordered_set>
 #include <memory>
+#include <thread>
+#include <mutex>
+#include <atomic>
 #include <SFML/Graphics.hpp>
+#include <SimplexNoise.h>
 
 class World {
 public:
@@ -19,7 +23,7 @@ public:
 	void update(const Camera& camera);
 	void updateRegion(int blockX, int blockY, int blockZ);
 
-	void render(RenderMaster& renderer);
+	void render(RenderMaster& renderer, Camera& camera);
 
 	inline ChunkManager& getChunkManager() { return _chunkManager; };
 
@@ -28,6 +32,8 @@ public:
 		_events.push_back(std::make_unique<T>(std::forward<Args>(args)...));
 	}
 
+	inline int getHeight(int x, int z) { return _worldNoise->noise(x, z) * 5;};
+
 	static VectorXZ getBlockXZ(int x, int z);
 	static VectorXZ getChunkXZ(int x, int z);
 
@@ -35,10 +41,17 @@ private:
 
 	int _currentLoadDistance = 2;
 
+	SimplexNoise* _worldNoise;
+
 	void updateRegions();
 
 	std::vector<std::unique_ptr<BaseWorldEvent>> _events;
 	std::unordered_map<sf::Vector3i, Chunk*> _regionUpdates;
 
 	ChunkManager _chunkManager;
+
+	std::atomic<bool> _isRunning{ true };
+	std::vector<std::thread> _chunkLoadThreads;
+	std::mutex _mutex;
+
 };

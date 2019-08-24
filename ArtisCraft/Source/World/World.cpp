@@ -3,14 +3,23 @@
 #include <Utils.h>
 
 constexpr int wsize = 4;
-constexpr int renderDistance = 4;
-
+constexpr int renderDistance = 8;
+constexpr int WORKERS = 4;
 
 World::World() : _chunkManager(*this)
 {
-	for (int x = 0; x < wsize; x++)
-		for (int z = 0; z < wsize; z++)
-			_chunkManager.getRegion(x, z).load();
+	_worldNoise = new SimplexNoise;
+
+	for (int i = 0; i < WORKERS; i++) {
+		_chunkLoadThreads.emplace_back([&]() {
+			while (_isRunning) {
+				for (int x = 0; x < wsize; x++)
+					for (int z = 0; z < wsize; z++)
+						_chunkManager.getRegion(x, z).load();
+				std::this_thread::sleep_for(std::chrono::milliseconds(10));
+			}
+		});
+	}
 }
 
 ChunkBlock World::getBlock(int x, int y, int z)
@@ -53,10 +62,9 @@ void World::update(const Camera & camera)
 
 		for (int x = minX; x < maxX; ++x) {
 			for (int z = minZ; z < maxZ; ++z) {
-				if (_chunkManager.makeMesh(x, z)) {
-					isMeshMade = true;
-					break;
-				}
+				_mutex.lock();
+				isMeshMade = _chunkManager.makeMesh(x, z);
+				_mutex.unlock();
 			}
 			if (isMeshMade)
 				break;
@@ -82,6 +90,7 @@ void World::update(const Camera & camera)
 
 void World::updateRegion(int blockX, int blockY, int blockZ)
 {
+	_mutex.lock();
 	auto addChunkToUpdateBatch = [&](const sf::Vector3i& key, Chunk& chunk)
 	{
 		_regionUpdates.emplace(key, &chunk);
@@ -128,13 +137,38 @@ void World::updateRegion(int blockX, int blockY, int blockZ)
 		sf::Vector3i newKey(chunkPos.x, chunkY, chunkPos.z + 1);
 		addChunkToUpdateBatch(newKey, _chunkManager.getRegion(newKey.x, newKey.z).getChunk(newKey.y));
 	}
+
+	_mutex.lock();
 }
 
-void World::render(RenderMaster & renderer)
+void World::render(RenderMaster & renderer, Camera& camera)
 {
+	_mutex.lock();
 	auto& regionMap = _chunkManager.getRegions();
-	for (auto& region : regionMap) {
-		region.second.draw(renderer);
+	for (auto iterator = regionMap.begin(); iterator != regionMap.end();) {
+		
+		Region& region = iterator->second;
+
+		int minX = (camera.position.x / CHUNK_SIZE) - renderDistance;
+		int minZ = (camera.position.z / CHUNK_SIZE) - renderDistance;
+		int maxX = (camera.position.x / CHUNK_SIZE) + renderDistance;
+		int maxZ = (camera.position.z / CHUNK_SIZE) + renderDistance;
+
+		sf::Vector2i location = region.getLocation();
+
+		if (minX > location.x ||
+			minZ > location.y ||
+			maxZ < location.y ||
+			maxX < location.x)
+		{
+			iterator = regionMap.erase(iterator);
+			continue;
+		}
+		else
+		{
+			region.draw(renderer);
+			iterator++;
+		}
 	}
 }
 
@@ -158,9 +192,11 @@ VectorXZ World::getChunkXZ(int x, int z)
 
 void World::updateRegions()
 {
+	_mutex.lock();
 	for (auto& region : _regionUpdates) {
 		Chunk& section = *region.second;
 		section.buildMesh();
 	}
 	_regionUpdates.clear();
+	_mutex.unlock();
 }

@@ -19,5 +19,4 @@ private:
 	BlockDatabase();
 
 	std::array<std::unique_ptr<BlockType>, (size_t)BlockID::NUM_TYPES> _blocks;
-
 };

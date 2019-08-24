@@ -1,5 +1,4 @@
 #include "Application.h"
-#include "World/Chunk/ChunkMeshBuilder.h"
 
 Application::Application(std::string windowName)
 {

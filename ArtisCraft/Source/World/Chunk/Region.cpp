@@ -4,7 +4,6 @@
 #include "../../Renderer/RenderMaster.h"
 #include <time.h>
 #include <random>
-#include <PerlinNoise.h>
 
 Region::Region(World & world, sf::Vector2i location) : _world(&world), _location(location)
 {
@@ -40,40 +39,20 @@ void Region::draw(RenderMaster & renderer)
 
 void Region::load()
 {
+
 	if (!isLoaded) {
 		for (int y = 0; y < 16; y++) {
 			_chunks.emplace_back(sf::Vector3i(_location.x, y, _location.y), *_world);
 		}
 
-		//siv::PerlinNoise noise(120);
-
-		int height = 8;
 
 		for (int x = 0; x < 16; x++)
-			for (int z = 0; z < 16; z++)
-				for (int y = 0; y < 16; y++)
-				{
+			for (int z = 0; z < 16; z++) {
+				
+				setBlock(x, temp_noiseGen->getHeight(x, z, _location.x, _location.y), z, BlockID::Grass);
 
-					/*double newx = (x + _location.x) / 10.0f;
-					double newz = (z + _location.y) / 10.0f;
-
-					int height = noise.noise0_1(newx, newz) * 20 + 5;
-
-
-					for (int newy = 0; newy <= height; newy++) {
-						if (newy == height) { setBlock(x, newy, z, BlockID::Grass); }
-						else if (newy > height - 5) { setBlock(x, newy, z, BlockID::Dirt); }
-						else { setBlock(x, newy, z, BlockID::Stone); }
-					}*/
-
-					
-
-					if (y == height) { setBlock(x, y, z, BlockID::Grass); }
-					else if (y < height) { setBlock(x, y, z, BlockID::Dirt); }
-					else if(y < height - 6) { setBlock(x, y, z, BlockID::Stone); }
-
-				}
-
+				setBlock(x, 1, z, BlockID::Bedrock);
+			}
 		isLoaded = true;
 	}
 }

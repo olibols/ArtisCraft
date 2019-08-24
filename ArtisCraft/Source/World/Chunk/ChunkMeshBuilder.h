@@ -16,7 +16,7 @@ private:
 	bool shouldMakeLayer(int y);
 	bool isAdjSolid(int x, int y, int z);
 
-	void addFace(std::vector<GLfloat> blockFace, sf::Vector2i texCoords, sf::Vector3i blockPosition, sf::Vector3i blockFacing);
+	void addFace(std::vector<GLfloat> blockFace, sf::Vector2i texCoords, sf::Vector3i blockPosition, sf::Vector3i blockFacing, GLfloat cardinalLight);
 
 	Chunk* _chunk = nullptr;
 	ChunkMesh* _mesh = nullptr;
