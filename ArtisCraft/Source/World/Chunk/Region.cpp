@@ -28,11 +28,16 @@ ChunkBlock Region::getBlock(int x, int y, int z)
 	return _chunks[y / CHUNK_SIZE].getBlock(x, blockY, z);
 }
 
-void Region::draw(RenderMaster & renderer)
+void Region::draw(RenderMaster & renderer, Camera& camera)
 {
 	for (auto& chunk : _chunks) {
-		if (chunk.hasMesh && chunk.hasFaces()) {
-			renderer.drawChunk(chunk._mesh);
+		if (chunk.hasMesh()) {
+			//if (!chunk.hasBufferedMesh()) {
+				//chunk.bufferMesh();
+			//}
+
+			if (camera.getFrustrum().isInFrustrum(chunk.getBoundingBox()))
+				renderer.drawChunk(chunk.getMesh());
 		}
 	}
 }
@@ -49,7 +54,9 @@ void Region::load()
 		for (int x = 0; x < 16; x++)
 			for (int z = 0; z < 16; z++) {
 				
-				setBlock(x, temp_noiseGen->getHeight(x, z, _location.x, _location.y), z, BlockID::Grass);
+				int height = _world->getWorldNoise().getHeight(x, z, _location.x, _location.y);
+
+				setBlock(x, height, z, BlockID::Grass);
 
 				setBlock(x, 1, z, BlockID::Bedrock);
 			}
@@ -60,12 +67,11 @@ void Region::load()
 bool Region::buildMesh()
 {
 	for (auto& chunk : _chunks) {
-		if (!chunk.hasMesh && chunk.hasBlocks()) {
+		if (!chunk.hasMesh()) {
 			chunk.buildMesh();
 			return true;
 		}
 	}
-
 	return false;
 }
 

@@ -2,7 +2,7 @@
 #include "Settings.h"
 #include <GLM.h>
 #include "Entity/Entity.h"
-
+#include "Util/Frustrum.h"
 
 //This class just holds the values and matrixes etc, it does NOT do movement etc
 
@@ -19,6 +19,8 @@ public:
 
 	void newFov(float value);
 
+	inline Frustrum& getFrustrum() { return _frustrum; };
+
 	glm::mat4 getViewMatrix();
 	glm::mat4 getProjMatrix();
 	glm::mat4 getProjViewMatrix();
@@ -26,6 +28,8 @@ public:
 private:
 
 	const Entity* _entity = nullptr;
+
+	Frustrum _frustrum;
 
 	glm::mat4 _projMatrix;
 	glm::mat4 _viewMatrix;

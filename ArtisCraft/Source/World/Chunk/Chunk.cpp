@@ -2,8 +2,9 @@
 #include "ChunkMeshBuilder.h"
 #include "../World.h"
 
-Chunk::Chunk(sf::Vector3i position, World& world) : _location(position), _world(&world)
+Chunk::Chunk(sf::Vector3i position, World& world) : _location(position), _world(&world), _aabb({ CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE })
 {
+	_aabb.update({ _location.x * CHUNK_SIZE, _location.y * CHUNK_SIZE, _location.z * CHUNK_SIZE });
 }
 
 void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
@@ -16,9 +17,6 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 		_world->setBlock(location.x, location.y, location.z, block);
 		return;
 	};
-
-	hasMesh = false;
-	_hasBlocks = true;
 
 	_layers[y].update(block);
 
@@ -43,19 +41,16 @@ sf::Vector3i Chunk::getLocation()
 	return _location;
 }
 
-bool Chunk::hasFaces()
-{
-	if (_mesh.hasMesh()) return true;
-	else return false;
-}
-
 void Chunk::buildMesh()
 {
-	if(_hasBlocks) {
-		ChunkMeshBuilder(*this).build();
-		_mesh.updateMesh();
-		hasMesh = true;
-	}
+	ChunkMeshBuilder(*this).build();
+	_hasMeshBuffered = false;
+	_hasMesh = true;
+}
+
+void Chunk::bufferMesh() {
+	_mesh.updateMesh();
+	_hasMeshBuffered = true;
 }
 
 ChunkLayer & Chunk::getLayer(int y)
