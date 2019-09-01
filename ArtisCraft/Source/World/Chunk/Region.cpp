@@ -32,12 +32,11 @@ void Region::draw(RenderMaster & renderer, Camera& camera)
 {
 	for (auto& chunk : _chunks) {
 		if (chunk.hasMesh()) {
-			//if (!chunk.hasBufferedMesh()) {
-				//chunk.bufferMesh();
-			//}
-
-			if (camera.getFrustrum().isInFrustrum(chunk.getBoundingBox()))
-				renderer.drawChunk(chunk.getMesh());
+			if (!chunk.hasBufferedMesh() && chunk.hasBlocks()) {
+				chunk.bufferMesh();
+			}
+			//if (camera.getFrustrum().isInFrustrum(chunk.getBoundingBox()))
+			renderer.drawChunk(chunk);
 		}
 	}
 }
@@ -60,6 +59,7 @@ void Region::load()
 
 				setBlock(x, 1, z, BlockID::Bedrock);
 			}
+
 		isLoaded = true;
 	}
 }

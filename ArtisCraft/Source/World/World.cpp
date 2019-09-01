@@ -2,28 +2,30 @@
 #include "ChunkManager.h"
 #include <Utils.h>
 
-constexpr int renderDistance = 3;
+constexpr int renderDistance = 6;
 constexpr int WORKERS = 4;
+constexpr int wsize = 4;
+
 
 World::World(Camera& camera) : _chunkManager(*this)
-{
-	auto seedprep = std::chrono::system_clock::now();
+{	auto seedprep = std::chrono::system_clock::now();
 	auto seed = std::chrono::system_clock::to_time_t(seedprep);
 
 	_worldNoise = new NoiseGenerator(seed);
+	
+	//_chunkManager.loadRegion(camera.position.x, camera.position.z);
 
+	loadRegions(camera);
 
-	for (int i = 0; i < WORKERS; i++)
+	
+	/*_chunkLoadThreads.emplace_back([&]()
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		_chunkLoadThreads.emplace_back([&]()
+		while (_isRunning)
 		{
-			while (_isRunning)
-			{
-				loadRegions(camera);
-			}
-		});
-	}
+			loadRegions(camera);
+		}
+	});*/
+	
 }
 
 ChunkBlock World::getBlock(int x, int y, int z)
@@ -41,10 +43,11 @@ void World::setBlock(int x, int y, int z, ChunkBlock block)
 
 	VectorXZ blockPos = getBlockXZ(x, z);
 	VectorXZ chunkPos = getChunkXZ(x, z);
-	
+
 	_chunkManager.getRegion(chunkPos.x, chunkPos.z).setBlock(blockPos.x, y, blockPos.z, block);
 
 }
+
 
 void World::loadRegions(Camera & camera)
 {
@@ -52,44 +55,43 @@ void World::loadRegions(Camera & camera)
 	int cameraX = camera.position.x / CHUNK_SIZE;
 	int cameraZ = camera.position.z / CHUNK_SIZE;
 
-	for (int i = 0; i < _currentLoadDistance; i++)
-	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+	for (int i = 0; i < _currentLoadDistance; i++) {
 		int minX = std::max(cameraX - i, 0);
 		int minZ = std::max(cameraZ - i, 0);
 		int maxX = cameraX + i;
 		int maxZ = cameraZ + i;
 
-		for (int x = minX; x < maxX; ++x)
-		{
-			for (int z = minZ; z < maxZ; ++z)
-			{
-				_mutex.lock();
+		for (int x = minX; x < maxX; ++x) {
+			for (int z = minZ; z < maxZ; ++z) {
+				//_mutex.lock();
 				isMeshMade = _chunkManager.makeMesh(x, z);
-				_mutex.unlock();
+				//_mutex.unlock();
 			}
-			if (isMeshMade) break;
+			if (isMeshMade)
+				break;
 		}
-		if (isMeshMade) break;
+		if (isMeshMade)
+			break;
 	}
 
 	if (!isMeshMade) _currentLoadDistance++;
 	if (_currentLoadDistance >= renderDistance) _currentLoadDistance = 2;
 }
 
-void World::update(const Camera & camera)
+void World::update(Camera & camera)
 {
 	for (auto& event : _events) {
 		event->handle(*this);
 	}
-	_events.clear();
 
 	updateRegions();
+	loadRegions(camera);
+	_events.clear();
 }
 
 void World::updateRegion(int blockX, int blockY, int blockZ)
 {
-	_mutex.lock();
+	//_mutex.lock();
 
 	auto addChunkToUpdateBatch = [&](const sf::Vector3i& key, Chunk& chunk)
 	{
@@ -98,7 +100,7 @@ void World::updateRegion(int blockX, int blockY, int blockZ)
 
 	auto chunkPos = getChunkXZ(blockX, blockZ);
 	auto chunkY = blockY / CHUNK_SIZE;
-	
+
 	sf::Vector3i key(chunkPos.x, chunkY, chunkPos.z);
 	addChunkToUpdateBatch(key, _chunkManager.getRegion(chunkPos.x, chunkPos.z).getChunk(chunkY));
 
@@ -138,17 +140,15 @@ void World::updateRegion(int blockX, int blockY, int blockZ)
 		addChunkToUpdateBatch(newKey, _chunkManager.getRegion(newKey.x, newKey.z).getChunk(newKey.y));
 	}
 
-	_mutex.unlock();
+	//_mutex.lock();
 }
 
 void World::render(RenderMaster & renderer, Camera& camera)
 {
-	_mutex.lock();
+	//_mutex.lock();
+	auto& regionMap = _chunkManager.getRegions();
+	for (auto iterator = regionMap.begin(); iterator != regionMap.end();) {
 
-	auto& chunkMap = _chunkManager.getRegions();
-
-	for (auto iterator = chunkMap.begin(); iterator != chunkMap.end();) {
-		
 		Region& region = iterator->second;
 
 		int minX = (camera.position.x / CHUNK_SIZE) - renderDistance;
@@ -163,7 +163,7 @@ void World::render(RenderMaster & renderer, Camera& camera)
 			maxZ < location.y ||
 			maxX < location.x)
 		{
-			iterator = chunkMap.erase(iterator);
+			iterator = regionMap.erase(iterator);
 			continue;
 		}
 		else
@@ -172,8 +172,7 @@ void World::render(RenderMaster & renderer, Camera& camera)
 			iterator++;
 		}
 	}
-	
-	_mutex.unlock();
+	//_mutex.unlock();
 }
 
 VectorXZ World::getBlockXZ(int x, int z)
@@ -196,11 +195,11 @@ VectorXZ World::getChunkXZ(int x, int z)
 
 void World::updateRegions()
 {
-	_mutex.lock();
+	//_mutex.lock();
 	for (auto& region : _regionUpdates) {
 		Chunk& section = *region.second;
 		section.buildMesh();
 	}
 	_regionUpdates.clear();
-	_mutex.unlock();
+	//_mutex.unlock();
 }

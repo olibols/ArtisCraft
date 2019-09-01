@@ -18,6 +18,8 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 		return;
 	};
 
+	_hasBlocks = true;
+
 	_layers[y].update(block);
 
 	_blocks[getIndex(x, y ,z)] = block;
@@ -31,7 +33,6 @@ ChunkBlock Chunk::getBlock(int x, int y, int z)
 
 	sf::Vector3i location = toWorldPos(x, y, z);
 	return _world->getBlock(location.x, location.y, location.z);
-
 	}
 	return _blocks[getIndex(x, y, z)];
 }
@@ -44,7 +45,7 @@ sf::Vector3i Chunk::getLocation()
 void Chunk::buildMesh()
 {
 	ChunkMeshBuilder(*this).build();
-	_hasMeshBuffered = false;
+	bufferMesh();
 	_hasMesh = true;
 }
 

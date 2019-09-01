@@ -20,7 +20,7 @@ public:
 	ChunkBlock getBlock(int x, int y, int z);
 	void setBlock(int x, int y, int z, ChunkBlock block);
 
-	void update(const Camera& camera);
+	void update(Camera& camera);
 	void updateRegion(int blockX, int blockY, int blockZ);
 
 	void render(RenderMaster& renderer, Camera& camera);
@@ -50,7 +50,7 @@ private:
 
 	std::atomic<bool> _isRunning{ true };
 	std::vector<std::thread> _chunkLoadThreads;
-	std::mutex _mutex;
+	//std::mutex _mutex;
 
 	ChunkManager _chunkManager;
 

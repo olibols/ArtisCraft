@@ -37,7 +37,10 @@ public:
 
 	inline ChunkMesh& getMesh() { return _mesh; };
 	inline bool hasMesh() { return _hasMesh; };
+	inline bool hasBlocks() { return _hasBlocks; };
 	inline bool hasBufferedMesh() { return _hasMeshBuffered; };
+
+	ChunkMesh _mesh;
 
 	void bufferMesh();
 	
@@ -45,17 +48,15 @@ public:
 	   
 private:
 
-	ChunkMesh _mesh;
-
 	sf::Vector3i toWorldPos(int x, int y, int z);
 	bool outOfBounds(int value);
 	int getIndex(int x, int y, int z);
 
-	bool _hasMesh;
+	bool _hasMesh = false;
 	bool _hasMeshBuffered = false;
+	bool _hasBlocks = false;
 
 	AABB _aabb;
-
 
 	std::array<ChunkLayer, CHUNK_SIZE> _layers;
 	std::array<ChunkBlock, CHUNK_VOLUME> _blocks;

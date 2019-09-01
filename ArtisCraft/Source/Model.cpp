@@ -43,9 +43,13 @@ void Model::addVBO(int dimensions, std::vector<GLfloat> data)
 	_buffers.push_back(vbo);
 }
 
-void Model::bindVAO()
+bool Model::bindVAO()
 {
+	if (_VAO = 0) {
+		return false;
+	}
 	glBindVertexArray(_VAO);
+	return true;
 }
 
 void Model::addEBO(const std::vector<GLuint> indices)

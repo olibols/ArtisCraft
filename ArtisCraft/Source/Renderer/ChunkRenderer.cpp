@@ -21,7 +21,6 @@ void ChunkRenderer::render(Camera& camera)
 	for (ChunkMesh mesh : _chunks) {
 		ChunkMesh model = mesh;
 
-		model.getModel().bindVAO();
 		glDrawElements(GL_TRIANGLES, model.getModel().getIndicesCount(), GL_UNSIGNED_INT, nullptr);
 	}
 
