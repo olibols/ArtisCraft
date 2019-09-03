@@ -3,7 +3,6 @@
 #include "../Constants.h"
 #include <SFML/Graphics.hpp>
 #include "ChunkMesh.h"
-#include "../AABB/AABB.h"
 #include <array>
 #include <atomic>
 #include <memory>

@@ -47,14 +47,20 @@ void World::setBlock(int x, int y, int z, ChunkBlock block)
 
 }
 
-
-void World::loadRegions(const Camera & camera)
+void World::update(const Camera & camera)
 {
+	for (auto& event : _events) {
+		event->handle(*this);
+	}
+	
+	updateRegions();
+
 	bool isMeshMade = false;
 	int cameraX = camera.position.x / CHUNK_SIZE;
 	int cameraZ = camera.position.z / CHUNK_SIZE;
 
-	for (int i = 0; i < _currentLoadDistance; i++) {
+	for (int i = 0; i < _currentLoadDistance; i++)
+	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 		int minX = std::max(cameraX - i, 0);
 		int minZ = std::max(cameraZ - i, 0);
@@ -167,7 +173,7 @@ void World::render(RenderMaster & renderer, Camera& camera)
 		}
 		else
 		{
-			region.draw(renderer, camera);
+			region.draw(renderer);
 			iterator++;
 		}
 	}

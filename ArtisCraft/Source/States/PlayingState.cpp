@@ -7,7 +7,7 @@
 #include <memory>
 
 
-PlayingState::PlayingState(Application & app) : BaseState (app), _world(app.getCamera()), _frameCounter(_player)
+PlayingState::PlayingState(Application & app) : BaseState (app)
 {
 	app.getCamera().hookEntity(_player);
 

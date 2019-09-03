@@ -1,9 +1,7 @@
 #include "FrameCounter.h"
 
-FrameCounter::FrameCounter(Entity& entity)
+FrameCounter::FrameCounter()
 {
-	_entity = &entity;
-
 	_text.move(10, 10);
 	_text.setOutlineColor(sf::Color::Black);
 	_text.setOutlineThickness(2);
@@ -27,6 +25,6 @@ void FrameCounter::update()
 
 void FrameCounter::draw(RenderMaster& renderer)
 {
-	_text.setString("FPS: " + std::to_string(_fps) + " Position: " + std::to_string(_entity->position.x) + " " + std::to_string(_entity->position.y) + " " + std::to_string(_entity->position.z));
+	_text.setString("FPS: " + std::to_string(_fps));
 	renderer.drawSFML(_text);
 }

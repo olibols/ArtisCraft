@@ -60,7 +60,7 @@ int faceCount = 0;
 ChunkMeshBuilder::ChunkMeshBuilder(Chunk & chunk)
 {
 	_chunk = &chunk;
-	_mesh = &_chunk->getMesh();
+	_mesh = &_chunk->_mesh;
 
 	_texData = new TextureData;
 }

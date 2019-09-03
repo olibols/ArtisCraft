@@ -9,7 +9,6 @@ public:
 
 	void draw(RenderMaster& renderer);
 private:
-
 	sf::Texture texture;
 	sf::Sprite sprite;
 
