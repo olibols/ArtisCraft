@@ -9,6 +9,7 @@ class RenderMaster;
 
 class Region {
 public:
+	Region() = default;
 	Region(World& world, sf::Vector2i location);
 
 	void setBlock(int x, int y, int z, ChunkBlock block);

@@ -32,11 +32,11 @@ void Region::draw(RenderMaster & renderer, Camera& camera)
 {
 	for (auto& chunk : _chunks) {
 		if (chunk.hasMesh()) {
-			if (!chunk.hasBufferedMesh() && chunk.hasBlocks()) {
-				chunk.bufferMesh();
-			}
+			//if (chunk.hasBufferedMesh())
+				//chunk.bufferMesh();
+
 			//if (camera.getFrustrum().isInFrustrum(chunk.getBoundingBox()))
-			renderer.drawChunk(chunk);
+				renderer.drawChunk(chunk);
 		}
 	}
 }

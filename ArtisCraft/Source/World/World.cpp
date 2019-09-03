@@ -1,4 +1,5 @@
 #include "World.h"
+#include "Block/BlockTypeDatabase.h"
 #include "ChunkManager.h"
 #include <Utils.h>
 
@@ -10,22 +11,20 @@ constexpr int wsize = 4;
 World::World(Camera& camera) : _chunkManager(*this)
 {	auto seedprep = std::chrono::system_clock::now();
 	auto seed = std::chrono::system_clock::to_time_t(seedprep);
-
 	_worldNoise = new NoiseGenerator(seed);
 	
-	//_chunkManager.loadRegion(camera.position.x, camera.position.z);
-
 	loadRegions(camera);
 
-	
-	/*_chunkLoadThreads.emplace_back([&]()
-	{
-		while (_isRunning)
+	/*for (int i = 0; i < WORKERS; i++) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		_chunkLoadThreads.emplace_back([&]()
 		{
-			loadRegions(camera);
-		}
-	});*/
-	
+			while (_isRunning)
+			{
+				loadRegions(camera);
+			}
+		});
+	}*/
 }
 
 ChunkBlock World::getBlock(int x, int y, int z)
@@ -49,13 +48,14 @@ void World::setBlock(int x, int y, int z, ChunkBlock block)
 }
 
 
-void World::loadRegions(Camera & camera)
+void World::loadRegions(const Camera & camera)
 {
 	bool isMeshMade = false;
 	int cameraX = camera.position.x / CHUNK_SIZE;
 	int cameraZ = camera.position.z / CHUNK_SIZE;
 
 	for (int i = 0; i < _currentLoadDistance; i++) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 		int minX = std::max(cameraX - i, 0);
 		int minZ = std::max(cameraZ - i, 0);
 		int maxX = cameraX + i;
@@ -83,10 +83,9 @@ void World::update(Camera & camera)
 	for (auto& event : _events) {
 		event->handle(*this);
 	}
-
-	updateRegions();
-	loadRegions(camera);
 	_events.clear();
+	loadRegions(camera);
+	updateRegions();
 }
 
 void World::updateRegion(int blockX, int blockY, int blockZ)
@@ -140,7 +139,7 @@ void World::updateRegion(int blockX, int blockY, int blockZ)
 		addChunkToUpdateBatch(newKey, _chunkManager.getRegion(newKey.x, newKey.z).getChunk(newKey.y));
 	}
 
-	//_mutex.lock();
+	//_mutex.unlock();
 }
 
 void World::render(RenderMaster & renderer, Camera& camera)

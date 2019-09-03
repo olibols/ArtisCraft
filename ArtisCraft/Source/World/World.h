@@ -40,7 +40,7 @@ public:
 private:
 	int _currentLoadDistance = 2;
 
-	void loadRegions(Camera& camera);
+	void loadRegions(const Camera& camera);
 	void updateRegions();
 
 	NoiseGenerator* _worldNoise;
@@ -50,7 +50,7 @@ private:
 
 	std::atomic<bool> _isRunning{ true };
 	std::vector<std::thread> _chunkLoadThreads;
-	//std::mutex _mutex;
+	std::mutex _mutex;
 
 	ChunkManager _chunkManager;
 

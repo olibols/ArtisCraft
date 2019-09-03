@@ -11,18 +11,15 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 {
 	if (outOfBounds(x) ||
 		outOfBounds(y) ||
-		outOfBounds(z)) 
+		outOfBounds(z))
 	{
 		auto location = toWorldPos(x, y, z);
 		_world->setBlock(location.x, location.y, location.z, block);
 		return;
 	};
-
-	_hasBlocks = true;
-
 	_layers[y].update(block);
 
-	_blocks[getIndex(x, y ,z)] = block;
+	_blocks[getIndex(x, y, z)] = block;
 }
 
 ChunkBlock Chunk::getBlock(int x, int y, int z)
@@ -31,8 +28,8 @@ ChunkBlock Chunk::getBlock(int x, int y, int z)
 		outOfBounds(y) ||
 		outOfBounds(z)) {
 
-	sf::Vector3i location = toWorldPos(x, y, z);
-	return _world->getBlock(location.x, location.y, location.z);
+		sf::Vector3i location = toWorldPos(x, y, z);
+		return _world->getBlock(location.x, location.y, location.z);
 	}
 	return _blocks[getIndex(x, y, z)];
 }
@@ -59,7 +56,7 @@ ChunkLayer & Chunk::getLayer(int y)
 	if (y == -1) {
 		return _world->getChunkManager().getRegion(_location.x, _location.z).getChunk(_location.y - 1).getLayer(CHUNK_SIZE - 1);
 	}
-	else if(y == CHUNK_SIZE){
+	else if (y == CHUNK_SIZE) {
 		return _world->getChunkManager().getRegion(_location.x, _location.z).getChunk(_location.y + 1).getLayer(0);
 	}
 	else {
@@ -74,7 +71,7 @@ Chunk & Chunk::getAdjacentChunk(int x, int z)
 
 sf::Vector3i Chunk::toWorldPos(int x, int y, int z)
 {
-	sf::Vector3i pos = { 
+	sf::Vector3i pos = {
 		_location.x * CHUNK_SIZE + x,
 		_location.y * CHUNK_SIZE + y,
 		_location.z * CHUNK_SIZE + z,

@@ -5,6 +5,8 @@
 #include "ChunkMesh.h"
 #include "../AABB/AABB.h"
 #include <array>
+#include <atomic>
+#include <memory>
 
 class World;
 
@@ -36,8 +38,8 @@ public:
 	Chunk& getAdjacentChunk(int x, int z);
 
 	inline ChunkMesh& getMesh() { return _mesh; };
+
 	inline bool hasMesh() { return _hasMesh; };
-	inline bool hasBlocks() { return _hasBlocks; };
 	inline bool hasBufferedMesh() { return _hasMeshBuffered; };
 
 	ChunkMesh _mesh;
@@ -54,7 +56,6 @@ private:
 
 	bool _hasMesh = false;
 	bool _hasMeshBuffered = false;
-	bool _hasBlocks = false;
 
 	AABB _aabb;
 

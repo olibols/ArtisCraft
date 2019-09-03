@@ -7,7 +7,7 @@ void RenderMaster::drawCube(glm::vec3 position)
 
 void RenderMaster::drawChunk(Chunk & chunk)
 {
-	const ChunkMesh& chunkMesh = chunk.getMesh();
+	ChunkMesh& chunkMesh = chunk.getMesh();
 	_chunkRenderer.add(chunkMesh);
 }
 
