@@ -11,7 +11,7 @@
 #include <mutex>
 #include <atomic>
 #include <SFML/Graphics.hpp>
-#include <SimplexNoise.h>
+#include "Generators/NoiseGenerator.h"
 
 class World {
 public:
@@ -20,8 +20,10 @@ public:
 	ChunkBlock getBlock(int x, int y, int z);
 	void setBlock(int x, int y, int z, ChunkBlock block);
 
-	void update(const Camera& camera);
+	void update(Camera& camera);
 	void updateRegion(int blockX, int blockY, int blockZ);
+
+	void loadRegions(Camera& camera);
 
 	void render(RenderMaster& renderer, Camera& camera);
 
@@ -32,7 +34,7 @@ public:
 		_events.push_back(std::make_unique<T>(std::forward<Args>(args)...));
 	}
 
-	inline int getHeight(int x, int z) { return _worldNoise->noise(x, z) * 5;};
+	inline NoiseGenerator& getWorldNoise() { return *_worldNoise; };
 
 	static VectorXZ getBlockXZ(int x, int z);
 	static VectorXZ getChunkXZ(int x, int z);
@@ -41,7 +43,7 @@ private:
 
 	int _currentLoadDistance = 2;
 
-	SimplexNoise* _worldNoise;
+	NoiseGenerator* _worldNoise;
 
 	void updateRegions();
 

@@ -31,7 +31,10 @@ ChunkBlock Region::getBlock(int x, int y, int z)
 void Region::draw(RenderMaster & renderer)
 {
 	for (auto& chunk : _chunks) {
-		if (chunk.hasMesh && chunk.hasFaces()) {
+		if (chunk.hasMesh()) {
+			if (!chunk.hasBuffered())
+				chunk.bufferMesh();
+
 			renderer.drawChunk(chunk._mesh);
 		}
 	}
@@ -40,7 +43,7 @@ void Region::draw(RenderMaster & renderer)
 void Region::load()
 {
 
-	if (!isLoaded) {
+	if (!_isLoaded) {
 		for (int y = 0; y < 16; y++) {
 			_chunks.emplace_back(sf::Vector3i(_location.x, y, _location.y), *_world);
 		}
@@ -49,18 +52,20 @@ void Region::load()
 		for (int x = 0; x < 16; x++)
 			for (int z = 0; z < 16; z++) {
 				
-				setBlock(x, temp_noiseGen->getHeight(x, z, _location.x, _location.y), z, BlockID::Grass);
+				int height = _world->getWorldNoise().getHeight(x, z, _location.x, _location.y);
+
+				setBlock(x, height, z, BlockID::Grass);
 
 				setBlock(x, 1, z, BlockID::Bedrock);
 			}
-		isLoaded = true;
+		_isLoaded = true;
 	}
 }
 
 bool Region::buildMesh()
 {
 	for (auto& chunk : _chunks) {
-		if (!chunk.hasMesh && chunk.hasBlocks()) {
+		if (!chunk.hasMesh()) {
 			chunk.buildMesh();
 			return true;
 		}

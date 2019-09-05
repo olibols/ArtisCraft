@@ -7,6 +7,10 @@ Model::Model(Mesh& mesh) {
 
 void Model::addData(Mesh& mesh)
 {
+	if (_VAO != 0) {
+		deleteData();
+	}
+
 	glGenVertexArrays(1, &_VAO);
 	glBindVertexArray(_VAO);
 

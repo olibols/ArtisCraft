@@ -15,7 +15,7 @@ public:
 
 	void draw(RenderMaster& renderer);
 
-	inline bool hasLoaded() { return isLoaded; };
+	inline bool hasLoaded() { return _isLoaded; };
 	void load();
 
 	inline sf::Vector2i getLocation() { return _location; };
@@ -26,19 +26,16 @@ public:
 
 private:
 
-	NoiseGenerator* temp_noiseGen = new NoiseGenerator(420);
-
 	void addChunk();
 	void addChunkBlockTarget(int blockY);
 	void addChunkIndexTarget(int index);
 
 	bool outOfBounds(int x, int y, int z);
 	
-	bool isLoaded = false;
+	bool _isLoaded = false;
 
 	std::vector<Chunk> _chunks;
 	sf::Vector2i _location;
-
 
 	World* _world;
 };

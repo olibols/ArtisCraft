@@ -17,9 +17,6 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 		return;
 	};
 
-	hasMesh = false;
-	_hasBlocks = true;
-
 	_layers[y].update(block);
 
 	_blocks[getIndex(x, y ,z)] = block;
@@ -51,11 +48,15 @@ bool Chunk::hasFaces()
 
 void Chunk::buildMesh()
 {
-	if(_hasBlocks) {
-		ChunkMeshBuilder(*this).build();
-		_mesh.updateMesh();
-		hasMesh = true;
-	}
+	ChunkMeshBuilder(*this).build();
+	//_mesh.updateMesh();
+	_hasMeshBuffered = false;
+	_hasMesh = true;
+}
+
+void Chunk::bufferMesh() {
+	_mesh.updateMesh();
+	_hasMeshBuffered = true;
 }
 
 ChunkLayer & Chunk::getLayer(int y)

@@ -42,7 +42,7 @@ void ChunkMesh::addFace(std::vector<GLfloat> blockFace,
 
 void ChunkMesh::updateMesh()
 {
-	_model->deleteData();
+	//_model->deleteData();
 
 	_model->addData(*_mesh);
 	_model->addVBO(1, _light);
@@ -58,6 +58,7 @@ void ChunkMesh::updateMesh()
 	_light.shrink_to_fit();
 
 	_indiceCount = 0;
+
 }
 
 bool ChunkMesh::hasMesh()

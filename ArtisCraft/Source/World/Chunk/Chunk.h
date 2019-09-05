@@ -29,13 +29,14 @@ public:
 
 	sf::Vector3i getLocation();
 
-	bool hasMesh = false;
-
 	bool hasFaces();
 
+	inline bool hasMesh() { return _hasMesh; };
+	inline bool hasBuffered() { return _hasMeshBuffered; };
 	inline bool hasBlocks() { return _hasBlocks; };
 
 	void buildMesh();
+	void bufferMesh();
 
 	ChunkLayer& getLayer(int y);
 	Chunk& getAdjacentChunk(int x, int z);
@@ -48,6 +49,8 @@ private:
 	bool outOfBounds(int value);
 	int getIndex(int x, int y, int z);
 
+	bool _hasMeshBuffered = false;
+	bool _hasMesh = false;
 	bool _hasBlocks = false;
 
 	std::array<ChunkLayer, CHUNK_SIZE> _layers;
