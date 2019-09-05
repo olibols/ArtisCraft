@@ -3,7 +3,6 @@
 #include "../Constants.h"
 #include <SFML/Graphics.hpp>
 #include "ChunkMesh.h"
-#include "../AABB/AABB.h"
 #include <array>
 
 class World;
@@ -30,32 +29,26 @@ public:
 
 	sf::Vector3i getLocation();
 
+	bool hasMesh = false;
+
+	bool hasFaces();
+
+	inline bool hasBlocks() { return _hasBlocks; };
+
 	void buildMesh();
 
 	ChunkLayer& getLayer(int y);
 	Chunk& getAdjacentChunk(int x, int z);
 
-	inline ChunkMesh& getMesh() { return _mesh; };
-	inline bool hasMesh() { return _hasMesh; };
-	inline bool hasBufferedMesh() { return _hasMeshBuffered; };
-
-	void bufferMesh();
-	
-	inline AABB getBoundingBox() { return _aabb; };
+	ChunkMesh _mesh;
 	   
 private:
-
-	ChunkMesh _mesh;
 
 	sf::Vector3i toWorldPos(int x, int y, int z);
 	bool outOfBounds(int value);
 	int getIndex(int x, int y, int z);
 
-	bool _hasMesh;
-	bool _hasMeshBuffered = false;
-
-	AABB _aabb;
-
+	bool _hasBlocks = false;
 
 	std::array<ChunkLayer, CHUNK_SIZE> _layers;
 	std::array<ChunkBlock, CHUNK_VOLUME> _blocks;

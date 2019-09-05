@@ -59,7 +59,6 @@
     <ClInclude Include="Source\AABB\AABB.h" />
     <ClInclude Include="Source\Util\SimplexNoise.h" />
     <ClInclude Include="Source\World\Generators\NoiseGenerator.h" />
-    <ClInclude Include="Source\Util\Frustrum.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -168,9 +167,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\Generators\NoiseGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Util\Frustrum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

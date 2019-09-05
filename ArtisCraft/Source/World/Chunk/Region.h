@@ -1,6 +1,5 @@
 #pragma once
 #include "Chunk.h"
-#include "../../Camera.h"
 #include "../Generators/NoiseGenerator.h"
 
 
@@ -14,7 +13,7 @@ public:
 	void setBlock(int x, int y, int z, ChunkBlock block);
 	ChunkBlock getBlock(int x, int y, int z);
 
-	void draw(RenderMaster& renderer, Camera& camera);
+	void draw(RenderMaster& renderer);
 
 	inline bool hasLoaded() { return isLoaded; };
 	void load();
@@ -26,6 +25,8 @@ public:
 	Chunk& getChunk(int chunkIndex);
 
 private:
+
+	NoiseGenerator* temp_noiseGen = new NoiseGenerator(420);
 
 	void addChunk();
 	void addChunkBlockTarget(int blockY);

@@ -4,15 +4,12 @@
 
 class FrameCounter {
 public:
-	FrameCounter(Entity& entity);
+	FrameCounter();
 
 	void update();
 
 	void draw(RenderMaster& renderer);
 private:
-
-	Entity* _entity;
-
 	sf::Text _text;
 	sf::Font _font;
 

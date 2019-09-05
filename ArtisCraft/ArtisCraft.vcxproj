@@ -34,7 +34,6 @@
     <ClInclude Include="Source\States\BaseState.h" />
     <ClInclude Include="Source\States\PlayingState.h" />
     <ClInclude Include="Source\Util\FileUtilities.h" />
-    <ClInclude Include="Source\Util\Frustrum.h" />
     <ClInclude Include="Source\Util\GLM.h" />
     <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
     <ClInclude Include="Source\Util\SimplexNoise.h" />
@@ -75,7 +74,6 @@
     <ClCompile Include="Source\States\PlayingState.cpp" />
     <ClCompile Include="Source\Util\FileUtilities.cpp" />
     <ClCompile Include="Source\Renderer\Texture\BasicTexture.cpp" />
-    <ClCompile Include="Source\Util\Frustrum.cpp" />
     <ClCompile Include="Source\Util\Ray.cpp" />
     <ClCompile Include="Source\Util\SimplexNoise.cpp" />
     <ClCompile Include="Source\Util\VectorXZ.cpp" />

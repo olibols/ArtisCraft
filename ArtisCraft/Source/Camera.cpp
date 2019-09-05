@@ -40,7 +40,6 @@ void Camera::update()
 	_viewMatrix = makeViewMatrix(*this);
 	
 	_projViewMatrix = _projMatrix * _viewMatrix;
-	_frustrum.update(_projViewMatrix);
 }
 
 void Camera::hookEntity(const Entity & entity)

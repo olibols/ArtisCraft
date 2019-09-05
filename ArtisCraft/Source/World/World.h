@@ -11,11 +11,11 @@
 #include <mutex>
 #include <atomic>
 #include <SFML/Graphics.hpp>
-#include "Generators/NoiseGenerator.h"
+#include <SimplexNoise.h>
 
 class World {
 public:
-	World(Camera& camera);
+	World();
 
 	ChunkBlock getBlock(int x, int y, int z);
 	void setBlock(int x, int y, int z, ChunkBlock block);
@@ -27,31 +27,31 @@ public:
 
 	inline ChunkManager& getChunkManager() { return _chunkManager; };
 
-	inline NoiseGenerator& getWorldNoise() { return *_worldNoise; };
-
 	template<typename T, typename... Args>
 	void addEvent(Args&&... args){
 		_events.push_back(std::make_unique<T>(std::forward<Args>(args)...));
 	}
 
+	inline int getHeight(int x, int z) { return _worldNoise->noise(x, z) * 5;};
+
 	static VectorXZ getBlockXZ(int x, int z);
 	static VectorXZ getChunkXZ(int x, int z);
 
 private:
+
 	int _currentLoadDistance = 2;
 
-	void loadRegions(Camera& camera);
-	void updateRegions();
+	SimplexNoise* _worldNoise;
 
-	NoiseGenerator* _worldNoise;
+	void updateRegions();
 
 	std::vector<std::unique_ptr<BaseWorldEvent>> _events;
 	std::unordered_map<sf::Vector3i, Chunk*> _regionUpdates;
 
+	ChunkManager _chunkManager;
+
 	std::atomic<bool> _isRunning{ true };
 	std::vector<std::thread> _chunkLoadThreads;
 	std::mutex _mutex;
-
-	ChunkManager _chunkManager;
 
 };
