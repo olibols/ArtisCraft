@@ -5,6 +5,8 @@
 
 #include <unordered_map>
 
+using RegionMap = std::unordered_map<VectorXZ, Region>;
+
 class World;
 
 class ChunkManager {
@@ -12,7 +14,7 @@ public:
 	ChunkManager(World& world);
 
 	Region& getRegion(int x, int z);
-	std::unordered_map<VectorXZ, Region> getRegions();
+	std::unordered_map<VectorXZ, Region>& getRegions();
 
 	bool makeMesh(int x, int z);
 
@@ -22,7 +24,7 @@ public:
 	void loadRegion(int x, int z);
 
 private:
-	static std::unordered_map<VectorXZ, Region> _regions;
+	RegionMap _regions;
 
 	World* _world;
 };

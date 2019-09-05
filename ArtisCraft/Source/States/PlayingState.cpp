@@ -9,8 +9,6 @@
 
 PlayingState::PlayingState(Application & app) : BaseState (app)
 {
-	_app = &app;
-
 	app.getCamera().hookEntity(_player);
 
 	//_world.editBlock(10, 10, 10, BlockID::Air);
@@ -55,10 +53,15 @@ void PlayingState::handleInput()
 
 void PlayingState::update(float deltaTime)
 {
+	if (_player.position.x < 0) _player.position.x = 0;
+	if (_player.position.z < 0) _player.position.z = 0;
+
 	_player.update(deltaTime, _world);
-	_world.update(_app->getCamera());
+	_world.update(_application->getCamera());
 
 	_frameCounter.update();
+
+	//printf("%c", glGetError());
 }
 
 void PlayingState::render(RenderMaster & renderer)
@@ -67,5 +70,5 @@ void PlayingState::render(RenderMaster & renderer)
 	_world.render(renderer, _application->getCamera());
 	_frameCounter.draw(renderer);
 	_crosshair.draw(renderer);
-	renderer.finishRender(_app->getWindow(), _app->getCamera());
+	renderer.finishRender(_application->getWindow(), _application->getCamera());
 }

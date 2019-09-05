@@ -1,10 +1,13 @@
 #include "Application.h"
+#include "World/Block/BlockTypeDatabase.h"
 
 Application::Application(std::string windowName)
 {
 	_context = new RenderContext("ArtisCraft", Settings::width, Settings::height);
 	_camera = new Camera();
 	_renderMaster = new RenderMaster;
+
+	BlockDatabase::get();
 
 	_states.push_back(std::make_unique<PlayingState>(*this));
 

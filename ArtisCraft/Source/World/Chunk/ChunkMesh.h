@@ -16,7 +16,7 @@ public:
 
 	bool hasMesh();
 
-	Model getModel();
+	Model& getModel();
 	void deleteModel();
 
 private:
@@ -26,7 +26,7 @@ private:
 
 	std::vector<GLfloat> _light;
 
-	Mesh* _mesh = nullptr;
-	Model* _model = nullptr;
+	Mesh _mesh;
+	Model _model;
 
 };
