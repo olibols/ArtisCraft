@@ -2,7 +2,7 @@
 #include "../World/World.h"
 #include <SFML/Graphics.hpp>
 
-Player::Player() : Entity({10, 150, 10}, {0, 0, 0}, {0.25, 1.62, 0.25})
+Player::Player() : Entity({10, 150, 10}, {0, 0, 0}, {0.25, 1.5, 0.25})
 {
 }
 
@@ -38,7 +38,7 @@ void Player::update(float deltaTime, World& world)
 void Player::collide(World& world, glm::vec3 vel, float dt)
 {
 	for (int x = position.x - hitbox.dimensions.x; x < position.x + hitbox.dimensions.x; x++)
-		for (int y = position.y - hitbox.dimensions.y; y < position.y + 0.7; y++)
+		for (int y = position.y - hitbox.dimensions.y; y < position.y; y++)
 			for (int z = position.z - hitbox.dimensions.z; z < position.z + hitbox.dimensions.z; z++)
 			{
 				auto block = world.getBlock(x, y, z);

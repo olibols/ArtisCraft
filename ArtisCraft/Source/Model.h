@@ -21,7 +21,7 @@ public:
 	int getIndicesCount() { return _indicesCount; };
 
 	void addVBO(int dimensions, std::vector<GLfloat> data);
-	bool bindVAO();
+	void bindVAO();
 
 private:
 	void addEBO(const std::vector<GLuint> indices);

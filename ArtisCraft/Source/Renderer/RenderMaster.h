@@ -10,7 +10,7 @@
 class RenderMaster {
 public:
 	void drawCube(glm::vec3 position);
-	void drawChunk(Chunk& mesh);
+	void drawChunk(ChunkMesh & chunkMesh);
 	void drawSFML(sf::Drawable& drawable);
 
 	void finishRender(sf::RenderWindow& window, Camera& camera);

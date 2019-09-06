@@ -11,7 +11,7 @@ public:
 	void render(Camera& camera);
 
 private:
-	std::vector<ChunkMesh*> _chunks;
+	std::vector<ChunkMesh> _chunks;
 
 	ChunkShader _shader;
 };

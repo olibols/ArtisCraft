@@ -32,10 +32,10 @@ void Region::draw(RenderMaster & renderer)
 {
 	for (auto& chunk : _chunks) {
 		if (chunk.hasMesh()) {
-			//if (!chunk.hasBuffered())
-				//chunk.bufferMesh();
+			if (!chunk.hasBuffered())
+				chunk.bufferMesh();
 
-			renderer.drawChunk(chunk._mesh);
+			renderer.drawChunk(chunk.getMesh());
 		}
 	}
 }
@@ -49,17 +49,22 @@ void Region::load()
 		}
 
 
-		for (int x = 0; x < 16; x++)
+		/*for (int x = 0; x < 16; x++)
 			for (int z = 0; z < 16; z++) {
 				
 				int height = _world->getWorldNoise().getHeight(x, z, _location.x, _location.y);
 
-				setBlock(x, height, z, BlockID::Grass);
-
 				setBlock(x, 64, z, BlockID::Water);
 
+				setBlock(x, height, z, BlockID::Grass);
+
 				setBlock(x, 1, z, BlockID::Bedrock);
-			}
+			}*/
+
+		for (int x = 0; x < 16; x++)
+			for (int z = 0; z < 16; z++)
+				setBlock(x, 5, z, BlockID::Water);
+
 		_isLoaded = true;
 	}
 }

@@ -3,7 +3,7 @@
 #include "../World/Block/BlockTypeDatabase.h"
 #include "../Camera.h"
 
-void ChunkRenderer::add(ChunkMesh mesh)
+void ChunkRenderer::add(ChunkMesh& mesh)
 {
 	_chunks.push_back(mesh);
 }

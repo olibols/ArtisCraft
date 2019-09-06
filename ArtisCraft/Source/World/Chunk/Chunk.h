@@ -41,7 +41,7 @@ public:
 	ChunkLayer& getLayer(int y);
 	Chunk& getAdjacentChunk(int x, int z);
 
-	ChunkMesh _mesh;
+	inline ChunkMesh& getMesh() { return _mesh; };
 	   
 private:
 
@@ -52,6 +52,8 @@ private:
 	bool _hasMeshBuffered = false;
 	bool _hasMesh = false;
 	bool _hasBlocks = false;
+
+	ChunkMesh _mesh;
 
 	std::array<ChunkLayer, CHUNK_SIZE> _layers;
 	std::array<ChunkBlock, CHUNK_VOLUME> _blocks;

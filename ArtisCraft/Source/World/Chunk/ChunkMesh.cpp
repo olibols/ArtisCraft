@@ -69,7 +69,7 @@ bool ChunkMesh::hasMesh()
 
 
 
-Model ChunkMesh::getModel()
+Model& ChunkMesh::getModel()
 {
 	return *_model;
 }

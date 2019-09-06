@@ -15,7 +15,7 @@
 
 class World {
 public:
-	World();
+	World(Camera& camera);
 
 	ChunkBlock getBlock(int x, int y, int z);
 	void setBlock(int x, int y, int z, ChunkBlock block);
@@ -55,5 +55,5 @@ private:
 	std::atomic<bool> _isRunning{ true };
 	std::vector<std::thread> _chunkLoadThreads;
 	std::mutex _mutex;
-
+	
 };

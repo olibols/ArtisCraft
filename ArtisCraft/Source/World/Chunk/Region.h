@@ -27,8 +27,6 @@ public:
 
 private:
 
-	NoiseGenerator* temp_noiseGen = new NoiseGenerator(420);
-
 	void addChunk();
 	void addChunkBlockTarget(int blockY);
 	void addChunkIndexTarget(int index);

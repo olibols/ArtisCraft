@@ -26,7 +26,7 @@ private:
 
 	std::vector<GLfloat> _light;
 
-	Mesh _mesh;
-	Model _model;
+	Mesh* _mesh;
+	Model* _model;
 
 };

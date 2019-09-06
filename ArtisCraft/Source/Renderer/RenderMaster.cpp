@@ -5,9 +5,8 @@ void RenderMaster::drawCube(glm::vec3 position)
 	_cubeRenderer.addCube(position);
 }
 
-void RenderMaster::drawChunk(Chunk & chunk)
+void RenderMaster::drawChunk(ChunkMesh & chunkMesh)
 {
-	ChunkMesh& chunkMesh = chunk.getMesh();
 	_chunkRenderer.add(chunkMesh);
 }
 

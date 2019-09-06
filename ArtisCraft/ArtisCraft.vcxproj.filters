@@ -59,6 +59,7 @@
     <ClInclude Include="Source\AABB\AABB.h" />
     <ClInclude Include="Source\Util\SimplexNoise.h" />
     <ClInclude Include="Source\World\Generators\NoiseGenerator.h" />
+    <ClInclude Include="Source\Item\InventoryItem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
