@@ -7,7 +7,7 @@ NoiseGenerator::NoiseGenerator(int seed) : _seed(seed) {
 	_noiseParameters.offset = -20;
 	_noiseParameters.octaves = 9;
 	_noiseParameters.roughness = 0.50;
-	_noiseParameters.smoothness = 195;
+	_noiseParameters.smoothness = 120;
 }
 
 double NoiseGenerator::getHeight(int x, int z, int chunkX, int chunkZ)

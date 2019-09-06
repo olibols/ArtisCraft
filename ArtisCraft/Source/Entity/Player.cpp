@@ -2,7 +2,7 @@
 #include "../World/World.h"
 #include <SFML/Graphics.hpp>
 
-Player::Player() : Entity({10, 240, 10}, {0, 0, 0}, {0.5, 1.75, 0.5})
+Player::Player() : Entity({10, 150, 10}, {0, 0, 0}, {0.25, 1.62, 0.25})
 {
 }
 
@@ -38,39 +38,38 @@ void Player::update(float deltaTime, World& world)
 void Player::collide(World& world, glm::vec3 vel, float dt)
 {
 	for (int x = position.x - hitbox.dimensions.x; x < position.x + hitbox.dimensions.x; x++)
-		for (int y = position.y - hitbox.dimensions.y; y < position.y + hitbox.dimensions.y; y++)
+		for (int y = position.y - hitbox.dimensions.y; y < position.y + 0.7; y++)
 			for (int z = position.z - hitbox.dimensions.z; z < position.z + hitbox.dimensions.z; z++)
 			{
 				auto block = world.getBlock(x, y, z);
 
 				if (block != 0)
 				{
-					if (vel.x > 0)
-					{
-						position.x = x - hitbox.dimensions.x;
-					}
-					if (vel.x < 0)
-					{
-						position.x = x + hitbox.dimensions.x + 1;
-					}
-
 					if (vel.y > 0)
 					{
 						position.y = y - hitbox.dimensions.y;
 						velocity.y = 0;
 					}
-					if (vel.y < 0)
-					{
+					else if (vel.y < 0) {
 						position.y = y + hitbox.dimensions.y + 1;
 						velocity.y = 0;
 						_onGround = true;
+					}
+
+					if (vel.x > 0)
+					{
+						position.x = x - hitbox.dimensions.x;
+					}
+					else if (vel.x < 0)
+					{
+						position.x = x + hitbox.dimensions.x + 1;
 					}
 
 					if (vel.z > 0)
 					{
 						position.z = z - hitbox.dimensions.z;
 					}
-					if (vel.x < 0)
+					else if (vel.z < 0)
 					{
 						position.z = z + hitbox.dimensions.z + 1;
 					}
@@ -132,7 +131,7 @@ void Player::keyboardInput()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
-		position = { 10, 250, 10 };
+		position = { 10, 150, 10 };
 		velocity = { 0, 0, 0 };
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && _onGround)

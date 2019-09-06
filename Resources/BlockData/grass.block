@@ -1,5 +1,11 @@
 Name
 Dirt
 
-TexAll
+TexSide
+1 1
+
+TexTop
 2 0
+
+TexBottom
+1 0

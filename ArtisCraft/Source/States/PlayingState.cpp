@@ -33,13 +33,11 @@ void PlayingState::handleInput()
 		auto block = _world.getBlock(x, y, z);
 
 		if (block != ChunkBlock(BlockID::Air) ){
-			//if (time.getElapsedTime().asSeconds() > 0.2) {
+			if (time.getElapsedTime().asSeconds() > 0.2) {
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 					time.restart();
-					sf::Clock clok;
 					_world.addEvent<PlayerDigEvent>(sf::Mouse::Button::Left, ray.getEnd(), _player);
-					//printf("Took %f seconds to edit the block", clok.getElapsedTime().asSeconds());
 					break;
 				}
 				else if ((sf::Mouse::isButtonPressed(sf::Mouse::Right))) {
@@ -47,7 +45,7 @@ void PlayingState::handleInput()
 					_world.addEvent<PlayerDigEvent>(sf::Mouse::Button::Right, lastPos, _player);
 					break;
 				}
-			//}
+			}
 		}
 		lastPos = ray.getEnd();
 	}	

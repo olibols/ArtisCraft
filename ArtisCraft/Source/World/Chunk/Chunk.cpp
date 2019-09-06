@@ -49,7 +49,7 @@ bool Chunk::hasFaces()
 void Chunk::buildMesh()
 {
 	ChunkMeshBuilder(*this).build();
-	//_mesh.updateMesh();
+	_mesh.updateMesh();
 	_hasMeshBuffered = false;
 	_hasMesh = true;
 }
