@@ -83,7 +83,6 @@ void ChunkMeshBuilder::build()
 				if (block == BlockID::Air) {
 					continue;
 				}
-
 				_texData = &BlockDatabase::get().getData((BlockID)block.id).getTextureData();
 
 				directions.update(x, y, z);

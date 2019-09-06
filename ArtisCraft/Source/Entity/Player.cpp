@@ -131,7 +131,7 @@ void Player::keyboardInput()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
-		position = { 10, 150, 10 };
+		position.y = 150;
 		velocity = { 0, 0, 0 };
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && _onGround)

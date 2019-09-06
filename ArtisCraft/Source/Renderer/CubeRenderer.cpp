@@ -5,7 +5,7 @@ CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
 {
 	_shader = new BlockShader();
 	_cubeModel = new Model();
-	_texture = new BasicTexture("dirt");
+	//_texture = new BasicTexture("dirt");
 	
 	_cubeMesh.vertexPositions = {
 		500, 0, 0,

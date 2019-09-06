@@ -19,7 +19,6 @@ void ChunkRenderer::render(Camera& camera)
 	_shader.loadProjViewMatrix(camera.getProjViewMatrix());
 
 	for (ChunkMesh& mesh : _chunks) {
-
 		mesh.getModel().bindVAO();
 		glDrawElements(GL_TRIANGLES, mesh.getModel().getIndicesCount(), GL_UNSIGNED_INT, nullptr);
 	}

@@ -1,6 +1,7 @@
 #pragma once
 #include "Chunk/Region.h"
 
+#include <mutex>
 #include <Utils.h>
 
 #include <unordered_map>

@@ -53,6 +53,7 @@
     <ClInclude Include="Source\World\Events\BaseWorldEvent.h" />
     <ClInclude Include="Source\World\Events\PlayerDigEvent.h" />
     <ClInclude Include="Source\World\Generators\NoiseGenerator.h" />
+    <ClInclude Include="Source\World\Generators\WorldTerrain.h" />
     <ClInclude Include="Source\World\World.h" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +92,7 @@
     <ClCompile Include="Source\World\Chunk\Region.cpp" />
     <ClCompile Include="Source\World\Events\PlayerDigEvent.cpp" />
     <ClCompile Include="Source\World\Generators\NoiseGenerator.cpp" />
+    <ClCompile Include="Source\World\Generators\WorldTerrain.cpp" />
     <ClCompile Include="Source\World\World.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

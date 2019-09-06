@@ -29,6 +29,8 @@ public:
 
 	inline ChunkManager& getChunkManager() { return _chunkManager; };
 
+	inline int getSeed() { return _worldSeed; };
+
 	template<typename T, typename... Args>
 	void addEvent(Args&&... args){
 		_events.push_back(std::make_unique<T>(std::forward<Args>(args)...));
@@ -44,6 +46,8 @@ private:
 	int _currentLoadDistance = 2;
 
 	NoiseGenerator* _worldNoise;
+
+	int _worldSeed = 1;
 
 	void updateRegions();
 

@@ -60,6 +60,7 @@
     <ClInclude Include="Source\Util\SimplexNoise.h" />
     <ClInclude Include="Source\World\Generators\NoiseGenerator.h" />
     <ClInclude Include="Source\Item\InventoryItem.h" />
+    <ClInclude Include="Source\World\Generators\WorldTerrain.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -168,6 +169,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\Generators\NoiseGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Generators\WorldTerrain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
