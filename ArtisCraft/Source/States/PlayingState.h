@@ -19,9 +19,6 @@ public:
 	void render(RenderMaster& renderer) override;
 
 private:
-
-	Application * _app = nullptr;
-
 	glm::vec3 lastPos;
 	sf::Clock time;
 

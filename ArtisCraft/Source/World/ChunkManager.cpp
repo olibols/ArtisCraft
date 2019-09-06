@@ -1,22 +1,20 @@
 #include "ChunkManager.h"
 
-std::unordered_map<VectorXZ, Region> ChunkManager::_regions;
-
 ChunkManager::ChunkManager(World & world) : _world(&world)
 {
 }
 
 Region & ChunkManager::getRegion(int x, int z)
 {
+	VectorXZ    key{ x, z };
 
 	if (!regionExistsAt(x, z))
 	{
-		VectorXZ    key{ x, z };
 		Region       _region{ *_world, {x, z} };
 		_regions.emplace(key, std::move(_region));
 	}
 
-	return _regions.at({ x, z });
+	return _regions[key];
 }
 
 bool ChunkManager::makeMesh(int x, int z)
@@ -46,7 +44,7 @@ void ChunkManager::loadRegion(int x, int z)
 	getRegion(x, z).load();
 }
 
-std::unordered_map<VectorXZ, Region> ChunkManager::getRegions()
+RegionMap& ChunkManager::getRegions()
 {
 	return _regions;
 }
