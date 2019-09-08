@@ -22,7 +22,7 @@ bool ChunkManager::makeMesh(int x, int z)
 	for (int nx = -1; nx <= 1; nx++)
 		for (int nz = -1; nz <= 1; nz++)
 		{
-			getRegion(x + nx, z + nz).load();
+			getRegion(x + nx, z + nz).load(_world->getWorldTerrain());
 		}
 	return getRegion(x, z).buildMesh();
 }
@@ -41,7 +41,7 @@ bool ChunkManager::regionExistsAt(int x, int z)
 
 void ChunkManager::loadRegion(int x, int z)
 {
-	getRegion(x, z).load();
+	getRegion(x, z).load(_world->getWorldTerrain());
 }
 
 RegionMap& ChunkManager::getRegions()

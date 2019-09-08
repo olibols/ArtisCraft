@@ -11,7 +11,7 @@
 #include <mutex>
 #include <atomic>
 #include <SFML/Graphics.hpp>
-#include "Generators/NoiseGenerator.h"
+#include "Generators/WorldTerrain.h"
 
 class World {
 public:
@@ -36,7 +36,7 @@ public:
 		_events.push_back(std::make_unique<T>(std::forward<Args>(args)...));
 	}
 
-	inline NoiseGenerator& getWorldNoise() { return *_worldNoise; };
+	inline WorldTerrain& getWorldTerrain() { return *_worldTerrain; };
 
 	static VectorXZ getBlockXZ(int x, int z);
 	static VectorXZ getChunkXZ(int x, int z);
@@ -45,7 +45,7 @@ private:
 
 	int _currentLoadDistance = 2;
 
-	NoiseGenerator* _worldNoise;
+	WorldTerrain* _worldTerrain;
 
 	int _worldSeed = 1;
 

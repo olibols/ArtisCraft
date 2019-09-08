@@ -3,11 +3,11 @@
 #include <cmath>
 
 NoiseGenerator::NoiseGenerator(int seed) : _seed(seed) {
-	_noiseParameters.amplitude = 100;
+	_noiseParameters.amplitude = 70;
 	_noiseParameters.offset = 1;
 	_noiseParameters.octaves = 6;
-	_noiseParameters.roughness = 300;
-	_noiseParameters.smoothness = 60;
+	_noiseParameters.roughness = 0.53;
+	_noiseParameters.smoothness = 235;
 }
 
 double NoiseGenerator::getHeight(int x, int z, int chunkX, int chunkZ)
@@ -24,11 +24,11 @@ double NoiseGenerator::getHeight(int x, int z, int chunkX, int chunkZ)
 		finalHeight += noise(
 			((double)worldX) * frequency / _noiseParameters.smoothness,
 			((double)worldZ) * frequency / _noiseParameters.smoothness) * amplitude;
-
-		double val = (((finalHeight / 2.1) + 1.2) * _noiseParameters.amplitude) + _noiseParameters.offset;
-
-		return val;
 	}
+
+	double val = (((finalHeight / 2.1) + 1.2) * _noiseParameters.amplitude) + _noiseParameters.offset;
+
+	return val;
 }
 
 void NoiseGenerator::setNoiseParameters(NoiseParameters & parameters)
@@ -55,7 +55,7 @@ double NoiseGenerator::interpolate(double a, double b, double c) // Some standar
 	return (a * (1 - mu2) + b * mu2);
 }
 
-double NoiseGenerator::noise(double x, double z) // This function is kind of hard to explain, it just gets the noise at the parts surrounding x and z and interpolates them to make the S M O O T H
+double NoiseGenerator::noise(double x, double z) // This function is kind of hard to explain, it just gets the noise at the parts surrounding x and z and interpolates them to make them S M O O T H
 {
 	double floorX = (double)((int)x);
 	double floorZ = (double)((int)z);

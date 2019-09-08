@@ -1,6 +1,6 @@
 #pragma once
 #include "Chunk.h"
-#include "../Generators/NoiseGenerator.h"
+#include "../Generators/WorldTerrain.h"
 
 
 class World;
@@ -17,7 +17,7 @@ public:
 	void draw(RenderMaster& renderer);
 
 	inline bool hasLoaded() { return _isLoaded; };
-	void load();
+	void load(WorldTerrain& worldTerrain);
 
 	inline sf::Vector2i getLocation() { return _location; };
 

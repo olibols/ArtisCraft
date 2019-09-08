@@ -40,7 +40,7 @@ void Region::draw(RenderMaster & renderer)
 	}
 }
 
-void Region::load()
+void Region::load(WorldTerrain& worldTerrain)
 {
 
 	if (!_isLoaded) {
@@ -48,16 +48,8 @@ void Region::load()
 			_chunks.emplace_back(sf::Vector3i(_location.x, y, _location.y), *_world);
 		}
 
+		worldTerrain.generateTerrainFor(*this);
 
-		for (int x = 0; x < 16; x++)
-			for (int z = 0; z < 16; z++) {
-				
-				int height = _world->getWorldNoise().getHeight(x, z, _location.x, _location.y);
-
-				setBlock(x, height, z, BlockID::Grass);
-
-				setBlock(x, 1, z, BlockID::Bedrock);
-			}
 		_isLoaded = true;
 	}
 }
