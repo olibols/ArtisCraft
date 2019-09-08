@@ -1,4 +1,5 @@
 #include "WorldTerrain.h"
+#include "../Chunk/Region.h"
 
 WorldTerrain::WorldTerrain(World& world) : _dampnessMap(world.getSeed()),
 										   _mainHeightmap(world.getSeed())

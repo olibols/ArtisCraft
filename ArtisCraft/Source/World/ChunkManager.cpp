@@ -1,4 +1,5 @@
 #include "ChunkManager.h"
+#include "World.h"
 
 ChunkManager::ChunkManager(World & world) : _world(&world)
 {

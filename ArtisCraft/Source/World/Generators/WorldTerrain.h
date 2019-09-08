@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Chunk/Region.h"
 #include "../World.h"
 #include "NoiseGenerator.h"
 
@@ -11,6 +10,7 @@ struct TopSoilBlocks {
 	BlockID BOTTOM;
 };
 
+class Region;
 
 class WorldTerrain
 {

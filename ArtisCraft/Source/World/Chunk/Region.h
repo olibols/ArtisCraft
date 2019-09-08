@@ -1,10 +1,9 @@
 #pragma once
 #include "Chunk.h"
-#include "../Generators/WorldTerrain.h"
-
 
 class World;
 class RenderMaster;
+class WorldTerrain;
 
 class Region {
 public:

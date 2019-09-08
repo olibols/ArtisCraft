@@ -1,5 +1,6 @@
 #include "World.h"
 #include "ChunkManager.h"
+#include "Generators/WorldTerrain.h"
 #include <Utils.h>
 
 constexpr int wsize = 4;
