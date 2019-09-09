@@ -27,8 +27,8 @@ void WorldTerrain::generateTerrainFor(Region& region)
 
 			int dampness = _dampnessMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
 
-			if (dampness > 80)
-				if (_treeMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y) > 115)
+			//if (dampness > 80)
+				if (_treeMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y) > 116)
 					buildTree(x, height, z);
 
 		}
@@ -71,7 +71,19 @@ TopSoilBlocks WorldTerrain::getTopSoilAt(int x, int z)
 void WorldTerrain::buildTree(int x, int y, int z)
 {
 	StructureBuilder treeBuilder;
-	treeBuilder.addColumn(x, y, z, 5);
+	//(int y, int xStart, int xEnd, int zStart, int zEnd, BlockId block)
+
+	treeBuilder.fill(x - 2, z - 2, y + 2, x + 2, z + 2, BlockID::Leaves);
+	treeBuilder.fill(x - 2, z - 2, y + 3, x + 2, z + 2, BlockID::Leaves);
+	treeBuilder.fill(x - 1, z - 1, y + 4, x + 1, z + 1, BlockID::Leaves);
+
+	treeBuilder.addBlock(x, y + 5, z, BlockID::Leaves);
+	treeBuilder.addBlock(x - 1, y + 5, z, BlockID::Leaves);
+	treeBuilder.addBlock(x + 1, y + 5, z, BlockID::Leaves);
+	treeBuilder.addBlock(x, y + 5, z + 1, BlockID::Leaves);
+	treeBuilder.addBlock(x, y + 5, z - 1, BlockID::Leaves);
+
+	treeBuilder.addColumn(x, y, z, 5, BlockID::Wood);
 	
 	treeBuilder.build(*_currentRegion);
 }
@@ -102,7 +114,7 @@ void WorldTerrain::setupGenerators()
 	treeParams.amplitude = 70;
 	treeParams.offset = 1;
 	treeParams.octaves = 2;
-	treeParams.roughness = 0.5;
+	treeParams.roughness = 0.1;
 	treeParams.smoothness = 1;
 
 	_treeMap.setNoiseParameters(treeParams);

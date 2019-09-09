@@ -13,16 +13,16 @@ struct BuilderBlock {
 
 class StructureBuilder {
 public:
-	StructureBuilder();
+	StructureBuilder() = default;
 
 	void build(Region& region);
 
-	void addColumn(int startX, int startY, int startZ, int height);
+	void addBlock(int x, int y, int z, BlockID block);
 
-	void fillXZ(int startX, int y, int startZ, int endX, int endZ);
+	void addColumn(int startX, int startY, int startZ, int height, BlockID block);
+	void fill(int startX, int startZ, int y, int endX, int endZ, BlockID block);
 
 private:
 
 	std::vector<BuilderBlock> _blocks;
-	
 };

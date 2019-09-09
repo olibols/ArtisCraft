@@ -13,6 +13,7 @@ enum class BlockID : Block_t {
 	Bedrock,
 	Water,
 	Sand,
+	Leaves,
 
 	NUM_TYPES
 };
