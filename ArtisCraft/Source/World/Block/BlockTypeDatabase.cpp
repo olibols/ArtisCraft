@@ -25,4 +25,5 @@ BlockDatabase::BlockDatabase() : atlas("ArtisPack")
 	_blocks[(int)BlockID::Wood] = std::make_unique<DefaultBlock>("wood");
 	_blocks[(int)BlockID::Bedrock] = std::make_unique<DefaultBlock>("bedrock");
 	_blocks[(int)BlockID::Water] = std::make_unique<DefaultBlock>("water");
+	_blocks[(int)BlockID::Sand] = std::make_unique<DefaultBlock>("sand");
 }

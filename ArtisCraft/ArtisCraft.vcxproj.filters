@@ -61,6 +61,7 @@
     <ClInclude Include="Source\World\Generators\NoiseGenerator.h" />
     <ClInclude Include="Source\Item\InventoryItem.h" />
     <ClInclude Include="Source\World\Generators\WorldTerrain.h" />
+    <ClInclude Include="Source\World\Generators\StructureBuilder.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -172,6 +173,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\Generators\WorldTerrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Generators\StructureBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

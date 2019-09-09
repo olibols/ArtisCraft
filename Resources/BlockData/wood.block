@@ -1,5 +1,11 @@
 Name
 Wood
 
-TexAll
+TexTop
+4 0
+
+TexSide
+4 1
+
+TexBottom
 4 0

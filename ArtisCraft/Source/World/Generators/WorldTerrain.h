@@ -25,6 +25,8 @@ private:
 	void fillBlocksAt(int x, int y, int z, TopSoilBlocks topSoil);
 	TopSoilBlocks getTopSoilAt(int x, int z);
 
+	void buildTree(int x, int y, int z);
+
 	void setupGenerators();
 
 	int _seed;
@@ -32,6 +34,7 @@ private:
 	Region* _currentRegion;
 
 	NoiseGenerator _dampnessMap;
-
 	NoiseGenerator _mainHeightmap;
+	NoiseGenerator _treeMap;
+
 };

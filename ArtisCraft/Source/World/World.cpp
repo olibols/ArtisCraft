@@ -18,7 +18,7 @@ World::World(Camera& camera) : _chunkManager(*this)
 
 	loadRegions(camera);
 
-	for (int i = 0; i < WORKERS; i++)
+	/*for (int i = 0; i < WORKERS; i++)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 		_chunkLoadThreads.emplace_back([&]()
@@ -29,7 +29,7 @@ World::World(Camera& camera) : _chunkManager(*this)
 				//std::this_thread::sleep_for(std::chrono::microseconds(100));
 			}
 		});
-	}
+	}*/
 }
 
 ChunkBlock World::getBlock(int x, int y, int z)
@@ -88,7 +88,7 @@ void World::update(Camera & camera)
 	_events.clear();
 
 	updateRegions();
-	//loadRegions(camera);
+	loadRegions(camera);
 }
 
 void World::updateRegion(int blockX, int blockY, int blockZ)
