@@ -87,9 +87,9 @@ void ChunkMeshBuilder::build()
 
 				directions.update(x, y, z);
 
-				if (y != 0) {
-					addFace(bottomFace, _texData->texBottomCoord, position, directions.down, LIGHT_BOT);
-				};
+				//int light = 1 / _chunk->getBlocklight(x, y, z);
+
+				addFace(bottomFace, _texData->texBottomCoord, position, directions.down, LIGHT_BOT);
 				addFace(topFace, _texData->texTopCoord, position, directions.up, LIGHT_TOP);
 
 				addFace(leftFace, _texData->texSideCoord, position, directions.left, LIGHT_X);

@@ -42,8 +42,26 @@ public:
 	Chunk& getAdjacentChunk(int x, int z);
 
 	inline ChunkMesh& getMesh() { return _mesh; };
+
+	inline int getSunlight(int x, int y, int z) {
+		return (_lightMap[x][y][z] >> 4) & 0xF;
+	}
+
+	inline void setSunlight(int x, int y, int z, int lightlevel) {
+		_lightMap[x][y][z] = (_lightMap[x][y][z] & 0xF) | (lightlevel << 4);
+	}
+
+	inline int getBlocklight(int x, int y, int z) {
+		return _lightMap[x][y][z] & 0xF;
+	}
+
+	inline void setBlockLight(int x, int y, int z, int lightLevel) {
+		_lightMap[x][y][z] = (_lightMap[x][y][z] & 0xF0) | lightLevel;
+	}
 	   
 private:
+
+	unsigned char _lightMap[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE]; // 16x16x16
 
 	sf::Vector3i toWorldPos(int x, int y, int z);
 	bool outOfBounds(int value);

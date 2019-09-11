@@ -4,6 +4,7 @@
 
 Chunk::Chunk(sf::Vector3i position, World& world) : _location(position), _world(&world)
 {
+	memset(_lightMap, 0, sizeof(_lightMap));
 }
 
 void Chunk::setBlock(int x, int y, int z, ChunkBlock block)

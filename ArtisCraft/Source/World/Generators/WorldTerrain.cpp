@@ -27,7 +27,7 @@ void WorldTerrain::generateTerrainFor(Region& region)
 
 			int dampness = _dampnessMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
 
-			//if (dampness > 80)
+			if (dampness > 80)
 				if (_treeMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y) > 116)
 					buildTree(x, height, z);
 
