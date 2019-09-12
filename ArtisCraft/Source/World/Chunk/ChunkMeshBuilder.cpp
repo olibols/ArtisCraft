@@ -65,6 +65,10 @@ ChunkMeshBuilder::ChunkMeshBuilder(Chunk & chunk)
 	_texData = new TextureData;
 }
 
+int test(int light) {
+	if (light > 5) return 1;
+};
+
 void ChunkMeshBuilder::build()
 {
 
@@ -90,7 +94,7 @@ void ChunkMeshBuilder::build()
 				//int light = 1 / _chunk->getBlocklight(x, y, z);
 
 				addFace(bottomFace, _texData->texBottomCoord, position, directions.down, LIGHT_BOT);
-				addFace(topFace, _texData->texTopCoord, position, directions.up, LIGHT_TOP);
+				addFace(topFace, _texData->texTopCoord, position, directions.up, test(_chunk->getBlocklight(x, y, z)));
 
 				addFace(leftFace, _texData->texSideCoord, position, directions.left, LIGHT_X);
 				addFace(rightFace, _texData->texSideCoord, position, directions.right, LIGHT_X);

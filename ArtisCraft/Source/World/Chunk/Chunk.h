@@ -4,8 +4,17 @@
 #include <SFML/Graphics.hpp>
 #include "ChunkMesh.h"
 #include <array>
+#include <queue>
 
 class World;
+class Chunk;
+
+struct LightNode
+{
+	LightNode(short index, Chunk* chunk) : index(index), chunk(chunk) {};
+	short index;
+	Chunk* chunk;
+};
 
 class ChunkLayer {
 public:
@@ -59,9 +68,12 @@ public:
 		_lightMap[x][y][z] = (_lightMap[x][y][z] & 0xF0) | lightLevel;
 	}
 	   
+	inline std::queue<LightNode>& getNodeQueue() { return _lightNodeQueue; };
+
 private:
 
-	unsigned char _lightMap[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE]; // 16x16x16
+	unsigned char _lightMap[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
+	std::queue<LightNode> _lightNodeQueue;
 
 	sf::Vector3i toWorldPos(int x, int y, int z);
 	bool outOfBounds(int value);

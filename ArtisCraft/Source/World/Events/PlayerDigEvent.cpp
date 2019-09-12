@@ -25,7 +25,7 @@ void PlayerDigEvent::dig(World & world)
 
 	case sf::Mouse::Button::Right:
 		world.updateRegion(_digSpot.x, _digSpot.y, _digSpot.z);
-		world.setBlock(_digSpot.x, _digSpot.y, _digSpot.z, BlockID::Wood);
+		world.setBlock(_digSpot.x, _digSpot.y, _digSpot.z, BlockID::Water);
 		break;
 
 	default:
