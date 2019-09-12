@@ -18,69 +18,49 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 		return;
 	};
 
-	
-
 	if (block == BlockID::Water) {
 
-		setBlockLight(x, y, z, 13);
-
+		setBlockLight(x, y, z, 12);
 		short index = y * CHUNK_AREA + z * CHUNK_SIZE + x;
+
 		_lightNodeQueue.emplace(index, this);
-
-		while (_lightNodeQueue.empty() == false) {
-			LightNode &node = _lightNodeQueue.front();
-
-			int index = y * CHUNK_AREA + z * CHUNK_SIZE + x;
-			Chunk* chunk = node.chunk;
-
-			_lightNodeQueue.pop();
-
-			int x = index % CHUNK_SIZE;
-			int y = index / (CHUNK_SIZE * CHUNK_SIZE);
-			int z = (index % (CHUNK_SIZE * CHUNK_SIZE)) / CHUNK_SIZE;
-
-			int lightLevel = getBlocklight(x, y, z);
-
-			for(int nx = -1; nx < 1; nx++)
-			for(int ny = -1; ny < 1; ny++)
-			for (int nz = -1; nx < 1; nz++)
-				{
-
-				if (outOfBounds(x + nx) ||
-					outOfBounds(y + ny) ||
-					outOfBounds(z + nz))
-				{
-					Chunk& chunk = getAdjacentChunk(_location.x + nx, _location.y + nz);
-
-					if (chunk.getBlock(x + nx, y + ny, z + nz) != BlockID::Air && chunk.getBlocklight(x + nx, y + ny, z + nz) + 2 <= lightLevel) {
-
-						chunk.setBlockLight(x + nx, y + ny, z + nz, lightLevel - 1);
-
-						int index = (y + ny) * CHUNK_AREA + (z + nz) * CHUNK_SIZE + (x + nx);
-
-						chunk.getNodeQueue().emplace(index, &chunk);
-					}
-
-					//return;
-				}else
-
-					if (getBlock(x + nx, y + ny, z + nz) != BlockID::Air && getBlocklight(x + nx, y + ny, z + nz) + 2 <= lightLevel) {
-
-						setBlockLight(x + nx, y + ny, z + nz, lightLevel - 1);
-
-						int index = (y + ny) * CHUNK_AREA + (z + nz) * CHUNK_SIZE + (x + nx);
-
-						_lightNodeQueue.emplace(index, chunk);
-					}
-				}
-		}
 	}
+	
+	fillLight();
 
 	_blocks[getIndex(x, y, z)] = block;
 	_layers[y].update(block);
 
 }
 
+void Chunk::fillLight()
+{
+
+	while (_lightNodeQueue.empty() == false) {
+
+		LightNode& node = _lightNodeQueue.front();
+
+		short index = node.index;
+		Chunk* chunk = node.chunk;
+
+		_lightNodeQueue.pop();
+
+		int x = index % CHUNK_SIZE;
+		int y = index / (CHUNK_SIZE * CHUNK_SIZE);
+		int z = (index % (CHUNK_SIZE * CHUNK_SIZE)) / CHUNK_SIZE;
+
+		int lightLevel = chunk->getBlocklight(x, y, z);
+
+		if (chunk->getBlock(x + 1, y, z) != BlockID::Air && chunk->getBlocklight(x + 1, y, z) + 2 <= lightLevel) {
+
+			chunk->setBlockLight(x + 1, y, z, lightLevel - 1);
+
+			short index = y * CHUNK_AREA + z * CHUNK_SIZE + x + 1;
+
+			_lightNodeQueue.emplace(index, chunk);
+		}
+	}
+}
 
 
 ChunkBlock Chunk::getBlock(int x, int y, int z)

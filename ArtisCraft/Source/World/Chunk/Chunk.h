@@ -70,6 +70,8 @@ public:
 	   
 	inline std::queue<LightNode>& getNodeQueue() { return _lightNodeQueue; };
 
+	void fillLight();
+
 private:
 
 	unsigned char _lightMap[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];

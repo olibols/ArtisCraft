@@ -93,16 +93,16 @@ void ChunkMeshBuilder::build()
 
 				directions.update(x, y, z);
 
-				//int light = 1 / _chunk->getBlocklight(x, y, z);
+				float light = 12 / (_chunk->getBlocklight(x, y, z) + 0.3);
 
-				addFace(bottomFace, _texData->texBottomCoord, position, directions.down, LIGHT_BOT);
-				addFace(topFace, _texData->texTopCoord, position, directions.up, test(_chunk->getBlocklight(x, y, z)));
+				addFace(bottomFace, _texData->texBottomCoord, position, directions.down, (1.0 / light)* LIGHT_BOT);
+				addFace(topFace, _texData->texTopCoord, position, directions.up, 1.0 / light);
 
-				addFace(leftFace, _texData->texSideCoord, position, directions.left, LIGHT_X);
-				addFace(rightFace, _texData->texSideCoord, position, directions.right, LIGHT_X);
+				addFace(leftFace, _texData->texSideCoord, position, directions.left, (1.0 / light)*LIGHT_X);
+				addFace(rightFace, _texData->texSideCoord, position, directions.right, (1.0 / light)*LIGHT_X);
 
-				addFace(frontFace, _texData->texSideCoord, position, directions.front, LIGHT_Z);
-				addFace(backFace, _texData->texSideCoord, position, directions.back, LIGHT_Z);
+				addFace(frontFace, _texData->texSideCoord, position, directions.front, (1.0 / light)*LIGHT_Z);
+				addFace(backFace, _texData->texSideCoord, position, directions.back, (1.0 / light)*LIGHT_Z);
 			}
 		}
 	}

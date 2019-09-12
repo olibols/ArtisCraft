@@ -47,7 +47,7 @@ void Player::collide(World& world, glm::vec3 vel, float dt)
 				{
 					if (vel.y > 0)
 					{
-						position.y = y - hitbox.dimensions.y;
+						position.y -= 0.01;
 						velocity.y = 0;
 					}
 					else if (vel.y < 0) {
