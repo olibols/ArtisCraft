@@ -18,8 +18,7 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 		return;
 	};
 
-	_blocks[getIndex(x, y, z)] = block;
-	_layers[y].update(block);
+	
 
 	if (block == BlockID::Water) {
 
@@ -62,8 +61,8 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 						chunk.getNodeQueue().emplace(index, &chunk);
 					}
 
-					return;
-				}
+					//return;
+				}else
 
 					if (getBlock(x + nx, y + ny, z + nz) != BlockID::Air && getBlocklight(x + nx, y + ny, z + nz) + 2 <= lightLevel) {
 
@@ -76,6 +75,10 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 				}
 		}
 	}
+
+	_blocks[getIndex(x, y, z)] = block;
+	_layers[y].update(block);
+
 }
 
 

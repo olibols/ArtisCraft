@@ -66,7 +66,9 @@ ChunkMeshBuilder::ChunkMeshBuilder(Chunk & chunk)
 }
 
 int test(int light) {
-	if (light > 5) return 1;
+	if (light < 5) return 0;
+	else return 1;
+	printf("%i \n", light);
 };
 
 void ChunkMeshBuilder::build()
