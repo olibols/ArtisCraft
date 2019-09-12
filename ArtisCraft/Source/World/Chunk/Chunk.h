@@ -76,6 +76,7 @@ private:
 
 	unsigned char _lightMap[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
 	std::queue<LightNode> _lightNodeQueue;
+	void processNode(int x, int nx, int y, int ny, int z, int nz, int lightLevel, Chunk* chunk);
 
 	sf::Vector3i toWorldPos(int x, int y, int z);
 	bool outOfBounds(int value);

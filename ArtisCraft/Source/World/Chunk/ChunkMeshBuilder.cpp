@@ -65,12 +65,6 @@ ChunkMeshBuilder::ChunkMeshBuilder(Chunk & chunk)
 	_texData = new TextureData;
 }
 
-int test(int light) {
-	if (light < 5) return 0;
-	else return 1;
-	printf("%i \n", light);
-};
-
 void ChunkMeshBuilder::build()
 {
 
@@ -93,16 +87,14 @@ void ChunkMeshBuilder::build()
 
 				directions.update(x, y, z);
 
-				float light = 12 / (_chunk->getBlocklight(x, y, z) + 0.3);
+				addFace(bottomFace, _texData->texBottomCoord, position, directions.down, LIGHT_BOT * getLight(x, y - 1, z));
+				addFace(topFace, _texData->texTopCoord, position, directions.up, getLight(x, y + 1, z));
 
-				addFace(bottomFace, _texData->texBottomCoord, position, directions.down, (1.0 / light)* LIGHT_BOT);
-				addFace(topFace, _texData->texTopCoord, position, directions.up, 1.0 / light);
+				addFace(leftFace, _texData->texSideCoord, position, directions.left, LIGHT_X* getLight(x - 1, y, z));
+				addFace(rightFace, _texData->texSideCoord, position, directions.right, LIGHT_X* getLight(x + 1, y, z));
 
-				addFace(leftFace, _texData->texSideCoord, position, directions.left, (1.0 / light)*LIGHT_X);
-				addFace(rightFace, _texData->texSideCoord, position, directions.right, (1.0 / light)*LIGHT_X);
-
-				addFace(frontFace, _texData->texSideCoord, position, directions.front, (1.0 / light)*LIGHT_Z);
-				addFace(backFace, _texData->texSideCoord, position, directions.back, (1.0 / light)*LIGHT_Z);
+				addFace(frontFace, _texData->texSideCoord, position, directions.front, LIGHT_Z* getLight(x, y, z + 1));
+				addFace(backFace, _texData->texSideCoord, position, directions.back, LIGHT_Z* getLight(x, y, z - 1));
 			}
 		}
 	}
@@ -150,4 +142,9 @@ void ChunkMeshBuilder::addFace(std::vector<GLfloat> blockFace, sf::Vector2i texC
 
 		_mesh->addFace(blockFace, textureCoords, _chunk->getLocation(), blockPosition, cardinalLight);
 	}
+}
+
+float ChunkMeshBuilder::getLight(int x, int y, int z)
+{
+	return(1.0 / ( 12.0 / (_chunk->getBlocklight(x, y, z) + 0.3) + 0.5));
 }
