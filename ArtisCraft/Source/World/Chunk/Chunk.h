@@ -6,14 +6,13 @@
 #include <array>
 #include <queue>
 
-class World;
 class Chunk;
+class World;
 
 struct LightNode
 {
-	LightNode(short index, Chunk* chunk) : index(index), chunk(chunk) {};
+	LightNode(short index) : index(index) {};
 	short index;
-	Chunk* chunk;
 };
 
 class ChunkLayer {
@@ -52,31 +51,7 @@ public:
 
 	inline ChunkMesh& getMesh() { return _mesh; };
 
-	inline int getSunlight(int x, int y, int z) {
-		return (_lightMap[x][y][z] >> 4) & 0xF;
-	}
-
-	inline void setSunlight(int x, int y, int z, int lightlevel) {
-		_lightMap[x][y][z] = (_lightMap[x][y][z] & 0xF) | (lightlevel << 4);
-	}
-
-	inline int getBlocklight(int x, int y, int z) {
-		return _lightMap[x][y][z] & 0xF;
-	}
-
-	inline void setBlockLight(int x, int y, int z, int lightLevel) {
-		_lightMap[x][y][z] = (_lightMap[x][y][z] & 0xF0) | lightLevel;
-	}
-	   
-	inline std::queue<LightNode>& getNodeQueue() { return _lightNodeQueue; };
-
-	void fillLight();
-
 private:
-
-	unsigned char _lightMap[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
-	std::queue<LightNode> _lightNodeQueue;
-	void processNode(int x, int nx, int y, int ny, int z, int nz, int lightLevel, Chunk* chunk);
 
 	sf::Vector3i toWorldPos(int x, int y, int z);
 	bool outOfBounds(int value);

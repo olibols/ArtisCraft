@@ -18,8 +18,6 @@ private:
 
 	void addFace(std::vector<GLfloat> blockFace, sf::Vector2i texCoords, sf::Vector3i blockPosition, sf::Vector3i blockFacing, GLfloat cardinalLight);
 
-	float getLight(int x, int y, int z);
-
 	Chunk* _chunk = nullptr;
 	ChunkMesh* _mesh = nullptr;
 	TextureData* _texData = nullptr;

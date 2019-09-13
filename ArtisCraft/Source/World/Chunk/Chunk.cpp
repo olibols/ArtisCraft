@@ -4,7 +4,6 @@
 
 Chunk::Chunk(sf::Vector3i position, World& world) : _location(position), _world(&world)
 {
-	memset(_lightMap, 0, sizeof(_lightMap));
 }
 
 void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
@@ -18,60 +17,9 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 		return;
 	};
 
-	if (block == BlockID::Water) {
-
-		setBlockLight(x, y, z, 12);
-		short index = y * CHUNK_AREA + z * CHUNK_SIZE + x;
-
-		_lightNodeQueue.emplace(index, this);
-	}
-
-	fillLight();
-
 	_blocks[getIndex(x, y, z)] = block;
 	_layers[y].update(block);
 
-}
-
-void Chunk::fillLight()
-{
-
-	while (_lightNodeQueue.empty() == false) {
-
-		LightNode& node = _lightNodeQueue.front();
-
-		short index = node.index;
-		Chunk* chunk = node.chunk;
-
-		_lightNodeQueue.pop();
-
-		int x = index % CHUNK_SIZE;
-		int y = index / (CHUNK_SIZE * CHUNK_SIZE);
-		int z = (index % (CHUNK_SIZE * CHUNK_SIZE)) / CHUNK_SIZE;
-
-		int lightLevel = chunk->getBlocklight(x, y, z);
-
-		processNode(x, 1, y, 0, z, 0, lightLevel, chunk);
-		processNode(x, -1, y, 0, z, 0, lightLevel, chunk);
-		processNode(x, 0, y, 1, z, 0, lightLevel, chunk);
-		processNode(x, 0, y, -1, z, 0, lightLevel, chunk);
-		processNode(x, 0, y, 0, z, 1, lightLevel, chunk);
-		processNode(x, 0, y, 0, z, -1, lightLevel, chunk);
-	}
-}
-
-void Chunk::processNode(int x, int nx, int y, int ny, int z, int nz, int lightLevel, Chunk* chunk)
-{
-	auto block = chunk->getBlock(x + nx, y + ny, z + nz);
-	if (chunk->getBlock(x + nx, y + ny, z + nz) == BlockID::Air && 
-		chunk->getBlocklight(x + nx, y + ny, z + nz) + 2 <= lightLevel) {
-
-		chunk->setBlockLight(x + nx, y + ny, z + nz, lightLevel - 1);
-
-		short index = (y + ny) * CHUNK_AREA + (z + nz) * CHUNK_SIZE + (x + nx);
-
-		_lightNodeQueue.emplace(index, chunk);
-	}
 }
 
 ChunkBlock Chunk::getBlock(int x, int y, int z)
