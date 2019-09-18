@@ -3,8 +3,7 @@
 #include "Generators/WorldTerrain.h"
 #include <Utils.h>
 
-constexpr int wsize = 4;
-constexpr int renderDistance = 4;
+constexpr int renderDistance = 16;
 constexpr int WORKERS = 4;
 
 World::World(Camera& camera) : _chunkManager(*this)
@@ -26,7 +25,7 @@ World::World(Camera& camera) : _chunkManager(*this)
 			while (_isRunning)
 			{
 				loadRegions(camera);
-				//std::this_thread::sleep_for(std::chrono::microseconds(100));
+				std::this_thread::sleep_for(std::chrono::microseconds(100));
 			}
 		});
 	}*/
