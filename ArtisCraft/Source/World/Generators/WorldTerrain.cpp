@@ -3,7 +3,8 @@
 #include "StructureBuilder.h"
 
 WorldTerrain::WorldTerrain(World& world) :
-	_mainHeightmap(world.getSeed() / 2)
+	_mainHeightmap(world.getSeed() / 2),
+	_mountainHeightmap(world.getSeed() * 2)
 {
 	_world = &world;
 	_seed = _world->getSeed();
@@ -31,6 +32,10 @@ void WorldTerrain::generateTerrainFor(Region& region)
 int WorldTerrain::getHeightAt(int x, int z)
 {
 	int height = _mainHeightmap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
+
+	if (_mountainHeightmap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y) > 90) {
+		height *= 3;
+	}
 
 	return height;
 }
@@ -84,11 +89,21 @@ void WorldTerrain::buildTree(int x, int y, int z)
 void WorldTerrain::setupGenerators()
 {
 	NoiseParameters mainParams;
-	mainParams.amplitude = 200;
-	mainParams.offset = -150;
+	mainParams.amplitude = 100;
+	mainParams.offset = -50;
 	mainParams.octaves = 6;
-	mainParams.roughness = 0.55;
-	mainParams.smoothness = 200;
+	mainParams.roughness = 0.35;
+	mainParams.smoothness = 250;
 
 	_mainHeightmap.setNoiseParameters(mainParams);
+
+
+	NoiseParameters mountainParams;
+	mountainParams.amplitude = 200;
+	mountainParams.offset = -50;
+	mountainParams.octaves = 6;
+	mountainParams.roughness = 0.35;
+	mountainParams.smoothness = 250;
+
+	_mountainHeightmap.setNoiseParameters(mountainParams);
 }

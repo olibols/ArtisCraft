@@ -36,4 +36,5 @@ private:
 	Region* _currentRegion;
 
 	NoiseGenerator _mainHeightmap;
+	NoiseGenerator _mountainHeightmap;
 };
