@@ -44,7 +44,7 @@ void Region::load(WorldTerrain& worldTerrain)
 {
 
 	if (!_isLoaded) {
-		for (int y = 0; y < 16; y++) {
+		for (int y = 0; y < 32; y++) {
 			_chunks.emplace_back(sf::Vector3i(_location.x, y, _location.y), *_world);
 		}
 

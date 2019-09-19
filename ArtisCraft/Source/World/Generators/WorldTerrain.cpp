@@ -2,12 +2,8 @@
 #include "../Chunk/Region.h"
 #include "StructureBuilder.h"
 
-WorldTerrain::WorldTerrain(World& world) : 
-_dampnessMap(world.getSeed()),
-_mainHeightmap(world.getSeed() / 2),
-_treeMap(world.getSeed() / 3),
-_riverMap(world.getSeed() * 2),
-_heatMap(world.getSeed() * 3)
+WorldTerrain::WorldTerrain(World& world) :
+	_mainHeightmap(world.getSeed() / 2)
 {
 	_world = &world;
 	_seed = _world->getSeed();
@@ -27,13 +23,6 @@ void WorldTerrain::generateTerrainFor(Region& region)
 			int height = getHeightAt(x, z);
 
 			fillBlocksAt(x, height, z, topSoil);
-
-			int dampness = _dampnessMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
-
-			if (dampness > 80 && height > 64)
-				if (_treeMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y) > 116)
-					buildTree(x, height, z);
-
 		}
 	}
 
@@ -42,9 +31,6 @@ void WorldTerrain::generateTerrainFor(Region& region)
 int WorldTerrain::getHeightAt(int x, int z)
 {
 	int height = _mainHeightmap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
-
-	if (_riverMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y) < 60 && _riverMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y) > 50)
-		height -= 3;
 
 	return height;
 }
@@ -55,33 +41,12 @@ void WorldTerrain::fillBlocksAt(int x, int y, int z, TopSoilBlocks topSoil)
 		if (i == y - 1) _currentRegion->setBlock(x, i, z, topSoil.TOP);
 		else if (i > y - 5) _currentRegion->setBlock(x, i, z, topSoil.MID);
 		else _currentRegion->setBlock(x, i, z, topSoil.BOTTOM);
-
-		_currentRegion->setBlock(x, 60, z, BlockID::Water);
 	}
 }
 
 TopSoilBlocks WorldTerrain::getTopSoilAt(int x, int z)
 {
 	int height = _mainHeightmap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
-	int dampness = _dampnessMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
-	int heat = _heatMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
-	int rivermap = _riverMap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
-
-	if (height < 60) {
-		return fillTopSoil(BlockID::Dirt, BlockID::Dirt, BlockID::Stone);
-	}
-
-	if (rivermap < 60 && rivermap > 55) {
-		return fillTopSoil(BlockID::Water, BlockID::Water, BlockID::Water);
-	}
-
-	if ((heat < 80 && dampness > 15) || height > 100) {
-		return fillTopSoil(BlockID::Snow, BlockID::Dirt, BlockID::Stone);
-	}
-
-	if (heat > 90 && dampness < 100) {
-		fillTopSoil(BlockID::Sand, BlockID::Sand, BlockID::Stone);
-	}
 
 	return fillTopSoil(BlockID::Grass, BlockID::Dirt, BlockID::Stone);
 }
@@ -118,49 +83,12 @@ void WorldTerrain::buildTree(int x, int y, int z)
 
 void WorldTerrain::setupGenerators()
 {
-	NoiseParameters dampParams;
-	dampParams.amplitude = 100;
-	dampParams.offset = 50;
-	dampParams.octaves = 3;
-	dampParams.roughness = 0.53;
-	dampParams.smoothness = 235;
-
-	_dampnessMap.setNoiseParameters(dampParams);
-
-	NoiseParameters hotParams;
-	hotParams.amplitude = 100;
-	hotParams.offset = 50;
-	hotParams.octaves = 3;
-	hotParams.roughness = 0.53;
-	hotParams.smoothness = 235;
-
-	_heatMap.setNoiseParameters(hotParams);
-
 	NoiseParameters mainParams;
-	mainParams.amplitude = 100;
-	mainParams.offset = -50;
+	mainParams.amplitude = 200;
+	mainParams.offset = -150;
 	mainParams.octaves = 6;
-	mainParams.roughness = 0.53;
-	mainParams.smoothness = 255;
+	mainParams.roughness = 0.55;
+	mainParams.smoothness = 200;
 
 	_mainHeightmap.setNoiseParameters(mainParams);
-
-
-	NoiseParameters treeParams;
-	treeParams.amplitude = 70;
-	treeParams.offset = 1;
-	treeParams.octaves = 2;
-	treeParams.roughness = 0.1;
-	treeParams.smoothness = 1;
-
-	_treeMap.setNoiseParameters(treeParams);
-
-	NoiseParameters riverParams;
-	riverParams.amplitude = 100;
-	riverParams.offset = -50;
-	riverParams.octaves = 9;
-	riverParams.roughness = 0.53;
-	riverParams.smoothness = 205;
-
-	_riverMap.setNoiseParameters(riverParams);
 }

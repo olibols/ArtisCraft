@@ -2,7 +2,7 @@
 #include "../World/World.h"
 #include <SFML/Graphics.hpp>
 
-Player::Player() : Entity({10, 150, 10}, {0, 0, 0}, {0.25, 1.5, 0.25})
+Player::Player() : Entity({10, 150, 10}, {0, 0, 0}, {0.25, 3, 0.25})
 {
 }
 
@@ -15,7 +15,7 @@ void Player::handleInput(sf::RenderWindow& window)
 void Player::update(float deltaTime, World& world)
 {
 	if (!_onGround) {
-		velocity.y -= 5.0 * deltaTime;
+		velocity.y -= 10.0 * deltaTime;
 	}
 	_onGround = false;
 
@@ -59,19 +59,23 @@ void Player::collide(World& world, glm::vec3 vel, float dt)
 					if (vel.x > 0)
 					{
 						position.x = x - hitbox.dimensions.x;
+						position.y = y + hitbox.dimensions.y + 1.1;
 					}
 					else if (vel.x < 0)
 					{
-						position.x = x + hitbox.dimensions.x + 1;
+						position.x = x + hitbox.dimensions.x + 1.1;
+						position.y = y + hitbox.dimensions.y + 1.1;
 					}
 
 					if (vel.z > 0)
 					{
 						position.z = z - hitbox.dimensions.z;
+						position.y = y + hitbox.dimensions.y + 1.1;
 					}
 					else if (vel.z < 0)
 					{
-						position.z = z + hitbox.dimensions.z + 1;
+						position.z = z + hitbox.dimensions.z + 1.1;
+						position.y = y + hitbox.dimensions.y + 1.1;
 					}
 				}
 			}

@@ -8,45 +8,45 @@ CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
 	//_texture = new BasicTexture("dirt");
 	
 	_cubeMesh.vertexPositions = {
-		500, 0, 0,
+		0.5, 0, 0,
 		0, 0, 0,
-		0, 500, 0,
-		500, 500, 0,
+		0, 0.5, 0,
+		0.5, 0.5, 0,
 
 		//Front
-		0, 0, 500,
-		500, 0, 500,
-		500, 500, 500,
-		0, 500, 500,
+		0, 0, 0.5,
+		0.5, 0, 0.5,
+		0.5, 0.5, 0.5,
+		0, 0.5, 0.5,
 
 		//Right
-		500, 0, 500,
-		500, 0, 0,
-		500, 500, 0,
-		500, 500, 500,
+		0.5, 0, 0.5,
+		0.5, 0, 0,
+		0.5, 0.5, 0,
+		0.5, 0.5, 0.5,
 
 		//Left
 		0, 0, 0,
-		0, 0, 500,
-		0, 500, 500,
-		0, 500, 0,
+		0, 0, 0.5,
+		0, 0.5, 0.5,
+		0, 0.5, 0,
 
 		//Top
-		0, 500, 500,
-		500, 500, 500,
-		500, 500, 0,
-		0, 500, 0,
+		0, 0.5, 0.5,
+		0.5, 0.5, 0.5,
+		0.5, 0.5, 0,
+		0, 0.5, 0,
 
 		//Bottom
 		0, 0, 0,
-		500, 0, 0,
-		500, 0, 500,
-		0, 0, 500
+		0.5, 0, 0,
+		0.5, 0, 0.5,
+		0, 0, 0.5
 	};
 
-	auto top = _atlas.getTexture({ 0, 1 });
-	auto side = _atlas.getTexture({ 1, 1 });
-	auto bottom = _atlas.getTexture({ 0, 1 });
+	auto top = _atlas.getTexture({ 0, 0 });
+	auto side = _atlas.getTexture({ 0, 0 });
+	auto bottom = _atlas.getTexture({ 0, 0 });
 
 	std::vector<GLfloat> texCoords;
 	texCoords.insert(texCoords.end(), side.begin(), side.end());
