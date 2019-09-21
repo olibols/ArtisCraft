@@ -10,7 +10,8 @@ public:
 		std::vector<GLfloat> textureCoords,
 		sf::Vector3i chunkPosition,
 		sf::Vector3i blockPosition,
-		GLfloat cardinalLight);
+		GLfloat cardinalLight,
+		std::vector<GLfloat> testLight);
 
 	void updateMesh();
 
@@ -25,6 +26,7 @@ private:
 	int _faces = 0;
 
 	std::vector<GLfloat> _light;
+	std::vector<GLfloat> _testLight;
 
 	Mesh* _mesh;
 	Model* _model;
