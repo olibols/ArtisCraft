@@ -23,7 +23,9 @@ void ChunkMesh::addFace(std::vector<GLfloat> blockFace,
 		_mesh->vertexPositions.push_back(blockFace[block++] + chunkPosition.y * CHUNK_SIZE + blockPosition.y);
 		_mesh->vertexPositions.push_back(blockFace[block++] + chunkPosition.z * CHUNK_SIZE + blockPosition.z);
 
-		_light.push_back(cardinalLight * testLight[i]);
+		_testLight.push_back(testLight[i]);
+
+		_light.push_back(cardinalLight);
 	}
 
 
@@ -47,16 +49,19 @@ void ChunkMesh::updateMesh()
 
 	_model->addData(*_mesh);
 	_model->addVBO(1, _light);
+	_model->addVBO(1, _testLight);
 
 	_mesh->indices.clear();
 	_mesh->textureCoords.clear();
 	_mesh->vertexPositions.clear();
 	_light.clear();
+	_testLight.clear();
 
 	_mesh->indices.shrink_to_fit();
 	_mesh->textureCoords.shrink_to_fit();
 	_mesh->vertexPositions.shrink_to_fit();
 	_light.shrink_to_fit();
+	_testLight.shrink_to_fit();
 
 	_indiceCount = 0;
 
