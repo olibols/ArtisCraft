@@ -140,7 +140,7 @@ void ChunkMeshBuilder::addFace(std::vector<GLfloat> blockFace, sf::Vector2i texC
 		faceCount++;
 		auto textureCoords = BlockDatabase::get().atlas.getTexture(texCoords);
 
-		std::vector<GLfloat> test;
+		std::vector<GLfloat> test = { 1, 1, 1, 1 };
 
 		auto topBlock = _chunk->getBlock(blockFacing.x - 1, blockFacing.y, blockFacing.z);
 		if (topBlock != BlockID::Air) {
@@ -148,7 +148,7 @@ void ChunkMeshBuilder::addFace(std::vector<GLfloat> blockFace, sf::Vector2i texC
 		}
 		else {
 			test = { 1, 1, 1, 1 };
-		}	
+		}
 
 		_mesh->addFace(blockFace, textureCoords, _chunk->getLocation(), blockPosition, cardinalLight, test);
 	}

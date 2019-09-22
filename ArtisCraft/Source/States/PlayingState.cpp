@@ -22,7 +22,7 @@ void PlayingState::handleInput()
 {
 	_player.handleInput(_application->getWindow());
 
-	for (Ray ray(_player.position, _player.rotation); ray.getLength() < 6; ray.step(0.1)) {
+	for (Ray ray(_player.position, _player.rotation); ray.getLength() < 20; ray.step(0.1)) {
 
 		auto x = ray.getEnd().x;
 		auto y = ray.getEnd().y;
@@ -35,7 +35,13 @@ void PlayingState::handleInput()
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 					time.restart();
-					_world.addEvent<PlayerDigEvent>(sf::Mouse::Button::Left, ray.getEnd(), _player);
+
+					for(int x = -2; x < 2; x++)
+					for(int y = -2; y < 2; y++)
+					for (int z = -2; z < 2; z++) {
+						glm::vec3 box ={ ray.getEnd().x + x, ray.getEnd().y + y, ray.getEnd().z + z };
+						_world.addEvent<PlayerDigEvent>(sf::Mouse::Button::Left, box, _player);
+					}
 					break;
 				}
 				else if ((sf::Mouse::isButtonPressed(sf::Mouse::Right))) {
@@ -65,6 +71,7 @@ void PlayingState::update(float deltaTime)
 void PlayingState::render(RenderMaster & renderer)
 {
 	renderer.drawCube({ _player.position.x - 0.25 ,_player.position.y - 3, _player.position.z - 0.25 });
+	renderer.drawCube({ _player.position.x - 0.25 ,_player.position.y - 2, _player.position.z - 0.25 });
 	_world.render(renderer, _application->getCamera());
 	_frameCounter.draw(renderer);
 	_crosshair.draw(renderer);

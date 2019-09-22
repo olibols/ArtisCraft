@@ -10,7 +10,7 @@ CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
 	_cubeMesh.vertexPositions = {
 		0.5, 0, 0,
 		0, 0, 0,
-		0, 0.5, 0,
+		0, 0, 0,
 		0.5, 0.5, 0,
 
 		//Front

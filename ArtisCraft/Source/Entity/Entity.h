@@ -11,5 +11,7 @@ struct Entity {
 	glm::vec3 rotation = { 0, 0, 0 };
 	glm::vec3 velocity;
 
+	float health = 10.0f;
+
 	AABB hitbox;
 };

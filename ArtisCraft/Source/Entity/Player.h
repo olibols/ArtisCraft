@@ -15,8 +15,13 @@ public:
 	void collide(World& world, glm::vec3 vel, float deltaTime);
 
 private:
+
+	float _fallTime = 0.0f;
+
 	void mouseInput(sf::RenderWindow& window);
 	void keyboardInput();
+
+	sf::Vector3i _spawnLocation = { 10, 150, 10 };
 
 	bool _onGround = false;
 };

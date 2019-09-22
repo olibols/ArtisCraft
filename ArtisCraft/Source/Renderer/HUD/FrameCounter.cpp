@@ -28,6 +28,8 @@ void FrameCounter::update()
 
 void FrameCounter::draw(RenderMaster& renderer)
 {
-	_text.setString("FPS: " + std::to_string(_fps) + "  \nCoordinates: " + std::to_string(_entity->position.x) + " " + std::to_string(_entity->position.y) + " " + std::to_string(_entity->position.z));
+	_text.setString("FPS: " + std::to_string(_fps) +
+					"  \nCoordinates: " + std::to_string(_entity->position.x) + " " + std::to_string(_entity->position.y) + " " + std::to_string(_entity->position.z) +
+					" \nHealth: " + std::to_string(_entity->health));
 	renderer.drawSFML(_text);
 }
