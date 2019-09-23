@@ -65,6 +65,7 @@
     <ClInclude Include="Source\Particle\Particle.h" />
     <ClInclude Include="Source\Renderer\Shaders\ParticleShader.h" />
     <ClInclude Include="Source\Renderer\ParticleRenderer.h" />
+    <ClInclude Include="Source\Particle\ParticleModel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -185,6 +186,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\ParticleRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Particle\ParticleModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

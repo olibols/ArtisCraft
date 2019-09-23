@@ -3,7 +3,7 @@
 #include "Generators/WorldTerrain.h"
 #include <Utils.h>
 
-constexpr int renderDistance = 32;
+constexpr int renderDistance = 16;
 constexpr int WORKERS = 2;
 
 World::World(Camera& camera) : _chunkManager(*this)

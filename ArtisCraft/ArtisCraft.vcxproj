@@ -21,6 +21,7 @@
     <ClInclude Include="Source\Item\InventoryItem.h" />
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\Particle\Particle.h" />
+    <ClInclude Include="Source\Particle\ParticleModel.h" />
     <ClInclude Include="Source\Renderer\ChunkRenderer.h" />
     <ClInclude Include="Source\Renderer\CubeRenderer.h" />
     <ClInclude Include="Source\Renderer\HUD\Crosshair.h" />
@@ -66,6 +67,7 @@
     <ClCompile Include="Source\Entity\Player.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Model.cpp" />
+    <ClCompile Include="Source\Particle\ParticleModel.cpp" />
     <ClCompile Include="Source\Renderer\ChunkRenderer.cpp" />
     <ClCompile Include="Source\Renderer\CubeRenderer.cpp" />
     <ClCompile Include="Source\Renderer\HUD\Crosshair.cpp" />
