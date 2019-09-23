@@ -1,11 +1,10 @@
 #include "CubeRenderer.h"
 #include "../Camera.h"
 
-CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
+CubeRenderer::CubeRenderer()
 {
 	_shader = new BlockShader();
 	_cubeModel = new Model();
-	//_texture = new BasicTexture("dirt");
 	
 	_cubeMesh.vertexPositions = {
 		0.5, 0, 0,
@@ -44,19 +43,6 @@ CubeRenderer::CubeRenderer() : _atlas("ArtisPack")
 		0, 0, 0.5
 	};
 
-	auto top = _atlas.getTexture({ 0, 0 });
-	auto side = _atlas.getTexture({ 0, 0 });
-	auto bottom = _atlas.getTexture({ 0, 0 });
-
-	std::vector<GLfloat> texCoords;
-	texCoords.insert(texCoords.end(), side.begin(), side.end());
-	texCoords.insert(texCoords.end(), side.begin(), side.end());
-	texCoords.insert(texCoords.end(), side.begin(), side.end());
-	texCoords.insert(texCoords.end(), side.begin(), side.end());
-	texCoords.insert(texCoords.end(), top.begin(), top.end());
-	texCoords.insert(texCoords.end(), bottom.begin(), bottom.end());
-
-	_cubeMesh.textureCoords = texCoords;
 
 	_cubeMesh.indices = {
 		0, 1, 2,
@@ -89,7 +75,6 @@ void CubeRenderer::renderCubes(Camera& cam)
 {
 	_shader->useProgram();
 	_cubeModel->bindVAO();
-	_atlas.bindTexture();
 
 	_shader->loadProjViewMatrix(cam.getProjViewMatrix());
 

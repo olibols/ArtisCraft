@@ -25,6 +25,9 @@ public:
 	void loadRegion(int x, int z);
 
 private:
+
+	std::mutex _chunkManagerMutex;
+
 	RegionMap _regions;
 
 	World* _world;

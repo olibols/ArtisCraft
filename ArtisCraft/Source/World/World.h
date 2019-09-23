@@ -58,6 +58,8 @@ private:
 
 	std::atomic<bool> _isRunning{ true };
 	std::vector<std::thread> _chunkLoadThreads;
+	std::vector<std::thread> _regionUpdateThreads;
 	std::mutex _mutex;
+	std::mutex _newmutex;
 	
 };

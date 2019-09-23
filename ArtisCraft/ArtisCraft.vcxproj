@@ -20,15 +20,18 @@
     <ClInclude Include="Source\Entity\Player.h" />
     <ClInclude Include="Source\Item\InventoryItem.h" />
     <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\Particle\Particle.h" />
     <ClInclude Include="Source\Renderer\ChunkRenderer.h" />
     <ClInclude Include="Source\Renderer\CubeRenderer.h" />
     <ClInclude Include="Source\Renderer\HUD\Crosshair.h" />
     <ClInclude Include="Source\Renderer\HUD\FrameCounter.h" />
+    <ClInclude Include="Source\Renderer\ParticleRenderer.h" />
     <ClInclude Include="Source\Renderer\RenderMaster.h" />
     <ClInclude Include="Source\Renderer\SFMLRenderer.h" />
     <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\ChunkShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
+    <ClInclude Include="Source\Renderer\Shaders\ParticleShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Renderer\Texture\TextureAtlas.h" />
     <ClInclude Include="Source\Settings.h" />
@@ -67,11 +70,13 @@
     <ClCompile Include="Source\Renderer\CubeRenderer.cpp" />
     <ClCompile Include="Source\Renderer\HUD\Crosshair.cpp" />
     <ClCompile Include="Source\Renderer\HUD\FrameCounter.cpp" />
+    <ClCompile Include="Source\Renderer\ParticleRenderer.cpp" />
     <ClCompile Include="Source\Renderer\RenderMaster.cpp" />
     <ClCompile Include="Source\Renderer\SFMLRenderer.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\BlockShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\ChunkShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\LoadShader.cpp" />
+    <ClCompile Include="Source\Renderer\Shaders\ParticleShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Renderer\Texture\TextureAtlas.cpp" />
     <ClCompile Include="Source\States\PlayingState.cpp" />
@@ -101,7 +106,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{387A0F97-D87F-42C7-A200-2A2E44FC0716}</ProjectGuid>
     <RootNamespace>ArtisCraft</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

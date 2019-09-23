@@ -3,8 +3,8 @@
 #include "Generators/WorldTerrain.h"
 #include <Utils.h>
 
-constexpr int renderDistance = 6;
-constexpr int WORKERS = 4;
+constexpr int renderDistance = 32;
+constexpr int WORKERS = 2;
 
 World::World(Camera& camera) : _chunkManager(*this)
 {
@@ -29,6 +29,7 @@ World::World(Camera& camera) : _chunkManager(*this)
 			}
 		});
 	}
+
 }
 
 ChunkBlock World::getBlock(int x, int y, int z)
@@ -195,7 +196,6 @@ VectorXZ World::getChunkXZ(int x, int z)
 
 void World::updateRegions()
 {
-	//std::lock_guard<std::mutex> mu(_mutex);
 	for (auto& region : _regionUpdates) {
 		Chunk& section = *region.second;
 		section.buildMesh();

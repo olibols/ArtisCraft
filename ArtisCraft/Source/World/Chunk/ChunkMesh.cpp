@@ -13,8 +13,7 @@ void ChunkMesh::addFace(std::vector<GLfloat> blockFace,
 		std::vector<GLfloat> textureCoords,
 		sf::Vector3i chunkPosition,
 		sf::Vector3i blockPosition,
-		GLfloat cardinalLight,
-		std::vector<GLfloat> testLight)
+		GLfloat cardinalLight)
 {
 	_mesh->textureCoords.insert(_mesh->textureCoords.end(), textureCoords.begin(), textureCoords.end());
 
@@ -22,8 +21,6 @@ void ChunkMesh::addFace(std::vector<GLfloat> blockFace,
 		_mesh->vertexPositions.push_back(blockFace[block++] + chunkPosition.x * CHUNK_SIZE + blockPosition.x);
 		_mesh->vertexPositions.push_back(blockFace[block++] + chunkPosition.y * CHUNK_SIZE + blockPosition.y);
 		_mesh->vertexPositions.push_back(blockFace[block++] + chunkPosition.z * CHUNK_SIZE + blockPosition.z);
-
-		_testLight.push_back(testLight[i]);
 
 		_light.push_back(cardinalLight);
 	}

@@ -142,15 +142,7 @@ void ChunkMeshBuilder::addFace(std::vector<GLfloat> blockFace, sf::Vector2i texC
 
 		std::vector<GLfloat> test = { 1, 1, 1, 1 };
 
-		auto topBlock = _chunk->getBlock(blockFacing.x - 1, blockFacing.y, blockFacing.z);
-		if (topBlock != BlockID::Air) {
-			test = { 0.8, 1, 1, 0.8 };
-		}
-		else {
-			test = { 1, 1, 1, 1 };
-		}
-
-		_mesh->addFace(blockFace, textureCoords, _chunk->getLocation(), blockPosition, cardinalLight, test);
+		_mesh->addFace(blockFace, textureCoords, _chunk->getLocation(), blockPosition, cardinalLight);
 	}
 }
 

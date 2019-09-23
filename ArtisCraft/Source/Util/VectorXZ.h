@@ -8,8 +8,13 @@ struct VectorXZ
 
 inline bool operator==(const VectorXZ& left, const VectorXZ& right)
 {
-	return  (left.x == right.x) &&
-		(left.z == right.z);
+	try {
+		return  (left.x == right.x) &&
+			(left.z == right.z);
+	}
+	catch(std::exception e){
+		return 0;
+	}
 }
 
 

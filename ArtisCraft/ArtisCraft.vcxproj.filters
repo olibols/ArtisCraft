@@ -62,6 +62,9 @@
     <ClInclude Include="Source\Item\InventoryItem.h" />
     <ClInclude Include="Source\World\Generators\WorldTerrain.h" />
     <ClInclude Include="Source\World\Generators\StructureBuilder.h" />
+    <ClInclude Include="Source\Particle\Particle.h" />
+    <ClInclude Include="Source\Renderer\Shaders\ParticleShader.h" />
+    <ClInclude Include="Source\Renderer\ParticleRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -176,6 +179,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\Generators\StructureBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Shaders\ParticleShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\ParticleRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -10,8 +10,7 @@ public:
 		std::vector<GLfloat> textureCoords,
 		sf::Vector3i chunkPosition,
 		sf::Vector3i blockPosition,
-		GLfloat cardinalLight,
-		std::vector<GLfloat> testLight);
+		GLfloat cardinalLight);
 
 	void updateMesh();
 
