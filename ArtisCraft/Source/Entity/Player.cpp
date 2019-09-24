@@ -14,6 +14,7 @@ void Player::handleInput(sf::RenderWindow& window)
 
 void Player::update(float deltaTime, World& world)
 {
+
 	if (!_onGround) {
 		velocity.y -= 10.0 * deltaTime;
 	}
