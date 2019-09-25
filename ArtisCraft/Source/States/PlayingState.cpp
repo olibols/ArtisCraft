@@ -18,8 +18,11 @@ void PlayingState::handleEvent(sf::Event event)
 {
 }
 
-void PlayingState::handleInput()
+void PlayingState::handleInput(RenderMaster& renderer)
 {
+
+	BaseParticle memeparticle({ 0, 0, 0 }, { 20, 0, 0 }, 50000, { 0, 1, 0 }, 0.5);
+
 	_player.handleInput(_application->getWindow());
 
 	for (Ray ray(_player.position, _player.rotation); ray.getLength() < 20; ray.step(0.1)) {
@@ -46,7 +49,12 @@ void PlayingState::handleInput()
 				}
 				else if ((sf::Mouse::isButtonPressed(sf::Mouse::Right))) {
 					time.restart();
-					_world.addEvent<PlayerDigEvent>(sf::Mouse::Button::Right, lastPos, _player);
+
+					memeparticle.position = lastPos;
+
+					renderer.addParticle(memeparticle);
+					//_world.addEvent<PlayerDigEvent>(sf::Mouse::Button::Right, lastPos, _player);
+					
 					break;
 				}
 			}

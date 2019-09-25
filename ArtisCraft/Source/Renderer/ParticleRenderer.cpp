@@ -4,10 +4,10 @@ ParticleRenderer::ParticleRenderer()
 {
 	_shader = new ParticleShader;
 
-
+	deltaClock.restart();
 }
 
-void ParticleRenderer::addParticle(BaseParticle particle)
+void ParticleRenderer::addParticle(BaseParticle& particle)
 {
 	auto& model = particle.model;
 
@@ -73,11 +73,18 @@ void ParticleRenderer::addParticle(BaseParticle particle)
 		22, 23, 20
 	};
 
+	model.addData(mesh);
+
 	_particles.push_back(particle);
 }
 
-void ParticleRenderer::processParticles(float deltaTime)
+void ParticleRenderer::processParticles()
 {
+	auto time = deltaClock.restart().asSeconds();
+
+	for (auto& particle : _particles) {
+		particle.processParticle(time);
+	}
 }
 
 void ParticleRenderer::renderParticles(Camera & cam)
@@ -85,8 +92,16 @@ void ParticleRenderer::renderParticles(Camera & cam)
 	_shader->useProgram();
 	_shader->loadProjViewMatrix(cam.getProjViewMatrix());
 
-	for (auto particle : _particles) {
-		//_shader->loadModelMatrix(makeModelMatrix({ quad.x, quad.y, quad.z }, { 0, 0, 0 }));
-		//glDrawElements(GL_TRIANGLES, _cubeModel->getIndicesCount(), GL_UNSIGNED_INT, 0);
+	for (auto& particle : _particles) {		
+
+		//if (particle.existedfor > particle.lifetime)
+			//break;
+
+		_shader->loadColour(particle.colour);
+		particle.model.bindVAO();
+		_shader->loadModelMatrix(makeModelMatrix({ particle.position.x, particle.position.y, particle.position.z }, { 0, 0, 0 }));
+		glDrawElements(GL_TRIANGLES, particle.model.getIndicesCount(), GL_UNSIGNED_INT, 0);
 	}
+
+	processParticles();
 }

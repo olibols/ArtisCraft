@@ -12,7 +12,7 @@ public:
 	virtual ~BaseState() = default;
 
 	virtual void handleEvent(sf::Event event) = 0;
-	virtual void handleInput() = 0;
+	virtual void handleInput(RenderMaster& renderer) = 0;
 
 	virtual void update(float deltaTime) = 0;
 

@@ -17,7 +17,6 @@ void ParticleModel::addData(ParticleMesh & mesh)
 	_indicesCount = mesh.indices.size();
 
 	addVBO(3, mesh.vertexPositions);
-	addVBO(3, mesh.colourPositions);
 	addEBO(mesh.indices);
 }
 

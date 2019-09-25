@@ -12,7 +12,7 @@ public:
 	PlayingState(Application& app);
 
 	void handleEvent(sf::Event event) override;
-	void handleInput() override;
+	void handleInput(RenderMaster& renderer) override;
 
 	void update(float deltaTime) override;
 

@@ -26,7 +26,7 @@ private:
 	void addEBO(const std::vector<GLuint> indices);
 
 	GLuint _VAO;
-	int _vboCount;
-	int _indicesCount;
+	int _vboCount = 0;
+	int _indicesCount = 0;
 	std::vector<GLuint> _buffers;
 };

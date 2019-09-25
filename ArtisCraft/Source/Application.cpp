@@ -23,7 +23,7 @@ void Application::runLoop()
 		auto deltaTime = dtTimer.restart();
 		
 		if (shouldUpdate) {
-			state.handleInput();
+			state.handleInput(*_renderMaster);
 			state.update(deltaTime.asSeconds());
 		}
 

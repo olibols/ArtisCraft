@@ -15,6 +15,11 @@ void RenderMaster::drawSFML(sf::Drawable & drawable)
 	_SFMLRenderer.add(drawable);
 }
 
+void RenderMaster::addParticle(BaseParticle & particle)
+{
+	_particleRenderer.addParticle(particle);
+}
+
 void RenderMaster::finishRender(sf::RenderWindow & window, Camera & camera)
 {
 	glClearColor(0.1, 0.5, 1.0, 1.0);
@@ -25,6 +30,7 @@ void RenderMaster::finishRender(sf::RenderWindow & window, Camera & camera)
 	_cubeRenderer.renderCubes(camera);
 	_chunkRenderer.render(camera);
 	_SFMLRenderer.render(window);
+	_particleRenderer.renderParticles(camera);
 
 	window.display();
 }
