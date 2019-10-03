@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../World.h"
-#include "NoiseGenerator.h"
+#include "FastNoise/NoiseWrapper.h"
 
 
 struct TopSoilBlocks {
@@ -35,5 +35,6 @@ private:
 	World* _world;
 	Region* _currentRegion;
 
-	NoiseGenerator _mainHeightmap;
+	NoiseWrapper _mainHeightmap;
+
 };
