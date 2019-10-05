@@ -1,4 +1,5 @@
 #include "Chunk.h"
+#include "../ChunkManager.h"
 #include "ChunkMeshBuilder.h"
 #include "../World.h"
 

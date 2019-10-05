@@ -3,7 +3,8 @@
 #include "StructureBuilder.h"
 
 WorldTerrain::WorldTerrain(World& world) :
-	_mainHeightmap(world.getSeed() / 2)
+	_seed(world.getSeed()),
+	_mainHeightmap(_seed)
 {
 	_world = &world;
 	_seed = _world->getSeed();
@@ -30,7 +31,10 @@ void WorldTerrain::generateTerrainFor(Region& region)
 
 int WorldTerrain::getHeightAt(int x, int z)
 {
-	int height = _mainHeightmap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
+	auto newX = (x + (_currentRegion->getLocation().x * CHUNK_SIZE));
+	auto newZ = (z + (_currentRegion->getLocation().y * CHUNK_SIZE));
+
+	int height = _mainHeightmap.GetHeight(newX, newZ);
 
 	return height;
 }
@@ -46,7 +50,7 @@ void WorldTerrain::fillBlocksAt(int x, int y, int z, TopSoilBlocks topSoil)
 
 TopSoilBlocks WorldTerrain::getTopSoilAt(int x, int z)
 {
-	int height = _mainHeightmap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
+	//int height = _mainHeightmap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
 
 	return fillTopSoil(BlockID::Grass, BlockID::Dirt, BlockID::Stone);
 }
@@ -83,12 +87,4 @@ void WorldTerrain::buildTree(int x, int y, int z)
 
 void WorldTerrain::setupGenerators()
 {
-	NoiseParameters mainParams;
-	mainParams.amplitude = 100;
-	mainParams.offset = -50;
-	mainParams.octaves = 6;
-	mainParams.roughness = 0.35;
-	mainParams.smoothness = 250;
-
-	_mainHeightmap.setNoiseParameters(mainParams);
 }

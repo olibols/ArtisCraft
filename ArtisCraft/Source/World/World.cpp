@@ -1,9 +1,10 @@
 #include "World.h"
 #include "ChunkManager.h"
+#include "Chunk/ChunkMeshBuilder.h"
 #include "Generators/WorldTerrain.h"
 #include <Utils.h>
 
-constexpr int renderDistance = 4;
+constexpr int renderDistance = 8;
 constexpr int WORKERS = 2;
 
 World::World(Camera& camera) : _chunkManager(*this)
@@ -17,7 +18,7 @@ World::World(Camera& camera) : _chunkManager(*this)
 
 	loadRegions(camera);
 
-	/*for (int i = 0; i < WORKERS; i++)
+	for (int i = 0; i < WORKERS; i++)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 		_chunkLoadThreads.emplace_back([&]()
@@ -28,7 +29,7 @@ World::World(Camera& camera) : _chunkManager(*this)
 				std::this_thread::sleep_for(std::chrono::microseconds(100));
 			}
 		});
-	}*/
+	}
 
 }
 
@@ -87,7 +88,7 @@ void World::update(Camera & camera)
 	_events.clear();
 
 	updateRegions();
-	loadRegions(camera);
+	//loadRegions(camera);
 }
 
 void World::updateRegion(int blockX, int blockY, int blockZ)

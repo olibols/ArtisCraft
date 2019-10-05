@@ -58,7 +58,6 @@
     <ClInclude Include="Source\World\Events\PlayerDigEvent.h" />
     <ClInclude Include="Source\AABB\AABB.h" />
     <ClInclude Include="Source\Util\SimplexNoise.h" />
-    <ClInclude Include="Source\World\Generators\NoiseGenerator.h" />
     <ClInclude Include="Source\Item\InventoryItem.h" />
     <ClInclude Include="Source\World\Generators\WorldTerrain.h" />
     <ClInclude Include="Source\World\Generators\StructureBuilder.h" />
@@ -66,6 +65,8 @@
     <ClInclude Include="Source\Renderer\Shaders\ParticleShader.h" />
     <ClInclude Include="Source\Renderer\ParticleRenderer.h" />
     <ClInclude Include="Source\Particle\ParticleModel.h" />
+    <ClInclude Include="Source\World\Generators\FastNoise\FastNoise.h" />
+    <ClInclude Include="Source\World\Generators\FastNoise\NoiseWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Util\FileUtilities.cpp">
@@ -173,9 +174,6 @@
     <ClCompile Include="Source\Util\SimplexNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\World\Generators\NoiseGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\World\Generators\WorldTerrain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -192,6 +190,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Particle\Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Generators\FastNoise\FastNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Generators\FastNoise\NoiseWrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
