@@ -4,7 +4,8 @@
 
 WorldTerrain::WorldTerrain(World& world) :
 	_seed(world.getSeed()),
-	_mainHeightmap(_seed)
+	_mainHeightmap(_seed),
+	_mountainMap(_seed / 2)
 {
 	_world = &world;
 	_seed = _world->getSeed();
@@ -24,6 +25,8 @@ void WorldTerrain::generateTerrainFor(Region& region)
 			int height = getHeightAt(x, z);
 
 			fillBlocksAt(x, height, z, topSoil);
+
+			_currentRegion->setBlock(x, 65, z, BlockID::Water);
 		}
 	}
 
@@ -35,6 +38,10 @@ int WorldTerrain::getHeightAt(int x, int z)
 	auto newZ = (z + (_currentRegion->getLocation().y * CHUNK_SIZE));
 
 	int height = _mainHeightmap.GetHeight(newX, newZ);
+
+	if (height > 65) {
+		height *= _mountainMap.GetRidgedHeight(newX, newZ);
+	}
 
 	return height;
 }
@@ -50,7 +57,13 @@ void WorldTerrain::fillBlocksAt(int x, int y, int z, TopSoilBlocks topSoil)
 
 TopSoilBlocks WorldTerrain::getTopSoilAt(int x, int z)
 {
-	//int height = _mainHeightmap.getHeight(x, z, _currentRegion->getLocation().x, _currentRegion->getLocation().y);
+	auto newX = (x + (_currentRegion->getLocation().x * CHUNK_SIZE));
+	auto newZ = (z + (_currentRegion->getLocation().y * CHUNK_SIZE));
+	int height = _mainHeightmap.GetHeight(newX, newZ);
+
+	if (height > 130) {
+		return fillTopSoil(BlockID::Snow, BlockID::Dirt, BlockID::Stone);
+	}
 
 	return fillTopSoil(BlockID::Grass, BlockID::Dirt, BlockID::Stone);
 }
@@ -87,4 +100,12 @@ void WorldTerrain::buildTree(int x, int y, int z)
 
 void WorldTerrain::setupGenerators()
 {
+	_mainHeightmap.GetNoise().SetFractalGain(0.5);
+	_mainHeightmap.GetNoise().SetFractalGain(0.3);
+
+	_mountainMap.SetAmplitude(2);
+	_mountainMap.SetOffset(1);
+	_mountainMap.GetNoise().SetFrequency(0.005);
+	_mountainMap.GetNoise().SetFractalOctaves(6);
+	_mountainMap.GetNoise().SetFractalGain(0.6);
 }
