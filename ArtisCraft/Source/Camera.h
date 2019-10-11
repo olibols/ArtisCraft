@@ -25,9 +25,9 @@ public:
 
 private:
 
-	const Entity* _entity = nullptr;
+	const Entity* m_pEntity = nullptr;
 
-	glm::mat4 _projMatrix;
-	glm::mat4 _viewMatrix;
-	glm::mat4 _projViewMatrix;
+	glm::mat4 m_projMatrix;
+	glm::mat4 m_viewMatrix;
+	glm::mat4 m_projViewMatrix;
 };

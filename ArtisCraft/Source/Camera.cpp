@@ -29,41 +29,41 @@ glm::mat4 makeModelMatrix(glm::vec3 position, glm::vec3 rotation)
 
 Camera::Camera()
 {
-	_projMatrix = glm::perspective(glm::radians((float)Settings::fov), (float)Settings::width / (float)Settings::height, 0.1f, 1000.0f);
+	m_projMatrix = glm::perspective(glm::radians((float)Settings::fov), (float)Settings::width / (float)Settings::height, 0.1f, 1000.0f);
 }
 
 void Camera::update()
 {
-	position = _entity->position;
-	rotation = _entity->rotation;
+	position = m_pEntity->position;
+	rotation = m_pEntity->rotation;
 
-	_viewMatrix = makeViewMatrix(*this);
+	m_viewMatrix = makeViewMatrix(*this);
 	
-	_projViewMatrix = _projMatrix * _viewMatrix;
+	m_projViewMatrix = m_projMatrix * m_viewMatrix;
 }
 
 void Camera::hookEntity(const Entity & entity)
 {
-	_entity = &entity;
+	m_pEntity = &entity;
 }
 
 void Camera::newFov(float value)
 {
-	_projMatrix = glm::perspective(glm::radians(value), 1280.0f / 720.0f, 0.1f, 1000.0f);
+	m_projMatrix = glm::perspective(glm::radians(value), 1280.0f / 720.0f, 0.1f, 1000.0f);
 }
 
 glm::mat4 Camera::getViewMatrix()
 {
-	return _viewMatrix;
+	return m_viewMatrix;
 }
 
 glm::mat4 Camera::getProjMatrix()
 {
-	return _projMatrix;
+	return m_projMatrix;
 }
 
 glm::mat4 Camera::getProjViewMatrix()
 {
-	return _projViewMatrix;
+	return m_projViewMatrix;
 }
 

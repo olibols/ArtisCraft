@@ -18,7 +18,7 @@ public:
 
 	void deleteData();
 
-	int getIndicesCount() { return _indicesCount; };
+	int getIndicesCount() { return m_indicesCount; };
 
 	void addVBO(int dimensions, std::vector<GLfloat> data);
 	void bindVAO();
@@ -26,8 +26,8 @@ public:
 private:
 	void addEBO(const std::vector<GLuint> indices);
 
-	GLuint _VAO;
-	int _vboCount;
-	int _indicesCount;
-	std::vector<GLuint> _buffers;
+	GLuint m_VAO;
+	int m_vboCount;
+	int m_indicesCount;
+	std::vector<GLuint> m_buffers;
 };

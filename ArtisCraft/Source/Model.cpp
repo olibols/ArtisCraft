@@ -7,14 +7,14 @@ Model::Model(Mesh& mesh) {
 
 void Model::addData(Mesh& mesh)
 {
-	if (_VAO != 0) {
+	if (m_VAO != 0) {
 		deleteData();
 	}
 
-	glGenVertexArrays(1, &_VAO);
-	glBindVertexArray(_VAO);
+	glGenVertexArrays(1, &m_VAO);
+	glBindVertexArray(m_VAO);
 
-	_indicesCount = mesh.indices.size();
+	m_indicesCount = mesh.indices.size();
 
 	addVBO(3, mesh.vertexPositions);
 	addVBO(2, mesh.textureCoords);
@@ -23,13 +23,13 @@ void Model::addData(Mesh& mesh)
 
 void Model::deleteData()
 {
-	glDeleteVertexArrays(1, &_VAO);
-	glDeleteBuffers(_buffers.size(), _buffers.data());
+	glDeleteVertexArrays(1, &m_VAO);
+	glDeleteBuffers(m_buffers.size(), m_buffers.data());
 
-	_buffers.clear();
+	m_buffers.clear();
 
-	_vboCount = 0;
-	_VAO = 0;
+	m_vboCount = 0;
+	m_VAO = 0;
 }
 
 void Model::addVBO(int dimensions, std::vector<GLfloat> data)
@@ -39,17 +39,17 @@ void Model::addVBO(int dimensions, std::vector<GLfloat> data)
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(GLfloat), data.data(), GL_STATIC_DRAW);
 
-	glVertexAttribPointer(_vboCount, dimensions, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+	glVertexAttribPointer(m_vboCount, dimensions, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
 
-	glEnableVertexAttribArray(_vboCount);
-	_vboCount++;
+	glEnableVertexAttribArray(m_vboCount);
+	m_vboCount++;
 
-	_buffers.push_back(vbo);
+	m_buffers.push_back(vbo);
 }
 
 void Model::bindVAO()
 {
-	glBindVertexArray(_VAO);
+	glBindVertexArray(m_VAO);
 }
 
 void Model::addEBO(const std::vector<GLuint> indices)

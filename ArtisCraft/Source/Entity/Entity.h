@@ -1,17 +1,15 @@
 #pragma once
-#include "../AABB/AABB.h"
 #include <GLM.h>
 
 struct Entity {
-	Entity() : hitbox({ 0, 0, 0 }) {} ;
+	Entity() {};
 
-	Entity(glm::vec3 pos, glm::vec3 rot, glm::vec3 box) : position(pos), rotation(rot), hitbox(box) {};
+	Entity(glm::vec3 pos, glm::vec3 rot) : position(pos), rotation(rot) {};
 
 	glm::vec3 position = { 0, 0, 0 };
 	glm::vec3 rotation = { 0, 0, 0 };
-	glm::vec3 velocity;
+	glm::vec3 velocity = { 0, 0, 0 };
 
 	float health = 10.0f;
 
-	AABB hitbox;
 };
