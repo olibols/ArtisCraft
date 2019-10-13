@@ -18,6 +18,9 @@
     <ClInclude Include="Source\Entity\Entity.h" />
     <ClInclude Include="Source\Entity\Player.h" />
     <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\Renderer\HUD\FrameCounter.h" />
+    <ClInclude Include="Source\Renderer\MasterRenderer.h" />
+    <ClInclude Include="Source\Renderer\SFMLRenderer.h" />
     <ClInclude Include="Source\Settings.h" />
     <ClInclude Include="Source\States\PlayingState.h" />
     <ClInclude Include="Source\States\StateBase.h" />
@@ -29,6 +32,9 @@
     <ClCompile Include="Source\Entity\Player.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Model.cpp" />
+    <ClCompile Include="Source\Renderer\HUD\FrameCounter.cpp" />
+    <ClCompile Include="Source\Renderer\MasterRenderer.cpp" />
+    <ClCompile Include="Source\Renderer\SFMLRenderer.cpp" />
     <ClCompile Include="Source\States\PlayingState.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

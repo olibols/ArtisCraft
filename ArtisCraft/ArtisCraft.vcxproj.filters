@@ -22,6 +22,9 @@
     <ClInclude Include="Source\States\StateBase.h" />
     <ClInclude Include="Source\States\PlayingState.h" />
     <ClInclude Include="Source\Entity\Player.h" />
+    <ClInclude Include="Source\Renderer\MasterRenderer.h" />
+    <ClInclude Include="Source\Renderer\HUD\FrameCounter.h" />
+    <ClInclude Include="Source\Renderer\SFMLRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -40,6 +43,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\States\PlayingState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\HUD\FrameCounter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\SFMLRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\MasterRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

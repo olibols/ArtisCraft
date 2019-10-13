@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "States/PlayingState.h"
 
 Application::Application(std::string windowName)
 {
@@ -6,6 +7,8 @@ Application::Application(std::string windowName)
 	m_pCamera = new Camera();
 
 	m_pContext->window.setMouseCursorVisible(false);
+
+	pushState<PlayingState>(*this);
 }
 
 void Application::runLoop()
@@ -14,8 +17,15 @@ void Application::runLoop()
 
 	while (true) {
 		auto deltaTime = dtTimer.restart();
-		
+
+		auto& state = *m_states.back();
+
+		state.handleInput();
+		state.update(deltaTime.asSeconds());
 		m_pCamera->update();
+
+		state.render(m_renderer);
+		
 
 		handleEvents();
 	}
