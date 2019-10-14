@@ -12,9 +12,9 @@ class Model {
 public:
 	Model() = default;
 
-	Model(Mesh& mesh);
+	Model(Mesh mesh);
 
-	void addData(Mesh& mesh);
+	void addData(Mesh mesh);
 
 	void deleteData();
 

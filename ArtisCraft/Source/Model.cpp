@@ -1,11 +1,11 @@
 #include "Model.h"
 #include <SFML/Graphics.hpp>
 
-Model::Model(Mesh& mesh) {
+Model::Model(Mesh mesh) {
 	addData(mesh);
 }
 
-void Model::addData(Mesh& mesh)
+void Model::addData(Mesh mesh)
 {
 	if (m_VAO != 0) {
 		deleteData();

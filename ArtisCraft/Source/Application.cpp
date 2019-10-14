@@ -20,8 +20,12 @@ void Application::runLoop()
 
 		auto& state = *m_states.back();
 
-		state.handleInput();
+		if (m_shouldUpdate) {
+			state.handleInput();
+		}
+
 		state.update(deltaTime.asSeconds());
+
 		m_pCamera->update();
 
 		state.render(m_renderer);
@@ -29,7 +33,7 @@ void Application::runLoop()
 
 		handleEvents();
 	}
-}
+}	
 
 
 void Application::handleEvents()
