@@ -25,6 +25,15 @@
     <ClInclude Include="Source\Renderer\MasterRenderer.h" />
     <ClInclude Include="Source\Renderer\HUD\FrameCounter.h" />
     <ClInclude Include="Source\Renderer\SFMLRenderer.h" />
+    <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
+    <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
+    <ClInclude Include="Source\Util\FileUtilities.h" />
+    <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
+    <ClInclude Include="Source\Renderer\Shaders\ChunkShader.h" />
+    <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
+    <ClInclude Include="Source\Renderer\Texture\TextureAtlas.h" />
+    <ClInclude Include="Source\World\Chunk\Section.h" />
+    <ClInclude Include="Source\World\WorldConstants.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -52,6 +61,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\MasterRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Shaders\ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Shaders\LoadShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Util\FileUtilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Shaders\BlockShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Shaders\ChunkShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Texture\BasicTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Texture\TextureAtlas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

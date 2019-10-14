@@ -46,7 +46,6 @@ void Application::handleEvents()
 			case sf::Keyboard::Escape:
 				m_shouldUpdate = !m_shouldUpdate;
 				m_pContext->window.setMouseCursorVisible(!m_shouldUpdate);
-				sf::sleep(sf::Time(sf::seconds(0.2)));
 
 			default:
 				break;

@@ -8,5 +8,5 @@ public:
 	void render(sf::RenderWindow& window);
 private:
 
-	std::vector<sf::Drawable*> _drawables;
+	std::vector<sf::Drawable*> m_drawables;
 };

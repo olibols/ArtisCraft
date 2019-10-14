@@ -3,12 +3,12 @@
 
 void SFMLRenderer::add(sf::Drawable & thing)
 {
-	_drawables.push_back(&thing);
+	m_drawables.push_back(&thing);
 }
 
 void SFMLRenderer::render(sf::RenderWindow & window)
 {
-	if (_drawables.empty())
+	if (m_drawables.empty())
 		return;
 
 	glDisable(GL_DEPTH_TEST);
@@ -21,11 +21,11 @@ void SFMLRenderer::render(sf::RenderWindow & window)
 	window.pushGLStates();
 	window.resetGLStates();
 
-	for (const auto& drawable : _drawables)
+	for (const auto& drawable : m_drawables)
 	{
 		window.draw(*drawable);
 	}
 
 	window.popGLStates();
-	_drawables.clear();
+	m_drawables.clear();
 }
