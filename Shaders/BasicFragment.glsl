@@ -67,7 +67,7 @@ vec4 render(vec3 rayStart, vec3 rayDir)
 
 void main()
 {
-    vec3 viewDirection = rayDirection(90.0, uv, uv);
+    vec3 viewDirection = rayDirection(90.0, uv, gl_FragCoord.xy);
     vec3 eye = vec3(5.0, 5.0, 5.0);
     
     mat3 viewToWorld = viewMatrix(eye, vec3(0.0, 0.0,0.0), vec3(0.0, 1.0, 0.0));
