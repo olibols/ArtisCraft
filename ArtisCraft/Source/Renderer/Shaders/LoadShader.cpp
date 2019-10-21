@@ -1,5 +1,6 @@
 #include "LoadShader.h"
 #include <vector>
+#include <iostream>
 #include "../Util/FileUtilities.h"
 
 GLuint compileShader(const GLchar *source, GLenum shaderType) {
@@ -8,19 +9,14 @@ GLuint compileShader(const GLchar *source, GLenum shaderType) {
 	glShaderSource(shaderID, 1, &source, nullptr); // Give the previously made shader the source code we input
 	glCompileShader(shaderID); // Compile the source for the shader
 
-	GLint isSuccess = 0;
+	int  success;
+	char infoLog[512];
+	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &success);
 
-	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &isSuccess); // Get the compile log for the shader
-	if (!isSuccess)
+	if (!success)
 	{
-		GLint maxLength = 0;
-		glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &maxLength);
-
-		std::vector<GLchar> errorLog(maxLength);
-		glGetShaderInfoLog(shaderID, maxLength, &maxLength, &errorLog[0]);
-
-		for (std::vector<char>::const_iterator i = errorLog.begin(); i != errorLog.end(); ++i)
-			printf(i._Ptr);
+		glGetShaderInfoLog(shaderID, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
 
 	return shaderID;

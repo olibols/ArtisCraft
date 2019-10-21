@@ -7,12 +7,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Util\FileUtilities.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Util\GLM.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Shaders\LoadShader.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -24,54 +18,14 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
-    <ClInclude Include="Source\Model.h" />
-    <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
-    <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
     <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\Entity\Entity.h" />
-    <ClInclude Include="Source\Entity\Player.h" />
-    <ClInclude Include="Source\World\Constants.h" />
-    <ClInclude Include="Source\Renderer\CubeRenderer.h" />
-    <ClInclude Include="Source\Renderer\RenderMaster.h" />
-    <ClInclude Include="Source\Renderer\Texture\TextureAtlas.h" />
-    <ClInclude Include="Source\World\Block\BlockData.h" />
-    <ClInclude Include="Source\World\Block\BlockTypeDatabase.h" />
-    <ClInclude Include="Source\World\Block\BlockID.h" />
-    <ClInclude Include="Source\World\Block\Types\BlockType.h" />
-    <ClInclude Include="Source\Util\Utils.h" />
-    <ClInclude Include="Source\Renderer\ChunkRenderer.h" />
-    <ClInclude Include="Source\Renderer\Shaders\ChunkShader.h" />
-    <ClInclude Include="Source\States\BaseState.h" />
-    <ClInclude Include="Source\States\PlayingState.h" />
-    <ClInclude Include="Source\World\Chunk\Chunk.h" />
-    <ClInclude Include="Source\World\Chunk\ChunkBlock.h" />
-    <ClInclude Include="Source\World\Chunk\ChunkMesh.h" />
-    <ClInclude Include="Source\World\Chunk\ChunkMeshBuilder.h" />
-    <ClInclude Include="Source\World\Chunk\Region.h" />
-    <ClInclude Include="Source\World\World.h" />
-    <ClInclude Include="Source\Util\Ray.h" />
-    <ClInclude Include="Source\Renderer\SFMLRenderer.h" />
-    <ClInclude Include="Source\Renderer\HUD\FrameCounter.h" />
-    <ClInclude Include="Source\Renderer\HUD\Crosshair.h" />
     <ClInclude Include="Source\Settings.h" />
-    <ClInclude Include="Source\World\Events\BaseWorldEvent.h" />
-    <ClInclude Include="Source\World\Events\PlayerDigEvent.h" />
-    <ClInclude Include="Source\AABB\AABB.h" />
-    <ClInclude Include="Source\Util\SimplexNoise.h" />
-    <ClInclude Include="Source\Item\InventoryItem.h" />
-    <ClInclude Include="Source\World\Generators\WorldTerrain.h" />
-    <ClInclude Include="Source\World\Generators\StructureBuilder.h" />
-    <ClInclude Include="Source\Particle\Particle.h" />
-    <ClInclude Include="Source\Renderer\Shaders\ParticleShader.h" />
-    <ClInclude Include="Source\Renderer\ParticleRenderer.h" />
-    <ClInclude Include="Source\Particle\ParticleModel.h" />
-    <ClInclude Include="Source\World\Generators\FastNoise\FastNoise.h" />
-    <ClInclude Include="Source\World\Generators\FastNoise\NoiseWrapper.h" />
+    <ClInclude Include="Source\Util\FileUtilities.h" />
+    <ClInclude Include="Source\Renderer\Shaders\MainShader.h" />
+    <ClInclude Include="Source\Entity\Entity.h" />
+    <ClInclude Include="Source\Util\includes.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Util\FileUtilities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -84,118 +38,13 @@
     <ClCompile Include="Source\Renderer\Shaders\ShaderProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\Texture\BasicTexture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\Shaders\BlockShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Entity\Player.cpp">
+    <ClCompile Include="Source\Util\FileUtilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Renderer\CubeRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\RenderMaster.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Block\BlockData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\Texture\TextureAtlas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Block\BlockTypeDatabase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Block\Types\BlockType.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\ChunkRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\Shaders\ChunkShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\States\PlayingState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Chunk\Chunk.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Chunk\ChunkBlock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Chunk\ChunkMesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Chunk\ChunkMeshBuilder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\World.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Chunk\Region.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Util\Ray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\ChunkManager.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\ChunkManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Util\VectorXZ.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Util\VectorXZ.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\SFMLRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\HUD\FrameCounter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\HUD\Crosshair.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Events\PlayerDigEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Util\SimplexNoise.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Generators\WorldTerrain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Generators\StructureBuilder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\Shaders\ParticleShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\ParticleRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Particle\ParticleModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Particle\Particle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Generators\FastNoise\FastNoise.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Generators\FastNoise\NoiseWrapper.cpp">
+    <ClCompile Include="Source\Renderer\Shaders\MainShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,16 +1,12 @@
 #version 330 core
 
-uniform mat4 projViewMatrix;
-uniform mat4 modelMatrix;
+out vec2 uv;
 
-layout (location = 0) in vec3 inVertCoord;
-layout (location = 1) in vec2 inTexCoord;
-
-out vec2 texCoord;
-
-void main()
+void main() 
 {
-    gl_Position = projViewMatrix * modelMatrix * vec4(inVertCoord, 1.0);
-	//gl_Position = vec4(inVertCoord, 1.0);
-    texCoord = inTexCoord;
+    float x = float(((uint(gl_VertexID) + 2u) / 3u)%2u); 
+    float y = float(((uint(gl_VertexID) + 1u) / 3u)%2u); 
+
+    gl_Position = vec4(-1.0f + x*2.0f, -1.0f+y*2.0f, 0.0f, 1.0f);
+    uv = vec2(x, y);
 }

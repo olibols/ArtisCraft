@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <GL\glew.h>
-#include <GLM.h>
 #include <iostream>
 
 inline void GLAPIENTRY

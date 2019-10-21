@@ -1,17 +1,15 @@
 #include "Context.h"
 #include "Settings.h"
 #include "Camera.h"
-#include "Entity/Player.h"
-#include "Renderer/RenderMaster.h"
-#include "States/PlayingState.h"
+#include "Renderer/Shaders/MainShader.h"
 
 
 class Application {
 public:
 	Application(std::string windowName);
 
-	inline sf::RenderWindow& getWindow() { return _context->window; };
-	inline Camera& getCamera() { return *_camera; };
+	inline sf::RenderWindow& getWindow() { return m_pContext->window; };
+	//inline Camera& getCamera() { return *m_pCamera; };
 
 	void runLoop();
 
@@ -21,9 +19,8 @@ private:
 
 	bool shouldUpdate = true;
 
-	std::vector<std::unique_ptr<BaseState>> _states;
+	MainShader* m_pShader = nullptr;
 
-	RenderContext* _context = nullptr;
-	RenderMaster* _renderMaster = nullptr;
-	Camera* _camera = nullptr;
+	RenderContext* m_pContext = nullptr;
+	//Camera* m_pCamera = nullptr;
 };
