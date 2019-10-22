@@ -10,23 +10,29 @@ Application::Application(std::string windowName)
 	m_pContext->window.setMouseCursorVisible(false);
 }
 
-
-
 void Application::runLoop()
 {
+	sf::Clock timer;
 	sf::Clock dtTimer;
 
 	GLuint VAO;
 	glGenBuffers(1, &VAO);
 	glBindVertexArray(VAO);
 
+	m_pShader->loadResolution(glm::vec2(1280.0, 720.0));
+
 	while (true) {
+		
+		//printf("Time taken this frame: %f \n", dtTimer.getElapsedTime().asSeconds());
+		dtTimer.restart();
+
 		handleEvents();
+
+		m_pShader->loadTime(timer.getElapsedTime().asSeconds());
 
 		glClearColor(0.1, 0.5, 1.0, 1.0);
 		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		m_pContext->window.display();

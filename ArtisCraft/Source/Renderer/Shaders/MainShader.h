@@ -6,12 +6,12 @@ class MainShader : public ShaderProgram {
 public:
 	MainShader(std::string vertexFile = "BasicVertex", std::string fragmentFile = "BasicFragment");
 
-	void loadProjViewMatrix(glm::mat4 projViewMatrix);
+	void loadResolution(glm::vec2 resolution);
+	void loadTime(float time);
 
-	void loadModelMatrix(glm::mat4 modelMatrix);
 protected:
 	void getUniforms();
 
-	GLuint m_locProjViewMat;
-	GLuint m_locModelMat;
+	GLuint m_locResolution;
+	GLuint m_locTime;
 };

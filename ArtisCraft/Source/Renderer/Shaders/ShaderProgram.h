@@ -13,7 +13,7 @@ public:
 	GLuint getID() const;
 
 	void loadInt(GLuint Location, int value);
-	void loadFloat(GLuint Location, int value);
+	void loadFloat(GLuint Location, float value);
 	void loadVector2(GLuint location, glm::vec2 vect);
 	void loadVector3(GLuint location, glm::vec3 vect);
 	void loadVector4(GLuint location, glm::vec4 vect);

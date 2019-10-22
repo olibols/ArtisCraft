@@ -5,19 +5,19 @@ MainShader::MainShader(std::string vertexFile, std::string fragmentFile) : Shade
 	getUniforms();
 }
 
-void MainShader::loadProjViewMatrix(glm::mat4 projViewMatrix)
+void MainShader::loadResolution(glm::vec2 resolution)
 {
-	loadMatrix4(m_locProjViewMat, projViewMatrix);
+	loadVector2(m_locResolution, resolution);
 }
 
-void MainShader::loadModelMatrix(glm::mat4 modelMatrix)
+void MainShader::loadTime(float time)
 {
-	loadMatrix4(m_locModelMat, modelMatrix);
+	loadFloat(m_locTime, time);
 }
 
 void MainShader::getUniforms()
 {
 	useProgram();
-	m_locProjViewMat = glGetUniformLocation(_ID, "projViewMatrix");
-	m_locModelMat = glGetUniformLocation(_ID, "modelMatrix");
+	m_locResolution = glGetUniformLocation(_ID, "iResolution");
+	m_locTime = glGetUniformLocation(_ID, "iTime");
 }
