@@ -40,7 +40,7 @@ struct RenderContext { // Creates the window and rendering context
 		//glEnable(GL_DEBUG_OUTPUT);
 		//glDebugMessageCallback(MessageCallback, 0);
 
-		//window.setFramerateLimit(60);
+		//window.setFramerateLimit();
 	};
 
 	sf::RenderWindow window;

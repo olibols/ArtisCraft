@@ -8,10 +8,8 @@ glm::mat4 makeViewMatrix(Camera& camera)
 	matrix = glm::rotate(matrix, glm::radians(camera.rotation.x), { 1, 0, 0 });
 	matrix = glm::rotate(matrix, glm::radians(camera.rotation.y), { 0, 1, 0 });
 	matrix = glm::rotate(matrix, glm::radians(camera.rotation.z), { 0, 0, 1 });
-
 	matrix = glm::translate(matrix, -camera.position);
 	
-
 	return matrix;
 }
 

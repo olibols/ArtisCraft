@@ -10,6 +10,7 @@ public:
 	void loadTime(float time);
 	void loadViewmatrix(glm::mat4 matrix);
 	void loadPosition(glm::vec3 position);
+	void loadRotation(glm::vec3 rotation);
 
 protected:
 	void getUniforms();
@@ -18,4 +19,5 @@ protected:
 	GLuint m_locTime;
 	GLuint m_locViewmatrix;
 	GLuint m_locPosition;
+	GLuint m_locRotation;
 };

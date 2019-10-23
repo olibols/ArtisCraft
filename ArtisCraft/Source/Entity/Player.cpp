@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <SFML/Graphics.hpp>
 
-Player::Player() : Entity({ 5, 5, 5 }, { 0, 0, 0 })
+Player::Player() : Entity({ 5, 1, 5 }, { 0, 0, 0 })
 {
 }
 
@@ -13,14 +13,19 @@ void Player::handleInput(sf::RenderWindow& window)
 
 void Player::update(float deltaTime)
 {
-	_onGround = false;
+	if (position.y > 1) {
+		velocity.y -= 9.8 * deltaTime;
+	}
+	else {
+		velocity.y = 0;
+	}
 
 	velocity.x *= 0.9;
 	velocity.z *= 0.9;
 
 	position.x += velocity.x * deltaTime;
 
-	//position.y += velocity.y * deltaTime;
+	position.y += velocity.y * deltaTime;
 
 	position.z += velocity.z * deltaTime;
 
@@ -53,7 +58,7 @@ void Player::mouseInput(sf::RenderWindow& window)
 void Player::keyboardInput()
 {
 	glm::vec3 change = { 0, 0, 0 };
-	float speed = 3.0;
+	float speed = 10.0;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
 		speed = 1.5;

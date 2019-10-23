@@ -1,12 +1,13 @@
 #version 330 core
-const int MAX_STEPS = 1000;
+const int MAX_STEPS = 500;
 const float ELIPSOID = 0.001;
 const float MIN_DIST = 0.0;
-const float MAX_DIST = 1000.0;
+const float MAX_DIST = 100.0;
 
 uniform vec2 iResolution;
 uniform mat4 iViewMatrix;
 uniform vec3 iPosition;
+uniform vec3 iRotation;
 uniform float iTime;
 
 float boxSDF(vec3 p, vec3 size) {
@@ -29,15 +30,22 @@ float opUnion( float d1, float d2 ){
     return min(d1,d2);
 }
 
+float opRepLim(vec3 p, float c, vec3 l)
+{
+    vec3 q = p-c*clamp(round(p/c),-l,l);
+    return boxSDF(q, vec3(1.0));
+}
+
 float opRep(vec3 p, vec3 c)
 {
     vec3 q = mod(p+0.5*c,c)-0.5*c;
-    return boxSDF(p, vec3(1.0));
+    return boxSDF(q, vec3(1.0));
 }
 
 float sdf(vec3 p)
 {
-   return opUnion(sdPlane(p, vec4(0, 1, 0, 1)), boxSDF(p, vec3(1.0)));
+   //return opUnion(sdPlane(p, vec4(0, 1, 0, 1)), boxSDF(p, vec3(1.0)));
+   return opRepLim(p, 2.0, vec3(10.0, 1.0, 10.0));
 }
 
 float shortestDistanceToSurface(vec3 eye, vec3 marchingDirection, float start, float end)
@@ -60,13 +68,6 @@ vec3 rayDirection(float fieldOfView, vec2 size, vec2 fragCoord) {
     vec2 xy = fragCoord - size / 2.0;
     float z = size.y / tan(radians(fieldOfView) / 2.0);
     return normalize(vec3(xy, -z));
-}
-
-mat3 viewMatrix(vec3 eye, vec3 center, vec3 up) {
-    vec3 f = normalize(center - eye);
-    vec3 s = normalize(cross(f, up));
-    vec3 u = cross(s, f);
-    return mat3(s, u, -f);
 }
 
 vec3 calcNormal(vec3 pos)
@@ -115,12 +116,21 @@ vec4 render(vec3 rayStart, vec3 rayDir)
     return vec4(col.x, col.y, col.z, 1.0);
 }
 
+vec3 camToWorld(vec3 ray, vec3 camRot){
+	ray.zy = ray.zy*cos(camRot.x * 0.01745329251994329576923690768489) + sin(camRot.x * 0.01745329251994329576923690768489)*vec2(-1,1)*ray.yz;
+    ray.xz = ray.xz*cos(camRot.y * 0.01745329251994329576923690768489) + sin(camRot.y * 0.01745329251994329576923690768489)*vec2(-1,1)*ray.zx;
+	
+	return ray;	
+}
+
 void main()
 {
-    vec3 viewDirection = rayDirection(90.0, iResolution, gl_FragCoord.xy);
-    vec3 eye = iPosition;
+    vec3 ray = rayDirection(90.0, iResolution, gl_FragCoord.xy);
     
-    vec3 worldDir = (iViewMatrix * vec4(viewDirection, 0.0)).xyz;
-
-    gl_FragColor = render(iPosition, worldDir);
+	vec3 camPos = iPosition;
+	vec3 camRot = iRotation;
+		
+	ray = camToWorld(ray, camRot);
+	
+    gl_FragColor = render(camPos, ray);
 } 

@@ -25,17 +25,17 @@ void Application::runLoop()
 	m_pShader->loadResolution(glm::vec2(1280.0, 720.0));
 
 	while (true) {
-		//printf("Time taken this frame: %f \n", dtTimer.getElapsedTime().asSeconds());
+		printf("FPS: %f \n", 1.0 / dtTimer.getElapsedTime().asSeconds());
 		dtTimer.restart();
 
 		m_pPlayer->handleInput(m_pContext->window);
 		m_pPlayer->update(dtTimer.getElapsedTime().asSeconds());
 		m_pCamera->update();
 
-		m_pShader->loadViewmatrix(m_pCamera->getViewMatrix());
 		m_pShader->loadPosition(m_pCamera->position);
+		m_pShader->loadRotation(m_pCamera->rotation);
 
-		printf("Position: %f, %f, %f \n", m_pCamera->position.x, m_pCamera->position.y, m_pCamera->position.z);
+		//printf("Position: %f, %f, %f \n", m_pCamera->position.x, m_pCamera->position.y, m_pCamera->position.z);
 
 		handleEvents();
 

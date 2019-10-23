@@ -25,6 +25,11 @@ void MainShader::loadPosition(glm::vec3 position)
 	loadVector3(m_locPosition, position);
 }
 
+void MainShader::loadRotation(glm::vec3 rotation)
+{
+	loadVector3(m_locRotation, rotation);
+}
+
 void MainShader::getUniforms()
 {
 	useProgram();
@@ -32,4 +37,5 @@ void MainShader::getUniforms()
 	m_locTime = glGetUniformLocation(_ID, "iTime");
 	m_locViewmatrix = glGetUniformLocation(_ID, "iViewMatrix");
 	m_locPosition = glGetUniformLocation(_ID, "iPosition");
+	m_locRotation = glGetUniformLocation(_ID, "iRotation");
 }
