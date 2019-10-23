@@ -34,6 +34,7 @@ void Application::runLoop()
 
 		m_pShader->loadViewmatrix(m_pCamera->getViewMatrix());
 		m_pShader->loadPosition(m_pCamera->position);
+
 		printf("Position: %f, %f, %f \n", m_pCamera->position.x, m_pCamera->position.y, m_pCamera->position.z);
 
 		handleEvents();

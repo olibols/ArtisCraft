@@ -76,13 +76,6 @@ vec3 calcNormal(vec3 pos)
     return normalize(vec3( sdf(pos + eps_zero.xyy), sdf(pos + eps_zero.yxy), sdf(pos + eps_zero.yyx) ) - c);
 }
 
-float checkersGradBox(vec2 p)
-{
-    vec2 w = fwidth(p) + 0.001;
-    vec2 i = 2.0*(abs(fract((p-0.5*w)*0.5)-0.5)-abs(fract((p+0.5*w)*0.5)-0.5))/w;
-    return 0.5 - 0.5*i.x*i.y;
-}
-
 vec4 render(vec3 rayStart, vec3 rayDir)
 {
     vec3 col;
@@ -125,10 +118,9 @@ vec4 render(vec3 rayStart, vec3 rayDir)
 void main()
 {
     vec3 viewDirection = rayDirection(90.0, iResolution, gl_FragCoord.xy);
-    vec3 eye = vec3(5.0, 5.0, 5.0);
+    vec3 eye = iPosition;
     
-    mat4 viewToWorld = iViewMatrix;
-    vec3 worldDir = (viewToWorld * vec4(viewDirection, 0.0)).xyz;
+    vec3 worldDir = (iViewMatrix * vec4(viewDirection, 0.0)).xyz;
 
     gl_FragColor = render(iPosition, worldDir);
 } 

@@ -53,7 +53,7 @@ void Player::mouseInput(sf::RenderWindow& window)
 void Player::keyboardInput()
 {
 	glm::vec3 change = { 0, 0, 0 };
-	float speed = 0.5;
+	float speed = 3.0;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
 		speed = 1.5;
