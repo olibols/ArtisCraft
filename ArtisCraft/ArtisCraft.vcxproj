@@ -16,6 +16,7 @@
     <ClInclude Include="Source\Context.h" />
     <ClInclude Include="Shaders\LoadShader.h" />
     <ClInclude Include="Source\Entity\Entity.h" />
+    <ClInclude Include="Source\Entity\Player.h" />
     <ClInclude Include="Source\Renderer\Shaders\MainShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
@@ -26,6 +27,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\Entity\Player.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\MainShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\LoadShader.cpp" />

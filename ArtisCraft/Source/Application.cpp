@@ -3,7 +3,8 @@
 Application::Application(std::string windowName)
 {
 	m_pContext = new RenderContext("ArtisCraft", Settings::width, Settings::height);
-	//m_pCamera = new Camera();
+	m_pCamera = new Camera();
+	m_pPlayer = new Player();
 
 	m_pShader = new MainShader();
 
@@ -12,6 +13,8 @@ Application::Application(std::string windowName)
 
 void Application::runLoop()
 {
+	m_pCamera->hookEntity(*m_pPlayer);
+
 	sf::Clock timer;
 	sf::Clock dtTimer;
 
@@ -22,9 +25,16 @@ void Application::runLoop()
 	m_pShader->loadResolution(glm::vec2(1280.0, 720.0));
 
 	while (true) {
-		
 		//printf("Time taken this frame: %f \n", dtTimer.getElapsedTime().asSeconds());
 		dtTimer.restart();
+
+		m_pPlayer->handleInput(m_pContext->window);
+		m_pPlayer->update(dtTimer.getElapsedTime().asSeconds());
+		m_pCamera->update();
+
+		m_pShader->loadViewmatrix(m_pCamera->getViewMatrix());
+		m_pShader->loadPosition(m_pCamera->position);
+		printf("Position: %f, %f, %f \n", m_pCamera->position.x, m_pCamera->position.y, m_pCamera->position.z);
 
 		handleEvents();
 

@@ -24,6 +24,7 @@
     <ClInclude Include="Source\Renderer\Shaders\MainShader.h" />
     <ClInclude Include="Source\Entity\Entity.h" />
     <ClInclude Include="Source\Util\includes.h" />
+    <ClInclude Include="Source\Entity\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -45,6 +46,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\Shaders\MainShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

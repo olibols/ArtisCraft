@@ -2,7 +2,7 @@
 #include "Settings.h"
 #include "Camera.h"
 #include "Renderer/Shaders/MainShader.h"
-
+#include "Entity/Player.h"
 
 class Application {
 public:
@@ -22,5 +22,6 @@ private:
 	MainShader* m_pShader = nullptr;
 
 	RenderContext* m_pContext = nullptr;
-	//Camera* m_pCamera = nullptr;
+	Camera* m_pCamera = nullptr;
+	Player* m_pPlayer = nullptr;
 };

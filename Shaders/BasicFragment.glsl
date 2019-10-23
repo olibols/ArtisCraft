@@ -5,6 +5,8 @@ const float MIN_DIST = 0.0;
 const float MAX_DIST = 1000.0;
 
 uniform vec2 iResolution;
+uniform mat4 iViewMatrix;
+uniform vec3 iPosition;
 uniform float iTime;
 
 float boxSDF(vec3 p, vec3 size) {
@@ -125,9 +127,8 @@ void main()
     vec3 viewDirection = rayDirection(90.0, iResolution, gl_FragCoord.xy);
     vec3 eye = vec3(5.0, 5.0, 5.0);
     
-    mat3 viewToWorld = viewMatrix(eye, vec3(0.0, 0.0,0.0), vec3(0.0, 1.0, 0.0));
-    vec3 worldDir = viewToWorld * viewDirection;
+    mat4 viewToWorld = iViewMatrix;
+    vec3 worldDir = (viewToWorld * vec4(viewDirection, 0.0)).xyz;
 
-
-    gl_FragColor = render(eye, worldDir);
+    gl_FragColor = render(iPosition, worldDir);
 } 

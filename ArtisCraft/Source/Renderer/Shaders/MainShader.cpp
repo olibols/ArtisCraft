@@ -15,9 +15,21 @@ void MainShader::loadTime(float time)
 	loadFloat(m_locTime, time);
 }
 
+void MainShader::loadViewmatrix(glm::mat4 matrix)
+{
+	loadMatrix4(m_locViewmatrix, matrix);
+}
+
+void MainShader::loadPosition(glm::vec3 position)
+{
+	loadVector3(m_locPosition, position);
+}
+
 void MainShader::getUniforms()
 {
 	useProgram();
 	m_locResolution = glGetUniformLocation(_ID, "iResolution");
 	m_locTime = glGetUniformLocation(_ID, "iTime");
+	m_locViewmatrix = glGetUniformLocation(_ID, "iViewMatrix");
+	m_locPosition = glGetUniformLocation(_ID, "iPosition");
 }
