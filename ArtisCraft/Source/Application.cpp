@@ -24,6 +24,13 @@ void Application::runLoop()
 
 	m_pShader->loadResolution(glm::vec2(1280.0, 720.0));
 
+	glm::vec3 points[50];
+
+	points[1] = glm::vec3(1.0, 2.0, 1.0);
+	points[2] = glm::vec3(3.0, 1.0, 1.0);
+	points[3] = glm::vec3(0.0, 2.0, 1.0);
+	points[4] = glm::vec3(0.0, 0.0, 1.0);
+
 	while (true) {
 		printf("FPS: %f \n", 1.0 / dtTimer.getElapsedTime().asSeconds());
 		dtTimer.restart();

@@ -25,6 +25,7 @@
     <ClInclude Include="Source\Entity\Entity.h" />
     <ClInclude Include="Source\Util\includes.h" />
     <ClInclude Include="Source\Entity\Player.h" />
+    <ClInclude Include="Source\World\World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">

@@ -13,14 +13,8 @@ void Player::handleInput(sf::RenderWindow& window)
 
 void Player::update(float deltaTime)
 {
-	if (position.y > 1) {
-		velocity.y -= 9.8 * deltaTime;
-	}
-	else {
-		velocity.y = 0;
-	}
-
 	velocity.x *= 0.9;
+	velocity.y *= 0.9;
 	velocity.z *= 0.9;
 
 	position.x += velocity.x * deltaTime;
@@ -91,7 +85,7 @@ void Player::keyboardInput()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		change.y += speed * 5;
+		change.y += speed;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
 	{

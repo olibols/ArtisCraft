@@ -20,6 +20,8 @@ public:
 
 	void loadMatrix4(GLuint location, const glm::mat4 matrix);
 
+	void loadVec3Array(GLuint location, glm::vec3 arr[], int arrSize);
+
 protected:
 
 	GLuint _ID;

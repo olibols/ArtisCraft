@@ -23,6 +23,7 @@
     <ClInclude Include="Source\Settings.h" />
     <ClInclude Include="Source\Util\FileUtilities.h" />
     <ClInclude Include="Source\Util\includes.h" />
+    <ClInclude Include="Source\World\World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />

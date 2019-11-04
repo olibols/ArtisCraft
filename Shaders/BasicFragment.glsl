@@ -10,6 +10,10 @@ uniform vec3 iPosition;
 uniform vec3 iRotation;
 uniform float iTime;
 
+uniform vec3 lastBlockEdited;
+
+vec3 points[];
+
 float boxSDF(vec3 p, vec3 size) {
     vec3 d = abs(p) - (size / 2.0);
     float insideDistance = min(max(d.x, max(d.y, d.z)), 0.0);
@@ -44,8 +48,9 @@ float opRep(vec3 p, vec3 c)
 
 float sdf(vec3 p)
 {
-   //return opUnion(sdPlane(p, vec4(0, 1, 0, 1)), boxSDF(p, vec3(1.0)));
-   return opRepLim(p, 2.0, vec3(10.0, 1.0, 10.0));
+	float minimum = 0.0;
+	minimum = boxSDF(p, vec3(1.0, 1.0, 1.0));
+	return minimum;
 }
 
 float shortestDistanceToSurface(vec3 eye, vec3 marchingDirection, float start, float end)
@@ -117,8 +122,8 @@ vec4 render(vec3 rayStart, vec3 rayDir)
 }
 
 vec3 camToWorld(vec3 ray, vec3 camRot){
-	ray.zy = ray.zy*cos(camRot.x * 0.01745329251994329576923690768489) + sin(camRot.x * 0.01745329251994329576923690768489)*vec2(-1,1)*ray.yz;
-    ray.xz = ray.xz*cos(camRot.y * 0.01745329251994329576923690768489) + sin(camRot.y * 0.01745329251994329576923690768489)*vec2(-1,1)*ray.zx;
+	ray.zy = ray.zy*cos(radians(camRot.x)) + sin(radians(camRot.x))*vec2(-1,1)*ray.yz;
+    ray.xz = ray.xz*cos(radians(camRot.y)) + sin(radians(camRot.y))*vec2(-1,1)*ray.zx;
 	
 	return ray;	
 }
