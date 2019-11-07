@@ -55,3 +55,8 @@ void ShaderProgram::loadMatrix4(GLuint location, glm::mat4 matrix)
 {
 	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
+
+void ShaderProgram::loadFloatArray(GLuint location, float arr[], int arrSize)
+{
+	glUniform1fv(location, arrSize, arr);
+}

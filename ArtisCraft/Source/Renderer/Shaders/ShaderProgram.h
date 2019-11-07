@@ -20,7 +20,7 @@ public:
 
 	void loadMatrix4(GLuint location, const glm::mat4 matrix);
 
-	void loadVec3Array(GLuint location, glm::vec3 arr[], int arrSize);
+	void loadFloatArray(GLuint location, float arr[], int arrSize);
 
 protected:
 
