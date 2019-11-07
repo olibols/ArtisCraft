@@ -30,9 +30,9 @@ void MainShader::loadRotation(glm::vec3 rotation)
 	loadVector3(m_locRotation, rotation);
 }
 
-void MainShader::loadPixels(float arr[], int x, int y)
+void MainShader::loadPixels(float arr[], int size)
 {
-	loadFloatArray(m_locPixels, arr, x * y);
+	loadFloatArray(m_locPixels, arr, size);
 }
 
 void MainShader::getUniforms()
@@ -43,5 +43,5 @@ void MainShader::getUniforms()
 	m_locViewmatrix = glGetUniformLocation(_ID, "iViewMatrix");
 	m_locPosition = glGetUniformLocation(_ID, "iPosition");
 	m_locRotation = glGetUniformLocation(_ID, "iRotation");
-	m_locPixels = glGetUniformLocation(_ID, "iPixels[1280]");
+	m_locPixels = glGetUniformLocation(_ID, "iPixels");
 }

@@ -17,5 +17,9 @@ void main()
 {
 	vec2 uv = gl_FragCoord.xy / iResolution;
 	
-	gl_FragColor = vec4(sin(uv.x), 1.0, 1.0, 1.0);
+	if(iPixels[1] == 1.0){
+		gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+	} else{
+		gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+	}
 } 

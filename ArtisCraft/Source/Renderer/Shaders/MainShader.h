@@ -11,7 +11,7 @@ public:
 	void loadViewmatrix(glm::mat4 matrix);
 	void loadPosition(glm::vec3 position);
 	void loadRotation(glm::vec3 rotation);
-	void loadPixels(float arr[], int x, int y);
+	void loadPixels(float arr[], int size);
 
 protected:
 	void getUniforms();

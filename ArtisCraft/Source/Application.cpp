@@ -24,13 +24,9 @@ void Application::runLoop()
 
 	GLfloat pixels[1280];
 
-	pixels[293] = 0.2;
-	pixels[294] = 0.2;
-	pixels[295] = 0.2;
-	pixels[296] = 0.2;
-	pixels[297] = 0.2;
+	pixels[1] = 0.0;
 
-	m_pShader->loadPixels(pixels, 1280, 1);
+	m_pShader->loadPixels(pixels, 1280);
 
 	m_pShader->loadResolution(glm::vec2(1280.0, 720.0));
 
