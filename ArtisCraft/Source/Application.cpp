@@ -22,11 +22,11 @@ void Application::runLoop()
 	glGenBuffers(1, &VAO);
 	glBindVertexArray(VAO);
 
-	GLfloat pixels[1280];
+	GLfloat* pixels = new GLfloat[921600];
 
 	pixels[1] = 0.0;
 
-	m_pShader->loadPixels(pixels, 1280);
+	m_pShader->loadPixels(pixels, 921600);
 
 	m_pShader->loadResolution(glm::vec2(1280.0, 720.0));
 
@@ -38,6 +38,10 @@ void Application::runLoop()
 		m_pPlayer->handleInput(m_pContext->window);
 		m_pPlayer->update(dtTimer.getElapsedTime().asSeconds());
 		m_pCamera->update();
+
+		pixels[1] = (int)timer.getElapsedTime().asSeconds() % 2;
+
+		m_pShader->loadPixels(pixels, 921600);
 
 		m_pShader->loadPosition(m_pCamera->position);
 		m_pShader->loadRotation(m_pCamera->rotation);
