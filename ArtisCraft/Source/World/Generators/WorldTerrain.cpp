@@ -26,7 +26,14 @@ void WorldTerrain::generateTerrainFor(Region& region)
 
 			fillBlocksAt(x, height, z, topSoil);
 
-			_currentRegion->setBlock(x, 65, z, BlockID::Water);
+			auto seed = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+			srand(seed * x * z);
+
+			if (rand() % 100 > 95) {
+				buildTree(x, height, z);
+			}
+
+			//_currentRegion->setBlock(x, 65, z, BlockID::Water);
 		}
 	}
 
