@@ -15,10 +15,12 @@
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\RenderContext.h" />
     <ClInclude Include="Source\States\StateBase.h" />
+    <ClInclude Include="Source\States\StatePlaying.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\States\StatePlaying.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

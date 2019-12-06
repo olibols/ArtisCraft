@@ -10,12 +10,13 @@ public:
 	Application(std::string windowName);
 
 	void runLoop();
-	void handleWindowEvents();
+	
+	StateBase& getState(std::string str);
 
 private:
 
-	std::map<std::string, StateBase> m_states;
-
+	std::map<std::string, std::unique_ptr<StateBase>> m_states;
 	RenderContext* m_context;
 
+	void handleWindowEvents();
 };

@@ -12,3 +12,8 @@ void Application::runLoop()
 
 	}
 }
+
+StateBase & Application::getState(std::string str)
+{
+	return *m_states[str];
+}
