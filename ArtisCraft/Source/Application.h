@@ -1,5 +1,6 @@
 #pragma once
 #include "States/StateBase.h"
+#include "RenderContext.h"
 
 #include <string>
 #include <map>
@@ -14,5 +15,7 @@ public:
 private:
 
 	std::map<std::string, StateBase> m_states;
+
+	RenderContext* m_context;
 
 };

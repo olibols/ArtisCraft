@@ -13,9 +13,11 @@
   <ItemGroup>
     <ClInclude Include="Shaders\LoadShader.h" />
     <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\RenderContext.h" />
     <ClInclude Include="Source\States\StateBase.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
