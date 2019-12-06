@@ -11,93 +11,10 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Application.h" />
-    <ClInclude Include="Source\Context.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Model.h" />
-    <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\Settings.h" />
-    <ClInclude Include="Source\Util\GLM.h" />
-    <ClInclude Include="Source\Entity\Entity.h" />
     <ClInclude Include="Source\States\StateBase.h" />
-    <ClInclude Include="Source\States\PlayingState.h" />
-    <ClInclude Include="Source\Entity\Player.h" />
-    <ClInclude Include="Source\Renderer\MasterRenderer.h" />
-    <ClInclude Include="Source\Renderer\HUD\FrameCounter.h" />
-    <ClInclude Include="Source\Renderer\SFMLRenderer.h" />
-    <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
-    <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
-    <ClInclude Include="Source\Util\FileUtilities.h" />
-    <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
-    <ClInclude Include="Source\Renderer\Shaders\ChunkShader.h" />
-    <ClInclude Include="Source\Renderer\Texture\BasicTexture.h" />
-    <ClInclude Include="Source\Renderer\Texture\TextureAtlas.h" />
-    <ClInclude Include="Source\World\Chunk\Section.h" />
-    <ClInclude Include="Source\World\WorldConstants.h" />
-    <ClInclude Include="Source\World\Block\SectionBlock.h" />
-    <ClInclude Include="Source\World\Block\BlockID.h" />
-    <ClInclude Include="Source\World\Chunk\SectionMesh.h" />
-    <ClInclude Include="Source\World\Chunk\ChunkMeshBuilder.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Entity\Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\States\PlayingState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\HUD\FrameCounter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\SFMLRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\MasterRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\Shaders\ShaderProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\Shaders\LoadShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Util\FileUtilities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\Shaders\BlockShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\Shaders\ChunkShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\Texture\BasicTexture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\Texture\TextureAtlas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Block\SectionBlock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Chunk\SectionMesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Chunk\ChunkMeshBuilder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\World\Chunk\Section.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
