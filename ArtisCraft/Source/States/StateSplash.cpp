@@ -22,6 +22,8 @@ void StateSplash::render(sf::RenderWindow& window)
 	title.setString("ArtisCraft");
 	title.setFillColor(sf::Color::White);
 
+	window.draw(title);
+
 	glClearColor(0.8, 0.8, 0.8, 1.0);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 }

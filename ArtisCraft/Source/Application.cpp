@@ -24,7 +24,7 @@ void Application::runLoop()
 
 		StateMap::iterator it = m_states.find(m_currentState);
 		if (it != m_states.end()) {
-			it->second->render();
+			it->second->render(m_context->window);
 		}
 
 
