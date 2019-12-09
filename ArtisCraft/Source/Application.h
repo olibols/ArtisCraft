@@ -5,6 +5,8 @@
 #include <string>
 #include <map>
 
+using StateMap = std::map<std::string, std::unique_ptr<StateBase>>;
+
 class Application {
 public:
 	Application(std::string windowName);
@@ -15,8 +17,10 @@ public:
 
 private:
 
-	std::map<std::string, std::unique_ptr<StateBase>> m_states;
+	StateMap m_states;
 	RenderContext* m_context;
+
+	std::string m_currentState;
 
 	void handleWindowEvents();
 };

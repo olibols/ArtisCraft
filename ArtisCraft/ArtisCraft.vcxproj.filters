@@ -14,6 +14,7 @@
     <ClInclude Include="Source\States\StateBase.h" />
     <ClInclude Include="Source\RenderContext.h" />
     <ClInclude Include="Source\States\StatePlaying.h" />
+    <ClInclude Include="Source\States\StateSplash.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -23,6 +24,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\States\StatePlaying.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\States\StateSplash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
