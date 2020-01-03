@@ -12,8 +12,11 @@ void StateSplash::update(float deltaTime)
 {
 }
 
-void StateSplash::render(sf::RenderWindow& window)
+void StateSplash::render(MasterRenderer& renderer)
 {
+	/*glClearColor(0.8, 0.8, 0.8, 1.0);
+	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
 	sf::Font font;
 	font.loadFromFile("../Resources/Fonts/rs.ttf");
 
@@ -22,12 +25,9 @@ void StateSplash::render(sf::RenderWindow& window)
 	title.setString("ArtisCraft");
 	title.setFillColor(sf::Color::White);
 
-	window.draw(title);
-
-	glClearColor(0.8, 0.8, 0.8, 1.0);
-	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+	window.draw(title);*/
 }
 
-void StateSplash::handleInput()
+void StateSplash::handleInput(MasterRenderer& renderer)
 {
 }

@@ -1,24 +1,29 @@
 #include "StatePlaying.h"
+#include "../Application.h"
+#include "../Renderer/MasterRenderer.h"
+#include "../Renderer/BlockRenderer.h"
 
 #include <SFML/OpenGL.hpp>
-
+#include <cstdio>
 #include <memory>
 
 StatePlaying::StatePlaying(Application & app) : StateBase(app)
 {
+	app.getCamera().hookEntity(m_player);
 }
 
 void StatePlaying::update(float deltaTime)
 {
+	m_player.update(deltaTime);
+	//printf("%f %f %f \n", m_player.position.x, m_player.position.y, m_player.position.z);
 }
 
-void StatePlaying::render(sf::RenderWindow& window)
+void StatePlaying::render(MasterRenderer& renderer)
 {
-	glClearColor(0.1, 0.5, 1.0, 1.0);
-	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
+	renderer.drawBlock({ 0, 0, 0 });
 }
 
-void StatePlaying::handleInput()
+void StatePlaying::handleInput(MasterRenderer& renderer)
 {
+	m_player.handleInput(m_pApplication->getContext().window);
 }

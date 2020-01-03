@@ -13,16 +13,38 @@
   <ItemGroup>
     <ClInclude Include="Shaders\LoadShader.h" />
     <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Entity\Entity.h" />
+    <ClInclude Include="Source\Entity\Player.h" />
+    <ClInclude Include="Source\GL\CubePrimitive.h" />
+    <ClInclude Include="Source\GL\Mesh.h" />
+    <ClInclude Include="Source\GL\Model.h" />
     <ClInclude Include="Source\RenderContext.h" />
+    <ClInclude Include="Source\Renderer\BlockRenderer.h" />
+    <ClInclude Include="Source\Renderer\MasterRenderer.h" />
+    <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
+    <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
+    <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\States\StateBase.h" />
     <ClInclude Include="Source\States\StatePlaying.h" />
     <ClInclude Include="Source\States\StateSplash.h" />
+    <ClInclude Include="Source\Utils\FileUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\Entity\Player.cpp" />
+    <ClCompile Include="Source\GL\CubePrimitive.cpp" />
+    <ClCompile Include="Source\GL\Model.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Renderer\BlockRenderer.cpp" />
+    <ClCompile Include="Source\Renderer\MasterRenderer.cpp" />
+    <ClCompile Include="Source\Renderer\Shaders\BlockShader.cpp" />
+    <ClCompile Include="Source\Renderer\Shaders\LoadShader.cpp" />
+    <ClCompile Include="Source\Renderer\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\States\StatePlaying.cpp" />
     <ClCompile Include="Source\States\StateSplash.cpp" />
+    <ClCompile Include="Source\Utils\FileUtils.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

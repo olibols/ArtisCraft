@@ -6,8 +6,8 @@ public:
 	StateSplash(Application& app);
 
 	void update(float deltaTime) override;
-	void render(sf::RenderWindow& window) override;
-	void handleInput() override;
+	void render(MasterRenderer& renderer) override;
+	void handleInput(MasterRenderer& renderer) override;
 
 private:
 

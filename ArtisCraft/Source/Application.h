@@ -1,6 +1,8 @@
 #pragma once
 #include "States/StateBase.h"
 #include "RenderContext.h"
+#include "Renderer/MasterRenderer.h"
+#include "Camera.h"
 
 #include <string>
 #include <map>
@@ -14,13 +16,19 @@ public:
 	void runLoop();
 	
 	StateBase& getState(std::string str);
+	void switchState(std::string str);
+
+	inline Camera& getCamera() { return *m_camera; };
+	inline RenderContext& getContext() { return *m_context; };
 
 private:
 
 	StateMap m_states;
-	RenderContext* m_context;
-
 	std::string m_currentState;
+
+	RenderContext* m_context;
+	MasterRenderer* m_renderer;
+	Camera* m_camera;
 
 	void handleWindowEvents();
 };

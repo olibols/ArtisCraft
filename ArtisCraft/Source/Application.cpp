@@ -7,8 +7,12 @@
 Application::Application(std::string windowName)
 {
 	m_context = new RenderContext(windowName, 1280, 720);
+	m_renderer = new MasterRenderer();
+	m_camera = new Camera();
 
 	m_currentState = "PlayingState";
+
+	glEnable(GL_DEPTH_TEST);
 }
 
 void Application::runLoop()
@@ -19,15 +23,24 @@ void Application::runLoop()
 	key = "SplashState";
 	m_states.insert(std::pair<std::string, std::unique_ptr<StateSplash>>(key, std::make_unique<StateSplash>(*this)));
 
+	sf::Clock dtTimer;
 	while (true) {
+		auto deltaTime = dtTimer.restart();
+
 		handleWindowEvents();
 
 		StateMap::iterator it = m_states.find(m_currentState);
 		if (it != m_states.end()) {
-			it->second->render(m_context->window);
+
+			std::unique_ptr<StateBase>& state = it->second;
+
+			state->handleInput(*m_renderer);
+			state->update(deltaTime.asSeconds());
+
+			state->render(*m_renderer);
 		}
 
-
+		m_renderer->finishRender(m_context->window, *m_camera);
 		m_context->window.display();
 	}
 }
@@ -35,6 +48,11 @@ void Application::runLoop()
 StateBase & Application::getState(std::string str)
 {
 	return *m_states[str];
+}
+
+void Application::switchState(std::string str)
+{
+	m_currentState = str;
 }
 
 void Application::handleWindowEvents()
