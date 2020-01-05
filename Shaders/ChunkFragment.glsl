@@ -1,12 +1,10 @@
 #version 330 core
 
-uniform sampler2D myTexture;
-in vec2 texCoord;
-in float cardinalLight;
+in vec3 vertColor;
 
 out vec4 FragColor;
  
 void main()
 {
-    FragColor = texture(myTexture, texCoord) * cardinalLight;
+    FragColor = vec4(vertColor.rgb, 1.0);
 }

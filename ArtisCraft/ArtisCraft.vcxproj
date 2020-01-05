@@ -19,16 +19,25 @@
     <ClInclude Include="Source\GL\CubePrimitive.h" />
     <ClInclude Include="Source\GL\Mesh.h" />
     <ClInclude Include="Source\GL\Model.h" />
+    <ClInclude Include="Source\GL\QuadPrimitive.h" />
     <ClInclude Include="Source\RenderContext.h" />
     <ClInclude Include="Source\Renderer\BlockRenderer.h" />
+    <ClInclude Include="Source\Renderer\ChunkRenderer.h" />
     <ClInclude Include="Source\Renderer\MasterRenderer.h" />
     <ClInclude Include="Source\Renderer\Shaders\BlockShader.h" />
+    <ClInclude Include="Source\Renderer\Shaders\ChunkShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\LoadShader.h" />
     <ClInclude Include="Source\Renderer\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\States\StateBase.h" />
     <ClInclude Include="Source\States\StatePlaying.h" />
     <ClInclude Include="Source\States\StateSplash.h" />
     <ClInclude Include="Source\Utils\FileUtils.h" />
+    <ClInclude Include="Source\World\BlockID.h" />
+    <ClInclude Include="Source\World\BlockTypeDatabase.h" />
+    <ClInclude Include="Source\World\Chunk\Chunk.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkMesh.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkMeshBuilder.h" />
+    <ClInclude Include="Source\World\WorldConstants.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
@@ -36,15 +45,22 @@
     <ClCompile Include="Source\Entity\Player.cpp" />
     <ClCompile Include="Source\GL\CubePrimitive.cpp" />
     <ClCompile Include="Source\GL\Model.cpp" />
+    <ClCompile Include="Source\GL\QuadPrimitive.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Renderer\BlockRenderer.cpp" />
+    <ClCompile Include="Source\Renderer\ChunkRenderer.cpp" />
     <ClCompile Include="Source\Renderer\MasterRenderer.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\BlockShader.cpp" />
+    <ClCompile Include="Source\Renderer\Shaders\ChunkShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\LoadShader.cpp" />
     <ClCompile Include="Source\Renderer\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\States\StatePlaying.cpp" />
     <ClCompile Include="Source\States\StateSplash.cpp" />
     <ClCompile Include="Source\Utils\FileUtils.cpp" />
+    <ClCompile Include="Source\World\BlockTypeDatabase.cpp" />
+    <ClCompile Include="Source\World\Chunk\Chunk.cpp" />
+    <ClCompile Include="Source\World\Chunk\ChunkMesh.cpp" />
+    <ClCompile Include="Source\World\Chunk\ChunkMeshBuilder.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

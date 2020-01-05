@@ -27,6 +27,15 @@
     <ClInclude Include="Source\GL\CubePrimitive.h" />
     <ClInclude Include="Source\GL\Model.h" />
     <ClInclude Include="Source\GL\Mesh.h" />
+    <ClInclude Include="Source\World\BlockID.h" />
+    <ClInclude Include="Source\World\WorldConstants.h" />
+    <ClInclude Include="Source\World\BlockTypeDatabase.h" />
+    <ClInclude Include="Source\Renderer\Shaders\ChunkShader.h" />
+    <ClInclude Include="Source\Renderer\ChunkRenderer.h" />
+    <ClInclude Include="Source\World\Chunk\Chunk.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkMesh.h" />
+    <ClInclude Include="Source\GL\QuadPrimitive.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkMeshBuilder.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -69,6 +78,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\MasterRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\BlockTypeDatabase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Shaders\ChunkShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\ChunkRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Chunk\Chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Chunk\ChunkMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GL\QuadPrimitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Chunk\ChunkMeshBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

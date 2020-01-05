@@ -6,8 +6,8 @@ class Model {
 public:
 	Model() = default;
 
-	Model(Mesh mesh);
-	void addData(Mesh mesh);
+	Model(const Mesh mesh);
+	void addData(const Mesh mesh);
 
 	int getIndiceCount();
 
