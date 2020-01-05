@@ -11,4 +11,6 @@ void MasterRenderer::finishRender(sf::RenderWindow & window, Camera & camera)
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 	m_blockRenderer.render(camera);
+
+	window.display();
 }

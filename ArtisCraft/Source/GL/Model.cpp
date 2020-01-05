@@ -14,6 +14,7 @@ void Model::addData(Mesh mesh)
 		m_buffers.clear();
 		m_VBOcount = 0;
 		m_VAO = 0;
+		m_indiceCount = 0;
 	}
 
 	glGenVertexArrays(1, &m_VAO);
@@ -22,12 +23,13 @@ void Model::addData(Mesh mesh)
 	m_indiceCount = mesh.indices.size();
 
 	addVBO(3, mesh.vertexPositions);
+	addVBO(3, mesh.vertexColors);
 	addEBO(mesh.indices);
 }
 
 int Model::getIndiceCount()
 {
-	return 0;
+	return m_indiceCount;
 }
 
 void Model::addVBO(int dimensions, std::vector<GLfloat> data)

@@ -4,12 +4,8 @@
 
 #include <stdio.h>
 
-Application::Application(std::string windowName)
+Application::Application(std::string windowName) : m_context("ArtisCraft", 1280, 720)
 {
-	m_context = new RenderContext(windowName, 1280, 720);
-	m_renderer = new MasterRenderer();
-	m_camera = new Camera();
-
 	m_currentState = "PlayingState";
 
 	glEnable(GL_DEPTH_TEST);
@@ -19,29 +15,22 @@ void Application::runLoop()
 {
 	std::string key = "PlayingState";
 	m_states.insert(std::pair<std::string, std::unique_ptr<StatePlaying>>(key, std::make_unique<StatePlaying>(*this)));
-	
-	key = "SplashState";
-	m_states.insert(std::pair<std::string, std::unique_ptr<StateSplash>>(key, std::make_unique<StateSplash>(*this)));
 
 	sf::Clock dtTimer;
+
+	std::unique_ptr<StateBase>& currentState = m_states["PlayingState"];
+
 	while (true) {
 		auto deltaTime = dtTimer.restart();
 
 		handleWindowEvents();
 
-		StateMap::iterator it = m_states.find(m_currentState);
-		if (it != m_states.end()) {
+		currentState->handleInput(m_renderer);
+		currentState->update(deltaTime.asSeconds());
 
-			std::unique_ptr<StateBase>& state = it->second;
+		m_camera.update();
 
-			state->handleInput(*m_renderer);
-			state->update(deltaTime.asSeconds());
-
-			state->render(*m_renderer);
-		}
-
-		m_renderer->finishRender(m_context->window, *m_camera);
-		m_context->window.display();
+		currentState->render(m_renderer);
 	}
 }
 
@@ -59,10 +48,10 @@ void Application::handleWindowEvents()
 {
 
 	sf::Event e;
-	while (m_context->window.pollEvent(e)) {
+	while (m_context.window.pollEvent(e)) {
 		switch (e.type) {
 		case sf::Event::Closed:
-			m_context->window.close();
+			m_context.window.close();
 
 		case sf::Event::KeyPressed:
 			switch (e.key.code) {

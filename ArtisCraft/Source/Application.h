@@ -18,17 +18,17 @@ public:
 	StateBase& getState(std::string str);
 	void switchState(std::string str);
 
-	inline Camera& getCamera() { return *m_camera; };
-	inline RenderContext& getContext() { return *m_context; };
+	inline Camera& getCamera() { return m_camera; };
+	inline RenderContext& getContext() { return m_context; };
 
 private:
 
 	StateMap m_states;
 	std::string m_currentState;
 
-	RenderContext* m_context;
-	MasterRenderer* m_renderer;
-	Camera* m_camera;
+	RenderContext m_context;
+	MasterRenderer m_renderer;
+	Camera m_camera;
 
 	void handleWindowEvents();
 };

@@ -2,9 +2,36 @@
 
 // I'm sorry this is all horrible but it works really nicely
 
-/*std::vector<GLfloat> createCubeVertexes(glm::vec3 pos)
+std::vector<GLfloat> primitives::createCubeColors(glm::vec3 color)
 {
-	std::vector<GLfloat> newVertexes;
+	return {
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
 
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b,
+	color.r, color.g, color.b };
 }
-*/

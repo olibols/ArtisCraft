@@ -21,6 +21,7 @@ void StatePlaying::update(float deltaTime)
 void StatePlaying::render(MasterRenderer& renderer)
 {
 	renderer.drawBlock({ 0, 0, 0 });
+	renderer.finishRender(m_pApplication->getContext().window, m_pApplication->getCamera());
 }
 
 void StatePlaying::handleInput(MasterRenderer& renderer)
