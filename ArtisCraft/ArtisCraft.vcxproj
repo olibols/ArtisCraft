@@ -33,9 +33,11 @@
     <ClInclude Include="Source\Utils\FileUtils.h" />
     <ClInclude Include="Source\World\BlockID.h" />
     <ClInclude Include="Source\World\BlockTypeDatabase.h" />
+    <ClInclude Include="Source\World\ChunkManager.h" />
     <ClInclude Include="Source\World\Chunk\Chunk.h" />
     <ClInclude Include="Source\World\Chunk\ChunkMesh.h" />
     <ClInclude Include="Source\World\Chunk\ChunkMeshBuilder.h" />
+    <ClInclude Include="Source\World\Coordinates.h" />
     <ClInclude Include="Source\World\WorldConstants.h" />
   </ItemGroup>
   <ItemGroup>

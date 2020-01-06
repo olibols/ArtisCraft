@@ -33,8 +33,10 @@
     <ClInclude Include="Source\Renderer\ChunkRenderer.h" />
     <ClInclude Include="Source\World\Chunk\Chunk.h" />
     <ClInclude Include="Source\World\Chunk\ChunkMesh.h" />
-    <ClInclude Include="Source\GL\QuadPrimitive.h" />
     <ClInclude Include="Source\World\Chunk\ChunkMeshBuilder.h" />
+    <ClInclude Include="Source\GL\QuadPrimitive.h" />
+    <ClInclude Include="Source\World\Coordinates.h" />
+    <ClInclude Include="Source\World\ChunkManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">

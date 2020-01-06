@@ -9,3 +9,4 @@ std::vector<GLfloat> QuadPrimitive::createQuadColors(glm::vec3 color)
 		color.r, color.g, color.b
 	};
 }
+

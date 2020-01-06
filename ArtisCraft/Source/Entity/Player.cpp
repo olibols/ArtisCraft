@@ -80,11 +80,11 @@ void Player::keyboardInput()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		velocity.y = speed;
+		change.y = speed;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
 	{
-		velocity.y = -speed;
+		change.y = -speed;
 	}
 
 	velocity += change;

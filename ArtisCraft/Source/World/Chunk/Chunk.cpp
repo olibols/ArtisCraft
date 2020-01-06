@@ -4,7 +4,13 @@
 
 Chunk::Chunk(sf::Vector3i pos) : m_location(pos)
 {
-	setBlock(3, 3, 3, BlockID::Grass);
+	for (int y = 0; y < CHUNK_SIZE; y++) {
+		for (int z = 0; z < CHUNK_SIZE; z++) {
+			for (int x = 0; x < CHUNK_SIZE; x++) {
+				setBlock(x, y, z, BlockID::Grass);
+			}
+		}
+	}
 }
 
 void Chunk::setBlock(int x, int y, int z, BlockID block)

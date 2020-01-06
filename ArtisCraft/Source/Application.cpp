@@ -55,9 +55,8 @@ void Application::handleWindowEvents()
 
 		case sf::Event::KeyPressed:
 			switch (e.key.code) {
-			case sf::Keyboard::Escape:
-				if (m_currentState == "PlayingState") m_currentState = "SplashState";
-				else m_currentState = "PlayingState";
+			case sf::Keyboard::X:
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			}
 		}
 	}

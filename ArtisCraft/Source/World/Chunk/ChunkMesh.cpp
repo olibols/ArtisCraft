@@ -11,7 +11,8 @@ void ChunkMesh::addFace(ChunkMeshFace face, sf::Vector3i blockPos)
 		mesh.vertexPositions.push_back(face.vertices[index++] + worldPos.y * CHUNK_SIZE + blockPos.y);
 		mesh.vertexPositions.push_back(face.vertices[index++] + worldPos.z * CHUNK_SIZE + blockPos.z);
 	}
-	mesh.vertexColors = QuadPrimitive::createQuadColors(face.color);
+	std::vector<GLfloat> color = QuadPrimitive::createQuadColors(face.color);
+	mesh.vertexColors.insert(mesh.vertexColors.end(), color.begin(), color.end());
 
 	mesh.indices.push_back(indiceCount);
 	mesh.indices.push_back(indiceCount + 1);
