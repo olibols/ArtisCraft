@@ -1,6 +1,13 @@
 #pragma once
 
-#include "Mesh.h"
+#include <vector>
+#include <gl/glew.h>
+
+struct Mesh {
+	std::vector<GLfloat> vertexPositions;
+	std::vector<GLfloat> vertexColors;
+	std::vector<GLuint> indices;
+};
 
 class Model {
 public:

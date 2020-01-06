@@ -17,7 +17,6 @@
     <ClInclude Include="Source\Entity\Entity.h" />
     <ClInclude Include="Source\Entity\Player.h" />
     <ClInclude Include="Source\GL\CubePrimitive.h" />
-    <ClInclude Include="Source\GL\Mesh.h" />
     <ClInclude Include="Source\GL\Model.h" />
     <ClInclude Include="Source\GL\QuadPrimitive.h" />
     <ClInclude Include="Source\RenderContext.h" />

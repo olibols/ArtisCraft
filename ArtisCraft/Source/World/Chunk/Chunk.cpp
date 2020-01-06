@@ -1,7 +1,10 @@
 #include "Chunk.h"
 
+#include "ChunkMeshBuilder.h"
+
 Chunk::Chunk(sf::Vector3i pos) : m_location(pos)
 {
+	setBlock(3, 3, 3, BlockID::Grass);
 }
 
 void Chunk::setBlock(int x, int y, int z, BlockID block)
@@ -27,6 +30,24 @@ BlockID Chunk::getBlock(int x, int y, int z)
 sf::Vector3i Chunk::getLocation()
 {
 	return m_location;
+}
+
+void Chunk::buildMesh()
+{
+	m_mesh = buildChunkMesh(*this);
+	m_hasMesh = true;
+	m_isBuffered = false;
+}
+
+void Chunk::bufferMesh()
+{
+	m_mesh.bufferMesh();
+	m_isBuffered = true;
+}
+
+ChunkMesh & Chunk::getMesh()
+{
+	return m_mesh;
 }
 
 int Chunk::getIndex(int x, int y, int z)

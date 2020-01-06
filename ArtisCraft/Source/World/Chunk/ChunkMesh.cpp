@@ -1,6 +1,7 @@
 #include "ChunkMesh.h"
 
 #include "../../GL/QuadPrimitive.h"
+#include "../WorldConstants.h"
 
 void ChunkMesh::addFace(ChunkMeshFace face, sf::Vector3i blockPos)
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ChunkMesh.h"
-#include "Chunk.h"
+class Chunk;
+class ChunkMesh;
 
-ChunkMesh buildChunkMesh(const Chunk& chunk);
+ChunkMesh buildChunkMesh(Chunk& chunk);

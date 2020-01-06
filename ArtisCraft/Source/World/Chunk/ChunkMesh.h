@@ -1,6 +1,5 @@
 #pragma once
 #include "../../GL/Model.h"
-#include "../WorldConstants.h"
 
 #include <array>
 #include <glm.hpp>

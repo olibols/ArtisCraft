@@ -26,7 +26,6 @@
     <ClInclude Include="Source\Renderer\MasterRenderer.h" />
     <ClInclude Include="Source\GL\CubePrimitive.h" />
     <ClInclude Include="Source\GL\Model.h" />
-    <ClInclude Include="Source\GL\Mesh.h" />
     <ClInclude Include="Source\World\BlockID.h" />
     <ClInclude Include="Source\World\WorldConstants.h" />
     <ClInclude Include="Source\World\BlockTypeDatabase.h" />

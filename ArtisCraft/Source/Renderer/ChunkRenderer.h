@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../World/Chunk/Chunk.h"
+#include "../World/Chunk/ChunkMesh.h"
 #include "../Camera.h"
 #include "Shaders/ChunkShader.h"
 
 class ChunkRenderer {
 public:
-	void addChunk(Chunk chunk);
+	void addChunk(ChunkMesh& chunk);
 	void render(Camera& cam);
 private:
-	std::vector<Chunk> m_chunks;
+	std::vector<ChunkMesh*> m_chunks;
 
 	ChunkShader m_shader;
 };
