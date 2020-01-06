@@ -3,6 +3,7 @@
 #include "../BlockID.h"
 #include "../WorldConstants.h"
 #include "ChunkMesh.h"
+#include "../../Renderer/MasterRenderer.h"
 
 #include <SFML/Graphics.hpp>
 #include <array>
@@ -19,6 +20,8 @@ public:
 	void buildMesh();
 	void bufferMesh();
 	ChunkMesh& getMesh();
+
+	void draw(MasterRenderer& renderer);
 
 private:
 	std::array<BlockID, CHUNK_VOLUME> m_blocks;

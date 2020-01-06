@@ -38,6 +38,7 @@
     <ClInclude Include="Source\World\Chunk\ChunkMesh.h" />
     <ClInclude Include="Source\World\Chunk\ChunkMeshBuilder.h" />
     <ClInclude Include="Source\World\Coordinates.h" />
+    <ClInclude Include="Source\World\World.h" />
     <ClInclude Include="Source\World\WorldConstants.h" />
   </ItemGroup>
   <ItemGroup>
@@ -59,9 +60,12 @@
     <ClCompile Include="Source\States\StateSplash.cpp" />
     <ClCompile Include="Source\Utils\FileUtils.cpp" />
     <ClCompile Include="Source\World\BlockTypeDatabase.cpp" />
+    <ClCompile Include="Source\World\ChunkManager.cpp" />
     <ClCompile Include="Source\World\Chunk\Chunk.cpp" />
     <ClCompile Include="Source\World\Chunk\ChunkMesh.cpp" />
     <ClCompile Include="Source\World\Chunk\ChunkMeshBuilder.cpp" />
+    <ClCompile Include="Source\World\Coordinates.cpp" />
+    <ClCompile Include="Source\World\World.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

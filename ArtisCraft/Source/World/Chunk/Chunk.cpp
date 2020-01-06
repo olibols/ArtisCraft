@@ -20,6 +20,8 @@ void Chunk::setBlock(int x, int y, int z, BlockID block)
 		isOutOfBounds(z)) {
 		return;
 	}
+	m_hasMesh = false;
+	m_isBuffered = false;
 	m_blocks[getIndex(x, y, z)] = block;
 }
 
@@ -54,6 +56,15 @@ void Chunk::bufferMesh()
 ChunkMesh & Chunk::getMesh()
 {
 	return m_mesh;
+}
+
+void Chunk::draw(MasterRenderer & renderer)
+{
+	if (m_hasMesh) {
+		if (!m_isBuffered)
+			bufferMesh();
+		renderer.drawChunk(m_mesh);
+	}
 }
 
 int Chunk::getIndex(int x, int y, int z)
