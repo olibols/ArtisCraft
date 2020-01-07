@@ -3,7 +3,7 @@
 #include "../Renderer/MasterRenderer.h"
 #include "../Entity/Player.h"
 
-#include "../World/Chunk/Chunk.h"
+#include "../World/World.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -20,6 +20,6 @@ public:
 private:
 	Player m_player;
 
-	Chunk m_chunk;
+	World m_world;
 
 };

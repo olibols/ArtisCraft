@@ -58,6 +58,11 @@ ChunkMesh & Chunk::getMesh()
 	return m_mesh;
 }
 
+bool Chunk::hasMesh()
+{
+	return m_hasMesh;
+}
+
 void Chunk::draw(MasterRenderer & renderer)
 {
 	if (m_hasMesh) {

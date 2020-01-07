@@ -37,8 +37,8 @@ struct RenderContext { // Creates the window and rendering context
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_DEPTH_TEST);
 
-		glEnable(GL_DEBUG_OUTPUT);
-		glDebugMessageCallback(MessageCallback, 0);
+		//glEnable(GL_DEBUG_OUTPUT);
+		//glDebugMessageCallback(MessageCallback, 0);
 
 		//window.setFramerateLimit(60);
 	};

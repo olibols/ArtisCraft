@@ -4,7 +4,7 @@
 #include <SFML/System/Vector3.hpp>
 
 struct ChunkPosHash {
-	std::size_t operator()(sf::Vector3i &position) const
+	const std::size_t operator()(const sf::Vector3i &position) const
 	{
 		return (position.x * 88339) ^ (position.z * 91967) ^
 			(position.z * 126323);

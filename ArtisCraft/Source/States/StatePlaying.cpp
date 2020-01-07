@@ -7,12 +7,9 @@
 #include <cstdio>
 #include <memory>
 
-StatePlaying::StatePlaying(Application & app) : StateBase(app), m_chunk({0, 0, 0})
+StatePlaying::StatePlaying(Application & app) : StateBase(app), m_world(app.getCamera())
 {
 	app.getCamera().hookEntity(m_player);
-
-	m_chunk.buildMesh();
-	m_chunk.bufferMesh();
 }
 
 void StatePlaying::update(float deltaTime)
@@ -24,7 +21,7 @@ void StatePlaying::update(float deltaTime)
 void StatePlaying::render(MasterRenderer& renderer)
 {
 	renderer.drawBlock({ 0, 0, 0 });
-	renderer.drawChunk(m_chunk.getMesh());
+	m_world.render(renderer);
 	renderer.finishRender(m_pApplication->getContext().window, m_pApplication->getCamera());
 }
 

@@ -20,6 +20,7 @@ public:
 	void buildMesh();
 	void bufferMesh();
 	ChunkMesh& getMesh();
+	bool hasMesh();
 
 	void draw(MasterRenderer& renderer);
 
