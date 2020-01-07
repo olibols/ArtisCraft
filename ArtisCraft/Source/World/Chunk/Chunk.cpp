@@ -4,12 +4,8 @@
 
 Chunk::Chunk(sf::Vector3i pos) : m_location(pos)
 {
-	for (int y = 0; y < CHUNK_SIZE; y++) {
-		for (int z = 0; z < CHUNK_SIZE; z++) {
-			for (int x = 0; x < CHUNK_SIZE; x++) {
-				setBlock(x, y, z, BlockID::Grass);
-			}
-		}
+	for (auto& block : m_blocks) {
+		block = BlockID::Air;
 	}
 }
 

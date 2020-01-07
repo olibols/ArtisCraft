@@ -38,6 +38,8 @@
     <ClInclude Include="Source\World\Coordinates.h" />
     <ClInclude Include="Source\World\ChunkManager.h" />
     <ClInclude Include="Source\World\World.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkTools.h" />
+    <ClInclude Include="Source\World\Terrain\WorldTerrain.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -110,6 +112,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Chunk\ChunkTools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
