@@ -1,8 +1,9 @@
 #include "Chunk.h"
 
 #include "ChunkMeshBuilder.h"
+#include "../ChunkManager.h"
 
-Chunk::Chunk(sf::Vector3i pos) : m_location(pos)
+Chunk::Chunk(sf::Vector3i pos, ChunkManager& cm) : m_location(pos), m_chunkManager(&cm)
 {
 	for (auto& block : m_blocks) {
 		block = BlockID::Air;
@@ -14,7 +15,8 @@ void Chunk::setBlock(int x, int y, int z, BlockID block)
 	if (isOutOfBounds(x) ||
 		isOutOfBounds(y) ||
 		isOutOfBounds(z)) {
-		return;
+		auto pos = toGlobalBlockPos({ x,y,z }, m_location);
+		m_chunkManager->setBlock(pos, block);
 	}
 	m_hasMesh = false;
 	m_isBuffered = false;
@@ -26,7 +28,8 @@ BlockID Chunk::getBlock(int x, int y, int z)
 	if (isOutOfBounds(x) ||
 		isOutOfBounds(y) ||
 		isOutOfBounds(z)) {
-		return BlockID::Air;
+		auto pos = toGlobalBlockPos({ x,y,z }, m_location);
+		return m_chunkManager->getBlock(pos);
 	}
 	return m_blocks[getIndex(x, y, z)];
 }

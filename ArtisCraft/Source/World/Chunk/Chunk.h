@@ -8,9 +8,11 @@
 #include <SFML/Graphics.hpp>
 #include <array>
 
+class ChunkManager;
+
 class Chunk {
 public:
-	Chunk(sf::Vector3i pos);
+	Chunk(sf::Vector3i pos, ChunkManager& cm);
 
 	void setBlock(int x, int y, int z, BlockID block);
 	BlockID getBlock(int x, int y, int z);
@@ -34,5 +36,5 @@ private:
 	bool m_isBuffered = false;
 
 	sf::Vector3i m_location;
-
+	ChunkManager* m_chunkManager;
 };

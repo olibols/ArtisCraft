@@ -4,7 +4,7 @@ void ChunkManager::addChunk(sf::Vector3i pos)
 {
 	auto itr = m_chunks.find(pos);
 	if (itr == m_chunks.cend()) {
-		m_chunks.emplace(std::piecewise_construct, std::forward_as_tuple(pos), std::forward_as_tuple(pos));
+		m_chunks.emplace(std::piecewise_construct, std::forward_as_tuple(pos), std::forward_as_tuple(pos, *this));
 	}
 	return;
 }
@@ -13,7 +13,7 @@ Chunk & ChunkManager::getChunk(sf::Vector3i pos)
 {
 	auto itr = m_chunks.find(pos);
 	if (itr == m_chunks.cend()) {
-		static Chunk errchunk({ 0, 0, 0 });
+		static Chunk errchunk({ 0, 0, 0 }, *this);
 		return errchunk;
 	}
 	return itr->second;
