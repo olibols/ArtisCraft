@@ -1,12 +1,12 @@
 #include "ChunkManager.h"
 
-void ChunkManager::addChunk(sf::Vector3i pos)
+Chunk& ChunkManager::addChunk(sf::Vector3i pos)
 {
 	auto itr = m_chunks.find(pos);
 	if (itr == m_chunks.cend()) {
-		m_chunks.emplace(std::piecewise_construct, std::forward_as_tuple(pos), std::forward_as_tuple(pos, *this));
+		return m_chunks.emplace(std::piecewise_construct, std::forward_as_tuple(pos), std::forward_as_tuple(pos, *this)).first->second;
 	}
-	return;
+	return itr->second;
 }
 
 Chunk & ChunkManager::getChunk(sf::Vector3i pos)
@@ -36,7 +36,7 @@ void ChunkManager::setBlock(sf::Vector3i pos, BlockID block)
 	if (itr != m_chunks.cend()) {
 		itr->second.setBlock(toLocalBlockPos(pos).x, toLocalBlockPos(pos).y, toLocalBlockPos(pos).z, block);
 	}
-	assert(itr != m_chunks.end());
+	//assert(itr != m_chunks.end());
 }
 
 bool ChunkManager::hasChunk(sf::Vector3i pos)

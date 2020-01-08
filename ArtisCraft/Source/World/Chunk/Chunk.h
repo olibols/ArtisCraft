@@ -24,6 +24,9 @@ public:
 	ChunkMesh& getMesh();
 	bool hasMesh();
 
+	bool isLoaded();
+	void setLoaded();
+
 	void draw(MasterRenderer& renderer);
 
 private:
@@ -34,6 +37,7 @@ private:
 	ChunkMesh m_mesh;
 	bool m_hasMesh = false;
 	bool m_isBuffered = false;
+	bool m_isLoaded = false;
 
 	sf::Vector3i m_location;
 	ChunkManager* m_chunkManager;

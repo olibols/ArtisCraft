@@ -62,6 +62,16 @@ bool Chunk::hasMesh()
 	return m_hasMesh;
 }
 
+bool Chunk::isLoaded()
+{
+	return m_isLoaded;
+}
+
+void Chunk::setLoaded()
+{
+	m_isLoaded = true;
+}
+
 void Chunk::draw(MasterRenderer & renderer)
 {
 	if (m_hasMesh) {

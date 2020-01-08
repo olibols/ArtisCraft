@@ -5,7 +5,7 @@
 
 class ChunkManager {
 public:
-	void addChunk(sf::Vector3i pos);
+	Chunk& addChunk(sf::Vector3i pos);
 
 	Chunk& getChunk(sf::Vector3i pos);
 

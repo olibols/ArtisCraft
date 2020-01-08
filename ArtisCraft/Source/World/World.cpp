@@ -4,35 +4,41 @@
 
 World::World(Camera& camera)
 {
-	for (int x = -2; x < 2; x++) {
-		for (int y = -1; y < 2; y++) {
-			for (int z = -2; z < 2; z++) {
-				m_chunkManager.addChunk({ x,y,z });
-				ChunkTools::fillChunk(m_chunkManager.getChunk({ x, y, z }), m_worldTerrain);
-			}
+	m_chunkManagementThread = std::thread([&]()
+	{
+		while (true) {
+			std::thread chunkload(&World::loadChunks, this, camera);
+			std::thread meshbuild(&World::buildChunks, this, camera);
+
+			//std::this_thread::sleep_for(std::chrono::duration(std::chrono::milliseconds(100)));
+			chunkload.join();
+			meshbuild.join();
 		}
-	}
-	
-	for (int i = 0; i < 4; i++) {
-		m_meshBuildThreads.emplace_back([&]()
-		{
-			loadChunks(camera);
-		});
-	}
+	});
 }
 
 void World::loadChunks(Camera & camera)
 {
-	for (int x = -2; x < 2; x++) {
-		for (int y = -2; y < 2; y++) {
-			for (int z = -2; z < 2; z++) {
-				m_mutex.lock();
-				if (!m_chunkManager.getChunk({ x,y,z }).hasMesh()) {
-					m_chunkManager.getChunk({ x,y,z }).buildMesh();
+	sf::Vector3i pos = toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z, });
+	for(int x = pos.x - 2; x < pos.x + 2; x++)
+		for(int y = pos.y - 2; y < pos.y + 2; y++)
+			for (int z = pos.z - 2; z < pos.z + 2; z++) {
+				auto& chunk = m_chunkManager.addChunk({ x,y,z });
+				if (!chunk.isLoaded()) {
+					ChunkTools::fillChunk(chunk, m_worldTerrain);
+					chunk.setLoaded();
 				}
-				m_mutex.unlock();
-			}
+	}
+}
+
+void World::buildChunks(Camera & camera)
+{
+	for (auto& chunk : m_chunkManager.getChunks()) {
+		m_mutex.lock();
+		if (!chunk.second.hasMesh()) {
+			chunk.second.buildMesh();
 		}
+		m_mutex.unlock();
 	}
 }
 

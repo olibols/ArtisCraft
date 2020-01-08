@@ -13,15 +13,20 @@ public:
 	World(Camera& camera);
 
 	void loadChunks(Camera& camera);
+	void buildChunks(Camera& camera);
 
 	void render(MasterRenderer& renderer);
 
 	void setBlock(int x, int y, int z, BlockID block);
 	BlockID getBlock(int x, int y, int z);
+
 private:
 	ChunkManager m_chunkManager;
 	WorldTerrain m_worldTerrain;
 
-	std::vector<std::thread> m_meshBuildThreads;
+	int m_loadDistance = 2;
+
+	std::thread m_chunkManagementThread;
+	std::thread m_meshBuildThread;
 	std::mutex m_mutex;
 };
