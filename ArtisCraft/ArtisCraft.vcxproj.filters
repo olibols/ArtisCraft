@@ -117,5 +117,8 @@
     <ClCompile Include="Source\World\Chunk\ChunkTools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\World\Terrain\WorldTerrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

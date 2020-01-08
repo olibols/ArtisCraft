@@ -4,8 +4,7 @@ void ChunkManager::addChunk(sf::Vector3i pos)
 {
 	auto itr = m_chunks.find(pos);
 	if (itr == m_chunks.cend()) {
-		m_chunks.emplace(std::piecewise_construct, std::forward_as_tuple(pos),
-			std::forward_as_tuple(pos));
+		m_chunks.emplace(std::piecewise_construct, std::forward_as_tuple(pos), std::forward_as_tuple(pos));
 	}
 	return;
 }
@@ -27,6 +26,7 @@ BlockID ChunkManager::getBlock(sf::Vector3i pos)
 	if (itr == m_chunks.cend()) {
 		return BlockID::ERR_TYPE;
 	}
+	return itr->second.getBlock(chunkPos.x, chunkPos.y, chunkPos.z);
 }
 
 void ChunkManager::setBlock(sf::Vector3i pos, BlockID block)

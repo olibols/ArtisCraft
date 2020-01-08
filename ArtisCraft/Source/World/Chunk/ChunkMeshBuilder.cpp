@@ -19,22 +19,22 @@ ChunkMesh buildChunkMesh(Chunk & chunk)
 
 					BlockID checkblock = chunk.getBlock(x - 1, y, z);
 					if (checkblock == BlockID::Air) {
-						chunkmesh.addFace({ QuadPrimitive::LEFT_FACE, BlockTypeDatabase::get().getColor(block) }, { x, y, z });
+						chunkmesh.addFace({ QuadPrimitive::LEFT_FACE, BlockTypeDatabase::get().getColor(block) * glm::vec3(0.8) }, { x, y, z });
 					}
 
 					checkblock = chunk.getBlock(x + 1, y, z);
 					if (checkblock == BlockID::Air) {
-						chunkmesh.addFace({ QuadPrimitive::RIGHT_FACE, BlockTypeDatabase::get().getColor(block) }, { x, y, z });
+						chunkmesh.addFace({ QuadPrimitive::RIGHT_FACE, BlockTypeDatabase::get().getColor(block) * glm::vec3(0.8) }, { x, y, z });
 					}
 
 					checkblock = chunk.getBlock(x, y, z + 1);
 					if (checkblock == BlockID::Air) {
-						chunkmesh.addFace({ QuadPrimitive::FRONT_FACE, BlockTypeDatabase::get().getColor(block) }, { x, y, z });
+						chunkmesh.addFace({ QuadPrimitive::FRONT_FACE, BlockTypeDatabase::get().getColor(block) * glm::vec3(0.6) }, { x, y, z });
 					}
 
 					checkblock = chunk.getBlock(x, y, z - 1);
 					if (checkblock == BlockID::Air) {
-						chunkmesh.addFace({ QuadPrimitive::BACK_FACE, BlockTypeDatabase::get().getColor(block) }, { x, y, z });
+						chunkmesh.addFace({ QuadPrimitive::BACK_FACE, BlockTypeDatabase::get().getColor(block) * glm::vec3(0.6) }, { x, y, z });
 					}
 
 					checkblock = chunk.getBlock(x, y + 1, z);
@@ -44,7 +44,7 @@ ChunkMesh buildChunkMesh(Chunk & chunk)
 
 					checkblock = chunk.getBlock(x, y - 1, z);
 					if (checkblock == BlockID::Air) {
-						chunkmesh.addFace({ QuadPrimitive::BOTTOM_FACE, BlockTypeDatabase::get().getColor(block) }, { x, y, z });
+						chunkmesh.addFace({ QuadPrimitive::BOTTOM_FACE, BlockTypeDatabase::get().getColor(block) * glm::vec3(0.4) }, { x, y, z });
 					}
 				}
 			}

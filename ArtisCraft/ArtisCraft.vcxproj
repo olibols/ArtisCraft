@@ -68,6 +68,7 @@
     <ClCompile Include="Source\World\Chunk\ChunkMeshBuilder.cpp" />
     <ClCompile Include="Source\World\Chunk\ChunkTools.cpp" />
     <ClCompile Include="Source\World\Coordinates.cpp" />
+    <ClCompile Include="Source\World\Terrain\WorldTerrain.cpp" />
     <ClCompile Include="Source\World\World.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

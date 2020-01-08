@@ -5,13 +5,10 @@
 World::World(Camera& camera)
 {
 	for (int x = -2; x < 2; x++) {
-		for (int y = -2; y < 2; y++) {
+		for (int y = -1; y < 2; y++) {
 			for (int z = -2; z < 2; z++) {
 				m_chunkManager.addChunk({ x,y,z });
-
-				if (y < 0) {
-					ChunkTools::fillChunk(m_chunkManager.getChunk({ x, y, z }), BlockID::Grass);
-				}
+				ChunkTools::fillChunk(m_chunkManager.getChunk({ x, y, z }), m_worldTerrain);
 			}
 		}
 	}
@@ -44,4 +41,14 @@ void World::render(MasterRenderer & renderer)
 	for (auto& chunk : m_chunkManager.getChunks()) {
 		chunk.second.draw(renderer);
 	}
+}
+
+void World::setBlock(int x, int y, int z, BlockID block)
+{
+	m_chunkManager.setBlock({ x,y,z }, block);
+}
+
+BlockID World::getBlock(int x, int y, int z)
+{
+	return m_chunkManager.getBlock({ x,y,z });
 }
