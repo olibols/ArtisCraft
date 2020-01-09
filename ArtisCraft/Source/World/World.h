@@ -26,6 +26,8 @@ private:
 
 	int m_loadDistance = 2;
 
+	std::vector<Chunk*> m_chunkUpdates;
+
 	std::thread m_chunkManagementThread;
 	std::thread m_meshBuildThread;
 	std::mutex m_mutex;

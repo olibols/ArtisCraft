@@ -19,7 +19,6 @@ void Chunk::setBlock(int x, int y, int z, BlockID block)
 		m_chunkManager->setBlock(pos, block);
 	}
 	m_hasMesh = false;
-	m_isBuffered = false;
 	m_blocks[getIndex(x, y, z)] = block;
 }
 

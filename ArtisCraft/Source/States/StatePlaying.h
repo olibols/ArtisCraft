@@ -19,7 +19,8 @@ public:
 
 private:
 	Player m_player;
-
 	World m_world;
+
+	sf::Clock m_inputTimer;
 
 };

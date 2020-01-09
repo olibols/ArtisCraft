@@ -31,6 +31,7 @@
     <ClInclude Include="Source\States\StatePlaying.h" />
     <ClInclude Include="Source\States\StateSplash.h" />
     <ClInclude Include="Source\Utils\FileUtils.h" />
+    <ClInclude Include="Source\Utils\Ray.h" />
     <ClInclude Include="Source\World\BlockID.h" />
     <ClInclude Include="Source\World\BlockTypeDatabase.h" />
     <ClInclude Include="Source\World\ChunkManager.h" />
@@ -39,6 +40,7 @@
     <ClInclude Include="Source\World\Chunk\ChunkMeshBuilder.h" />
     <ClInclude Include="Source\World\Chunk\ChunkTools.h" />
     <ClInclude Include="Source\World\Coordinates.h" />
+    <ClInclude Include="Source\World\Event\BaseEvent.h" />
     <ClInclude Include="Source\World\Terrain\WorldTerrain.h" />
     <ClInclude Include="Source\World\World.h" />
     <ClInclude Include="Source\World\WorldConstants.h" />
@@ -61,6 +63,7 @@
     <ClCompile Include="Source\States\StatePlaying.cpp" />
     <ClCompile Include="Source\States\StateSplash.cpp" />
     <ClCompile Include="Source\Utils\FileUtils.cpp" />
+    <ClCompile Include="Source\Utils\Ray.cpp" />
     <ClCompile Include="Source\World\BlockTypeDatabase.cpp" />
     <ClCompile Include="Source\World\ChunkManager.cpp" />
     <ClCompile Include="Source\World\Chunk\Chunk.cpp" />

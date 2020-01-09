@@ -2,6 +2,7 @@
 #include "../Application.h"
 #include "../Renderer/MasterRenderer.h"
 #include "../Renderer/BlockRenderer.h"
+#include "../Utils/Ray.h"
 
 #include <SFML/OpenGL.hpp>
 #include <cstdio>
@@ -15,9 +16,23 @@ StatePlaying::StatePlaying(Application & app) : StateBase(app), m_world(app.getC
 void StatePlaying::update(float deltaTime)
 {
 	m_player.update(deltaTime);
-	//printf("%f %f %f \n", m_player.position.x, m_player.position.y, m_player.position.z);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
-		m_world.setBlock(0, 0, 0, BlockID::Air);
+	
+	for (Ray ray(m_player.position, m_player.rotation); ray.getLength() < 6; ray.step(0.1)){
+		auto x = ray.getEnd().x;
+		auto y = ray.getEnd().y;
+		auto z = ray.getEnd().z;
+
+		auto block = m_world.getBlock(x, y, z);
+
+		if (m_inputTimer.getElapsedTime().asSeconds() > 0.2) {
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+				m_inputTimer.restart();
+				auto block = m_world.getBlock(x, y, z);
+				if (block != BlockID::Air && block != BlockID::ERR_TYPE) {
+					m_world.setBlock(x, y, z, BlockID::Air);
+				}
+			}
+		}
 	}
 }
 

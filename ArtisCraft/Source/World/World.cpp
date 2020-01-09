@@ -21,13 +21,15 @@ void World::loadChunks(Camera & camera)
 {
 	sf::Vector3i pos = toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z, });
 	for(int x = pos.x - 2; x < pos.x + 2; x++)
-		for(int y = pos.y - 2; y < pos.y + 2; y++)
+		for(int y = pos.y - 1; y < pos.y + 1; y++)
 			for (int z = pos.z - 2; z < pos.z + 2; z++) {
+				m_mutex.lock();
 				auto& chunk = m_chunkManager.addChunk({ x,y,z });
 				if (!chunk.isLoaded()) {
 					ChunkTools::fillChunk(chunk, m_worldTerrain);
 					chunk.setLoaded();
 				}
+				m_mutex.unlock();
 	}
 }
 
