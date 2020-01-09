@@ -14,7 +14,6 @@ ChunkMesh buildChunkMesh(Chunk & chunk)
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 
 				BlockID block = chunk.getBlock(x, y, z);
-
 				if (block != BlockID::Air) {
 
 					BlockID checkblock = chunk.getBlock(x - 1, y, z);

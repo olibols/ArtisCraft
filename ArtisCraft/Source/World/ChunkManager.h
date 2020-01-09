@@ -2,6 +2,7 @@
 
 #include "Chunk/Chunk.h"
 #include "Coordinates.h"
+#include "Terrain/WorldTerrain.h"
 
 class ChunkManager {
 public:
@@ -15,7 +16,7 @@ public:
 	bool hasChunk(sf::Vector3i pos);
 	bool hasNeighbours(sf::Vector3i pos);
 
-	void buildNeighbours(sf::Vector3i pos);
+	void buildNeighbours(sf::Vector3i pos, WorldTerrain& terrain);
 
 	ChunkPosMap<Chunk>& getChunks();
 

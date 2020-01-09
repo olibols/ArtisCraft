@@ -1,4 +1,5 @@
 #include "ChunkManager.h"
+#include "Chunk/ChunkTools.h"
 
 Chunk& ChunkManager::addChunk(sf::Vector3i pos)
 {
@@ -56,16 +57,16 @@ bool ChunkManager::hasNeighbours(sf::Vector3i pos)
 		hasChunk({ cp.x, cp.y, cp.z + 1 });
 }
 
-void ChunkManager::buildNeighbours(sf::Vector3i pos)
+void ChunkManager::buildNeighbours(sf::Vector3i pos, WorldTerrain& terrain)
 {
 	const auto &cp = pos;
-	addChunk(cp);
-	addChunk({ cp.x, cp.y + 1, cp.z });
-	addChunk({ cp.x, cp.y - 1, cp.z });
-	addChunk({ cp.x - 1, cp.y, cp.z });
-	addChunk({ cp.x + 1, cp.y, cp.z });
-	addChunk({ cp.x, cp.y, cp.z - 1 });
-	addChunk({ cp.x, cp.y, cp.z + 1 });
+	ChunkTools::fillChunk(addChunk(cp), terrain);
+	ChunkTools::fillChunk(addChunk({ cp.x, cp.y + 1, cp.z }), terrain);
+	ChunkTools::fillChunk(addChunk({ cp.x, cp.y - 1, cp.z }), terrain);
+	ChunkTools::fillChunk(addChunk({ cp.x - 1, cp.y, cp.z }), terrain);
+	ChunkTools::fillChunk(addChunk({ cp.x + 1, cp.y, cp.z }), terrain);
+	ChunkTools::fillChunk(addChunk({ cp.x, cp.y, cp.z - 1 }), terrain);
+	ChunkTools::fillChunk(addChunk({ cp.x, cp.y, cp.z + 1 }), terrain);
 }
 
 ChunkPosMap<Chunk>& ChunkManager::getChunks()
