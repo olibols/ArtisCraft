@@ -22,5 +22,5 @@ private:
 	World m_world;
 
 	sf::Clock m_inputTimer;
-
+	glm::vec3 m_rayPos;
 };
