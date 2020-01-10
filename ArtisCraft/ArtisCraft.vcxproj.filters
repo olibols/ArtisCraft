@@ -42,6 +42,7 @@
     <ClInclude Include="Source\World\Terrain\WorldTerrain.h" />
     <ClInclude Include="Source\Utils\Ray.h" />
     <ClInclude Include="Source\World\Event\BaseEvent.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkBlock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -123,6 +124,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Utils\Ray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Chunk\ChunkBlock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

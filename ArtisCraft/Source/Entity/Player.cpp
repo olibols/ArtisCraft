@@ -50,7 +50,7 @@ void Player::keyboardInput()
 	float speed = 0.5;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-		speed = 1.5;
+		speed = 10.0;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))

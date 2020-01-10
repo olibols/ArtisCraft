@@ -18,8 +18,23 @@ public:
 
 	void buildNeighbours(sf::Vector3i pos, WorldTerrain& terrain);
 
+
+	void updateLoadList(Camera& cam);
+	void updateSetupList(Camera& cam, WorldTerrain& terrain);
+	void updateRenderList(Camera& cam);
+
+	std::vector<Chunk*>& getLoadlist();
+	std::vector<Chunk*>& getSetuplist();
+	std::vector<Chunk*>& getRenderlist();
+
 	ChunkPosMap<Chunk>& getChunks();
 
 private:
 	ChunkPosMap<Chunk> m_chunks;
+
+	std::vector<Chunk*> m_loadList;
+	std::vector<Chunk*> m_setupList;
+	std::vector<Chunk*> m_renderlist;
+
+	int m_loadDistance = 2;
 };

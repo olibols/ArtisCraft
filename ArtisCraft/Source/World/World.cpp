@@ -19,11 +19,11 @@ World::World(Camera& camera)
 
 void World::loadChunks(Camera & camera)
 {
-	sf::Vector3i pos = toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z, });
+	/*sf::Vector3i pos = toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z, });
 	bool chunkBuilt = false;
-	for (int i = 1; i < m_loadDistance; i++) {
-		sf::Vector3i min = {pos.x - i, pos.y - std::max(i/2, 1), pos.z - i};
-		sf::Vector3i max = {pos.x + i, pos.y + std::max(i/2, 1), pos.z + i};
+	for (int i = 0; i < m_loadDistance; i++) {
+		sf::Vector3i min = {pos.x - i, pos.y - std::max(i/3, 1), pos.z - i};
+		sf::Vector3i max = {pos.x + i, pos.y + std::max(i/3, 1), pos.z + i};
 
 		for (int x = min.x; x < max.x; x++) {
 			for (int y = min.y; y < max.y; y++) {
@@ -41,18 +41,24 @@ void World::loadChunks(Camera & camera)
 		}
 	}
 	if(!chunkBuilt)m_loadDistance++;
-	if(m_loadDistance >= 16) m_loadDistance = 2;
+	if(m_loadDistance >= 16) m_loadDistance = 2;*/
+
+	m_chunkManager.updateLoadList(camera);
+
+	for (auto& chunk : m_chunkManager.getLoadlist()) {
+		ChunkTools::fillChunk(*chunk, m_worldTerrain);
+	}
 }
 
 void World::buildChunks(Camera & camera)
 {
+	m_mutex.lock();
 	for (auto& chunk : m_chunkManager.getChunks()) {
-		m_mutex.lock();
 		if (!chunk.second.hasMesh()) {
 			chunk.second.buildMesh();
 		}
-		m_mutex.unlock();
 	}
+	m_mutex.unlock();
 }
 
 void World::render(MasterRenderer & renderer)

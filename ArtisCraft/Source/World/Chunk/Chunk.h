@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../BlockID.h"
+#include "ChunkBlock.h"
 #include "../WorldConstants.h"
 #include "ChunkMesh.h"
 #include "../../Renderer/MasterRenderer.h"
@@ -30,7 +31,7 @@ public:
 	void draw(MasterRenderer& renderer);
 
 private:
-	std::array<BlockID, CHUNK_VOLUME> m_blocks;
+	std::array<ChunkBlock, CHUNK_VOLUME> m_blocks;
 	int getIndex(int x, int y, int z);
 	bool isOutOfBounds(int index);
 

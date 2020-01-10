@@ -24,11 +24,10 @@ private:
 	ChunkManager m_chunkManager;
 	WorldTerrain m_worldTerrain;
 
-	int m_loadDistance = 2;
-
 	std::vector<Chunk*> m_chunkUpdates;
 
 	std::thread m_chunkManagementThread;
 	std::thread m_meshBuildThread;
+	std::thread m_chunkLoadThread;
 	std::mutex m_mutex;
 };

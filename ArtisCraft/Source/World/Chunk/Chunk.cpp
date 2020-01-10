@@ -4,11 +4,7 @@
 #include "../ChunkManager.h"
 
 Chunk::Chunk(sf::Vector3i pos, ChunkManager& cm) : m_location(pos), m_chunkManager(&cm)
-{
-	for (auto& block : m_blocks) {
-		block = BlockID::Air;
-	}
-}
+{}
 
 void Chunk::setBlock(int x, int y, int z, BlockID block)
 {
@@ -30,7 +26,7 @@ BlockID Chunk::getBlock(int x, int y, int z)
 		auto pos = toGlobalBlockPos({ x,y,z }, m_location);
 		return m_chunkManager->getBlock(pos);
 	}
-	return m_blocks[getIndex(x, y, z)];
+	return m_blocks[getIndex(x, y, z)].id;
 }
 
 sf::Vector3i Chunk::getLocation()

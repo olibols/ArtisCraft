@@ -6,5 +6,6 @@ enum class BlockID : uint8_t {
 	Grass,
 
 	ERR_TYPE,
+	FULL_CHUNKTYPE,
 	MAX_TYPE
 };
