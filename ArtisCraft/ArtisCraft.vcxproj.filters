@@ -43,6 +43,8 @@
     <ClInclude Include="Source\Utils\Ray.h" />
     <ClInclude Include="Source\World\Event\BaseEvent.h" />
     <ClInclude Include="Source\World\Chunk\ChunkBlock.h" />
+    <ClInclude Include="Source\World\Terrain\Generators\NoiseWrapper.h" />
+    <ClInclude Include="Source\World\Terrain\Generators\FastNoise.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -127,6 +129,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\Chunk\ChunkBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Terrain\Generators\FastNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Terrain\Generators\NoiseWrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

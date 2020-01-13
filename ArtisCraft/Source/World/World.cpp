@@ -2,19 +2,32 @@
 
 #include "Chunk/ChunkTools.h"
 
-World::World(Camera& camera)
+World::World(Camera& camera) : m_worldTerrain(m_seed)
 {
-	m_chunkManagementThread = std::thread([&]()
+	/*m_chunkManagementThread = std::thread([&]()
 	{
 		while (true) {
-			std::thread chunkload(&World::loadChunks, this, camera);
+			//std::thread chunkload(&World::loadChunks, this, camera);
 			std::thread meshbuild(&World::buildChunks, this, camera);
 
 			//std::this_thread::sleep_for(std::chrono::duration(std::chrono::milliseconds(100)));
-			chunkload.join();
+			//chunkload.join();
 			meshbuild.join();
 		}
+	});*/
+
+	m_meshBuildThread = std::thread([&]() {
+		while (true) {
+			buildChunks(camera);
+		}
 	});
+
+	m_chunkLoadThread = std::thread([&]() {
+		while (true) {
+			loadChunks(camera);
+		}
+	});
+
 }
 
 void World::loadChunks(Camera & camera)
@@ -42,12 +55,13 @@ void World::loadChunks(Camera & camera)
 	}
 	if(!chunkBuilt)m_loadDistance++;
 	if(m_loadDistance >= 16) m_loadDistance = 2;*/
-
+	m_mutex.lock();
 	m_chunkManager.updateLoadList(camera);
-
+	
 	for (auto& chunk : m_chunkManager.getLoadlist()) {
 		ChunkTools::fillChunk(*chunk, m_worldTerrain);
 	}
+	m_mutex.unlock();
 }
 
 void World::buildChunks(Camera & camera)
@@ -55,7 +69,9 @@ void World::buildChunks(Camera & camera)
 	m_mutex.lock();
 	for (auto& chunk : m_chunkManager.getChunks()) {
 		if (!chunk.second.hasMesh()) {
+			sf::Clock clock;
 			chunk.second.buildMesh();
+			printf("Took %f seconds to build mesh! \n", clock.getElapsedTime().asSeconds());
 		}
 	}
 	m_mutex.unlock();

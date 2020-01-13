@@ -75,7 +75,11 @@ void ChunkManager::updateLoadList(Camera & cam)
 	for (int x = pos.x - 2; x < pos.x + 2; x++) {
 		for (int y = pos.y - 2; y < pos.y + 2; y++) {
 			for (int z = pos.z - 2; z < pos.z + 2; z++) {
-				addChunk({ x,y,z });
+				sf::Clock clock;
+				Chunk& chunk = addChunk({ x,y,z });
+				if (!chunk.isLoaded()) {
+					m_loadList.push_back(&chunk);
+				}
 			}
 		}
 	}
@@ -83,7 +87,6 @@ void ChunkManager::updateLoadList(Camera & cam)
 
 void ChunkManager::updateSetupList(Camera & cam, WorldTerrain& terrain)
 {
-
 }
 
 void ChunkManager::updateRenderList(Camera & cam)

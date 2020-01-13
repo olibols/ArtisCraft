@@ -15,7 +15,9 @@ void Chunk::setBlock(int x, int y, int z, BlockID block)
 		m_chunkManager->setBlock(pos, block);
 	}
 	m_hasMesh = false;
+	m_hasBlocks = true;
 	m_blocks[getIndex(x, y, z)] = block;
+	m_layers[y].update(block);
 }
 
 BlockID Chunk::getBlock(int x, int y, int z)
@@ -27,6 +29,11 @@ BlockID Chunk::getBlock(int x, int y, int z)
 		return m_chunkManager->getBlock(pos);
 	}
 	return m_blocks[getIndex(x, y, z)].id;
+}
+
+Chunk & Chunk::getAdjChunk(int x, int y, int z)
+{
+	return m_chunkManager->getChunk({ m_location.x + x, m_location.y + y, m_location.x + z });
 }
 
 sf::Vector3i Chunk::getLocation()
@@ -57,6 +64,19 @@ bool Chunk::hasMesh()
 	return m_hasMesh;
 }
 
+Layer Chunk::getLayer(int y)
+{
+	if (y == -1) {
+		return m_chunkManager->getChunk({m_location.x, m_location.y - 1, m_location.z}).getLayer(CHUNK_SIZE - 1);
+	}
+	else if (y == CHUNK_SIZE) {
+		return m_chunkManager->getChunk({ m_location.x, m_location.y + 1, m_location.z }).getLayer(0);
+	}
+	else {
+		return m_layers[y];
+	}
+}
+
 bool Chunk::isLoaded()
 {
 	return m_isLoaded;
@@ -65,6 +85,11 @@ bool Chunk::isLoaded()
 void Chunk::setLoaded()
 {
 	m_isLoaded = true;
+}
+
+bool Chunk::hasBlocks()
+{
+	return m_hasBlocks;
 }
 
 void Chunk::draw(MasterRenderer & renderer)

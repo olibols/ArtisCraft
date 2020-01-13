@@ -5,11 +5,32 @@
 #include "Chunk.h"
 #include "../BlockTypeDatabase.h"
 
+bool isAdjSolid(int x, int y, int z, Chunk& chunk) {
+	Chunk& ochunk = chunk.getAdjChunk(x, y, z);
+	return ochunk.getLayer(y).isSolid();
+}
+
+bool shouldMakeLayer(int y, Chunk& chunk) {
+	return	((!chunk.getLayer(y).isSolid())		||
+			(!chunk.getLayer(y + 1).isSolid())	||
+			(!chunk.getLayer(y - 1).isSolid())	||
+
+			(!isAdjSolid(1, y, 0, chunk)) ||
+			(!isAdjSolid(0, y, 1, chunk)) ||
+			(!isAdjSolid(-1, y, 0, chunk)) ||
+			(!isAdjSolid(0, y, -1, chunk))
+		);
+}
+
 ChunkMesh buildChunkMesh(Chunk & chunk)
 {
 	ChunkMesh chunkmesh;
+	if (!chunk.hasBlocks())
+		return chunkmesh;
+
 	chunkmesh.worldPos = chunk.getLocation();
 	for (int y = 0; y < CHUNK_SIZE; y++) {
+		shouldMakeLayer(y, chunk);
 		for (int z = 0; z < CHUNK_SIZE; z++) {
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 

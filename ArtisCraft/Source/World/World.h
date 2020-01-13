@@ -24,6 +24,8 @@ private:
 	ChunkManager m_chunkManager;
 	WorldTerrain m_worldTerrain;
 
+	int m_seed = 10;
+
 	std::vector<Chunk*> m_chunkUpdates;
 
 	std::thread m_chunkManagementThread;
