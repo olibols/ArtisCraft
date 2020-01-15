@@ -13,7 +13,7 @@ public:
 	World(Camera& camera);
 
 	void loadChunks(Camera& camera);
-	void buildChunks(Camera& camera);
+	void loadChunk(sf::Vector3i pos);
 
 	void render(MasterRenderer& renderer);
 
@@ -25,6 +25,7 @@ private:
 	WorldTerrain m_worldTerrain;
 
 	int m_seed = 10;
+	int m_loadDistance = 2;
 
 	std::vector<Chunk*> m_chunkUpdates;
 

@@ -1,6 +1,10 @@
 #include "ChunkManager.h"
 #include "Chunk/ChunkTools.h"
 
+ChunkManager::ChunkManager(WorldTerrain& terrain) : m_terrain(&terrain)
+{
+}
+
 Chunk& ChunkManager::addChunk(sf::Vector3i pos)
 {
 	auto itr = m_chunks.find(pos);
@@ -10,12 +14,21 @@ Chunk& ChunkManager::addChunk(sf::Vector3i pos)
 	return itr->second;
 }
 
+void ChunkManager::makeMesh(sf::Vector3i pos)
+{
+	for(int nx = -1; nx <= 1; nx++)
+	for(int ny = -1; ny <= 1; ny++)
+		for (int nz = -1; nz <= 1; nz++) {
+			m_terrain->buildChunk(&addChunk({ pos.x + nx, pos.y + ny, pos.z + nz }));
+	}
+	getChunk(pos).buildMesh();
+}
+
 Chunk & ChunkManager::getChunk(sf::Vector3i pos)
 {
 	auto itr = m_chunks.find(pos);
 	if (itr == m_chunks.cend()) {
-		static Chunk errchunk({ 0, 0, 0 }, *this);
-		return errchunk;
+		return addChunk(pos);
 	}
 	return itr->second;
 }
@@ -25,7 +38,7 @@ BlockID ChunkManager::getBlock(sf::Vector3i pos)
 	sf::Vector3i chunkPos = toChunkPos(pos);
 	auto itr = m_chunks.find(chunkPos);
 	if (itr == m_chunks.cend()) {
-		return BlockID::ERR_TYPE;
+		return BlockID::Air;
 	}
 	return itr->second.getBlock(chunkPos.x, chunkPos.y, chunkPos.z);
 }
@@ -59,53 +72,13 @@ bool ChunkManager::hasNeighbours(sf::Vector3i pos)
 void ChunkManager::buildNeighbours(sf::Vector3i pos, WorldTerrain& terrain)
 {
 	const auto &cp = pos;
-	ChunkTools::fillChunk(addChunk(cp), terrain);
-	ChunkTools::fillChunk(addChunk({ cp.x, cp.y + 1, cp.z }), terrain);
-	ChunkTools::fillChunk(addChunk({ cp.x, cp.y - 1, cp.z }), terrain);
-	ChunkTools::fillChunk(addChunk({ cp.x - 1, cp.y, cp.z }), terrain);
-	ChunkTools::fillChunk(addChunk({ cp.x + 1, cp.y, cp.z }), terrain);
-	ChunkTools::fillChunk(addChunk({ cp.x, cp.y, cp.z - 1 }), terrain);
-	ChunkTools::fillChunk(addChunk({ cp.x, cp.y, cp.z + 1 }), terrain);
-}
-
-void ChunkManager::updateLoadList(Camera & cam)
-{
-	sf::Vector3i pos = toChunkPos({ (int)cam.position.x, (int)cam.position.y, (int)cam.position.z, });
-	
-	for (int x = pos.x - 2; x < pos.x + 2; x++) {
-		for (int y = pos.y - 2; y < pos.y + 2; y++) {
-			for (int z = pos.z - 2; z < pos.z + 2; z++) {
-				sf::Clock clock;
-				Chunk& chunk = addChunk({ x,y,z });
-				if (!chunk.isLoaded()) {
-					m_loadList.push_back(&chunk);
-				}
-			}
-		}
-	}
-}
-
-void ChunkManager::updateSetupList(Camera & cam, WorldTerrain& terrain)
-{
-}
-
-void ChunkManager::updateRenderList(Camera & cam)
-{
-}
-
-std::vector<Chunk*>& ChunkManager::getLoadlist()
-{
-	return m_loadList;
-}
-
-std::vector<Chunk*>& ChunkManager::getSetuplist()
-{
-	return m_setupList;
-}
-
-std::vector<Chunk*>& ChunkManager::getRenderlist()
-{
-	return m_renderlist;
+	terrain.buildChunk(&addChunk(cp));
+	terrain.buildChunk(&addChunk({ cp.x, cp.y + 1, cp.z }));
+	terrain.buildChunk(&addChunk({ cp.x, cp.y - 1, cp.z }));
+	terrain.buildChunk(&addChunk({ cp.x - 1, cp.y, cp.z }));
+	terrain.buildChunk(&addChunk({ cp.x + 1, cp.y, cp.z }));
+	terrain.buildChunk(&addChunk({ cp.x, cp.y, cp.z - 1 }));
+	terrain.buildChunk(&addChunk({ cp.x, cp.y, cp.z + 1 }));
 }
 
 ChunkPosMap<Chunk>& ChunkManager::getChunks()

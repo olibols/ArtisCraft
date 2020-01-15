@@ -27,7 +27,7 @@ void StatePlaying::update(float deltaTime)
 				m_inputTimer.restart();
 				auto block = m_world.getBlock(x, y, z);
 				if (block != BlockID::Air && block != BlockID::ERR_TYPE) {
-					m_world.setBlock(m_rayPos.x, m_rayPos.y, m_rayPos.z, BlockID::Grass);
+					m_world.setBlock(x, y, z, BlockID::Grass);
 				}
 				break;
 			}
