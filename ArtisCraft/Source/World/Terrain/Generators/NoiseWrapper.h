@@ -5,12 +5,12 @@ struct NoiseParams {
 	FastNoise::NoiseType NoiseType = FastNoise::PerlinFractal;
 	FastNoise::FractalType FractalType = FastNoise::FBM;
 
-	float Frequency = 0.006;
-	float Octaves = 5;
+	float Frequency = 0.06;
+	float Octaves = 3;
 	float Lacunarity = 2;
 	float Gain = 0.3;
-	float Amplitude = 130;
-	float Offset = -60;
+	float Amplitude = 150;
+	float Offset = 5;
 };
 
 class NoiseWrapper {
@@ -34,5 +34,4 @@ private:
 	FastNoise m_noiseGen;
 
 	NoiseParams m_params;
-
 };

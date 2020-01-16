@@ -24,7 +24,7 @@ private:
 	ChunkManager m_chunkManager;
 	WorldTerrain m_worldTerrain;
 
-	int m_seed = 10;
+	int m_seed;
 	int m_loadDistance = 2;
 
 	std::vector<Chunk*> m_chunkUpdates;

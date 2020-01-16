@@ -38,7 +38,7 @@ BlockID ChunkManager::getBlock(sf::Vector3i pos)
 	sf::Vector3i chunkPos = toChunkPos(pos);
 	auto itr = m_chunks.find(chunkPos);
 	if (itr == m_chunks.cend()) {
-		return BlockID::Air;
+		return BlockID::ERR_TYPE;
 	}
 	return itr->second.getBlock(chunkPos.x, chunkPos.y, chunkPos.z);
 }

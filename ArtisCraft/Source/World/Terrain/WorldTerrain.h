@@ -3,6 +3,8 @@
 #include "../BlockID.h"
 #include "Generators/NoiseWrapper.h"
 
+#include "../Coordinates.h"
+
 class Chunk;
 struct GenResults;
 
@@ -16,8 +18,7 @@ public:
 
 private:
 	NoiseWrapper m_mainHeightmap;
-
 	int m_seed;
-
-	GenResults shouldGen(Chunk* chunk);
+	
+	bool shouldBuild(Chunk* chunk);
 };

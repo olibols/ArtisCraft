@@ -2,7 +2,7 @@
 
 #include "Chunk/ChunkTools.h"
 
-World::World(Camera& camera) : m_seed(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())),m_worldTerrain(m_seed), m_chunkManager(m_worldTerrain)
+World::World(Camera& camera) : m_seed(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())), m_worldTerrain(m_seed), m_chunkManager(m_worldTerrain)
 {
 	m_chunkLoadThread = std::thread([&]() {
 		while (true) {
@@ -25,7 +25,11 @@ void World::loadChunks(Camera & camera)
 					m_mutex.lock();
 					auto& chunk = m_chunkManager.addChunk({x,y,z});
 					if (!chunk.isLoaded()) {
-						m_worldTerrain.buildChunk(&chunk);
+						m_chunkManager.buildNeighbours(chunk.getLocation(), m_worldTerrain);
+						chunk.buildMesh();
+						chunkBuilt = true;
+					}
+					if (!chunk.hasMesh()) {
 						chunk.buildMesh();
 						chunkBuilt = true;
 					}
