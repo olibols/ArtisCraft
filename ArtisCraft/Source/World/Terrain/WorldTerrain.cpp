@@ -55,7 +55,7 @@ void WorldTerrain::buildChunk(Chunk* chunk)
 bool WorldTerrain::shouldBuild(Chunk * chunk)
 {
 	sf::Vector3i pos = chunk->getLocation() * CHUNK_SIZE;
-	if (pos.y < m_mainHeightmap.GetHeight(pos.x, pos.z) - CHUNK_SIZE){
+	if (pos.y < m_mainHeightmap.GetHeight(pos.x, pos.z) - CHUNK_SIZE*2){
 		return false;
 	}
 	return true;

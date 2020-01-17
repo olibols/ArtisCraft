@@ -15,22 +15,24 @@ public:
 	void loadChunks(Camera& camera);
 	void loadChunk(sf::Vector3i pos);
 
+	void processUpdates();
+
 	void render(MasterRenderer& renderer);
 
 	void setBlock(int x, int y, int z, BlockID block);
+	void psetBlock(int x, int y, int z, BlockID block);
 	BlockID getBlock(int x, int y, int z);
 
 private:
 	ChunkManager m_chunkManager;
 	WorldTerrain m_worldTerrain;
 
+	std::vector<Chunk*> m_chunkUpdates;
+
 	int m_seed;
 	int m_loadDistance = 2;
 
-	std::vector<Chunk*> m_chunkUpdates;
-
-	std::thread m_chunkManagementThread;
-	std::thread m_meshBuildThread;
 	std::thread m_chunkLoadThread;
+	std::thread m_chunkUpdateThread;
 	std::mutex m_mutex;
 };

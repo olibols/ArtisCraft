@@ -10,6 +10,7 @@ public:
 
 	Chunk& addChunk(sf::Vector3i pos);
 	void makeMesh(sf::Vector3i pos);
+	void loadChunk(sf::Vector3i pos);
 
 	Chunk& getChunk(sf::Vector3i pos);
 
@@ -25,6 +26,7 @@ public:
 
 private:
 	ChunkPosMap<Chunk> m_chunks;
+	std::vector<Chunk*> m_chunkUpdates;
 
 	WorldTerrain* m_terrain;
 

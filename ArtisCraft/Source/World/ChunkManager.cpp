@@ -24,6 +24,11 @@ void ChunkManager::makeMesh(sf::Vector3i pos)
 	getChunk(pos).buildMesh();
 }
 
+void ChunkManager::loadChunk(sf::Vector3i pos)
+{
+	m_terrain->buildChunk(&getChunk(pos));
+}
+
 Chunk & ChunkManager::getChunk(sf::Vector3i pos)
 {
 	auto itr = m_chunks.find(pos);
@@ -40,7 +45,8 @@ BlockID ChunkManager::getBlock(sf::Vector3i pos)
 	if (itr == m_chunks.cend()) {
 		return BlockID::ERR_TYPE;
 	}
-	return itr->second.getBlock(chunkPos.x, chunkPos.y, chunkPos.z);
+	sf::Vector3i locPos = toLocalBlockPos(pos);
+	return itr->second.getBlock(locPos.x, locPos.y, locPos.z);
 }
 
 void ChunkManager::setBlock(sf::Vector3i pos, BlockID block)

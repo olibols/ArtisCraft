@@ -9,6 +9,12 @@ World::World(Camera& camera) : m_seed(std::chrono::system_clock::to_time_t(std::
 			loadChunks(camera);
 		}
 	});
+
+	m_chunkUpdateThread = std::thread([&]() {
+		while (true) {
+			processUpdates();
+		}
+	});
 }
 
 void World::loadChunks(Camera & camera)
@@ -19,18 +25,14 @@ void World::loadChunks(Camera & camera)
 		sf::Vector3i min = {pos.x - i, pos.y - std::max(i/2, 2), pos.z - i};
 		sf::Vector3i max = {pos.x + i, pos.y + std::max(i/2, 2), pos.z + i};
 
-		for (int x = min.x; x < max.x; x++) {
-			for (int z = min.z; z < max.z; z++) {
-				for (int y = min.y; y < max.y; y++) {
+			for (int y = min.y; y < max.y; y++){
+				for (int x = min.x; x < max.x; x++){
+					for (int z = min.z; z < max.z; z++) {
 					m_mutex.lock();
 					auto& chunk = m_chunkManager.addChunk({x,y,z});
-					if (!chunk.isLoaded()) {
-						m_chunkManager.buildNeighbours(chunk.getLocation(), m_worldTerrain);
-						chunk.buildMesh();
-						chunkBuilt = true;
-					}
+					m_chunkManager.buildNeighbours({ x,y,z }, m_worldTerrain);
 					if (!chunk.hasMesh()) {
-						chunk.buildMesh();
+						chunk.buildMesh(); 
 						chunkBuilt = true;
 					}
 					m_mutex.unlock();
@@ -48,6 +50,16 @@ void World::loadChunk(sf::Vector3i pos)
 	m_worldTerrain.buildChunk(&m_chunkManager.addChunk(pos));
 }
 
+void World::processUpdates()
+{
+	m_mutex.lock();
+	for (auto& chunk : m_chunkUpdates) {
+		chunk->buildMesh();
+	}
+	m_chunkUpdates.clear();
+	m_mutex.unlock();
+}
+
 void World::render(MasterRenderer & renderer)
 {
 	for (auto& chunk : m_chunkManager.getChunks()) {
@@ -58,6 +70,13 @@ void World::render(MasterRenderer & renderer)
 void World::setBlock(int x, int y, int z, BlockID block)
 {
 	m_chunkManager.setBlock({ x,y,z }, block);
+}
+
+void World::psetBlock(int x, int y, int z, BlockID block)
+{
+	m_chunkManager.setBlock({ x,y,z }, block);
+	sf::Vector3i chunkPos = toChunkPos({ x,y,z });
+	m_chunkUpdates.push_back(&m_chunkManager.getChunk(chunkPos));
 }
 
 BlockID World::getBlock(int x, int y, int z)
