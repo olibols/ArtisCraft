@@ -5,6 +5,8 @@
 #include <SFML/System/Vector3.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include "../Utils/RobinHash.h"
+
 struct ChunkPosHash {
 	const std::size_t operator()(const sf::Vector3i &position) const
 	{
@@ -39,7 +41,4 @@ sf::Vector3i toLocalBlockPos(sf::Vector3i pos);
 sf::Vector3i toGlobalBlockPos(sf::Vector3i blockPos, sf::Vector3i chunkPos);
 
 template <typename T>
-using ChunkPosMap = std::unordered_map<sf::Vector3i, T, ChunkPosHash>;
-
-template <typename T>
-using HeightMap = std::unordered_map<sf::Vector2i, T, ChunkPosHash>;
+using ChunkPosMap = robin_hood::unordered_map<sf::Vector3i, T, ChunkPosHash>;

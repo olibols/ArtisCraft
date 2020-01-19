@@ -14,7 +14,6 @@ void Chunk::setBlock(int x, int y, int z, BlockID block)
 		auto pos = toGlobalBlockPos({ x,y,z }, m_location);
 		m_chunkManager->setBlock(pos, block);
 	}
-	m_hasMesh = false;
 	m_hasBlocks = true;
 	m_blocks[getIndex(x, y, z)] = block;
 	m_layers[y].update(block);

@@ -15,4 +15,5 @@ BlockTypeDatabase::BlockTypeDatabase()
 {
 	m_blockColors[(int)BlockID::Air] = glm::vec3(1.0);
 	m_blockColors[(int)BlockID::Grass] = glm::vec3(124 / 255.0, 252 / 255.0, 0 / 255.0);
+	m_blockColors[(int)BlockID::Sand] = glm::vec3(1.0, 1.0, 0.0);
 }

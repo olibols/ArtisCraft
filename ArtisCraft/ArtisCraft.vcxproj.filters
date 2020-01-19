@@ -45,6 +45,7 @@
     <ClInclude Include="Source\World\Chunk\ChunkBlock.h" />
     <ClInclude Include="Source\World\Terrain\Generators\NoiseWrapper.h" />
     <ClInclude Include="Source\World\Terrain\Generators\FastNoise.h" />
+    <ClInclude Include="Source\Utils\RobinHash.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">

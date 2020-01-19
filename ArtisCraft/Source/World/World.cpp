@@ -19,6 +19,7 @@ World::World(Camera& camera) : m_seed(std::chrono::system_clock::to_time_t(std::
 
 void World::loadChunks(Camera & camera)
 {
+	processUpdates();
 	sf::Vector3i pos = toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z, });
 	bool chunkBuilt = false;
 	for (int i = 0; i < m_loadDistance; i++) {

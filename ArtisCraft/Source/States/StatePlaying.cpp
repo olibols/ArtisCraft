@@ -22,15 +22,19 @@ void StatePlaying::update(float deltaTime)
 		auto y = ray.getEnd().y;
 		auto z = ray.getEnd().z;
 
-		BlockID block = m_world.getBlock(x, y, z);
-
-		if (block != BlockID::Air) {
-			if (m_inputTimer.getElapsedTime().asSeconds() > 0.2) {
-				if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		if (m_inputTimer.getElapsedTime().asSeconds() > 0.2) {
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+				BlockID block = m_world.getBlock(x, y, z);
+				if (block != BlockID::Air) {
 					m_inputTimer.restart();
 					m_world.psetBlock(ray.getEnd().x, ray.getEnd().y, ray.getEnd().z, BlockID::Air);
 					break;
 				}
+			}
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+				m_inputTimer.restart();
+				m_world.psetBlock(m_rayPos.x, m_rayPos.y, m_rayPos.z, BlockID::Grass);
+				break;
 			}
 		}
 

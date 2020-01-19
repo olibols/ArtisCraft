@@ -32,6 +32,7 @@
     <ClInclude Include="Source\States\StateSplash.h" />
     <ClInclude Include="Source\Utils\FileUtils.h" />
     <ClInclude Include="Source\Utils\Ray.h" />
+    <ClInclude Include="Source\Utils\RobinHash.h" />
     <ClInclude Include="Source\World\BlockID.h" />
     <ClInclude Include="Source\World\BlockTypeDatabase.h" />
     <ClInclude Include="Source\World\ChunkManager.h" />
@@ -84,13 +85,13 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{387A0F97-D87F-42C7-A200-2A2E44FC0716}</ProjectGuid>
     <RootNamespace>ArtisCraft</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
