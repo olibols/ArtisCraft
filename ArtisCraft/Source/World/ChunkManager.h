@@ -26,7 +26,6 @@ public:
 
 private:
 	ChunkPosMap<Chunk> m_chunks;
-	std::vector<Chunk*> m_chunkUpdates;
 
 	WorldTerrain* m_terrain;
 

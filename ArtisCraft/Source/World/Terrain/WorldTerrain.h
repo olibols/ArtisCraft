@@ -16,6 +16,7 @@ public:
 	int getHeightAt(int x, int z);
 
 	void buildChunk(Chunk* chunk);
+	void seedChunk(Chunk* chunk);
 
 private:
 	void setupGens();

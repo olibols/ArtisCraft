@@ -37,13 +37,15 @@ BlockID WorldTerrain::getBlockAt(int x, int y, int z)
 
 int WorldTerrain::getHeightAt(int x, int z)
 {
-	return m_mainHeightmap.GetHeight(x, z) * ((m_mountainHeightmap.GetRidgedHeight(x,z)) * pow(m_mainHeightmap.GetHeight1_0(x,z),3) + 1);
+	double height = m_mainHeightmap.GetHeight(x, z);
+	double mountainmod = (m_mountainHeightmap.GetRidgedHeight(x, z) + 1) * 2.0;
+	return height * mountainmod;
 }
 
 void WorldTerrain::buildChunk(Chunk* chunk)
 {
 	if (!chunk->isLoaded()) {
-		//if (!shouldBuild(chunk)) { chunk->setLoaded(); return; }
+		if (!shouldBuild(chunk)) { chunk->setLoaded(); return; }
 		for (int y = 0; y < CHUNK_SIZE; y++) {
 			for (int z = 0; z < CHUNK_SIZE; z++) {
 				for (int x = 0; x < CHUNK_SIZE; x++) {
@@ -59,6 +61,14 @@ void WorldTerrain::buildChunk(Chunk* chunk)
 	chunk->setLoaded();
 }
 
+void WorldTerrain::seedChunk(Chunk* chunk)
+{
+	if (!chunk->isSeeded()) {
+
+	}
+	chunk->setSeeded();
+}
+
 void WorldTerrain::setupGens()
 {
 	m_mountainHeightmap.GetNoise().SetFrequency(0.0006);
@@ -70,8 +80,11 @@ void WorldTerrain::setupGens()
 bool WorldTerrain::shouldBuild(Chunk * chunk)
 {
 	sf::Vector3i pos = chunk->getLocation() * CHUNK_SIZE;
-	if (pos.y < m_mainHeightmap.GetHeight(pos.x, pos.z) - CHUNK_SIZE * 2){
+	if (pos.y < 0) return false;
+
+	if (getHeightAt(pos.x, pos.z) < (pos.y - CHUNK_SIZE * 2)) {
 		return false;
 	}
+
 	return true;
 }

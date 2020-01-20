@@ -86,6 +86,16 @@ void Chunk::setLoaded()
 	m_isLoaded = true;
 }
 
+bool Chunk::isSeeded()
+{
+	return m_isSeeded;
+}
+
+void Chunk::setSeeded()
+{
+	m_isSeeded = true;
+}
+
 bool Chunk::hasBlocks()
 {
 	return m_hasBlocks;

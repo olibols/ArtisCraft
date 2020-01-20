@@ -43,6 +43,8 @@ public:
 
 	bool isLoaded();
 	void setLoaded();
+	bool isSeeded();
+	void setSeeded();
 
 	bool hasBlocks();
 
@@ -58,8 +60,10 @@ private:
 	ChunkMesh m_mesh;
 	bool m_hasMesh = false;
 	bool m_isBuffered = false;
-	bool m_isLoaded = false;
 	bool m_hasBlocks = false;
+
+	bool m_isLoaded = false;
+	bool m_isSeeded = false;
 
 	sf::Vector3i m_location;
 	ChunkManager* m_chunkManager;
