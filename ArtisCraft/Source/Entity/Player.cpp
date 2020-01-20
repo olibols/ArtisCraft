@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player() : Entity({0, 10, 0}, {90, 0, 0})
+Player::Player() : Entity({0, 50, 0}, {90, 0, 0})
 {
 }
 

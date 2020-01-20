@@ -29,6 +29,8 @@ private:
 
 	std::vector<Chunk*> m_chunkUpdates;
 
+	sf::Vector3i m_currentChunk;
+
 	int m_seed;
 	int m_loadDistance = 2;
 

@@ -27,6 +27,7 @@ void fillChunk(Chunk* chunk, BlockID block)
 
 BlockID WorldTerrain::getBlockAt(int x, int y, int z)
 {
+	if (y < 0) return BlockID::Air;
 	if (y < getHeightAt(x, z)) {
 		return BlockID::Grass;
 	}
@@ -36,20 +37,21 @@ BlockID WorldTerrain::getBlockAt(int x, int y, int z)
 
 int WorldTerrain::getHeightAt(int x, int z)
 {
-	return m_mainHeightmap.GetHeight(x, z) * (m_mountainHeightmap.GetHeight1_0(x,z) + 1.0);
+	return m_mainHeightmap.GetHeight(x, z) * ((m_mountainHeightmap.GetRidgedHeight(x,z)) * pow(m_mainHeightmap.GetHeight1_0(x,z),3) + 1);
 }
 
 void WorldTerrain::buildChunk(Chunk* chunk)
 {
 	if (!chunk->isLoaded()) {
-		if (!shouldBuild(chunk)) { chunk->setLoaded(); return; }
+		//if (!shouldBuild(chunk)) { chunk->setLoaded(); return; }
 		for (int y = 0; y < CHUNK_SIZE; y++) {
 			for (int z = 0; z < CHUNK_SIZE; z++) {
 				for (int x = 0; x < CHUNK_SIZE; x++) {
 					sf::Vector3i worldPos = toGlobalBlockPos({ x, y, z }, chunk->getLocation());
 					BlockID block = getBlockAt(worldPos.x, worldPos.y, worldPos.z);
-					if (block == BlockID::Air) break;
-					chunk->setBlock(x, y, z, block);
+					if (block != BlockID::Air) {
+						chunk->setBlock(x, y, z, block);
+					}
 				}
 			}
 		}
@@ -59,8 +61,10 @@ void WorldTerrain::buildChunk(Chunk* chunk)
 
 void WorldTerrain::setupGens()
 {
-	m_mountainHeightmap.GetNoise().SetFrequency(0.001);
-	m_mountainHeightmap.GetNoise().SetFractalGain(2);
+	m_mountainHeightmap.GetNoise().SetFrequency(0.0006);
+	m_mountainHeightmap.GetNoise().SetFractalGain(0.5);
+	m_mountainHeightmap.GetNoise().SetFractalLacunarity(5.0);
+	m_mountainHeightmap.SetOffset(0);
 }
 
 bool WorldTerrain::shouldBuild(Chunk * chunk)

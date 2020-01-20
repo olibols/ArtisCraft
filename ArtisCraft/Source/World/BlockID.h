@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-enum class BlockID : uint8_t {
+enum class BlockID : unsigned char {
 	Air = 0,
 	Grass,
 	Sand,
