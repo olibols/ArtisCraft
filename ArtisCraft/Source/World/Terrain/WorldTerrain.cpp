@@ -49,7 +49,7 @@ int WorldTerrain::getHeightAt(int x, int z)
 
 void WorldTerrain::buildChunk(Chunk* chunk)
 {
-	genHeightmap(&m_chunkManager->addColumn({ chunk->getLocation().x, chunk->getLocation().z }));
+	genHeightmap(&m_chunkManager->addColumn({ chunk->getLocation().x, chunk->getLocation().z }), { chunk->getLocation().x, chunk->getLocation().z });
 
 	if (!chunk->isLoaded()) {
 		if (!shouldBuild(chunk)) { chunk->setLoaded(); return; }
@@ -89,14 +89,15 @@ void WorldTerrain::setupGens()
 	m_mountainHeightmap.SetOffset(0);
 }
 
-void WorldTerrain::genHeightmap(Column* column)
+void WorldTerrain::genHeightmap(Column* column, sf::Vector2i worldPos)
 {
 	if (column->isLoaded()) return;
 
 	HeightMap heights;
 	for (int x = 0; x < CHUNK_SIZE; x++) {
 		for (int z = 0; z < CHUNK_SIZE; z++) {
-			heights[x][z] = getHeightAt(x, z);
+			auto pos = toGlobalBlockPos({ x,0,z }, { worldPos.x, 0, worldPos.y });
+			heights[x][z] = getHeightAt(pos.x, pos.z);
 		}
 	}
 	column->setHeights(heights);

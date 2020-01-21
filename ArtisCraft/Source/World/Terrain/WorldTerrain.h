@@ -21,7 +21,7 @@ public:
 
 private:
 	void setupGens();
-	void genHeightmap(Column* column);
+	void genHeightmap(Column* column, sf::Vector2i worldPos);
 	ChunkManager* m_chunkManager;
 
 	NoiseWrapper m_mainHeightmap;
