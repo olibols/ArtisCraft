@@ -2,13 +2,16 @@
 
 #include "../Chunk/Chunk.h"
 #include "../Coordinates.h"
+#include "StructureBuilder.h"
+
+#include <random>
 
 struct GenResults {
 	bool shouldGen = true;
 	BlockID blockType = BlockID::ERR_TYPE;
 };
 
-WorldTerrain::WorldTerrain(int seed) : m_mainHeightmap(seed), m_mountainHeightmap(seed * 3)
+WorldTerrain::WorldTerrain(int seed, ChunkManager* manager) : m_mainHeightmap(seed), m_mountainHeightmap(seed * 3), m_chunkManager(manager)
 {
 	m_seed = seed;
 	setupGens();
@@ -27,8 +30,10 @@ void fillChunk(Chunk* chunk, BlockID block)
 
 BlockID WorldTerrain::getBlockAt(int x, int y, int z)
 {
-	if (y < 0) return BlockID::Air;
-	if (y < getHeightAt(x, z)) {
+	sf::Vector3i chunkPos = toChunkPos({ x,y,z });
+	sf::Vector3i localPos = toLocalBlockPos({ x,y,z });
+
+	if (y < m_chunkManager->addColumn({ chunkPos.x, chunkPos.z }).getHeight(localPos.x, localPos.z)) {
 		return BlockID::Grass;
 	}
 
@@ -44,27 +49,34 @@ int WorldTerrain::getHeightAt(int x, int z)
 
 void WorldTerrain::buildChunk(Chunk* chunk)
 {
+	genHeightmap(&m_chunkManager->addColumn({ chunk->getLocation().x, chunk->getLocation().z }));
+
 	if (!chunk->isLoaded()) {
 		if (!shouldBuild(chunk)) { chunk->setLoaded(); return; }
 		for (int y = 0; y < CHUNK_SIZE; y++) {
 			for (int z = 0; z < CHUNK_SIZE; z++) {
 				for (int x = 0; x < CHUNK_SIZE; x++) {
-					sf::Vector3i worldPos = toGlobalBlockPos({ x, y, z }, chunk->getLocation());
-					BlockID block = getBlockAt(worldPos.x, worldPos.y, worldPos.z);
-					if (block != BlockID::Air) {
-						chunk->setBlock(x, y, z, block);
-					}
+					auto globalpos = toGlobalBlockPos({ x,y,z }, chunk->getLocation());
+					BlockID block = getBlockAt(globalpos.x, globalpos.y, globalpos.z);
+					if (block == BlockID::Air) break;
+					chunk->setBlock(x, y, z, block);
 				}
 			}
 		}
-	}
+	}	
 	chunk->setLoaded();
 }
 
 void WorldTerrain::seedChunk(Chunk* chunk)
 {
 	if (!chunk->isSeeded()) {
+		StructureBuilder builder;
 
+		for (auto& pos : m_treePositions) {
+			builder.addBlock(pos.x, pos.y, pos.z, BlockID::Sand);
+		}
+		m_treePositions.clear();
+		builder.build(chunk);
 	}
 	chunk->setSeeded();
 }
@@ -75,6 +87,20 @@ void WorldTerrain::setupGens()
 	m_mountainHeightmap.GetNoise().SetFractalGain(0.5);
 	m_mountainHeightmap.GetNoise().SetFractalLacunarity(5.0);
 	m_mountainHeightmap.SetOffset(0);
+}
+
+void WorldTerrain::genHeightmap(Column* column)
+{
+	if (column->isLoaded()) return;
+
+	HeightMap heights;
+	for (int x = 0; x < CHUNK_SIZE; x++) {
+		for (int z = 0; z < CHUNK_SIZE; z++) {
+			heights[x][z] = getHeightAt(x, z);
+		}
+	}
+	column->setHeights(heights);
+	column->setLoaded();
 }
 
 bool WorldTerrain::shouldBuild(Chunk * chunk)

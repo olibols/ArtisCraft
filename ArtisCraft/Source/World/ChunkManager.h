@@ -2,14 +2,18 @@
 
 #include "Chunk/Chunk.h"
 #include "Coordinates.h"
-#include "Terrain/WorldTerrain.h"
+#include "Terrain/Column.h"
+
+class WorldTerrain;
 
 class ChunkManager {
 public:
 	ChunkManager(WorldTerrain& terrain);
 
 	Chunk& addChunk(sf::Vector3i pos);
+	Column& addColumn(sf::Vector2i pos);
 	void makeMesh(sf::Vector3i pos);
+
 	void loadChunk(sf::Vector3i pos);
 
 	Chunk& getChunk(sf::Vector3i pos);
@@ -24,8 +28,11 @@ public:
 
 	ChunkPosMap<Chunk>& getChunks();
 
+	inline ChunkHeightMap<Column>& getHeights() { return m_heightMap; };
+
 private:
 	ChunkPosMap<Chunk> m_chunks;
+	ChunkHeightMap<Column> m_heightMap;
 
 	WorldTerrain* m_terrain;
 

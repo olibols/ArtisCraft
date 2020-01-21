@@ -47,6 +47,7 @@
     <ClInclude Include="Source\World\Terrain\Generators\FastNoise.h" />
     <ClInclude Include="Source\Utils\RobinHash.h" />
     <ClInclude Include="Source\World\Terrain\StructureBuilder.h" />
+    <ClInclude Include="Source\World\Terrain\Column.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -140,6 +141,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\Terrain\StructureBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Terrain\Column.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,7 +2,7 @@
 
 #include "Chunk/ChunkTools.h"
 
-World::World(Camera& camera) : m_seed(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())), m_worldTerrain(m_seed), m_chunkManager(m_worldTerrain)
+World::World(Camera& camera) : m_seed(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())), m_worldTerrain(m_seed, &m_chunkManager), m_chunkManager(m_worldTerrain)
 {
 	loadChunks(camera);
 	m_currentChunk = toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z });
@@ -41,6 +41,9 @@ void World::loadChunks(Camera & camera)
 					m_mutex.lock();
 					auto& chunk = m_chunkManager.addChunk({x,y,z});
 					m_chunkManager.buildNeighbours({ x,y,z }, m_worldTerrain);
+					/*if (!chunk.isSeeded()) {
+						m_worldTerrain.seedChunk(&chunk);
+					}*/
 					if (!chunk.hasMesh()) {
 						chunk.buildMesh(); 
 						chunkBuilt = true;

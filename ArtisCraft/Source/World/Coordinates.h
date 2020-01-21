@@ -42,3 +42,6 @@ sf::Vector3i toGlobalBlockPos(sf::Vector3i blockPos, sf::Vector3i chunkPos);
 
 template <typename T>
 using ChunkPosMap = robin_hood::unordered_map<sf::Vector3i, T, ChunkPosHash>;
+
+template <typename T>
+using ChunkHeightMap = robin_hood::unordered_map<sf::Vector2i, T, ChunkPosHash>;

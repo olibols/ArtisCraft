@@ -43,6 +43,7 @@
     <ClInclude Include="Source\World\Chunk\ChunkTools.h" />
     <ClInclude Include="Source\World\Coordinates.h" />
     <ClInclude Include="Source\World\Event\BaseEvent.h" />
+    <ClInclude Include="Source\World\Terrain\Column.h" />
     <ClInclude Include="Source\World\Terrain\Generators\FastNoise.h" />
     <ClInclude Include="Source\World\Terrain\Generators\NoiseWrapper.h" />
     <ClInclude Include="Source\World\Terrain\StructureBuilder.h" />
@@ -77,6 +78,7 @@
     <ClCompile Include="Source\World\Chunk\ChunkMeshBuilder.cpp" />
     <ClCompile Include="Source\World\Chunk\ChunkTools.cpp" />
     <ClCompile Include="Source\World\Coordinates.cpp" />
+    <ClCompile Include="Source\World\Terrain\Column.cpp" />
     <ClCompile Include="Source\World\Terrain\Generators\FastNoise.cpp" />
     <ClCompile Include="Source\World\Terrain\Generators\NoiseWrapper.cpp" />
     <ClCompile Include="Source\World\Terrain\StructureBuilder.cpp" />

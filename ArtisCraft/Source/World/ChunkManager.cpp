@@ -1,5 +1,6 @@
 #include "ChunkManager.h"
 #include "Chunk/ChunkTools.h"
+#include "Terrain/WorldTerrain.h"
 
 ChunkManager::ChunkManager(WorldTerrain& terrain) : m_terrain(&terrain)
 {
@@ -10,6 +11,15 @@ Chunk& ChunkManager::addChunk(sf::Vector3i pos)
 	auto itr = m_chunks.find(pos);
 	if (itr == m_chunks.cend()) {
 		return m_chunks.emplace(std::piecewise_construct, std::forward_as_tuple(pos), std::forward_as_tuple(pos, *this)).first->second;
+	}
+	return itr->second;
+}
+
+Column& ChunkManager::addColumn(sf::Vector2i pos)
+{
+	auto itr = m_heightMap.find(pos);
+	if (itr == m_heightMap.cend()) {
+		return m_heightMap.emplace().first->second;
 	}
 	return itr->second;
 }
