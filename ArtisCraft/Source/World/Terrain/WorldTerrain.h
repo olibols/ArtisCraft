@@ -13,7 +13,7 @@ class WorldTerrain {
 public:
 	WorldTerrain(int seed, ChunkManager* manager);
 
-	BlockID getBlockAt(int x, int y, int z);
+	BlockID getBlockAt(int x, int y, int z, Column* column);
 	int getHeightAt(int x, int z);
 
 	void buildChunk(Chunk* chunk);
@@ -21,7 +21,7 @@ public:
 
 private:
 	void setupGens();
-	void genHeightmap(Column* column, sf::Vector2i worldPos);
+	void genHeightmap(Column* column, sf::Vector3i worldPos);
 	ChunkManager* m_chunkManager;
 
 	NoiseWrapper m_mainHeightmap;

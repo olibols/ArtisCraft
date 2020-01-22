@@ -28,12 +28,9 @@ void fillChunk(Chunk* chunk, BlockID block)
 	}
 }
 
-BlockID WorldTerrain::getBlockAt(int x, int y, int z)
+BlockID WorldTerrain::getBlockAt(int x, int y, int z, Column* column)
 {
-	sf::Vector3i chunkPos = toChunkPos({ x,y,z });
-	sf::Vector3i localPos = toLocalBlockPos({ x,y,z });
-
-	if (y < m_chunkManager->addColumn({ chunkPos.x, chunkPos.z }).getHeight(localPos.x, localPos.z)) {
+	if (y < column->getHeight(x, z)) {
 		return BlockID::Grass;
 	}
 
@@ -49,15 +46,15 @@ int WorldTerrain::getHeightAt(int x, int z)
 
 void WorldTerrain::buildChunk(Chunk* chunk)
 {
-	genHeightmap(&m_chunkManager->addColumn({ chunk->getLocation().x, chunk->getLocation().z }), { chunk->getLocation().x, chunk->getLocation().z });
+	auto& column = m_chunkManager->addColumn({ chunk->getLocation().x, chunk->getLocation().z });
+	genHeightmap(&column, chunk->getLocation());
 
 	if (!chunk->isLoaded()) {
 		if (!shouldBuild(chunk)) { chunk->setLoaded(); return; }
 		for (int y = 0; y < CHUNK_SIZE; y++) {
 			for (int z = 0; z < CHUNK_SIZE; z++) {
 				for (int x = 0; x < CHUNK_SIZE; x++) {
-					auto globalpos = toGlobalBlockPos({ x,y,z }, chunk->getLocation());
-					BlockID block = getBlockAt(globalpos.x, globalpos.y, globalpos.z);
+					BlockID block = getBlockAt(x,y,z,&column);
 					if (block == BlockID::Air) break;
 					chunk->setBlock(x, y, z, block);
 				}
@@ -89,15 +86,16 @@ void WorldTerrain::setupGens()
 	m_mountainHeightmap.SetOffset(0);
 }
 
-void WorldTerrain::genHeightmap(Column* column, sf::Vector2i worldPos)
+void WorldTerrain::genHeightmap(Column* column, sf::Vector3i worldPos)
 {
 	if (column->isLoaded()) return;
 
 	HeightMap heights;
 	for (int x = 0; x < CHUNK_SIZE; x++) {
 		for (int z = 0; z < CHUNK_SIZE; z++) {
-			auto pos = toGlobalBlockPos({ x,0,z }, { worldPos.x, 0, worldPos.y });
-			heights[x][z] = getHeightAt(pos.x, pos.z);
+			auto nx = worldPos.x * CHUNK_SIZE + x;
+			auto nz = worldPos.z * CHUNK_SIZE + z;
+			heights[x][z] = getHeightAt(nx, nz);
 		}
 	}
 	column->setHeights(heights);
