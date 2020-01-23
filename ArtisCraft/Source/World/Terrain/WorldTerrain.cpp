@@ -40,7 +40,7 @@ int WorldTerrain::getHeightAt(int x, int z)
 {
 	double height = m_mainHeightmap.GetHeight(x, z);
 	double mountainmod = (m_mountainHeightmap.GetRidgedHeight(x, z) + 1.0) * 4.0;
-	return height + mountainmod;
+	return height * mountainmod;
 }
 
 void WorldTerrain::buildChunk(Chunk* chunk)
@@ -48,15 +48,14 @@ void WorldTerrain::buildChunk(Chunk* chunk)
 	auto& column = m_chunkManager->addColumn({ chunk->getLocation().x, chunk->getLocation().z });
 	genHeightmap(&column, chunk->getLocation());
 
+	auto cp = chunk->getLocation();
+
 	if (!chunk->isLoaded()) {
-		//if (!shouldBuild(chunk)) { chunk->setLoaded(); return; }
-		for (int y = 0; y < CHUNK_SIZE; y++) {
+		if (!shouldBuild(chunk)) { chunk->setLoaded(); return; }
+		for (int x = 0; x < CHUNK_SIZE; x++) {
 			for (int z = 0; z < CHUNK_SIZE; z++) {
-				for (int x = 0; x < CHUNK_SIZE; x++) {
-					sf::Vector3i worldPos = toGlobalBlockPos({ x,y,z }, chunk->getLocation());
-					BlockID block = getBlockAt(x, worldPos.y, z, &column);
-					if (block == BlockID::Air) break;
-					chunk->setBlock(x, y, z, block);
+				for (int y = 0; (cp.y * CHUNK_SIZE + y) < column.getHeight(x,z); y++) {
+					chunk->setBlock(x, y, z, BlockID::Grass);
 				}
 			}
 		}
