@@ -103,7 +103,7 @@ bool Chunk::hasBlocks()
 
 void Chunk::draw(MasterRenderer & renderer)
 {
-	if (m_hasMesh) {
+	if (m_hasMesh && m_isLoaded) {
 		if (!m_isBuffered)
 			bufferMesh();
 		renderer.drawChunk(m_mesh);

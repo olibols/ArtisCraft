@@ -22,8 +22,6 @@ World::World(Camera& camera) : m_seed(std::chrono::system_clock::to_time_t(std::
 
 void World::loadChunks(Camera & camera)
 {
-	processUpdates();
-
 	if (m_currentChunk != toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z })) {
 		m_currentChunk = toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z });
 		m_loadDistance = 2;
@@ -38,17 +36,18 @@ void World::loadChunks(Camera & camera)
 			for (int y = min.y; y < max.y; y++){
 				for (int x = min.x; x < max.x; x++){
 					for (int z = min.z; z < max.z; z++) {
-					m_mutex.lock();
-					auto& chunk = m_chunkManager.addChunk({x,y,z});
-					m_chunkManager.buildNeighbours({ x,y,z }, m_worldTerrain);
-					/*if (!chunk.isSeeded()) {
-						m_worldTerrain.seedChunk(&chunk);
-					}*/
-					if (!chunk.hasMesh()) {
-						chunk.buildMesh(); 
-						chunkBuilt = true;
-					}
-					m_mutex.unlock();
+						processUpdates();
+						m_mutex.lock();
+						auto& chunk = m_chunkManager.addChunk({x,y,z});
+						m_chunkManager.buildNeighbours({ x,y,z }, m_worldTerrain);
+						if (!chunk.isSeeded()) {
+							m_worldTerrain.seedChunk(&chunk);
+						}
+						if (!chunk.hasMesh()) {
+							chunk.buildMesh(); 
+							chunkBuilt = true;
+						}
+						m_mutex.unlock();
 				}
 				if (chunkBuilt) break;
 			}
@@ -75,9 +74,11 @@ void World::processUpdates()
 
 void World::render(MasterRenderer & renderer)
 {
+	if (!m_mutex.try_lock()) return;
 	for (auto& chunk : m_chunkManager.getChunks()) {
 		chunk.second.draw(renderer);
 	}
+	m_mutex.unlock();
 }
 
 void World::setBlock(int x, int y, int z, BlockID block)

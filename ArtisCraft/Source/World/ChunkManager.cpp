@@ -2,9 +2,7 @@
 #include "Chunk/ChunkTools.h"
 #include "Terrain/WorldTerrain.h"
 
-ChunkManager::ChunkManager(WorldTerrain& terrain) : m_terrain(&terrain)
-{
-}
+ChunkManager::ChunkManager(WorldTerrain& terrain) : m_terrain(&terrain){}
 
 Chunk& ChunkManager::addChunk(sf::Vector3i pos)
 {
@@ -19,7 +17,7 @@ Column& ChunkManager::addColumn(sf::Vector2i pos)
 {
 	auto itr = m_heightMap.find(pos);
 	if (itr == m_heightMap.cend()) {
-		return m_heightMap.emplace().first->second;
+		return m_heightMap.emplace(std::piecewise_construct, std::forward_as_tuple(pos), std::forward_as_tuple()).first->getSecond();
 	}
 	return itr->second;
 }
