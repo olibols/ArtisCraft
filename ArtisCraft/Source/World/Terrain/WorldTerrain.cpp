@@ -39,8 +39,8 @@ BlockID WorldTerrain::getBlockAt(int x, int y, int z, Column* column)
 int WorldTerrain::getHeightAt(int x, int z)
 {
 	double height = m_mainHeightmap.GetHeight(x, z);
-	//double mountainmod = (m_mountainHeightmap.GetRidgedHeight(x, z) + 1.0) * 2.0;
-	return height;// *mountainmod;
+	double mountainmod = (m_mountainHeightmap.GetRidgedHeight(x, z) + 1.0) * 4.0;
+	return height + mountainmod;
 }
 
 void WorldTerrain::buildChunk(Chunk* chunk)
@@ -80,9 +80,9 @@ void WorldTerrain::seedChunk(Chunk* chunk)
 
 void WorldTerrain::setupGens()
 {
-	m_mainHeightmap.SetAmplitude(15);
+	m_mainHeightmap.SetAmplitude(4);
 
-	m_mountainHeightmap.GetNoise().SetFrequency(0.0006);
+	m_mountainHeightmap.GetNoise().SetFrequency(0.0003);
 	m_mountainHeightmap.GetNoise().SetFractalGain(0.5);
 	m_mountainHeightmap.GetNoise().SetFractalLacunarity(5.0);
 	m_mountainHeightmap.SetOffset(0);

@@ -31,6 +31,8 @@ private:
 
 	sf::Vector3i m_currentChunk;
 
+	bool m_mapChanged;
+
 	int m_seed;
 	int m_loadDistance = 2;
 

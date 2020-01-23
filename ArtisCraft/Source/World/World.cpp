@@ -40,14 +40,16 @@ void World::loadChunks(Camera & camera)
 						m_mutex.lock();
 						auto& chunk = m_chunkManager.addChunk({x,y,z});
 						m_chunkManager.buildNeighbours({ x,y,z }, m_worldTerrain);
+						m_mutex.unlock();
 						if (!chunk.isSeeded()) {
 							m_worldTerrain.seedChunk(&chunk);
 						}
 						if (!chunk.hasMesh()) {
-							chunk.buildMesh(); 
+							m_mutex.lock();
+							chunk.buildMesh();
+							m_mutex.unlock();
 							chunkBuilt = true;
 						}
-						m_mutex.unlock();
 				}
 				if (chunkBuilt) break;
 			}
@@ -74,11 +76,9 @@ void World::processUpdates()
 
 void World::render(MasterRenderer & renderer)
 {
-	if (!m_mutex.try_lock()) return;
 	for (auto& chunk : m_chunkManager.getChunks()) {
 		chunk.second.draw(renderer);
 	}
-	m_mutex.unlock();
 }
 
 void World::setBlock(int x, int y, int z, BlockID block)
