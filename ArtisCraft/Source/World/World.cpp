@@ -13,11 +13,7 @@ World::World(Camera& camera) : m_seed(std::chrono::system_clock::to_time_t(std::
 		}
 	});
 
-	/*m_chunkUpdateThread = std::thread([&]() {
-		while (true) {
-			processUpdates();
-		}
-	});*/
+	camera.position = {0, m_chunkManager.addColumn({ 0,0 }).getHeight(0, 0),0 };
 }
 
 void World::loadChunks(Camera & camera)
@@ -38,6 +34,7 @@ void World::loadChunks(Camera & camera)
 					for (int z = min.z; z < max.z; z++) {
 						processUpdates();
 						m_mutex.lock();
+						m_mapChanged = true;
 						auto& chunk = m_chunkManager.addChunk({x,y,z});
 						m_chunkManager.buildNeighbours({ x,y,z }, m_worldTerrain);
 						m_mutex.unlock();
@@ -77,6 +74,10 @@ void World::processUpdates()
 void World::render(MasterRenderer & renderer)
 {
 	for (auto& chunk : m_chunkManager.getChunks()) {
+		if (m_mapChanged) {
+			m_mapChanged = false;
+			break;
+		}
 		chunk.second.draw(renderer);
 	}
 }

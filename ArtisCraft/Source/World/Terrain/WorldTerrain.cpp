@@ -4,6 +4,7 @@
 #include "../Coordinates.h"
 #include "StructureBuilder.h"
 
+#include <chrono>
 #include <random>
 
 struct GenResults {
@@ -39,8 +40,7 @@ BlockID WorldTerrain::getBlockAt(int x, int y, int z, Column* column)
 int WorldTerrain::getHeightAt(int x, int z)
 {
 	double height = m_mainHeightmap.GetHeight(x, z);
-	double mountainmod = (m_mountainHeightmap.GetRidgedHeight(x, z) + 1.0) * 4.0;
-	return height * mountainmod;
+	return height;
 }
 
 void WorldTerrain::buildChunk(Chunk* chunk)
@@ -54,7 +54,10 @@ void WorldTerrain::buildChunk(Chunk* chunk)
 		if (!shouldBuild(chunk)) { chunk->setLoaded(); return; }
 		for (int x = 0; x < CHUNK_SIZE; x++) {
 			for (int z = 0; z < CHUNK_SIZE; z++) {
-				for (int y = 0; (cp.y * CHUNK_SIZE + y) < column.getHeight(x,z); y++) {
+
+				int height = column.getHeight(x, z);
+				for (int y = 0; (cp.y * CHUNK_SIZE + y) < height && y < CHUNK_SIZE; y++) {
+					auto wPos = toGlobalBlockPos({ x,y,z }, cp);
 					chunk->setBlock(x, y, z, BlockID::Grass);
 				}
 			}
@@ -79,12 +82,10 @@ void WorldTerrain::seedChunk(Chunk* chunk)
 
 void WorldTerrain::setupGens()
 {
-	m_mainHeightmap.SetAmplitude(4);
-
-	m_mountainHeightmap.GetNoise().SetFrequency(0.0003);
-	m_mountainHeightmap.GetNoise().SetFractalGain(0.5);
-	m_mountainHeightmap.GetNoise().SetFractalLacunarity(5.0);
-	m_mountainHeightmap.SetOffset(0);
+	m_mainHeightmap.SetAmplitude(400);
+	m_mainHeightmap.SetOffset(-200);
+	m_mainHeightmap.GetNoise().SetFrequency(0.0005);
+	m_mainHeightmap.GetNoise().SetFractalLacunarity(2.0);
 }
 
 void WorldTerrain::genHeightmap(Column* column, sf::Vector3i worldPos)
