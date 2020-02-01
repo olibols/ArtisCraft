@@ -25,11 +25,11 @@ private:
 	ChunkManager* m_chunkManager;
 
 	NoiseWrapper m_mainHeightmap;
-	NoiseWrapper m_mountainHeightmap;
+	NoiseWrapper m_treemap;
 
 	int m_seed;
 	
 	std::vector<sf::Vector3i> m_treePositions;
 	
-	bool shouldBuild(Chunk* chunk);
+	bool shouldBuild(Chunk* chunk, Column* column);
 };

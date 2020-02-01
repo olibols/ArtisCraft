@@ -11,6 +11,10 @@
 
 class ChunkManager;
 
+struct SeedData {
+	std::vector<sf::Vector3i> treePositions;
+};
+
 class Layer {
 public:
 	inline void update(ChunkBlock block) {
@@ -46,6 +50,8 @@ public:
 	bool isSeeded();
 	void setSeeded();
 
+	SeedData& getSeedData();
+
 	bool hasBlocks();
 
 	void draw(MasterRenderer& renderer);
@@ -63,6 +69,7 @@ private:
 	bool m_hasBlocks = false;
 
 	bool m_isLoaded = false;
+	SeedData m_seedData;
 	bool m_isSeeded = false;
 
 	sf::Vector3i m_location;

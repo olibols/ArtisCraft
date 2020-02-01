@@ -13,6 +13,7 @@ void Chunk::setBlock(int x, int y, int z, BlockID block)
 		isOutOfBounds(z)) {
 		auto pos = toGlobalBlockPos({ x,y,z }, m_location);
 		m_chunkManager->setBlock(pos, block);
+		return;
 	}
 	m_hasBlocks = true;
 	m_blocks[getIndex(x, y, z)] = block;
@@ -96,6 +97,11 @@ void Chunk::setSeeded()
 	m_isSeeded = true;
 }
 
+SeedData& Chunk::getSeedData()
+{
+	return m_seedData;
+}
+
 bool Chunk::hasBlocks()
 {
 	return m_hasBlocks;
@@ -103,6 +109,7 @@ bool Chunk::hasBlocks()
 
 void Chunk::draw(MasterRenderer & renderer)
 {
+	if (this == nullptr) return;
 	if (m_hasMesh && m_isLoaded) {
 		if (!m_isBuffered)
 			bufferMesh();

@@ -26,12 +26,12 @@ public:
 
 	void buildNeighbours(sf::Vector3i pos, WorldTerrain& terrain);
 
-	ChunkPosMap<Chunk>& getChunks();
+	ChunkPosMap<std::unique_ptr<Chunk>>& getChunks();
 
 	inline ChunkHeightMap<Column>& getHeights() { return m_heightMap; };
 
 private:
-	ChunkPosMap<Chunk> m_chunks;
+	ChunkPosMap<std::unique_ptr<Chunk>> m_chunks;
 	ChunkHeightMap<Column> m_heightMap;
 
 	WorldTerrain* m_terrain;

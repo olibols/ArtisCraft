@@ -34,7 +34,7 @@ private:
 	bool m_mapChanged;
 
 	int m_seed;
-	int m_loadDistance = 2;
+	int m_loadDistance = 0;
 
 	std::thread m_chunkLoadThread;
 	std::thread m_chunkUpdateThread;

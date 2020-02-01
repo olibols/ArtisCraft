@@ -12,7 +12,7 @@ struct GenResults {
 	BlockID blockType = BlockID::ERR_TYPE;
 };
 
-WorldTerrain::WorldTerrain(int seed, ChunkManager* manager) : m_mainHeightmap(seed), m_mountainHeightmap(seed * 3), m_chunkManager(manager)
+WorldTerrain::WorldTerrain(int seed, ChunkManager* manager) : m_mainHeightmap(seed), m_treemap(seed * 3), m_chunkManager(manager)
 {
 	m_seed = seed;
 	setupGens();
@@ -45,20 +45,28 @@ int WorldTerrain::getHeightAt(int x, int z)
 
 void WorldTerrain::buildChunk(Chunk* chunk)
 {
-	auto& column = m_chunkManager->addColumn({ chunk->getLocation().x, chunk->getLocation().z });
-	genHeightmap(&column, chunk->getLocation());
-
-	auto cp = chunk->getLocation();
-
 	if (!chunk->isLoaded()) {
-		if (!shouldBuild(chunk)) { chunk->setLoaded(); return; }
+
+		auto& column = m_chunkManager->addColumn({ chunk->getLocation().x, chunk->getLocation().z });
+		genHeightmap(&column, chunk->getLocation());
+
+		auto cp = chunk->getLocation();
+
+		if (!shouldBuild(chunk, &column)) { chunk->setLoaded(); return; }
 		for (int x = 0; x < CHUNK_SIZE; x++) {
 			for (int z = 0; z < CHUNK_SIZE; z++) {
-
 				int height = column.getHeight(x, z);
-				for (int y = 0; (cp.y * CHUNK_SIZE + y) < height && y < CHUNK_SIZE; y++) {
+				for (int y = 0; (cp.y * CHUNK_SIZE + y) <= height && y < CHUNK_SIZE; y++) {
 					auto wPos = toGlobalBlockPos({ x,y,z }, cp);
 					chunk->setBlock(x, y, z, BlockID::Grass);
+
+					if((cp.y * CHUNK_SIZE + y) == height){
+						auto seed = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+						srand(seed * x * z);
+						if (rand() % 1000 > 995) {
+							chunk->getSeedData().treePositions.push_back({ x, y + 1, z });
+						}
+					}
 				}
 			}
 		}
@@ -71,10 +79,18 @@ void WorldTerrain::seedChunk(Chunk* chunk)
 	if (!chunk->isSeeded()) {
 		StructureBuilder builder;
 
-		for (auto& pos : m_treePositions) {
-			builder.addBlock(pos.x, pos.y, pos.z, BlockID::Sand);
+		for (auto& pos : chunk->getSeedData().treePositions) {
+			builder.fill(pos.x-1, pos.z-1, pos.y, pos.x + 1, pos.z + 1, BlockID::Wood);
+			builder.fill(pos.x-1, pos.z-1, pos.y + 1, pos.x + 1, pos.z + 1, BlockID::Wood);
+			builder.fill(pos.x-1, pos.z-1, pos.y + 2, pos.x + 1, pos.z + 1, BlockID::Wood);
+			builder.fill(pos.x-1, pos.z-1, pos.y + 3, pos.x + 1, pos.z + 1, BlockID::Wood);
+			builder.fill(pos.x-1, pos.z-1, pos.y + 4, pos.x + 1, pos.z + 1, BlockID::Wood);
+			builder.fill(pos.x-1, pos.z-1, pos.y + 5, pos.x + 1, pos.z + 1, BlockID::Wood);
+			builder.fill(pos.x-1, pos.z-1, pos.y + 6, pos.x + 1, pos.z + 1, BlockID::Wood);
+			builder.fill(pos.x-1, pos.z-1, pos.y + 7, pos.x + 1, pos.z + 1, BlockID::Wood);
+			builder.fill(pos.x-1, pos.z-1, pos.y + 8, pos.x + 1, pos.z + 1, BlockID::Wood);
 		}
-		m_treePositions.clear();
+		chunk->getSeedData().treePositions.clear();
 		builder.build(chunk);
 	}
 	chunk->setSeeded();
@@ -104,12 +120,15 @@ void WorldTerrain::genHeightmap(Column* column, sf::Vector3i worldPos)
 	column->setLoaded();
 }
 
-bool WorldTerrain::shouldBuild(Chunk * chunk)
+bool WorldTerrain::shouldBuild(Chunk * chunk, Column* column)
 {
+	int height = column->getHeight(0, 0);
 	sf::Vector3i pos = chunk->getLocation() * CHUNK_SIZE;
-	if (getHeightAt(pos.x, pos.z) < (pos.y - CHUNK_SIZE * 2)) {
+
+	if (pos.y > height + CHUNK_SIZE) {
 		return false;
 	}
+
 
 	return true;
 }

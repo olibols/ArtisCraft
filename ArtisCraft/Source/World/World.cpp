@@ -13,7 +13,7 @@ World::World(Camera& camera) : m_seed(std::chrono::system_clock::to_time_t(std::
 		}
 	});
 
-	camera.position = {0, m_chunkManager.addColumn({ 0,0 }).getHeight(0, 0),0 };
+	camera.position = {0, m_worldTerrain.getHeightAt(0, 0) + 2,0 };
 }
 
 void World::loadChunks(Camera & camera)
@@ -53,7 +53,7 @@ void World::loadChunks(Camera & camera)
 		}
 	}
 	if(!chunkBuilt)m_loadDistance++;
-	if(m_loadDistance >= 8) m_loadDistance = 2;
+	if(m_loadDistance >= 8) m_loadDistance = 0;
 }
 
 void World::loadChunk(sf::Vector3i pos)
@@ -76,9 +76,10 @@ void World::render(MasterRenderer & renderer)
 	for (auto& chunk : m_chunkManager.getChunks()) {
 		if (m_mapChanged) {
 			m_mapChanged = false;
-			break;
+			render(renderer);
+			return;
 		}
-		chunk.second.draw(renderer);
+		chunk.second->draw(renderer);
 	}
 }
 
