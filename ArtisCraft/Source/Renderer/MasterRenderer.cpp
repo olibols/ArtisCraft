@@ -10,6 +10,11 @@ void MasterRenderer::drawChunk(ChunkMesh & chunk)
 	m_chunkRenderer.addChunk(chunk);
 }
 
+void MasterRenderer::clearChunks()
+{
+	m_chunkRenderer.clearChunks();
+}
+
 void MasterRenderer::finishRender(sf::RenderWindow & window, Camera & camera)
 {
 	glClearColor(80 / 250.0, 200 / 250.0, 198 / 250.0, 1.0);

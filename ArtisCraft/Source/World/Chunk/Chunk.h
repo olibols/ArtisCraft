@@ -13,6 +13,7 @@ class ChunkManager;
 
 struct SeedData {
 	std::vector<sf::Vector3i> treePositions;
+	std::vector<sf::Vector3i> rockPositions;
 };
 
 class Layer {

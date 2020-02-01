@@ -47,6 +47,8 @@
     <ClInclude Include="Source\World\Terrain\Generators\FastNoise.h" />
     <ClInclude Include="Source\World\Terrain\Generators\NoiseWrapper.h" />
     <ClInclude Include="Source\World\Terrain\StructureBuilder.h" />
+    <ClInclude Include="Source\World\Terrain\Structures\StoneStructure.h" />
+    <ClInclude Include="Source\World\Terrain\Structures\Structure.h" />
     <ClInclude Include="Source\World\Terrain\WorldTerrain.h" />
     <ClInclude Include="Source\World\World.h" />
     <ClInclude Include="Source\World\WorldConstants.h" />
@@ -82,6 +84,7 @@
     <ClCompile Include="Source\World\Terrain\Generators\FastNoise.cpp" />
     <ClCompile Include="Source\World\Terrain\Generators\NoiseWrapper.cpp" />
     <ClCompile Include="Source\World\Terrain\StructureBuilder.cpp" />
+    <ClCompile Include="Source\World\Terrain\Structures\StoneStructure.cpp" />
     <ClCompile Include="Source\World\Terrain\WorldTerrain.cpp" />
     <ClCompile Include="Source\World\World.cpp" />
   </ItemGroup>

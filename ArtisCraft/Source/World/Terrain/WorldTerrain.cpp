@@ -3,6 +3,7 @@
 #include "../Chunk/Chunk.h"
 #include "../Coordinates.h"
 #include "StructureBuilder.h"
+#include "Structures/StoneStructure.h"
 
 #include <chrono>
 #include <random>
@@ -12,7 +13,7 @@ struct GenResults {
 	BlockID blockType = BlockID::ERR_TYPE;
 };
 
-WorldTerrain::WorldTerrain(int seed, ChunkManager* manager) : m_mainHeightmap(seed), m_treemap(seed * 3), m_chunkManager(manager)
+WorldTerrain::WorldTerrain(int seed, ChunkManager* manager) : m_mainHeightmap(seed), m_treemap(seed * 3), m_rockmap(seed * 2), m_chunkManager(manager)
 {
 	m_seed = seed;
 	setupGens();
@@ -43,6 +44,12 @@ int WorldTerrain::getHeightAt(int x, int z)
 	return height;
 }
 
+int random(int n) {
+	n = (n >> 13) ^ n;
+	int nn = (n * (n * n * 60493 + 19990303) + 1376312589) & 0x7fffffff;
+	return nn;
+}
+
 void WorldTerrain::buildChunk(Chunk* chunk)
 {
 	if (!chunk->isLoaded()) {
@@ -61,10 +68,13 @@ void WorldTerrain::buildChunk(Chunk* chunk)
 					chunk->setBlock(x, y, z, BlockID::Grass);
 
 					if((cp.y * CHUNK_SIZE + y) == height){
-						auto seed = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-						srand(seed * x * z);
-						if (rand() % 1000 > 995) {
+						double treeBias = m_treemap.GetHeight1_0(wPos.x, wPos.z);
+						double rockBias = m_rockmap.GetHeight1_0(wPos.x, wPos.z);
+						if (treeBias == 1.0) {
 							chunk->getSeedData().treePositions.push_back({ x, y + 1, z });
+						}
+						if (rockBias == 1.0) {
+							chunk->getSeedData().rockPositions.push_back({ x,y,z });
 						}
 					}
 				}
@@ -80,17 +90,21 @@ void WorldTerrain::seedChunk(Chunk* chunk)
 		StructureBuilder builder;
 
 		for (auto& pos : chunk->getSeedData().treePositions) {
-			builder.fill(pos.x-1, pos.z-1, pos.y, pos.x + 1, pos.z + 1, BlockID::Wood);
-			builder.fill(pos.x-1, pos.z-1, pos.y + 1, pos.x + 1, pos.z + 1, BlockID::Wood);
-			builder.fill(pos.x-1, pos.z-1, pos.y + 2, pos.x + 1, pos.z + 1, BlockID::Wood);
-			builder.fill(pos.x-1, pos.z-1, pos.y + 3, pos.x + 1, pos.z + 1, BlockID::Wood);
-			builder.fill(pos.x-1, pos.z-1, pos.y + 4, pos.x + 1, pos.z + 1, BlockID::Wood);
-			builder.fill(pos.x-1, pos.z-1, pos.y + 5, pos.x + 1, pos.z + 1, BlockID::Wood);
-			builder.fill(pos.x-1, pos.z-1, pos.y + 6, pos.x + 1, pos.z + 1, BlockID::Wood);
-			builder.fill(pos.x-1, pos.z-1, pos.y + 7, pos.x + 1, pos.z + 1, BlockID::Wood);
-			builder.fill(pos.x-1, pos.z-1, pos.y + 8, pos.x + 1, pos.z + 1, BlockID::Wood);
+			builder.addColumn(pos.x, pos.y, pos.z, 8, BlockID::Wood);
+			builder.addColumn(pos.x + 1, pos.y, pos.z, 8, BlockID::Wood);
+			builder.addColumn(pos.x + 1, pos.y, pos.z + 1, 8, BlockID::Wood);
+			builder.addColumn(pos.x, pos.y, pos.z + 1, 8, BlockID::Wood);
+
+			builder.fill(pos.x - 3, pos.z - 3, pos.y + 8, pos.x + 5, pos.z + 5, pos.y + 15, BlockID::Leaf);
 		}
 		chunk->getSeedData().treePositions.clear();
+
+		for (auto& pos : chunk->getSeedData().rockPositions) {
+			StoneStructure structure;
+			structure.build(builder, pos);
+		}
+		chunk->getSeedData().rockPositions.clear();
+
 		builder.build(chunk);
 	}
 	chunk->setSeeded();
@@ -102,6 +116,11 @@ void WorldTerrain::setupGens()
 	m_mainHeightmap.SetOffset(-200);
 	m_mainHeightmap.GetNoise().SetFrequency(0.0005);
 	m_mainHeightmap.GetNoise().SetFractalLacunarity(2.0);
+
+	m_treemap.GetNoise().SetFrequency(3);
+	m_treemap.GetNoise().SetNoiseType(FastNoise::NoiseType::Value);
+	m_rockmap.GetNoise().SetFrequency(0.2);
+	m_rockmap.GetNoise().SetNoiseType(FastNoise::NoiseType::Value);
 }
 
 void WorldTerrain::genHeightmap(Column* column, sf::Vector3i worldPos)

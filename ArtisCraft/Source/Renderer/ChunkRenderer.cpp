@@ -17,3 +17,8 @@ void ChunkRenderer::render(Camera & cam)
 	}
 	m_chunks.clear();
 }
+
+void ChunkRenderer::clearChunks()
+{
+	m_chunks.clear();
+}

@@ -7,6 +7,7 @@ enum class BlockID : unsigned char {
 	Sand,
 	Wood,
 	Leaf,
+	Stone,
 
 	ERR_TYPE,
 	FULL_CHUNKTYPE,

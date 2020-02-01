@@ -20,9 +20,10 @@ void StructureBuilder::addColumn(int startX, int startY, int startZ, int height,
 	}
 }
 
-void StructureBuilder::fill(int startX, int startZ, int y, int endX, int endZ, BlockID block)
+void StructureBuilder::fill(int startX, int startZ, int startY, int endX, int endZ, int endY, BlockID block)
 {
 	for (int x = startX; x < endX; x++)
 		for (int z = startZ; z < endZ; z++)
+			for (int y = startY; y < endY; y++)
 			addBlock(x, y, z, block);
 }

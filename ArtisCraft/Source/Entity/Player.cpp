@@ -34,7 +34,7 @@ void Player::mouseInput(sf::RenderWindow & window)
 	else if (rotation.x < -BOUND) rotation.x = -BOUND;
 
 	if (rotation.y > 360) rotation.y = 0;
-	else if (rotation.y < 0)    rotation.y = 360;
+	else if (rotation.y < 0) rotation.y = 360;
 
 	auto cx = static_cast<int>(window.getSize().x / 2);
 	auto cy = static_cast<int>(window.getSize().y / 2);
@@ -47,10 +47,10 @@ void Player::mouseInput(sf::RenderWindow & window)
 void Player::keyboardInput()
 {
 	glm::vec3 change = { 0, 0, 0 };
-	float speed = 10;
+	float speed = 7;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-		speed = 25.0;
+		speed = 20.0;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))

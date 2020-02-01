@@ -10,6 +10,7 @@ class MasterRenderer {
 public:
 	void drawBlock(glm::vec3 pos);
 	void drawChunk(ChunkMesh& chunk);
+	void clearChunks();
 
 	void finishRender(sf::RenderWindow & window, Camera & camera);
 

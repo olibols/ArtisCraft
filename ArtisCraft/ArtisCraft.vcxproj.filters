@@ -48,6 +48,8 @@
     <ClInclude Include="Source\Utils\RobinHash.h" />
     <ClInclude Include="Source\World\Terrain\StructureBuilder.h" />
     <ClInclude Include="Source\World\Terrain\Column.h" />
+    <ClInclude Include="Source\World\Terrain\Structures\Structure.h" />
+    <ClInclude Include="Source\World\Terrain\Structures\StoneStructure.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -144,6 +146,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\Terrain\Column.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Terrain\Structures\StoneStructure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

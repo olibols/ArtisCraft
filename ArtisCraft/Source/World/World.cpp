@@ -26,8 +26,8 @@ void World::loadChunks(Camera & camera)
 	sf::Vector3i pos = toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z, });
 	bool chunkBuilt = false;
 	for (int i = 0; i < m_loadDistance; i++) {
-		sf::Vector3i min = {pos.x - i, pos.y - std::max(i/2, 2), pos.z - i};
-		sf::Vector3i max = {pos.x + i, pos.y + std::max(i/2, 2), pos.z + i};
+		sf::Vector3i min = {pos.x - i, pos.y - std::max(i/2, 0), pos.z - i};
+		sf::Vector3i max = {pos.x + i, pos.y + std::max(i/2, 0), pos.z + i};
 
 			for (int y = min.y; y < max.y; y++){
 				for (int x = min.x; x < max.x; x++){
@@ -73,14 +73,41 @@ void World::processUpdates()
 
 void World::render(MasterRenderer & renderer)
 {
-	for (auto& chunk : m_chunkManager.getChunks()) {
-		if (m_mapChanged) {
-			m_mapChanged = false;
-			render(renderer);
-			return;
+	/*int i = 0;
+	auto it = m_chunkManager.getChunks().begin();
+	auto end = m_chunkManager.getChunks().end();
+
+	if (m_mutex.try_lock()) {
+		try {
+			for (; it != end; ++it, ++i) {
+				it->second->draw(renderer);
+			}
 		}
-		chunk.second->draw(renderer);
+		catch (std::exception e) {}
+		m_mutex.unlock();
 	}
+	else {
+		for (; it != end; ++it, ++i) {
+			/*if (m_mapChanged) {
+				m_mapChanged = false;
+				it = m_chunkManager.getChunks().begin();
+				end = m_chunkManager.getChunks().end();
+				for (int x = 0; x < i - 1; x++) {
+					++it;
+				}
+				i = 0;
+			}
+			it->second->draw(renderer);
+		}
+	}*/
+
+	try
+	{
+		for (auto& chunk : m_chunkManager.getChunks()) {
+			chunk.second->draw(renderer);
+		}
+	}
+	catch (const std::exception&){}
 }
 
 void World::setBlock(int x, int y, int z, BlockID block)

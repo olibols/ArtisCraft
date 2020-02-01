@@ -26,6 +26,7 @@ private:
 
 	NoiseWrapper m_mainHeightmap;
 	NoiseWrapper m_treemap;
+	NoiseWrapper m_rockmap;
 
 	int m_seed;
 	
