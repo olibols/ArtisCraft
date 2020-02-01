@@ -5,8 +5,8 @@ in float vertDist;
 
 out vec4 FragColor;
  
-float minFog = 150.0;
-float maxFog = 500.0;
+float minFog = 300.0;
+float maxFog = 700.0;
  
 float gamma = 1.2;
  
