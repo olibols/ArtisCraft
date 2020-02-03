@@ -22,11 +22,13 @@ public:
 private:
 	void setupGens();
 	void genHeightmap(Column* column, sf::Vector3i worldPos);
+	void genBlockmap(Column* column, sf::Vector3i worldPos);
 	ChunkManager* m_chunkManager;
 
 	NoiseWrapper m_mainHeightmap;
 	NoiseWrapper m_treemap;
 	NoiseWrapper m_rockmap;
+	NoiseWrapper m_riverMap;
 
 	int m_seed;
 	

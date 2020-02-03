@@ -19,6 +19,8 @@ void Player::update(float deltaTime)
 	position.x += velocity.x * deltaTime;
 	position.z += velocity.z * deltaTime;
 	position.y += velocity.y * deltaTime;
+
+	//printf("%f, %f, %f \n", position.x, position.y, position.z);
 }
 
 void Player::mouseInput(sf::RenderWindow & window)

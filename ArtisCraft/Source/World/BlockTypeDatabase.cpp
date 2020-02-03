@@ -23,4 +23,5 @@ BlockTypeDatabase::BlockTypeDatabase()
 	m_blockColors[(int)BlockID::Wood] = normaliseColour(86, 67, 52);
 	m_blockColors[(int)BlockID::Leaf] = normaliseColour(82, 107, 45);
 	m_blockColors[(int)BlockID::Stone] = normaliseColour(145, 142, 133);
+	m_blockColors[(int)BlockID::Water] = normaliseColour(30, 144, 255);
 }

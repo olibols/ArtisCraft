@@ -13,7 +13,7 @@ struct GenResults {
 	BlockID blockType = BlockID::ERR_TYPE;
 };
 
-WorldTerrain::WorldTerrain(int seed, ChunkManager* manager) : m_mainHeightmap(seed), m_treemap(seed * 3), m_rockmap(seed * 2), m_chunkManager(manager)
+WorldTerrain::WorldTerrain(int seed, ChunkManager* manager) : m_mainHeightmap(seed), m_treemap(seed * 3), m_rockmap(seed * 2), m_riverMap(seed / 2), m_chunkManager(manager)
 {
 	m_seed = seed;
 	setupGens();
@@ -41,6 +41,13 @@ BlockID WorldTerrain::getBlockAt(int x, int y, int z, Column* column)
 int WorldTerrain::getHeightAt(int x, int z)
 {
 	double height = m_mainHeightmap.GetHeight(x, z);
+
+	int riv = m_riverMap.GetHeight(x, z);
+
+	if (riv < 190 && riv > 185) {
+		height -= 5;
+	}
+
 	return height;
 }
 
@@ -56,6 +63,7 @@ void WorldTerrain::buildChunk(Chunk* chunk)
 
 		auto& column = m_chunkManager->addColumn({ chunk->getLocation().x, chunk->getLocation().z });
 		genHeightmap(&column, chunk->getLocation());
+		genBlockmap(&column, chunk->getLocation());
 
 		auto cp = chunk->getLocation();
 
@@ -65,15 +73,16 @@ void WorldTerrain::buildChunk(Chunk* chunk)
 				int height = column.getHeight(x, z);
 				for (int y = 0; (cp.y * CHUNK_SIZE + y) <= height && y < CHUNK_SIZE; y++) {
 					auto wPos = toGlobalBlockPos({ x,y,z }, cp);
-					chunk->setBlock(x, y, z, BlockID::Grass);
+					BlockID block = column.getBlock(x, z);
+					chunk->setBlock(x, y, z, block);
 
 					if((cp.y * CHUNK_SIZE + y) == height){
 						double treeBias = m_treemap.GetHeight1_0(wPos.x, wPos.z);
 						double rockBias = m_rockmap.GetHeight1_0(wPos.x, wPos.z);
-						if (treeBias == 1.0) {
+						if (treeBias == 1.0 && block != BlockID::Water) {
 							chunk->getSeedData().treePositions.push_back({ x, y + 1, z });
 						}
-						if (rockBias == 1.0) {
+						if (rockBias == 1.0 && block == BlockID::Water) {
 							chunk->getSeedData().rockPositions.push_back({ x,y,z });
 						}
 					}
@@ -116,6 +125,12 @@ void WorldTerrain::setupGens()
 	m_mainHeightmap.SetOffset(-200);
 	m_mainHeightmap.GetNoise().SetFrequency(0.0005);
 	m_mainHeightmap.GetNoise().SetFractalLacunarity(2.0);
+	
+	m_riverMap.SetAmplitude(400);
+	m_riverMap.SetOffset(-200);
+	m_riverMap.GetNoise().SetFractalOctaves(4);
+	m_riverMap.GetNoise().SetFrequency(0.0005);
+	m_riverMap.GetNoise().SetFractalLacunarity(2.0);
 
 	m_treemap.GetNoise().SetFrequency(3);
 	m_treemap.GetNoise().SetNoiseType(FastNoise::NoiseType::Value);
@@ -125,7 +140,7 @@ void WorldTerrain::setupGens()
 
 void WorldTerrain::genHeightmap(Column* column, sf::Vector3i worldPos)
 {
-	if (column->isLoaded()) return;
+	if (column->isHeightsLoaded()) return;
 
 	HeightMap heights;
 	for (int x = 0; x < CHUNK_SIZE; x++) {
@@ -136,7 +151,32 @@ void WorldTerrain::genHeightmap(Column* column, sf::Vector3i worldPos)
 		}
 	}
 	column->setHeights(heights);
-	column->setLoaded();
+	column->setHeightsLoaded();
+}
+
+void WorldTerrain::genBlockmap(Column * column, sf::Vector3i worldPos)
+{
+	if (column->isBlocksLoaded()) return;
+
+	BlockMap blocks;
+
+	for (int x = 0; x < CHUNK_SIZE; x++) {
+		for (int z = 0; z < CHUNK_SIZE; z++) {
+			auto nx = worldPos.x * CHUNK_SIZE + x;
+			auto nz = worldPos.z * CHUNK_SIZE + z;
+
+			int riv = m_riverMap.GetHeight(nx, nz);
+
+			if (riv < 190 && riv > 185) {
+				blocks[x][z] = BlockID::Water;
+			}
+			else {
+				blocks[x][z] = BlockID::Grass;
+			}
+		}
+	}
+	column->setBlocks(blocks);
+	column->setBlocksLoaded();
 }
 
 bool WorldTerrain::shouldBuild(Chunk * chunk, Column* column)
