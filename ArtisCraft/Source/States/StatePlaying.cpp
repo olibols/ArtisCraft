@@ -17,7 +17,7 @@ void StatePlaying::update(float deltaTime)
 {
 	m_player.update(deltaTime);
 	
-	for (Ray ray(m_player.position, m_player.rotation); ray.getLength() < 6; ray.step(0.1)){
+	/*for (Ray ray(m_player.position, m_player.rotation); ray.getLength() < 6; ray.step(0.1)){
 		auto x = ray.getEnd().x;
 		auto y = ray.getEnd().y;
 		auto z = ray.getEnd().z;
@@ -39,6 +39,19 @@ void StatePlaying::update(float deltaTime)
 		}
 
 		m_rayPos = ray.getEnd();
+	}*/
+
+	if (m_inputTimer.getElapsedTime().asSeconds() > 0.2) {
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+			for (Ray ray(m_player.position, m_player.rotation); ray.getLength() < 6; ray.step(0.1)) {
+				BlockID block = m_world.getBlock(ray.getEnd().x, ray.getEnd().y, ray.getEnd().z);
+				if (block != BlockID::Air) {
+					m_inputTimer.restart();
+					m_world.psetBlock(ray.getEnd().x, ray.getEnd().y, ray.getEnd().z, BlockID::Air);
+					break;
+				}
+			}
+		}
 	}
 }
 
