@@ -22,6 +22,7 @@ public:
 	void setBlock(int x, int y, int z, BlockID block);
 	void psetBlock(int x, int y, int z, BlockID block);
 	BlockID getBlock(int x, int y, int z);
+	int getHeight(int x, int z);
 
 private:
 	ChunkManager m_chunkManager;

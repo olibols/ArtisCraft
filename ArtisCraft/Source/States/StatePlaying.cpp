@@ -11,11 +11,13 @@
 StatePlaying::StatePlaying(Application & app) : StateBase(app), m_world(app.getCamera())
 {
 	app.getCamera().hookEntity(m_player);
+
+	m_player.position = { 0, m_world.getHeight(0, 0) + 10, 0 };
 }
 
 void StatePlaying::update(float deltaTime)
 {
-	m_player.update(deltaTime);
+	m_player.update(deltaTime, m_world);
 	
 	/*for (Ray ray(m_player.position, m_player.rotation); ray.getLength() < 6; ray.step(0.1)){
 		auto x = ray.getEnd().x;

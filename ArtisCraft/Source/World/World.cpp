@@ -12,15 +12,13 @@ World::World(Camera& camera) : m_seed(std::chrono::system_clock::to_time_t(std::
 			loadChunks(camera);
 		}
 	});
-
-	camera.position = {0, m_worldTerrain.getHeightAt(0, 0) + 2,0 };
 }
 
 void World::loadChunks(Camera & camera)
 {
 	if (m_currentChunk != toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z })) {
 		m_currentChunk = toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z });
-		m_loadDistance = 2;
+		m_loadDistance = 0;
 	}
 
 	sf::Vector3i pos = toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z, });
@@ -125,4 +123,9 @@ void World::psetBlock(int x, int y, int z, BlockID block)
 BlockID World::getBlock(int x, int y, int z)
 {
 	return m_chunkManager.getBlock({ x,y,z });
+}
+
+int World::getHeight(int x, int z)
+{
+	return m_worldTerrain.getHeightAt(x, z);
 }

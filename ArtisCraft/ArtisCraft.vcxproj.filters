@@ -50,6 +50,7 @@
     <ClInclude Include="Source\World\Terrain\Column.h" />
     <ClInclude Include="Source\World\Terrain\Structures\Structure.h" />
     <ClInclude Include="Source\World\Terrain\Structures\StoneStructure.h" />
+    <ClInclude Include="Source\Entity\AABB.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
