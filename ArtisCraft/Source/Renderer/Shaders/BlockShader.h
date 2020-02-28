@@ -1,6 +1,7 @@
 #pragma once
 #include "ShaderProgram.h"
 
+// Child class of ShaderProgram. Contains methods and the shader program itself
 class BlockShader : public ShaderProgram {
 public:
 	BlockShader(std::string vertexFile = "BasicVertex", std::string fragmentFile = "BasicFragment");

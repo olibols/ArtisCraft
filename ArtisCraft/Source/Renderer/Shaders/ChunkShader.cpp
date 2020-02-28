@@ -1,5 +1,6 @@
 #include "ChunkShader.h"
 
+
 ChunkShader::ChunkShader() : BlockShader("ChunkVertex", "ChunkFragment")
 {
 	getUniforms();

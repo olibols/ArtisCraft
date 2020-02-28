@@ -3,12 +3,15 @@
 #include <vector>
 #include <gl/glew.h>
 
+// The small struct for holding vertex positions etc.
 struct Mesh {
 	std::vector<GLfloat> vertexPositions;
 	std::vector<GLfloat> vertexColors;
 	std::vector<GLuint> indices;
 };
 
+
+// The class that holds the OpenGL stuff and can be rendered.
 class Model {
 public:
 	Model() = default;

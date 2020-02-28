@@ -3,31 +3,37 @@
 
 #include <gtc/type_ptr.hpp>
 
+// Constructor
 ShaderProgram::ShaderProgram(std::string vertex, std::string fragment)
 {
 	m_ID = loadShaders(vertex, fragment);
 	glUseProgram(m_ID);
 }
 
+// Destructor
 ShaderProgram::~ShaderProgram() {
 	deleteProgram();
 }
 
+// Bind the shader program in opengl
 void ShaderProgram::useProgram()
 {
 	glUseProgram(m_ID);
 }
 
+// Delete the shader program
 void ShaderProgram::deleteProgram()
 {
 	glDeleteProgram(m_ID);
 }
 
+// Returns the shaders ID
 GLuint ShaderProgram::getID() const
 {
 	return m_ID;
 }
 
+// The following functions just load certain values into a shader.
 void ShaderProgram::loadInt(GLuint location, int value)
 {
 	glUniform1i(location, value);

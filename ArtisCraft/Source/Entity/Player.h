@@ -7,6 +7,8 @@
 
 class World;
 
+// This is the player class
+
 class Player : public Entity {
 public:
 	Player();

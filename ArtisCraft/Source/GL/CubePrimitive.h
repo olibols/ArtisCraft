@@ -4,6 +4,8 @@
 #include <glm.hpp>
 #include <GL/glew.h>
 
+// Contains the primitives used in rendering
+
 namespace primitives {
 	const std::vector<GLfloat> CubeVertexes =
 	{

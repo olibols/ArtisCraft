@@ -11,16 +11,17 @@ void Player::handleInput(sf::RenderWindow & window)
 	mouseInput(window);
 }
 
+// This is called after the movement code is called and handles collisions
 void Player::collide(World & world, glm::vec3 vel, float deltaTime)
 {
-	world.loadChunk(toChunkPos({ (int)position.x, (int)position.y, (int)position.z}));
+	world.loadChunk(toChunkPos({ (int)position.x, (int)position.y, (int)position.z})); // To prevent errors, load the current chunk
 
 	for(int x = position.x - m_box.dimensions.x; x < position.x + m_box.dimensions.x; x++)
 	for(int y = position.y - m_box.dimensions.y; y < position.y + 0.3; y++)
 	for(int z = position.z - m_box.dimensions.z; z < position.z + m_box.dimensions.z; z++) {
 		auto block = world.getBlock(x, y, z);
 
-		if (block != BlockID::Air) {
+		if (block != BlockID::Air) { // If we are intersecting with another block, move us out of that block
 			if (vel.y > 0) {
 				velocity.y = 0;
 				position.y -= 0.1;
@@ -48,11 +49,12 @@ void Player::collide(World & world, glm::vec3 vel, float deltaTime)
 	}
 }
 
+// This is called every frame and handles the movement after keys have been pressed etc
 void Player::update(float deltaTime, World& world)
 {
 	m_timeAlive += deltaTime;
 
-	if (m_timeAlive > 5.0) {
+	if (m_timeAlive > 5.0) { // Only handle movement and physics after 5 seconds
 
 		if (!m_onGround) {
 			velocity.y -= 40.0 * deltaTime;
@@ -73,9 +75,9 @@ void Player::update(float deltaTime, World& world)
 		collide(world, { 0, 0, velocity.z }, deltaTime);
 	}
 
-	//printf("%f, %f, %f \n", position.x, position.y, position.z);
 }
 
+// This function takes in the mouse input and creates a rotation vector based on how it moved since last frame.
 void Player::mouseInput(sf::RenderWindow & window)
 {
 	static auto const BOUND = 90;
@@ -99,6 +101,7 @@ void Player::mouseInput(sf::RenderWindow & window)
 	lastMousePosition = sf::Mouse::getPosition();
 }
 
+// This handles keypresses and does actions based on what was pressed. It creates a movement vector.
 void Player::keyboardInput()
 {
 	glm::vec3 change = { 0, 0, 0 };

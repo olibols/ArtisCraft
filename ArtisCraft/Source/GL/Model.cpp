@@ -1,10 +1,12 @@
 #include "Model.h"
 
+// Model class initialiser
 Model::Model(Mesh mesh)
 {
 	addData(mesh);
 }
 
+// Adds the mesh data into model class
 void Model::addData(Mesh mesh)
 {
 
@@ -27,11 +29,13 @@ void Model::addData(Mesh mesh)
 	addEBO(mesh.indices);
 }
 
+
 int Model::getIndiceCount()
 {
 	return m_indiceCount;
 }
 
+// Sends buffer data to the graphics card
 void Model::addVBO(int dimensions, std::vector<GLfloat> data)
 {
 	GLuint VBO;
@@ -47,11 +51,13 @@ void Model::addVBO(int dimensions, std::vector<GLfloat> data)
 	m_buffers.push_back(VBO);
 }
 
+// Binds the models vertex array object
 void Model::bindVAO()
 {
 	glBindVertexArray(m_VAO);
 }
 
+// Adds an element buffer object
 void Model::addEBO(std::vector<GLuint> indices)
 {
 	GLuint EBO;

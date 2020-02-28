@@ -4,6 +4,8 @@
 #include <glm.hpp>
 #include <GL/glew.h>
 
+
+// Base class containing a opengl shader program and methods to operate on it
 class ShaderProgram {
 public:
 	ShaderProgram(std::string vertex, std::string fragment);

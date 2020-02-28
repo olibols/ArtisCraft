@@ -6,6 +6,8 @@
 
 #include <glm.hpp>
 
+// Primitives for rendering
+
 namespace QuadPrimitive {
 
 	const std::array<GLfloat, 12> FRONT_FACE = { 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1 };
