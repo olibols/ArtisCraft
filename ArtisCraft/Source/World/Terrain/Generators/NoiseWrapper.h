@@ -18,6 +18,7 @@ public:
 	NoiseWrapper(int seed);
 
 	void SetParams(NoiseParams& params);
+	void SetSeed(int seed);
 
 	double GetHeight(int x, int z);
 	double GetHeight1_0(int x, int z);

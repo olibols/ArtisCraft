@@ -20,6 +20,8 @@ private:
 	void mouseInput(sf::RenderWindow& window);
 	void keyboardInput();
 
+	float m_timeAlive = 0.0f;
+
 	AABB m_box;
 	bool m_onGround = false;
 };

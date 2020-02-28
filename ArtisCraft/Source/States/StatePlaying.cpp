@@ -12,37 +12,12 @@ StatePlaying::StatePlaying(Application & app) : StateBase(app), m_world(app.getC
 {
 	app.getCamera().hookEntity(m_player);
 
-	m_player.position = { 0, m_world.getHeight(0, 0) + 10, 0 };
+	m_player.position = { 500, m_world.getHeight(500, 500) + 10, 500 };
 }
 
 void StatePlaying::update(float deltaTime)
 {
 	m_player.update(deltaTime, m_world);
-	
-	/*for (Ray ray(m_player.position, m_player.rotation); ray.getLength() < 6; ray.step(0.1)){
-		auto x = ray.getEnd().x;
-		auto y = ray.getEnd().y;
-		auto z = ray.getEnd().z;
-
-		if (m_inputTimer.getElapsedTime().asSeconds() > 0.2) {
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-				BlockID block = m_world.getBlock(x, y, z);
-				if (block != BlockID::Air) {
-					m_inputTimer.restart();
-					m_world.psetBlock(ray.getEnd().x, ray.getEnd().y, ray.getEnd().z, BlockID::Air);
-					break;
-				}
-			}
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-				m_inputTimer.restart();
-				m_world.psetBlock(m_rayPos.x, m_rayPos.y, m_rayPos.z, BlockID::Grass);
-				break;
-			}
-		}
-
-		m_rayPos = ray.getEnd();
-	}*/
-
 	if (m_inputTimer.getElapsedTime().asSeconds() > 0.2) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			for (Ray ray(m_player.position, m_player.rotation); ray.getLength() < 6; ray.step(0.1)) {
@@ -50,7 +25,21 @@ void StatePlaying::update(float deltaTime)
 				if (block != BlockID::Air) {
 					m_inputTimer.restart();
 					m_world.psetBlock(ray.getEnd().x, ray.getEnd().y, ray.getEnd().z, BlockID::Air);
-					break;
+					return;
+				}
+			}
+		}
+	}
+
+	if (m_inputTimer.getElapsedTime().asSeconds() > 0.2) {
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+			for (Ray ray(m_player.position, m_player.rotation); ray.getLength() < 6; ray.step(0.1)) {
+				BlockID block = m_world.getBlock(ray.getEnd().x, ray.getEnd().y, ray.getEnd().z);
+				if (block != BlockID::Air) {
+					ray.step(-0.15);
+					m_inputTimer.restart();
+					m_world.psetBlock(ray.getEnd().x, ray.getEnd().y, ray.getEnd().z, BlockID::Stone);
+					return;
 				}
 			}
 		}

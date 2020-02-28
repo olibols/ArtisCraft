@@ -22,6 +22,11 @@ void NoiseWrapper::SetParams(NoiseParams & params)
 	m_noiseGen.SetFractalGain(m_params.Gain);
 }
 
+void NoiseWrapper::SetSeed(int seed)
+{
+	m_noiseGen.SetSeed(seed);
+}
+
 double NoiseWrapper::GetHeight(int x, int z)
 {
 	return ((m_noiseGen.GetNoise(x, z) + 1.0) * m_params.Amplitude) + m_params.Offset;
