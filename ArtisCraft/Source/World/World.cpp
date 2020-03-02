@@ -71,38 +71,10 @@ void World::processUpdates()
 
 void World::render(MasterRenderer & renderer)
 {
-	/*int i = 0;
-	auto it = m_chunkManager.getChunks().begin();
-	auto end = m_chunkManager.getChunks().end();
-
-	if (m_mutex.try_lock()) {
-		try {
-			for (; it != end; ++it, ++i) {
-				it->second->draw(renderer);
-			}
-		}
-		catch (std::exception e) {}
-		m_mutex.unlock();
-	}
-	else {
-		for (; it != end; ++it, ++i) {
-			/*if (m_mapChanged) {
-				m_mapChanged = false;
-				it = m_chunkManager.getChunks().begin();
-				end = m_chunkManager.getChunks().end();
-				for (int x = 0; x < i - 1; x++) {
-					++it;
-				}
-				i = 0;
-			}
-			it->second->draw(renderer);
-		}
-	}*/
-
 	try
 	{
 		for (auto& chunk : m_chunkManager.getChunks()) {
-			chunk.second->draw(renderer);
+			chunk.second.draw(renderer);
 		}
 	}
 	catch (const std::exception&){}
@@ -116,8 +88,23 @@ void World::setBlock(int x, int y, int z, BlockID block)
 void World::psetBlock(int x, int y, int z, BlockID block)
 {
 	m_chunkManager.setBlock({ x,y,z }, block);
+	updateChunk(x, y, z);
+}
+
+void World::updateChunk(int x, int y, int z)
+{
 	sf::Vector3i chunkPos = toChunkPos({ x,y,z });
+	sf::Vector3i localPos = toLocalBlockPos({ x,y,z });
+
 	m_chunkUpdates.push_back(&m_chunkManager.getChunk(chunkPos));
+
+	if (localPos.x == 0) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x - 1, chunkPos.y, chunkPos.z }));
+	if (localPos.y == 0) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x, chunkPos.y - 1, chunkPos.z }));
+	if (localPos.z == 0) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x, chunkPos.y, chunkPos.z - 1 }));
+
+	if (localPos.x == CHUNK_SIZE) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x + 1, chunkPos.y, chunkPos.z }));
+	if (localPos.y == CHUNK_SIZE) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x, chunkPos.y + 1, chunkPos.z }));
+	if (localPos.z == CHUNK_SIZE) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x, chunkPos.y, chunkPos.z + 1 }));
 }
 
 BlockID World::getBlock(int x, int y, int z)

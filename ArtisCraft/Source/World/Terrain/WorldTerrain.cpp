@@ -82,7 +82,7 @@ void WorldTerrain::buildChunk(Chunk* chunk)
 						if (treeBias == 1.0 && block != BlockID::Water) {
 							chunk->getSeedData().treePositions.push_back({ x, y + 1, z });
 						}
-						if (rockBias == 1.0 && block == BlockID::Water) {
+						if (rockBias == 1.0) {
 							chunk->getSeedData().rockPositions.push_back({ x,y,z });
 						}
 					}
@@ -121,13 +121,13 @@ void WorldTerrain::seedChunk(Chunk* chunk)
 
 void WorldTerrain::setupGens()
 {
-	m_mainHeightmap.SetSeed(m_seed);
+	m_mainHeightmap.SetSeed(m_seed * 3);
 	m_mainHeightmap.SetAmplitude(400);
 	m_mainHeightmap.SetOffset(-200);
 	m_mainHeightmap.GetNoise().SetFrequency(0.0005);
 	m_mainHeightmap.GetNoise().SetFractalLacunarity(2.0);
 	
-	m_riverMap.SetAmplitude(400);
+	m_riverMap.SetAmplitude(400 * 2);
 	m_riverMap.SetSeed(m_seed);
 	m_riverMap.SetOffset(-200);
 	m_riverMap.GetNoise().SetFractalOctaves(4);
@@ -135,7 +135,7 @@ void WorldTerrain::setupGens()
 	m_riverMap.GetNoise().SetFractalLacunarity(2.0);
 
 	m_treemap.GetNoise().SetFrequency(3);
-	m_treemap.GetNoise().SetSeed(m_seed);
+	m_treemap.GetNoise().SetSeed(m_seed / 2);
 	m_treemap.GetNoise().SetNoiseType(FastNoise::NoiseType::Value);
 	m_rockmap.GetNoise().SetFrequency(0.2);
 	m_rockmap.GetNoise().SetNoiseType(FastNoise::NoiseType::Value);

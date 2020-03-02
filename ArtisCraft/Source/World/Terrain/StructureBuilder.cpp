@@ -13,6 +13,17 @@ void StructureBuilder::addBlock(int x, int y, int z, BlockID block)
 	m_blocks.emplace_back(block, x, y, z);
 }
 
+void StructureBuilder::addCube(int x, int y, int z, int radius, BlockID block)
+{
+	for (int nx = x - radius; nx < x + radius; nx++) {
+		for (int ny = y - radius; ny < y + radius; ny++) {
+			for (int nz = z - radius; nz < z + radius; nz++) {
+				m_blocks.emplace_back(block, nx, ny, nz);
+			}
+		}
+	}
+}
+
 void StructureBuilder::addColumn(int startX, int startY, int startZ, int height, BlockID block)
 {
 	for (int y = 0; y < height; y++) {

@@ -7,6 +7,7 @@
 
 #include <thread>
 #include <mutex>
+#include <atomic>
 
 class World {
 public:
@@ -21,6 +22,7 @@ public:
 
 	void setBlock(int x, int y, int z, BlockID block);
 	void psetBlock(int x, int y, int z, BlockID block);
+	void updateChunk(int x, int y, int z);
 	BlockID getBlock(int x, int y, int z);
 	int getHeight(int x, int z);
 

@@ -8,9 +8,9 @@ Chunk& ChunkManager::addChunk(sf::Vector3i pos)
 {
 	auto itr = m_chunks.find(pos);
 	if (itr == m_chunks.cend()) {
-		return *m_chunks.emplace(std::piecewise_construct, std::forward_as_tuple(pos), std::forward_as_tuple(std::make_unique<Chunk>(pos, *this))).first->second;
+		return m_chunks.emplace(std::piecewise_construct, std::forward_as_tuple(pos), std::forward_as_tuple(pos, *this)).first->second;
 	}
-	return *itr->second;
+	return itr->second;
 }
 
 Column& ChunkManager::addColumn(sf::Vector2i pos)
@@ -43,7 +43,7 @@ Chunk & ChunkManager::getChunk(sf::Vector3i pos)
 	if (itr == m_chunks.cend()) {
 		return addChunk(pos);
 	}
-	return *itr->second;
+	return itr->second;
 }
 
 BlockID ChunkManager::getBlock(sf::Vector3i pos)
@@ -54,7 +54,7 @@ BlockID ChunkManager::getBlock(sf::Vector3i pos)
 		return BlockID::ERR_TYPE;
 	}
 	sf::Vector3i locPos = toLocalBlockPos(pos);
-	return itr->second->getBlock(locPos.x, locPos.y, locPos.z);
+	return itr->second.getBlock(locPos.x, locPos.y, locPos.z);
 }
 
 void ChunkManager::setBlock(sf::Vector3i pos, BlockID block)
@@ -62,7 +62,7 @@ void ChunkManager::setBlock(sf::Vector3i pos, BlockID block)
 	sf::Vector3i chunkPos = toChunkPos(pos);
 	auto itr = m_chunks.find(chunkPos);
 	if (itr != m_chunks.cend()) {
-		itr->second->setBlock(toLocalBlockPos(pos).x, toLocalBlockPos(pos).y, toLocalBlockPos(pos).z, block);
+		itr->second.setBlock(toLocalBlockPos(pos).x, toLocalBlockPos(pos).y, toLocalBlockPos(pos).z, block);
 	}
 }
 
@@ -95,7 +95,7 @@ void ChunkManager::buildNeighbours(sf::Vector3i pos, WorldTerrain& terrain)
 	terrain.buildChunk(&addChunk({ cp.x, cp.y, cp.z + 1 }));
 }
 
-ChunkPosMap<std::unique_ptr<Chunk>>& ChunkManager::getChunks()
+ChunkPosMap<Chunk>& ChunkManager::getChunks()
 {
 	return m_chunks;
 }
