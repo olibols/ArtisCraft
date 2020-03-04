@@ -102,9 +102,9 @@ void World::updateChunk(int x, int y, int z)
 	if (localPos.y == 0) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x, chunkPos.y - 1, chunkPos.z }));
 	if (localPos.z == 0) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x, chunkPos.y, chunkPos.z - 1 }));
 
-	if (localPos.x == CHUNK_SIZE) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x + 1, chunkPos.y, chunkPos.z }));
-	if (localPos.y == CHUNK_SIZE) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x, chunkPos.y + 1, chunkPos.z }));
-	if (localPos.z == CHUNK_SIZE) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x, chunkPos.y, chunkPos.z + 1 }));
+	if (localPos.x == CHUNK_SIZE - 1) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x + 1, chunkPos.y, chunkPos.z }));
+	if (localPos.y == CHUNK_SIZE - 1) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x, chunkPos.y + 1, chunkPos.z }));
+	if (localPos.z == CHUNK_SIZE - 1) m_chunkUpdates.push_back(&m_chunkManager.getChunk({ chunkPos.x, chunkPos.y, chunkPos.z + 1 }));
 }
 
 BlockID World::getBlock(int x, int y, int z)

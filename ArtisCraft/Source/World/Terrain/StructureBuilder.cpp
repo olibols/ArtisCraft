@@ -38,3 +38,14 @@ void StructureBuilder::fill(int startX, int startZ, int startY, int endX, int en
 			for (int y = startY; y < endY; y++)
 			addBlock(x, y, z, block);
 }
+
+void StructureBuilder::addSphere(int startX, int startY, int startZ, int radius, BlockID block)
+{
+	for (int x = startX - radius; x < startX + radius; x++)
+	for (int y = startY - radius; y < startY + radius; y++)
+	for (int z = startZ - radius; z < startZ + radius; z++) {
+		if (glm::length(glm::vec3(startX, startY, startZ) - glm::vec3(x, y, z)) < radius) {
+			addBlock(x, y, z, block);
+		}
+	}
+}

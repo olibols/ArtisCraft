@@ -4,6 +4,7 @@
 #include "../Coordinates.h"
 #include "StructureBuilder.h"
 #include "Structures/StoneStructure.h"
+#include "Structures/OakTreeStructure.h"
 
 #include <chrono>
 #include <random>
@@ -99,12 +100,8 @@ void WorldTerrain::seedChunk(Chunk* chunk)
 		StructureBuilder builder;
 
 		for (auto& pos : chunk->getSeedData().treePositions) {
-			builder.addColumn(pos.x, pos.y, pos.z, 8, BlockID::Wood);
-			builder.addColumn(pos.x + 1, pos.y, pos.z, 8, BlockID::Wood);
-			builder.addColumn(pos.x + 1, pos.y, pos.z + 1, 8, BlockID::Wood);
-			builder.addColumn(pos.x, pos.y, pos.z + 1, 8, BlockID::Wood);
-
-			builder.fill(pos.x - 3, pos.z - 3, pos.y + 8, pos.x + 5, pos.z + 5, pos.y + 15, BlockID::Leaf);
+			OakTreeStructure structure;
+			structure.build(builder, pos);
 		}
 		chunk->getSeedData().treePositions.clear();
 
