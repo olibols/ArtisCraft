@@ -45,6 +45,7 @@
     <ClInclude Include="Source\World\Coordinates.h" />
     <ClInclude Include="Source\World\Event\BaseEvent.h" />
     <ClInclude Include="Source\World\Terrain\Column.h" />
+    <ClInclude Include="Source\World\Terrain\Generators\NoiseWrapper3D.h" />
     <ClInclude Include="Source\World\Terrain\Generators\FastNoise.h" />
     <ClInclude Include="Source\World\Terrain\Generators\NoiseWrapper.h" />
     <ClInclude Include="Source\World\Terrain\StructureBuilder.h" />
@@ -85,6 +86,7 @@
     <ClCompile Include="Source\World\Terrain\Column.cpp" />
     <ClCompile Include="Source\World\Terrain\Generators\FastNoise.cpp" />
     <ClCompile Include="Source\World\Terrain\Generators\NoiseWrapper.cpp" />
+    <ClCompile Include="Source\World\Terrain\Generators\NoiseWrapper3D.cpp" />
     <ClCompile Include="Source\World\Terrain\StructureBuilder.cpp" />
     <ClCompile Include="Source\World\Terrain\Structures\OakTreeStructure.cpp" />
     <ClCompile Include="Source\World\Terrain\Structures\StoneStructure.cpp" />

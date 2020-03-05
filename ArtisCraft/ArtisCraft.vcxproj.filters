@@ -52,6 +52,7 @@
     <ClInclude Include="Source\World\Terrain\Structures\StoneStructure.h" />
     <ClInclude Include="Source\Entity\AABB.h" />
     <ClInclude Include="Source\World\Terrain\Structures\OakTreeStructure.h" />
+    <ClInclude Include="Source\World\Terrain\Generators\NoiseWrapper3D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -154,6 +155,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\World\Terrain\Structures\OakTreeStructure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World\Terrain\Generators\NoiseWrapper3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
