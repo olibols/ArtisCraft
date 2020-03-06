@@ -21,6 +21,8 @@ void OakTreeStructure::build(StructureBuilder & builder, sf::Vector3i startPos)
 
 	builder.addColumn(sx, sy - 10, sz, 6, BlockID::Wood);
 
+	builder.addLine(sx, sy - 10, sz, { 2.0, 0.0, 0.0 }, 8, BlockID::Wood);
+
 	for (int x = sx - 5; x < sx + 5; x++)
 		for (int y = sy - 5; y < sy + 5; y++)
 			for (int z = sz - 5; z < sz + 5; z++) {
@@ -31,3 +33,4 @@ void OakTreeStructure::build(StructureBuilder & builder, sf::Vector3i startPos)
 				}
 			}
 }
+

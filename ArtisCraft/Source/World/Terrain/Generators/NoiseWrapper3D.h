@@ -5,7 +5,7 @@ struct NoiseParams3D {
 	FastNoise::NoiseType NoiseType = FastNoise::NoiseType::Simplex;
 	FastNoise::FractalType FractalType = FastNoise::FractalType::FBM;
 
-	float Frequency = 0.3;
+	float Frequency = 1.0;
 	float Octaves = 3;
 	float Lacunarity = 2.0;
 	float Gain = 0.5;

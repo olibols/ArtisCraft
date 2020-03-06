@@ -1,5 +1,7 @@
 #include "StructureBuilder.h"
 
+#include "../../Utils/Ray.h"
+
 void StructureBuilder::build(Chunk* chunk)
 {
 	for (auto& block : m_blocks) {
@@ -47,5 +49,13 @@ void StructureBuilder::addSphere(int startX, int startY, int startZ, int radius,
 		if (glm::length(glm::vec3(startX, startY, startZ) - glm::vec3(x, y, z)) < radius) {
 			addBlock(x, y, z, block);
 		}
+	}
+}
+
+void StructureBuilder::addLine(int sx, int sy, int sz, glm::vec3 direction, int distance, BlockID block)
+{
+	for (Ray ray({ sx, sy, sz }, direction); ray.getLength() < distance; ray.step(0.5)) {
+		auto& p = ray.getEnd();
+		addBlock(p.x, p.y, p.z, block);
 	}
 }

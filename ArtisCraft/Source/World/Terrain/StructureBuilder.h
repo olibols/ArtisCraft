@@ -23,6 +23,7 @@ public:
 	void addColumn(int startX, int startY, int startZ, int height, BlockID block);
 	void fill(int startX, int startZ, int startY, int endX, int endZ, int endY, BlockID block);
 	void addSphere(int startX, int startY, int startZ, int radius, BlockID block);
+	void addLine(int sx, int sy, int sz, glm::vec3 direction, int distance, BlockID block);
 private:
 	std::vector<BuilderBlock> m_blocks;
 };
