@@ -2,10 +2,13 @@
 
 #include "Chunk/ChunkTools.h"
 
-World::World(Camera& camera) : m_seed(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())), m_worldTerrain(m_seed, &m_chunkManager), m_chunkManager(m_worldTerrain)
+World::World(Camera& camera) :  m_worldTerrain(m_seed, &m_chunkManager), m_chunkManager(m_worldTerrain)
 {
 	loadChunks(camera);
 	m_currentChunk = toChunkPos({ (int)camera.position.x, (int)camera.position.y, (int)camera.position.z });
+
+	m_seed = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	m_worldTerrain.setSeed(m_seed);
 
 	m_chunkLoadThread = std::thread([&]() {
 		while (true) {

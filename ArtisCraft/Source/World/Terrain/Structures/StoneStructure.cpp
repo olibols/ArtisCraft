@@ -11,7 +11,9 @@ void StoneStructure::build(StructureBuilder& builder, sf::Vector3i startPos)
 	int y = sp.y;
 	int z = sp.z;
 
-	m_builder->fill(x-3, z-3, y-3, x+3, z+3, y+10, BlockID::Stone);
-	m_builder->addCube(x, z, y+3, 3, BlockID::Stone);
-	m_builder->addCube(x+2, y+3, z-3, 2, BlockID::Stone);
+	m_builder->addSphere(x + 2, y-4, z, 7, BlockID::Grass);
+	m_builder->addSphere(x, y-2, z, 6, BlockID::Grass);
+	m_builder->fill(x-3, z-3, y, x+3, z+3, y+13, BlockID::Stone);
+	m_builder->addCube(x, z, y+6, 3, BlockID::Stone);
+	m_builder->addCube(x+2, y+6, z-3, 2, BlockID::Stone);
 }

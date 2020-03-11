@@ -13,6 +13,8 @@ class WorldTerrain {
 public:
 	WorldTerrain(int seed, ChunkManager* manager);
 
+	void setSeed(int seed);
+
 	BlockID getBlockAt(int x, int y, int z, Column* column);
 	int getHeightAt(int x, int z);
 
@@ -29,6 +31,7 @@ private:
 	NoiseWrapper m_treemap;
 	NoiseWrapper m_rockmap;
 	NoiseWrapper m_riverMap;
+	NoiseWrapper m_grassMap;
 
 	int m_seed;
 	

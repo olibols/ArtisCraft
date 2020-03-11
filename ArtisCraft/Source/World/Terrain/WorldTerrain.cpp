@@ -14,10 +14,19 @@ struct GenResults {
 	BlockID blockType = BlockID::ERR_TYPE;
 };
 
-WorldTerrain::WorldTerrain(int seed, ChunkManager* manager) : m_mainHeightmap(seed), m_treemap(seed * 3), m_rockmap(seed * 2), m_riverMap(seed / 2), m_chunkManager(manager)
+WorldTerrain::WorldTerrain(int seed, ChunkManager* manager) : m_mainHeightmap(seed), m_treemap(seed * 3), m_rockmap(seed * 2), m_riverMap(seed / 2), m_grassMap(seed + 3), m_chunkManager(manager)
 {
 	m_seed = seed;
 	setupGens();
+}
+
+void WorldTerrain::setSeed(int seed)
+{
+	m_mainHeightmap.SetSeed(seed);
+	m_treemap.SetSeed(seed * 3);
+	m_rockmap.SetSeed(seed * 2);
+	m_riverMap.SetSeed(seed / 2);
+	m_grassMap.SetSeed(seed + 3);
 }
 
 void fillChunk(Chunk* chunk, BlockID block)
@@ -86,6 +95,17 @@ void WorldTerrain::buildChunk(Chunk* chunk)
 						if (rockBias == 1.0) {
 							chunk->getSeedData().rockPositions.push_back({ x,y,z });
 						}
+
+						if (m_grassMap.GetHeight1_0(wPos.x, wPos.z) < 0.15) {
+							srand(time(NULL) * x * y * z);
+							if (rand() % 100 < 85) {
+								chunk->setBlock(x, y, z, BlockID::Darkgrass);
+							}
+						}
+						srand(time(NULL) * wPos.x * y * wPos.z);
+						if (rand() % 100 < 3) {
+							chunk->setBlock(x, y + 1, z, BlockID::Darkleaf);
+						}
 					}
 				}
 			}
@@ -118,24 +138,24 @@ void WorldTerrain::seedChunk(Chunk* chunk)
 
 void WorldTerrain::setupGens()
 {
-	m_mainHeightmap.SetSeed(m_seed * 3);
 	m_mainHeightmap.SetAmplitude(400);
 	m_mainHeightmap.SetOffset(-200);
 	m_mainHeightmap.GetNoise().SetFrequency(0.0005);
 	m_mainHeightmap.GetNoise().SetFractalLacunarity(2.0);
 	
 	m_riverMap.SetAmplitude(400 * 2);
-	m_riverMap.SetSeed(m_seed);
 	m_riverMap.SetOffset(-200);
 	m_riverMap.GetNoise().SetFractalOctaves(4);
 	m_riverMap.GetNoise().SetFrequency(0.0005);
 	m_riverMap.GetNoise().SetFractalLacunarity(2.0);
 
 	m_treemap.GetNoise().SetFrequency(3);
-	m_treemap.GetNoise().SetSeed(m_seed / 2);
 	m_treemap.GetNoise().SetNoiseType(FastNoise::NoiseType::Value);
 	m_rockmap.GetNoise().SetFrequency(0.2);
 	m_rockmap.GetNoise().SetNoiseType(FastNoise::NoiseType::Value);
+
+	m_grassMap.GetNoise().SetFrequency(0.01);
+	m_grassMap.GetNoise().SetNoiseType(FastNoise::NoiseType::Simplex);
 }
 
 void WorldTerrain::genHeightmap(Column* column, sf::Vector3i worldPos)
