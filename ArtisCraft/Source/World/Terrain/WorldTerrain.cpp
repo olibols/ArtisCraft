@@ -54,7 +54,7 @@ int WorldTerrain::getHeightAt(int x, int z)
 
 	int riv = m_riverMap.GetHeight(x, z);
 
-	if (riv < 190 && riv > 185) {
+	if (riv < 50 && riv > 40) {
 		height -= 5;
 	}
 
@@ -138,16 +138,16 @@ void WorldTerrain::seedChunk(Chunk* chunk)
 
 void WorldTerrain::setupGens()
 {
-	m_mainHeightmap.SetAmplitude(400);
+	m_mainHeightmap.SetAmplitude(4000);
 	m_mainHeightmap.SetOffset(-200);
-	m_mainHeightmap.GetNoise().SetFrequency(0.0005);
-	m_mainHeightmap.GetNoise().SetFractalLacunarity(2.0);
+	m_mainHeightmap.GetNoise().SetFrequency(0.0001);
+	m_mainHeightmap.GetNoise().SetFractalLacunarity(2.5);
 	
-	m_riverMap.SetAmplitude(400 * 2);
-	m_riverMap.SetOffset(-200);
+	m_riverMap.SetAmplitude(100);
+	m_riverMap.SetOffset(0);
 	m_riverMap.GetNoise().SetFractalOctaves(4);
-	m_riverMap.GetNoise().SetFrequency(0.0005);
-	m_riverMap.GetNoise().SetFractalLacunarity(2.0);
+	m_riverMap.GetNoise().SetFrequency(0.0001);
+	m_riverMap.GetNoise().SetFractalLacunarity(2.5);
 
 	m_treemap.GetNoise().SetFrequency(3);
 	m_treemap.GetNoise().SetNoiseType(FastNoise::NoiseType::Value);
@@ -187,7 +187,7 @@ void WorldTerrain::genBlockmap(Column * column, sf::Vector3i worldPos)
 
 			int riv = m_riverMap.GetHeight(nx, nz);
 
-			if (riv < 190 && riv > 185) {
+			if (riv < 50 && riv > 40) {
 				blocks[x][z] = BlockID::Water;
 			}
 			else {

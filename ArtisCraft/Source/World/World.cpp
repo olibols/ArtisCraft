@@ -35,13 +35,14 @@ void World::loadChunks(Camera & camera)
 					for (int z = min.z; z < max.z; z++) {
 						processUpdates();
 						m_mutex.lock();
-						m_mapChanged = true;
 						auto& chunk = m_chunkManager.addChunk({x,y,z});
 						m_chunkManager.buildNeighbours({ x,y,z }, m_worldTerrain);
 						m_mutex.unlock();
+
 						if (!chunk.isSeeded()) {
 							m_worldTerrain.seedChunk(&chunk);
 						}
+
 						if (!chunk.hasMesh()) {
 							m_mutex.lock();
 							chunk.buildMesh();
