@@ -7,6 +7,7 @@
 
 #include "../Utils/RobinHash.h"
 
+// The hash algo used in the unordered hashmap
 struct ChunkPosHash {
 	const std::size_t operator()(const sf::Vector3i &position) const
 	{
@@ -21,6 +22,7 @@ struct ChunkPosHash {
 	}
 };
 
+// Hash algorithm used for hashing a 2d vector
 template<>
 struct std::hash<sf::Vector2i>{
 	size_t operator()(const sf::Vector2i& vect) const
